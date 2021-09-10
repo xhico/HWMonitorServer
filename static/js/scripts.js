@@ -82,24 +82,39 @@ window.addEventListener('DOMContentLoaded', async event => {
     document.getElementById("Disks_918_Total").innerText = Disks_918_Total;
 
 
-    // Network
-    let Network_Sent = JSON["Network"]["Sent"];
-    let Network_Received = JSON["Network"]["Received"];
-    let Network_Packets_Sent = JSON["Network"]["Packets_Sent"];
-    let Network_Packets_Received = JSON["Network"]["Packets_Received"];
-    let Network_Errors_Sent = JSON["Network"]["Errors_Sent"];
-    let Network_Errors_Received = JSON["Network"]["Errors_Received"];
-    let Network_Dropped_Sent = JSON["Network"]["Dropped_Sent"];
-    let Network_Dropped_Received = JSON["Network"]["Dropped_Received"];
-    document.getElementById("Network_Sent").innerText = Network_Sent;
-    document.getElementById("Network_Received").innerText = Network_Received;
-    document.getElementById("Network_Packets_Sent").innerText = Network_Packets_Sent;
-    document.getElementById("Network_Packets_Received").innerText = Network_Packets_Received;
-    document.getElementById("Network_Errors_Sent").innerText = Network_Errors_Sent;
-    document.getElementById("Network_Errors_Received").innerText = Network_Errors_Received;
-    document.getElementById("Network_Dropped_Sent").innerText = Network_Dropped_Sent;
-    document.getElementById("Network_Dropped_Received").innerText = Network_Dropped_Received;
+    // Network -> Wired
+    let Network_Wired_Sent = JSON["Network"]["Wired"]["Sent"];
+    let Network_Wired_Received = JSON["Network"]["Wired"]["Received"];
+    let Network_Wired_Packets_Sent = JSON["Network"]["Wired"]["Packets_Sent"];
+    let Network_Wired_Packets_Received = JSON["Network"]["Wired"]["Packets_Received"];
+    let Network_Wired_Errors_Sent = JSON["Network"]["Wired"]["Errors_Sent"];
+    let Network_Wired_Errors_Received = JSON["Network"]["Wired"]["Errors_Received"];
+    let Network_Wired_Dropped_Sent = JSON["Network"]["Wired"]["Dropped_Sent"];
+    let Network_Wired_Dropped_Received = JSON["Network"]["Wired"]["Dropped_Received"];
+    document.getElementById("Network_Wired_Sent").innerText = Network_Wired_Sent;
+    document.getElementById("Network_Wired_Received").innerText = Network_Wired_Received;
+    document.getElementById("Network_Wired_Packets_Sent").innerText = Network_Wired_Packets_Sent;
+    document.getElementById("Network_Wired_Packets_Received").innerText = Network_Wired_Packets_Received;
+    document.getElementById("Network_Wired_Errors_Sent").innerText = Network_Wired_Errors_Sent;
+    document.getElementById("Network_Wired_Errors_Received").innerText = Network_Wired_Errors_Received;
+    document.getElementById("Network_Wired_Dropped_Sent").innerText = Network_Wired_Dropped_Sent;
+    document.getElementById("Network_Wired_Dropped_Received").innerText = Network_Wired_Dropped_Received;
 
-
-
+    // Disks -> Wifi
+    let Network_Wifi_Sent = JSON["Network"]["Wifi"]["Sent"];
+    let Network_Wifi_Received = JSON["Network"]["Wifi"]["Received"];
+    let Network_Wifi_Packets_Sent = JSON["Network"]["Wifi"]["Packets_Sent"];
+    let Network_Wifi_Packets_Received = JSON["Network"]["Wifi"]["Packets_Received"];
+    let Network_Wifi_Errors_Sent = JSON["Network"]["Wifi"]["Errors_Sent"];
+    let Network_Wifi_Errors_Received = JSON["Network"]["Wifi"]["Errors_Received"];
+    let Network_Wifi_Dropped_Sent = JSON["Network"]["Wifi"]["Dropped_Sent"];
+    let Network_Wifi_Dropped_Received = JSON["Network"]["Wifi"]["Dropped_Received"];
+    document.getElementById("Network_Wifi_Sent").innerText = Network_Wifi_Sent;
+    document.getElementById("Network_Wifi_Received").innerText = Network_Wifi_Received;
+    document.getElementById("Network_Wifi_Packets_Sent").innerText = Network_Wifi_Packets_Sent;
+    document.getElementById("Network_Wifi_Packets_Received").innerText = Network_Wifi_Packets_Received;
+    document.getElementById("Network_Wifi_Errors_Sent").innerText = Network_Wifi_Errors_Sent;
+    document.getElementById("Network_Wifi_Errors_Received").innerText = Network_Wifi_Errors_Received;
+    document.getElementById("Network_Wifi_Dropped_Sent").innerText = Network_Wifi_Dropped_Sent;
+    document.getElementById("Network_Wifi_Dropped_Received").innerText = Network_Wifi_Dropped_Received;
 });

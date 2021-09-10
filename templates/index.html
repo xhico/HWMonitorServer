@@ -135,19 +135,19 @@
             </div>
 
             <div class="row py-4 border-bottom">
-                <!-- Network -->
+                <!-- Wired Network -->
                 <div class="col border-end">
                     <div class="Title"><img src="{{ url_for('static', filename='images/network.png') }}"
-                            alt="Network" /> &nbsp;Network</div>
+                            alt="Wired Network" /> &nbsp;Wired Network</div>
                     <div class="Text">
-                        <p>Sent: <b><span id="Network_Sent"></span></b></p>
-                        <p>Received: <b><span id="Network_Received"></span></b></p>
-                        <p>Packets (Sent): <b><span id="Network_Packets_Sent"></span></b></p>
-                        <p>Packets (Received): <b><span id="Network_Packets_Received"></span></b></p>
-                        <p>Errors (Sent): <b><span id="Network_Errors_Sent"></span></b></p>
-                        <p>Errors (Received): <b><span id="Network_Errors_Received"></span></b></p>
-                        <p>Dropped (Sent): <b><span id="Network_Dropped_Sent"></span></b></p>
-                        <p>Dropped (Received): <b><span id="Network_Dropped_Received"></span></b></p>
+                        <p>Sent: <b><span id="Network_Wired_Sent"></span></b></p>
+                        <p>Received: <b><span id="Network_Wired_Received"></span></b></p>
+                        <p>Packets (Sent): <b><span id="Network_Wired_Packets_Sent"></span></b></p>
+                        <p>Packets (Received): <b><span id="Network_Wired_Packets_Received"></span></b></p>
+                        <p>Errors (Sent): <b><span id="Network_Wired_Errors_Sent"></span></b></p>
+                        <p>Errors (Received): <b><span id="Network_Wired_Errors_Received"></span></b></p>
+                        <p>Dropped (Sent): <b><span id="Network_Wired_Dropped_Sent"></span></b></p>
+                        <p>Dropped (Received): <b><span id="Network_Wired_Dropped_Received"></span></b></p>
                     </div>
                 </div>
                 <!-- 918 -->
@@ -164,6 +164,30 @@
                             <div id="Disks_918_Percentage" class="progress-bar" role="progressbar" aria-valuemin="0"
                                 aria-valuemax="100"></div>
                         </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row py-4 border-bottom">
+                <!-- Wifi Network -->
+                <div class="col border-end">
+                    <div class="Title"><img src="{{ url_for('static', filename='images/wifi.png') }}" alt="Network" />
+                        &nbsp;Wifi Network</div>
+                    <div class="Text">
+                        <p>Sent: <b><span id="Network_Wifi_Sent"></span></b></p>
+                        <p>Received: <b><span id="Network_Wifi_Received"></span></b></p>
+                        <p>Packets (Sent): <b><span id="Network_Wifi_Packets_Sent"></span></b></p>
+                        <p>Packets (Received): <b><span id="Network_Wifi_Packets_Received"></span></b></p>
+                        <p>Errors (Sent): <b><span id="Network_Wifi_Errors_Sent"></span></b></p>
+                        <p>Errors (Received): <b><span id="Network_Wifi_Errors_Received"></span></b></p>
+                        <p>Dropped (Sent): <b><span id="Network_Wifi_Dropped_Sent"></span></b></p>
+                        <p>Dropped (Received): <b><span id="Network_Wifi_Dropped_Received"></span></b></p>
+                    </div>
+                </div>
+                <!-- Empty -->
+                <div class="col">
+                    <div class="Title"></div>
+                    <div class="Text">
                     </div>
                 </div>
             </div>

@@ -8,29 +8,38 @@ import subprocess
 import gpiozero
 import datetime
 import psutil
+import socket
 import math
 import re
 
 app = Flask(__name__)
 
+
+# Convert bytes to human readable sizes
 def convert_size(size_bytes):
-   if size_bytes == 0:
-       return "0B"
-   size_name = ("B", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB")
-   i = int(math.floor(math.log(size_bytes, 1024)))
-   p = math.pow(1024, i)
-   s = round(size_bytes / p, 2)
-   return "%s %s" % (s, size_name[i])
+    if size_bytes == "0":
+        return "0B"
+
+    size_bytes = int(size_bytes)
+    size_name = ("B", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB")
+    i = int(math.floor(math.log(size_bytes, 1024)))
+    p = math.pow(1024, i)
+    s = round(size_bytes / p, 2)
+    return "%s %s" % (s, size_name[i])
 
 
+# Returns the local IP Address
+def getIPHostname():
+    localIP = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+    localIP.connect(("8.8.8.8", 80))
+    now = datetime.now()
+    dateTime = now.strftime("%Y-%m-%d_%H:%M:%S")
+    infos = [str(socket.gethostname()).upper() + " - " + localIP.getsockname()[0] + " - " + dateTime]
+    return infos   
+
+
+# Get Hardware / Software Information
 def getInfo():
-
-    # VERSION
-    cpu_model = subprocess.getoutput("cat /proc/cpuinfo | grep model | tail -1").split(':')[1].lstrip()
-    distribution = subprocess.getoutput("cat /etc/os-release | head -n 1").split('=')[1][1:-1]
-    kernel = subprocess.getoutput("uname -msr")
-    firmware = re.search(r"#\d+", subprocess.getoutput("cat /proc/version")).group()
-
     # UPTIME
     date_now = datetime.datetime.now()
     boot_time = datetime.datetime.fromtimestamp(psutil.boot_time())
@@ -41,10 +50,10 @@ def getInfo():
 
     x = {
         "Version": {
-            "Processor": cpu_model,
-            "Distribution": distribution,
-            "Kernel": kernel,
-            "Firmware": firmware
+            "Processor": subprocess.getoutput("cat /proc/cpuinfo | grep model | tail -1").split(':')[1].lstrip(),
+            "Distribution": subprocess.getoutput("cat /etc/os-release | head -n 1").split('=')[1][1:-1],
+            "Kernel": subprocess.getoutput("uname -msr"),
+            "Firmware": re.search(r"#\d+", subprocess.getoutput("cat /proc/version")).group()
         },
         "Uptime": {
             "Date_Now": date_now.strftime("%Y/%m/%d %H:%M:%S"),
@@ -79,18 +88,30 @@ def getInfo():
             },
         },
         "Network": {
-            "Sent": convert_size(psutil.net_io_counters().bytes_sent),
-            "Received": convert_size(psutil.net_io_counters().bytes_recv),
-            "Packets_Sent": psutil.net_io_counters().packets_sent,
-            "Packets_Received": psutil.net_io_counters().packets_recv,
-            "Errors_Sent": psutil.net_io_counters().errin,
-            "Errors_Received": psutil.net_io_counters().errout,
-            "Dropped_Sent": psutil.net_io_counters().dropin,
-            "Dropped_Received": psutil.net_io_counters().dropout
+            "Wired": {
+                "Sent": convert_size(subprocess.getoutput("cat /sys/class/net/eth0/statistics/tx_bytes")),
+                "Received": convert_size(subprocess.getoutput("cat /sys/class/net/eth0/statistics/rx_bytes")),
+                "Packets_Sent": subprocess.getoutput("cat /sys/class/net/eth0/statistics/rx_packets"),
+                "Packets_Received": subprocess.getoutput("cat /sys/class/net/eth0/statistics/tx_packets"),
+                "Errors_Sent": subprocess.getoutput("cat /sys/class/net/eth0/statistics/tx_errors"),
+                "Errors_Received": subprocess.getoutput("cat /sys/class/net/eth0/statistics/rx_errors"),
+                "Dropped_Sent": subprocess.getoutput("cat /sys/class/net/eth0/statistics/tx_dropped"),
+                "Dropped_Received": subprocess.getoutput("cat /sys/class/net/eth0/statistics/rx_dropped")
+            },
+            "Wifi": {
+                "Sent": convert_size(subprocess.getoutput("cat /sys/class/net/wlan0/statistics/tx_bytes")),
+                "Received": convert_size(subprocess.getoutput("cat /sys/class/net/wlan0/statistics/rx_bytes")),
+                "Packets_Sent": subprocess.getoutput("cat /sys/class/net/wlan0/statistics/rx_packets"),
+                "Packets_Received": subprocess.getoutput("cat /sys/class/net/wlan0/statistics/tx_packets"),
+                "Errors_Sent": subprocess.getoutput("cat /sys/class/net/wlan0/statistics/tx_errors"),
+                "Errors_Received": subprocess.getoutput("cat /sys/class/net/wlan0/statistics/rx_errors"),
+                "Dropped_Sent": subprocess.getoutput("cat /sys/class/net/wlan0/statistics/tx_dropped"),
+                "Dropped_Received": subprocess.getoutput("cat /sys/class/net/wlan0/statistics/rx_dropped")
+            }            
         }
     }
-
     return x
+    
 
 @app.route("/")
 def index():

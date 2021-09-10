@@ -9,6 +9,12 @@
     <meta name="description" content="Raspberry Pi Hardware Monitor" />
     <meta name="author" content="xhico" />
 
+    <!-- Favicon-->
+    <link rel="shortcut icon" type="image/png" href="{{ url_for('static', filename='images/favicon.png') }}">
+
+    <!-- JQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
     <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
@@ -44,15 +50,15 @@
         <div class="container-fluid column-fluid">
 
             <div class="row py-4 border-bottom">
-                <!-- Geral -->
+                <!-- Version -->
                 <div class="col border-end">
                     <div class="Title"><img src="{{ url_for('static', filename='images/version.png') }}"
                             alt="Version" /> &nbsp;Version</div>
                     <div class="Text">
-                        <p>Processor:<b id="processor">Intel(R) Core(TM) i7-9750H CPU @ 2.60GHz</b></p>
-                        <p>Distribution: <b id="distribution">Ubuntu 20.04.3 LTS</b></p>
-                        <p>Kernel version: <b id="kernel">Linux 5.4.0-81-generic x86_64</b></p>
-                        <p>Firmware: <b id="firmware">#91</b></p>
+                        <p>Processor:<b><span id="Version_Processor"></span></b></p>
+                        <p>Distribution: <b><span id="Version_Distribution"></span></b></p>
+                        <p>Kernel version: <b><span id="Version_Kernel"></span></b></p>
+                        <p>Firmware: <b><span id="Version_Firmware"></span></b></p>
                     </div>
                 </div>
                 <!-- Uptime -->
@@ -60,9 +66,9 @@
                     <div class="Title"><img src="{{ url_for('static', filename='images/uptime.png') }}" alt="Uptime" />
                         &nbsp;Uptime</div>
                     <div class="Text">
-                        <p>Date Now: <b id="DateNow">{{ conf.General.Date_Now }}</b></p>
-                        <p>Boot Time: <b id="BootTime">{{ conf.General.Boot_Time }}</b></p>
-                        <p>Uptime: <b id="Uptime">{{ conf.General.Uptime }}</b></p>
+                        <p>Date Now: <b><span id="Uptime_Date_Now"></span></b></p>
+                        <p>Boot Time: <b><span id="Uptime_Boot_Time"></span></b></p>
+                        <p>Uptime: <b><span id="Uptime_Uptime"></span></b></p>
                     </div>
                 </div>
             </div>
@@ -74,12 +80,12 @@
                         &nbsp;CPU</div>
                     <div class="Text">
                         <div class="progress mb-4">
-                            <div id="cpuPercentage" class="progress-bar" role="progressbar" style="width: 25%;"
-                                aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%
-                            </div>
+                            <div id="CPU_Percentage" class="progress-bar" role="progressbar" aria-valuemin="0"
+                                aria-valuemax="100"></div>
                         </div>
-                        <p>Cores: <b id="cpuCores">4</b></p>
-                        <p>Frequency (MHz): <b id="cpuFrequency">700.0</b></p>
+                        <p>Cores: <b><span id="CPU_Cores"></span></b></p>
+                        <p>Frequency (MHz): <b><span id="CPU_Frequency"></span></b></p>
+                        <p>Processes: <b><span id="CPU_PIDs"></span></b></p>
                     </div>
                 </div>
                 <!-- Temperature -->
@@ -88,13 +94,8 @@
                             alt="Temperature" />&nbsp;Temperature</div>
                     <div class="Text">
                         <div class="progress mb-4">
-                            <div id="cpuPercentageC" class="progress-bar" role="progressbar" style="width: 25%;"
-                                aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%
-                            </div>
-                        </div>
-                        <div class="progress">
-                            <div id="cpuPercentageF" class="progress-bar" role="progressbar" style="width: 25%;"
-                                aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%
+                            <div id="CPU_Temperature" class="progress-bar" role="progressbar" aria-valuemin="30"
+                                aria-valuemax="80">
                             </div>
                         </div>
                     </div>
@@ -107,37 +108,27 @@
                     <div class="Title"><img src="{{ url_for('static', filename='images/memory.png') }}" alt="Memory" />
                         &nbsp;Memory</div>
                     <div class="Text">
-                        <p>Used: <b id="memUsed">577.70MB</b> Available:<b id="memAvailable">3.25GB</b> Total: <b
-                                id="memTotal">3.82GB</b></p>
+                        <p>Used: <b><span id="Memory_Used"></span></b></p>
+                        <p>Available: <b><span id="Memory_Available"></span></b></p>
+                        <p>Total: <b><span id="Memory_Total"></span></b></p>
                         <div class="progress">
-                            <div id="memPercentage" class="progress-bar" role="progressbar" style="width: 25%;"
-                                aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%
-                            </div>
+                            <div id="Memory_Percentage" class="progress-bar" role="progressbar" aria-valuemin="0"
+                                aria-valuemax="100"></div>
                         </div>
                     </div>
                 </div>
-                <!-- Disks -->
+                <!-- SDCard -->
                 <div class="col">
                     <div class="Title"><img src="{{ url_for('static', filename='images/sd.png') }}" alt="SD card" />
                         &nbsp;SD card</div>
                     <div class="Text">
-                        <p>
-                            <b>/</b> Used: <b id="SDCardUsed">106.02MB</b> (<b id="SDCardPercentage">10.86%</b>) Free:
-                            <b id="SDCardAvailable">869.88MB</b> Total:
-                            <b id="SDCardTotal">975.90MB</b>
-                        </p>
+                        <p><b>/</b></p>
+                        <p>Used: <b><span id="Disks_SDCard_Used"></span></b></p>
+                        <p>Free: <b><span id="Disks_SDCard_Free"></span></b></p>
+                        <p>Total: <b><span id="Disks_SDCard_Total"></span></b></p>
                         <div class="progress mb-4">
-                            <div class="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100"
-                                aria-valuenow="10.86" style="width: 10.86%">10.86%
-                            </div>
-                        </div>
-                        <p><b>/media/pi/918</b> Used: <b id="918Used">106.02MB</b> (<b
-                                id="918Percentage">10.86%</b>)Free:<b id="918Available">869.88MB</b> Total:<b
-                                id="918Total">975.90MB</b></p>
-                        <div class="progress">
-                            <div class="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100"
-                                aria-valuenow="26.03" style="width: 26.03%">26.03%
-                            </div>
+                            <div id="Disks_SDCard_Percentage" class="progress-bar" role="progressbar" aria-valuemin="0"
+                                aria-valuemax="100"></div>
                         </div>
                     </div>
                 </div>
@@ -149,25 +140,39 @@
                     <div class="Title"><img src="{{ url_for('static', filename='images/network.png') }}"
                             alt="Network" /> &nbsp;Network</div>
                     <div class="Text">
-                        <p>Sent (MB): <b id="network_sent">2360</b></p>
-                        <p>Received (MB): <b id="network_received">33</b></p>
-                        <p>Packets (Sent): <b id="network_packets_sent">1708610</b></p>
-                        <p>Packets (Received): <b id="network_packets_received">335330</b></p>
-                        <p>Errors (Sent): <b id="network_errors_sent">0</b></p>
-                        <p>Errors (Received): <b id="network_errors_received">0</b></p>
-                        <p>Dropped (Sent): <b id="network_dropped_sent">0</b></p>
-                        <p>Dropped (Received): <b id="network_dropped_received">0</b></p>
+                        <p>Sent: <b><span id="Network_Sent"></span></b></p>
+                        <p>Received: <b><span id="Network_Received"></span></b></p>
+                        <p>Packets (Sent): <b><span id="Network_Packets_Sent"></span></b></p>
+                        <p>Packets (Received): <b><span id="Network_Packets_Received"></span></b></p>
+                        <p>Errors (Sent): <b><span id="Network_Errors_Sent"></span></b></p>
+                        <p>Errors (Received): <b><span id="Network_Errors_Received"></span></b></p>
+                        <p>Dropped (Sent): <b><span id="Network_Dropped_Sent"></span></b></p>
+                        <p>Dropped (Received): <b><span id="Network_Dropped_Received"></span></b></p>
                     </div>
                 </div>
-                <!-- Empty -->
+                <!-- 918 -->
                 <div class="col">
-                    <div class="Title"></div>
-                    <div class="Text"></div>
+                    <div class="Title"><img src="{{ url_for('static', filename='images/usb_hdd.png') }}"
+                            alt="SD card" />
+                        &nbsp;918</div>
+                    <div class="Text">
+                        <p><b>/media/pi/918</b></p>
+                        <p>Used: <b><span id="Disks_918_Used"></span></b></p>
+                        <p>Free: <b><span id="Disks_918_Free"></span></b></p>
+                        <p>Total: <b><span id="Disks_918_Total"></span></b></p>
+                        <div class="progress mb-4">
+                            <div id="Disks_918_Percentage" class="progress-bar" role="progressbar" aria-valuemin="0"
+                                aria-valuemax="100"></div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
         </div>
     </main>
+
+    <!-- Scripts -->
+    <script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
         crossorigin="anonymous"></script>

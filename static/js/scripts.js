@@ -1,9 +1,5 @@
 window.addEventListener('DOMContentLoaded', async event => {
 
-
-
-
-
     // Get JSON
     let JSON = await $.get("/json", function (result) {
         return result;
@@ -38,6 +34,21 @@ window.addEventListener('DOMContentLoaded', async event => {
     document.getElementById("CPU_Percentage").innerText = CPU_Percentage + " %";
     document.getElementById("CPU_Percentage").style.width = CPU_Percentage + "%";
     document.getElementById("CPU_Percentage").ariaValueNow = CPU_Percentage;
+    if (CPU_Percentage < 50) {
+        document.getElementById("CPU_Percentage").classList.remove("bg-warning");
+        document.getElementById("CPU_Percentage").classList.remove("bg-danger");
+        document.getElementById("CPU_Percentage").classList.add("bg-success");
+    } else if (CPU_Percentage >= 50 && CPU_Percentage < 80) {
+        document.getElementById("CPU_Percentage").classList.remove("bg-danger");
+        document.getElementById("CPU_Percentage").classList.remove("bg-success");
+        document.getElementById("CPU_Percentage").classList.add("bg-warning");
+    } else {
+        document.getElementById("CPU_Percentage").classList.remove("bg-success");
+        document.getElementById("CPU_Percentage").classList.remove("bg-warning");
+        document.getElementById("CPU_Percentage").classList.add("bg-danger");
+    }
+    document.getElementById("CPU_Percentage").style.width = CPU_Percentage + "%";
+    document.getElementById("CPU_Percentage").ariaValueNow = CPU_Percentage;
     document.getElementById("CPU_Cores").innerText = CPU_Cores;
     document.getElementById("CPU_Frequency").innerText = CPU_Frequency;
     document.getElementById("CPU_PIDs").innerText = CPU_PIDs;
@@ -50,7 +61,7 @@ window.addEventListener('DOMContentLoaded', async event => {
         angle: 0.15, lineWidth: 0.44, radiusScale: 1,
         pointer: { length: 0.6, strokeWidth: 0.035, color: '#000000' },
         limitMax: false, limitMin: false,
-        percentColors: [[0.37, "#00FF00"], [0.62, "#FF9900"], [81.0, "#FF0000"]],
+        percentColors: [[0.37, "#198754"], [0.62, "#ffc107"], [81.0, "##dc3545"]],
         highDpiSupport: true,
     };
     let target = document.getElementById('CPU_Temperature_Gauge');
@@ -69,6 +80,19 @@ window.addEventListener('DOMContentLoaded', async event => {
     document.getElementById("Memory_Percentage").innerText = Memory_Percentage + " %";
     document.getElementById("Memory_Percentage").style.width = Memory_Percentage + "%";
     document.getElementById("Memory_Percentage").ariaValueNow = Memory_Percentage;
+    if (Memory_Percentage < 50) {
+        document.getElementById("Memory_Percentage").classList.remove("bg-warning");
+        document.getElementById("Memory_Percentage").classList.remove("bg-danger");
+        document.getElementById("Memory_Percentage").classList.add("bg-success");
+    } else if (Memory_Percentage >= 50 && Memory_Percentage < 80) {
+        document.getElementById("Memory_Percentage").classList.remove("bg-danger");
+        document.getElementById("Memory_Percentage").classList.remove("bg-success");
+        document.getElementById("Memory_Percentage").classList.add("bg-warning");
+    } else {
+        document.getElementById("Memory_Percentage").classList.remove("bg-success");
+        document.getElementById("Memory_Percentage").classList.remove("bg-warning");
+        document.getElementById("Memory_Percentage").classList.add("bg-danger");
+    }
     document.getElementById("Memory_Used").innerText = Memory_Used;
     document.getElementById("Memory_Available").innerText = Memory_Available;
     document.getElementById("Memory_Total").innerText = Memory_Total;
@@ -82,6 +106,19 @@ window.addEventListener('DOMContentLoaded', async event => {
     document.getElementById("Disks_SDCard_Percentage").innerText = Disks_SDCard_Percentage + " %";
     document.getElementById("Disks_SDCard_Percentage").style.width = Disks_SDCard_Percentage + "%";
     document.getElementById("Disks_SDCard_Percentage").ariaValueNow = Disks_SDCard_Percentage;
+    if (Disks_SDCard_Percentage < 50) {
+        document.getElementById("Disks_SDCard_Percentage").classList.remove("bg-warning");
+        document.getElementById("Disks_SDCard_Percentage").classList.remove("bg-danger");
+        document.getElementById("Disks_SDCard_Percentage").classList.add("bg-success");
+    } else if (Disks_SDCard_Percentage >= 50 && Disks_SDCard_Percentage < 80) {
+        document.getElementById("Disks_SDCard_Percentage").classList.remove("bg-danger");
+        document.getElementById("Disks_SDCard_Percentage").classList.remove("bg-success");
+        document.getElementById("Disks_SDCard_Percentage").classList.add("bg-warning");
+    } else {
+        document.getElementById("Disks_SDCard_Percentage").classList.remove("bg-success");
+        document.getElementById("Disks_SDCard_Percentage").classList.remove("bg-warning");
+        document.getElementById("Disks_SDCard_Percentage").classList.add("bg-danger");
+    }
     document.getElementById("Disks_SDCard_Used").innerText = Disks_SDCard_Used;
     document.getElementById("Disks_SDCard_Free").innerText = Disks_SDCard_Free;
     document.getElementById("Disks_SDCard_Total").innerText = Disks_SDCard_Total;
@@ -95,6 +132,19 @@ window.addEventListener('DOMContentLoaded', async event => {
     document.getElementById("Disks_918_Percentage").innerText = Disks_918_Percentage + " %";
     document.getElementById("Disks_918_Percentage").style.width = Disks_918_Percentage + "%";
     document.getElementById("Disks_918_Percentage").ariaValueNow = Disks_918_Percentage;
+    if (Disks_918_Percentage < 50) {
+        document.getElementById("Disks_918_Percentage").classList.remove("bg-warning");
+        document.getElementById("Disks_918_Percentage").classList.remove("bg-danger");
+        document.getElementById("Disks_918_Percentage").classList.add("bg-success");
+    } else if (Disks_918_Percentage >= 50 && Disks_918_Percentage < 80) {
+        document.getElementById("Disks_918_Percentage").classList.remove("bg-danger");
+        document.getElementById("Disks_918_Percentage").classList.remove("bg-success");
+        document.getElementById("Disks_918_Percentage").classList.add("bg-warning");
+    } else {
+        document.getElementById("Disks_918_Percentage").classList.remove("bg-success");
+        document.getElementById("Disks_918_Percentage").classList.remove("bg-warning");
+        document.getElementById("Disks_918_Percentage").classList.add("bg-danger");
+    }
     document.getElementById("Disks_918_Used").innerText = Disks_918_Used;
     document.getElementById("Disks_918_Free").innerText = Disks_918_Free;
     document.getElementById("Disks_918_Total").innerText = Disks_918_Total;

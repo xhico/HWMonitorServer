@@ -4,6 +4,8 @@ window.addEventListener('DOMContentLoaded', async event => {
         return result;
     });
 
+
+
     // Version
     let Version_Processor = JSON["Version"]["Processor"];
     let Version_Distribution = JSON["Version"]["Distribution"];
@@ -69,6 +71,7 @@ window.addEventListener('DOMContentLoaded', async event => {
     document.getElementById("Disks_SDCard_Free").innerText = Disks_SDCard_Free;
     document.getElementById("Disks_SDCard_Total").innerText = Disks_SDCard_Total;
 
+
     // Disks -> 918
     let Disks_918_Percentage = JSON["Disks"]["918"]["Percentage"];
     let Disks_918_Used = JSON["Disks"]["918"]["Used"];
@@ -81,6 +84,10 @@ window.addEventListener('DOMContentLoaded', async event => {
     document.getElementById("Disks_918_Free").innerText = Disks_918_Free;
     document.getElementById("Disks_918_Total").innerText = Disks_918_Total;
 
+
+    // Network
+    let Hostname = JSON["Network"]["Info"]["Hostname"];
+    document.getElementById("Hostname").innerText = Hostname;
 
     // Network -> Wired
     let Network_Wired_Sent = JSON["Network"]["Wired"]["Sent"];
@@ -99,6 +106,7 @@ window.addEventListener('DOMContentLoaded', async event => {
     document.getElementById("Network_Wired_Errors_Received").innerText = Network_Wired_Errors_Received;
     document.getElementById("Network_Wired_Dropped_Sent").innerText = Network_Wired_Dropped_Sent;
     document.getElementById("Network_Wired_Dropped_Received").innerText = Network_Wired_Dropped_Received;
+
 
     // Disks -> Wifi
     let Network_Wifi_Sent = JSON["Network"]["Wifi"]["Sent"];

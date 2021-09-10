@@ -31,7 +31,7 @@
             <div class="container-fluid">
                 <a class="navbar-brand" href="index.html">
                     <img src="{{ url_for('static', filename='images/logo.png') }}" />&nbsp;RPi-Monitor
-                    <sub id="rpiName">(x3-ubuntusrv-vm)</sub>
+                    <sub id="Hostname"></sub>
                 </a>
                 <div class="collapse navbar-collapse" id="navbarCollapse">
                     <ul class="navbar-nav me-auto mb-2 mb-md-0">
@@ -46,92 +46,96 @@
     </header>
 
     <!-- Begin page content -->
-    <main class="flex-shrink-0">
-        <div class="container-fluid column-fluid">
+    <main class="container-fluid column-fluid">
 
-            <div class="row py-4 border-bottom">
-                <!-- Version -->
-                <div class="col border-end">
-                    <div class="Title"><img src="{{ url_for('static', filename='images/version.png') }}"
-                            alt="Version" /> &nbsp;Version</div>
-                    <div class="Text">
-                        <p>Processor:<b><span id="Version_Processor"></span></b></p>
-                        <p>Distribution: <b><span id="Version_Distribution"></span></b></p>
-                        <p>Kernel version: <b><span id="Version_Kernel"></span></b></p>
-                        <p>Firmware: <b><span id="Version_Firmware"></span></b></p>
-                    </div>
+        <div class="row border-bottom">
+            <!-- Version -->
+            <div class="col border-end">
+                <div class="Title"><img src="{{ url_for('static', filename='images/version.png') }}" alt="Version" />
+                    &nbsp;Version</div>
+                <div class="Text">
+                    <p>Processor:<b><span id="Version_Processor"></span></b></p>
+                    <p>Distribution: <b><span id="Version_Distribution"></span></b></p>
+                    <p>Kernel version: <b><span id="Version_Kernel"></span></b></p>
+                    <p>Firmware: <b><span id="Version_Firmware"></span></b></p>
                 </div>
-                <!-- Uptime -->
-                <div class="col border-end">
-                    <div class="Title"><img src="{{ url_for('static', filename='images/uptime.png') }}" alt="Uptime" />
-                        &nbsp;Uptime</div>
-                    <div class="Text">
-                        <p>Date Now: <b><span id="Uptime_Date_Now"></span></b></p>
-                        <p>Boot Time: <b><span id="Uptime_Boot_Time"></span></b></p>
-                        <p>Uptime: <b><span id="Uptime_Uptime"></span></b></p>
-                    </div>
+            </div>
+
+            <!-- Uptime -->
+            <div class="col border-end">
+                <div class="Title"><img src="{{ url_for('static', filename='images/uptime.png') }}" alt="Uptime" />
+                    &nbsp;Uptime</div>
+                <div class="Text">
+                    <p>Date Now: <b><span id="Uptime_Date_Now"></span></b></p>
+                    <p>Boot Time: <b><span id="Uptime_Boot_Time"></span></b></p>
+                    <p>Uptime: <b><span id="Uptime_Uptime"></span></b></p>
                 </div>
-                <!-- Temperature -->
-                <div class="col border-end">
-                    <div class="Title"><img src="{{ url_for('static', filename='images/cpu_temp.png') }}"
-                            alt="Temperature" />&nbsp;Temperature</div>
-                    <div class="Text">
-                        <div class="progress mb-4">
-                            <div id="CPU_Temperature" class="progress-bar" role="progressbar" aria-valuemin="30"
-                                aria-valuemax="80">
-                            </div>
+            </div>
+
+            <!-- Temperature -->
+            <div class="col border-end">
+                <div class="Title"><img src="{{ url_for('static', filename='images/cpu_temp.png') }}"
+                        alt="Temperature" />&nbsp;Temperature</div>
+                <div class="Text">
+                    <div class="progress mb-4">
+                        <div id="CPU_Temperature" class="progress-bar" role="progressbar" aria-valuemin="30"
+                            aria-valuemax="80">
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
 
-            <div class="row py-4 border-bottom">
-                <!-- CPU -->
-                <div class="col border-end">
-                    <div class="Title"><img src="{{ url_for('static', filename='images/cpu.png') }}" alt="CPU" />
-                        &nbsp;CPU</div>
-                    <div class="Text">
-                        <p>Cores: <b><span id="CPU_Cores"></span></b></p>
-                        <p>Frequency (MHz): <b><span id="CPU_Frequency"></span></b></p>
-                        <p>Processes: <b><span id="CPU_PIDs"></span></b></p>
-                        <div class="progress mb-4">
-                            <div id="CPU_Percentage" class="progress-bar" role="progressbar" aria-valuemin="0"
-                                aria-valuemax="100"></div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Memory -->
-                <div class="col border-end">
-                    <div class="Title"><img src="{{ url_for('static', filename='images/memory.png') }}" alt="Memory" />
-                        &nbsp;Memory</div>
-                    <div class="Text">
-                        <p>Used: <b><span id="Memory_Used"></span></b></p>
-                        <p>Available: <b><span id="Memory_Available"></span></b></p>
-                        <p>Total: <b><span id="Memory_Total"></span></b></p>
-                        <div class="progress">
-                            <div id="Memory_Percentage" class="progress-bar" role="progressbar" aria-valuemin="0"
-                                aria-valuemax="100"></div>
-                        </div>
-                    </div>
-                </div>
-                <!-- SDCard -->
-                <div class="col border-end">
-                    <div class="Title"><img src="{{ url_for('static', filename='images/sd.png') }}" alt="SD card" />
-                        &nbsp;SD card</div>
-                    <div class="Text">
-                        <p>Used: <b><span id="Disks_SDCard_Used"></span></b></p>
-                        <p>Free: <b><span id="Disks_SDCard_Free"></span></b></p>
-                        <p>Total: <b><span id="Disks_SDCard_Total"></span></b></p>
-                        <div class="progress mb-4">
-                            <div id="Disks_SDCard_Percentage" class="progress-bar" role="progressbar" aria-valuemin="0"
-                                aria-valuemax="100"></div>
-                        </div>
+        <div class="row border-bottom">
+            <!-- CPU -->
+            <div class="col border-end">
+                <div class="Title"><img src="{{ url_for('static', filename='images/cpu.png') }}" alt="CPU" />
+                    &nbsp;CPU</div>
+                <div class="Text">
+                    <p>Cores: <b><span id="CPU_Cores"></span></b></p>
+                    <p>Frequency (MHz): <b><span id="CPU_Frequency"></span></b></p>
+                    <p>Processes: <b><span id="CPU_PIDs"></span></b></p>
+                    <div class="progress mb-4">
+                        <div id="CPU_Percentage" class="progress-bar" role="progressbar" aria-valuemin="0"
+                            aria-valuemax="100"></div>
                     </div>
                 </div>
             </div>
 
-            <div class="row py-4 border-bottom">
-                <!-- Wired Network -->
+            <!-- Memory -->
+            <div class="col border-end">
+                <div class="Title"><img src="{{ url_for('static', filename='images/memory.png') }}" alt="Memory" />
+                    &nbsp;Memory</div>
+                <div class="Text">
+                    <p>Used: <b><span id="Memory_Used"></span></b></p>
+                    <p>Available: <b><span id="Memory_Available"></span></b></p>
+                    <p>Total: <b><span id="Memory_Total"></span></b></p>
+                    <div class="progress">
+                        <div id="Memory_Percentage" class="progress-bar" role="progressbar" aria-valuemin="0"
+                            aria-valuemax="100"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SDCard -->
+            <div class="col border-end">
+                <div class="Title"><img src="{{ url_for('static', filename='images/sd.png') }}" alt="SD card" />
+                    &nbsp;SD card</div>
+                <div class="Text">
+                    <p>Used: <b><span id="Disks_SDCard_Used"></span></b></p>
+                    <p>Free: <b><span id="Disks_SDCard_Free"></span></b></p>
+                    <p>Total: <b><span id="Disks_SDCard_Total"></span></b></p>
+                    <div class="progress mb-4">
+                        <div id="Disks_SDCard_Percentage" class="progress-bar" role="progressbar" aria-valuemin="0"
+                            aria-valuemax="100"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row border-bottom">
+            <!-- Wired Network -->
+            <div class="col border-end">
                 <div class="col border-end">
                     <div class="Title"><img src="{{ url_for('static', filename='images/network.png') }}"
                             alt="Wired Network" /> &nbsp;Wired Network</div>
@@ -146,40 +150,40 @@
                         <p>Dropped (Received): <b><span id="Network_Wired_Dropped_Received"></span></b></p>
                     </div>
                 </div>
-                <!-- Wifi Network -->
-                <div class="col border-end">
-                    <div class="Title"><img src="{{ url_for('static', filename='images/wifi.png') }}" alt="Network" />
-                        &nbsp;Wifi Network</div>
-                    <div class="Text">
-                        <p>Sent: <b><span id="Network_Wifi_Sent"></span></b></p>
-                        <p>Received: <b><span id="Network_Wifi_Received"></span></b></p>
-                        <p>Packets (Sent): <b><span id="Network_Wifi_Packets_Sent"></span></b></p>
-                        <p>Packets (Received): <b><span id="Network_Wifi_Packets_Received"></span></b></p>
-                        <p>Errors (Sent): <b><span id="Network_Wifi_Errors_Sent"></span></b></p>
-                        <p>Errors (Received): <b><span id="Network_Wifi_Errors_Received"></span></b></p>
-                        <p>Dropped (Sent): <b><span id="Network_Wifi_Dropped_Sent"></span></b></p>
-                        <p>Dropped (Received): <b><span id="Network_Wifi_Dropped_Received"></span></b></p>
-                    </div>
-                </div>
-                <!-- 918 -->
-                <div class="col border-end">
-                    <div class="Title"><img src="{{ url_for('static', filename='images/usb_hdd.png') }}"
-                            alt="SD card" />
-                        &nbsp;918</div>
-                    <div class="Text">
-                        <p>Used: <b><span id="Disks_918_Used"></span></b></p>
-                        <p>Free: <b><span id="Disks_918_Free"></span></b></p>
-                        <p>Total: <b><span id="Disks_918_Total"></span></b></p>
-                        <div class="progress mb-4">
-                            <div id="Disks_918_Percentage" class="progress-bar" role="progressbar" aria-valuemin="0"
-                                aria-valuemax="100"></div>
-                        </div>
-                    </div>
-                </div>
-
             </div>
 
+            <!-- Wifi Network -->
+            <div class="col border-end">
+                <div class="Title"><img src="{{ url_for('static', filename='images/wifi.png') }}" alt="Network" />
+                    &nbsp;Wifi Network</div>
+                <div class="Text">
+                    <p>Sent: <b><span id="Network_Wifi_Sent"></span></b></p>
+                    <p>Received: <b><span id="Network_Wifi_Received"></span></b></p>
+                    <p>Packets (Sent): <b><span id="Network_Wifi_Packets_Sent"></span></b></p>
+                    <p>Packets (Received): <b><span id="Network_Wifi_Packets_Received"></span></b></p>
+                    <p>Errors (Sent): <b><span id="Network_Wifi_Errors_Sent"></span></b></p>
+                    <p>Errors (Received): <b><span id="Network_Wifi_Errors_Received"></span></b></p>
+                    <p>Dropped (Sent): <b><span id="Network_Wifi_Dropped_Sent"></span></b></p>
+                    <p>Dropped (Received): <b><span id="Network_Wifi_Dropped_Received"></span></b></p>
+                </div>
+            </div>
+
+            <!-- 918 -->
+            <div class="col border-end">
+                <div class="Title"><img src="{{ url_for('static', filename='images/usb_hdd.png') }}" alt="SD card" />
+                    &nbsp;918</div>
+                <div class="Text">
+                    <p>Used: <b><span id="Disks_918_Used"></span></b></p>
+                    <p>Free: <b><span id="Disks_918_Free"></span></b></p>
+                    <p>Total: <b><span id="Disks_918_Total"></span></b></p>
+                    <div class="progress mb-4">
+                        <div id="Disks_918_Percentage" class="progress-bar" role="progressbar" aria-valuemin="0"
+                            aria-valuemax="100"></div>
+                    </div>
+                </div>
+            </div>
         </div>
+
     </main>
 
     <!-- Scripts -->

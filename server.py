@@ -29,13 +29,8 @@ def convert_size(size_bytes):
 
 
 # Returns the local IP Address
-def getIPHostname():
-    localIP = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-    localIP.connect(("8.8.8.8", 80))
-    now = datetime.now()
-    dateTime = now.strftime("%Y-%m-%d_%H:%M:%S")
-    infos = [str(socket.gethostname()).upper() + " - " + localIP.getsockname()[0] + " - " + dateTime]
-    return infos   
+def getHostname():
+    return str(socket.gethostname()).upper()
 
 
 # Get Hardware / Software Information
@@ -88,7 +83,11 @@ def getInfo():
             },
         },
         "Network": {
+            "Info": {
+                "Hostname": getHostname(),
+            },
             "Wired": {
+                "IP": subprocess.getoutput("ip addr show eth0 | grep 'inet\b' | awk '{print $2}' | cut -d/ -f1"),
                 "Sent": convert_size(subprocess.getoutput("cat /sys/class/net/eth0/statistics/tx_bytes")),
                 "Received": convert_size(subprocess.getoutput("cat /sys/class/net/eth0/statistics/rx_bytes")),
                 "Packets_Sent": subprocess.getoutput("cat /sys/class/net/eth0/statistics/rx_packets"),
@@ -99,6 +98,7 @@ def getInfo():
                 "Dropped_Received": subprocess.getoutput("cat /sys/class/net/eth0/statistics/rx_dropped")
             },
             "Wifi": {
+                "IP": subprocess.getoutput("ip addr show wlan0 | grep 'inet\b' | awk '{print $2}' | cut -d/ -f1"),
                 "Sent": convert_size(subprocess.getoutput("cat /sys/class/net/wlan0/statistics/tx_bytes")),
                 "Received": convert_size(subprocess.getoutput("cat /sys/class/net/wlan0/statistics/rx_bytes")),
                 "Packets_Sent": subprocess.getoutput("cat /sys/class/net/wlan0/statistics/rx_packets"),

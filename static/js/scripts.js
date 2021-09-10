@@ -1,9 +1,13 @@
 window.addEventListener('DOMContentLoaded', async event => {
+
+
+
+
+
     // Get JSON
     let JSON = await $.get("/json", function (result) {
         return result;
     });
-
 
 
     // Version
@@ -42,8 +46,19 @@ window.addEventListener('DOMContentLoaded', async event => {
     // Temperature
     let CPU_Temperature = JSON["CPU"]["Temperature"];
     document.getElementById("CPU_Temperature").innerText = CPU_Temperature + " °C";
-    document.getElementById("CPU_Temperature").style.width = CPU_Temperature + "%";
-    document.getElementById("CPU_Temperature").ariaValueNow = CPU_Temperature;
+    let opts = {
+        angle: 0.15, lineWidth: 0.44, radiusScale: 1,
+        pointer: { length: 0.6, strokeWidth: 0.035, color: '#000000' },
+        limitMax: false, limitMin: false,
+        percentColors: [[0.37, "#00FF00"], [0.62, "#FF9900"], [81.0, "#FF0000"]],
+        highDpiSupport: true,
+    };
+    let target = document.getElementById('CPU_Temperature_Gauge');
+    let gauge = new Gauge(target).setOptions(opts);
+    gauge.maxValue = 80;
+    gauge.setMinValue(30);
+    gauge.animationSpeed = 32;
+    gauge.set(CPU_Temperature);
 
 
     // Memory

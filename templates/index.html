@@ -19,11 +19,14 @@
     <!-- JQuery -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
+    <!-- GaugeJs -->
+    <script src="https://bernii.github.io/gauge.js/dist/gauge.min.js"></script>
+
     <!-- Custom -->
     <link href="{{ url_for('static', filename='css/styles.css') }}" rel="stylesheet" />
 </head>
 
-<body class="d-flex flex-column h-100">
+<body class="d-flex flex-column h-100" style="margin-top: 60px;">
 
     <!-- Fixed navbar -->
     <header>
@@ -51,10 +54,11 @@
         <div class="row">
             <!-- Version -->
             <div class="col-xl-4 col-md-6 border-bottom border-end">
-                <div class="Title"><img src="{{ url_for('static', filename='images/version.png') }}" alt="Version" />
+                <div class="text-center"><img src="{{ url_for('static', filename='images/version.png') }}"
+                        alt="Version" />
                     &nbsp;Version</div>
-                <div class="Text">
-                    <p>Processor:<b><span id="Version_Processor"></span></b></p>
+                <div class="text-center">
+                    <p>Processor: <b><span id="Version_Processor"></span></b></p>
                     <p>Distribution: <b><span id="Version_Distribution"></span></b></p>
                     <p>Kernel version: <b><span id="Version_Kernel"></span></b></p>
                     <p>Firmware: <b><span id="Version_Firmware"></span></b></p>
@@ -63,9 +67,10 @@
 
             <!-- Uptime -->
             <div class="col-xl-4 col-md-6 border-bottom border-end">
-                <div class="Title"><img src="{{ url_for('static', filename='images/uptime.png') }}" alt="Uptime" />
+                <div class="text-center"><img src="{{ url_for('static', filename='images/uptime.png') }}"
+                        alt="Uptime" />
                     &nbsp;Uptime</div>
-                <div class="Text">
+                <div class="text-center">
                     <p>Date Now: <b><span id="Uptime_Date_Now"></span></b></p>
                     <p>Boot Time: <b><span id="Uptime_Boot_Time"></span></b></p>
                     <p>Uptime: <b><span id="Uptime_Uptime"></span></b></p>
@@ -73,27 +78,24 @@
             </div>
 
             <!-- Temperature -->
-            <div class="col-xl-4 col-md-6 border-bottom border-end">
-                <div class="Title"><img src="{{ url_for('static', filename='images/cpu_temp.png') }}"
+            <div class="col-xl-4 col-md-6 border-bottom">
+                <div class="text-center"><img src="{{ url_for('static', filename='images/cpu_temp.png') }}"
                         alt="Temperature" />&nbsp;Temperature</div>
-                <div class="Text">
-                    <div class="progress mb-4">
-                        <div id="CPU_Temperature" class="progress-bar" role="progressbar" aria-valuemin="30"
-                            aria-valuemax="80">
-                        </div>
-                    </div>
+                <div class="text-center">
+                    <canvas id="CPU_Temperature_Gauge"></canvas>
+                    <p><b><span id="CPU_Temperature"></span></b></p>
                 </div>
             </div>
 
             <!-- CPU -->
-            <div class="col-xl-4 col-md-6  border-bottom border-end">
-                <div class="Title"><img src="{{ url_for('static', filename='images/cpu.png') }}" alt="CPU" />
+            <div class="col-xl-4 col-md-6 border-bottom border-end">
+                <div class="text-center"><img src="{{ url_for('static', filename='images/cpu.png') }}" alt="CPU" />
                     &nbsp;CPU</div>
-                <div class="Text">
+                <div class="text-center">
                     <p>Cores: <b><span id="CPU_Cores"></span></b></p>
                     <p>Frequency (MHz): <b><span id="CPU_Frequency"></span></b></p>
                     <p>Processes: <b><span id="CPU_PIDs"></span></b></p>
-                    <div class="progress mb-4">
+                    <div class="progress mb-4 mx-4" style="height: 20px;">
                         <div id="CPU_Percentage" class="progress-bar" role="progressbar" aria-valuemin="0"
                             aria-valuemax="100"></div>
                     </div>
@@ -101,14 +103,15 @@
             </div>
 
             <!-- Memory -->
-            <div class="col-xl-4 col-md-6  border-bottom border-end">
-                <div class="Title"><img src="{{ url_for('static', filename='images/memory.png') }}" alt="Memory" />
+            <div class="col-xl-4 col-md-6 border-bottom border-end">
+                <div class="text-center"><img src="{{ url_for('static', filename='images/memory.png') }}"
+                        alt="Memory" />
                     &nbsp;Memory</div>
-                <div class="Text">
+                <div class="text-center">
                     <p>Used: <b><span id="Memory_Used"></span></b></p>
                     <p>Available: <b><span id="Memory_Available"></span></b></p>
                     <p>Total: <b><span id="Memory_Total"></span></b></p>
-                    <div class="progress">
+                    <div class="progress mb-4 mx-4" style="height: 20px;">
                         <div id="Memory_Percentage" class="progress-bar" role="progressbar" aria-valuemin="0"
                             aria-valuemax="100"></div>
                     </div>
@@ -116,14 +119,14 @@
             </div>
 
             <!-- SDCard -->
-            <div class="col-xl-4 col-md-6  border-bottom border-end">
-                <div class="Title"><img src="{{ url_for('static', filename='images/sd.png') }}" alt="SD card" />
+            <div class="col-xl-4 col-md-6 border-bottom">
+                <div class="text-center"><img src="{{ url_for('static', filename='images/sd.png') }}" alt="SD card" />
                     &nbsp;SD card</div>
-                <div class="Text">
+                <div class="text-center">
                     <p>Used: <b><span id="Disks_SDCard_Used"></span></b></p>
                     <p>Free: <b><span id="Disks_SDCard_Free"></span></b></p>
                     <p>Total: <b><span id="Disks_SDCard_Total"></span></b></p>
-                    <div class="progress mb-4">
+                    <div class="progress mb-4 mx-4" style="height: 20px;">
                         <div id="Disks_SDCard_Percentage" class="progress-bar" role="progressbar" aria-valuemin="0"
                             aria-valuemax="100"></div>
                     </div>
@@ -131,10 +134,10 @@
             </div>
 
             <!-- Wired Network -->
-            <div class="col-xl-4 col-md-6  border-bottom border-end">
-                <div class="Title"><img src="{{ url_for('static', filename='images/network.png') }}"
+            <div class="col-xl-4 col-md-6 border-bottom border-end">
+                <div class="text-center"><img src="{{ url_for('static', filename='images/network.png') }}"
                         alt="Wired Network" /> &nbsp;Wired Network</div>
-                <div class="Text">
+                <div class="text-center">
                     <p>Sent: <b><span id="Network_Wired_Sent"></span></b></p>
                     <p>Received: <b><span id="Network_Wired_Received"></span></b></p>
                     <p>Packets (Sent): <b><span id="Network_Wired_Packets_Sent"></span></b></p>
@@ -147,10 +150,10 @@
             </div>
 
             <!-- Wifi Network -->
-            <div class="col-xl-4 col-md-6  border-bottom border-end">
-                <div class="Title"><img src="{{ url_for('static', filename='images/wifi.png') }}" alt="Network" />
+            <div class="col-xl-4 col-md-6 border-bottom border-end">
+                <div class="text-center"><img src="{{ url_for('static', filename='images/wifi.png') }}" alt="Network" />
                     &nbsp;Wifi Network</div>
-                <div class="Text">
+                <div class="text-center">
                     <p>Sent: <b><span id="Network_Wifi_Sent"></span></b></p>
                     <p>Received: <b><span id="Network_Wifi_Received"></span></b></p>
                     <p>Packets (Sent): <b><span id="Network_Wifi_Packets_Sent"></span></b></p>
@@ -163,14 +166,15 @@
             </div>
 
             <!-- 918 -->
-            <div class="col-xl-4 col-md-6  border-bottom border-end">
-                <div class="Title"><img src="{{ url_for('static', filename='images/usb_hdd.png') }}" alt="SD card" />
+            <div class="col-xl-4 col-md-6 border-bottom">
+                <div class="text-center"><img src="{{ url_for('static', filename='images/usb_hdd.png') }}"
+                        alt="SD card" />
                     &nbsp;918</div>
-                <div class="Text">
+                <div class="text-center">
                     <p>Used: <b><span id="Disks_918_Used"></span></b></p>
                     <p>Free: <b><span id="Disks_918_Free"></span></b></p>
                     <p>Total: <b><span id="Disks_918_Total"></span></b></p>
-                    <div class="progress mb-4">
+                    <div class="progress mb-4 mx-4" style="height: 20px;">
                         <div id="Disks_918_Percentage" class="progress-bar" role="progressbar" aria-valuemin="0"
                             aria-valuemax="100"></div>
                     </div>

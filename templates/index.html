@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" data-lt-installed="true">
 
-<head>
+<head class="w-100">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>Raspberry Pi Hardware Monitor</title>
 
@@ -12,12 +12,12 @@
     <!-- Favicon-->
     <link rel="shortcut icon" type="image/png" href="{{ url_for('static', filename='images/favicon.png') }}">
 
-    <!-- JQuery -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
     <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <!-- JQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
     <!-- Custom -->
     <link href="{{ url_for('static', filename='css/styles.css') }}" rel="stylesheet" />
@@ -46,11 +46,11 @@
     </header>
 
     <!-- Begin page content -->
-    <main class="container-fluid column-fluid">
+    <main class="container-fluid column-fluid flex-shrink-0">
 
-        <div class="row border-bottom">
+        <div class="row">
             <!-- Version -->
-            <div class="col border-end">
+            <div class="col-xl-4 col-md-6 border-bottom border-end">
                 <div class="Title"><img src="{{ url_for('static', filename='images/version.png') }}" alt="Version" />
                     &nbsp;Version</div>
                 <div class="Text">
@@ -62,7 +62,7 @@
             </div>
 
             <!-- Uptime -->
-            <div class="col border-end">
+            <div class="col-xl-4 col-md-6 border-bottom border-end">
                 <div class="Title"><img src="{{ url_for('static', filename='images/uptime.png') }}" alt="Uptime" />
                     &nbsp;Uptime</div>
                 <div class="Text">
@@ -73,7 +73,7 @@
             </div>
 
             <!-- Temperature -->
-            <div class="col border-end">
+            <div class="col-xl-4 col-md-6 border-bottom border-end">
                 <div class="Title"><img src="{{ url_for('static', filename='images/cpu_temp.png') }}"
                         alt="Temperature" />&nbsp;Temperature</div>
                 <div class="Text">
@@ -84,11 +84,9 @@
                     </div>
                 </div>
             </div>
-        </div>
 
-        <div class="row border-bottom">
             <!-- CPU -->
-            <div class="col border-end">
+            <div class="col-xl-4 col-md-6  border-bottom border-end">
                 <div class="Title"><img src="{{ url_for('static', filename='images/cpu.png') }}" alt="CPU" />
                     &nbsp;CPU</div>
                 <div class="Text">
@@ -103,7 +101,7 @@
             </div>
 
             <!-- Memory -->
-            <div class="col border-end">
+            <div class="col-xl-4 col-md-6  border-bottom border-end">
                 <div class="Title"><img src="{{ url_for('static', filename='images/memory.png') }}" alt="Memory" />
                     &nbsp;Memory</div>
                 <div class="Text">
@@ -118,7 +116,7 @@
             </div>
 
             <!-- SDCard -->
-            <div class="col border-end">
+            <div class="col-xl-4 col-md-6  border-bottom border-end">
                 <div class="Title"><img src="{{ url_for('static', filename='images/sd.png') }}" alt="SD card" />
                     &nbsp;SD card</div>
                 <div class="Text">
@@ -131,29 +129,25 @@
                     </div>
                 </div>
             </div>
-        </div>
 
-        <div class="row border-bottom">
             <!-- Wired Network -->
-            <div class="col border-end">
-                <div class="col border-end">
-                    <div class="Title"><img src="{{ url_for('static', filename='images/network.png') }}"
-                            alt="Wired Network" /> &nbsp;Wired Network</div>
-                    <div class="Text">
-                        <p>Sent: <b><span id="Network_Wired_Sent"></span></b></p>
-                        <p>Received: <b><span id="Network_Wired_Received"></span></b></p>
-                        <p>Packets (Sent): <b><span id="Network_Wired_Packets_Sent"></span></b></p>
-                        <p>Packets (Received): <b><span id="Network_Wired_Packets_Received"></span></b></p>
-                        <p>Errors (Sent): <b><span id="Network_Wired_Errors_Sent"></span></b></p>
-                        <p>Errors (Received): <b><span id="Network_Wired_Errors_Received"></span></b></p>
-                        <p>Dropped (Sent): <b><span id="Network_Wired_Dropped_Sent"></span></b></p>
-                        <p>Dropped (Received): <b><span id="Network_Wired_Dropped_Received"></span></b></p>
-                    </div>
+            <div class="col-xl-4 col-md-6  border-bottom border-end">
+                <div class="Title"><img src="{{ url_for('static', filename='images/network.png') }}"
+                        alt="Wired Network" /> &nbsp;Wired Network</div>
+                <div class="Text">
+                    <p>Sent: <b><span id="Network_Wired_Sent"></span></b></p>
+                    <p>Received: <b><span id="Network_Wired_Received"></span></b></p>
+                    <p>Packets (Sent): <b><span id="Network_Wired_Packets_Sent"></span></b></p>
+                    <p>Packets (Received): <b><span id="Network_Wired_Packets_Received"></span></b></p>
+                    <p>Errors (Sent): <b><span id="Network_Wired_Errors_Sent"></span></b></p>
+                    <p>Errors (Received): <b><span id="Network_Wired_Errors_Received"></span></b></p>
+                    <p>Dropped (Sent): <b><span id="Network_Wired_Dropped_Sent"></span></b></p>
+                    <p>Dropped (Received): <b><span id="Network_Wired_Dropped_Received"></span></b></p>
                 </div>
             </div>
 
             <!-- Wifi Network -->
-            <div class="col border-end">
+            <div class="col-xl-4 col-md-6  border-bottom border-end">
                 <div class="Title"><img src="{{ url_for('static', filename='images/wifi.png') }}" alt="Network" />
                     &nbsp;Wifi Network</div>
                 <div class="Text">
@@ -169,7 +163,7 @@
             </div>
 
             <!-- 918 -->
-            <div class="col border-end">
+            <div class="col-xl-4 col-md-6  border-bottom border-end">
                 <div class="Title"><img src="{{ url_for('static', filename='images/usb_hdd.png') }}" alt="SD card" />
                     &nbsp;918</div>
                 <div class="Text">

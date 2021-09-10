@@ -1,0 +1,23 @@
+body {
+    padding-top: 50px;
+}
+
+.Title {
+    float: left;
+    font-family: Tahoma, Helvetica;
+    font-size: 21px;
+    padding-left: 30px;
+    width: 250px;
+}
+
+.Text {
+    float: left;
+    font-family: Tahoma, Helvetica;
+    font-size: 13px;
+    line-height: 13px;
+    padding-left: 30px;
+    padding-right: 30px;
+    padding-top: 15px;
+    width: 518px;
+    white-space: nowrap;
+}

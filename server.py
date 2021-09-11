@@ -1,9 +1,9 @@
-# pip install flask --no-cache-dir
-# export FLASK_APP=server
-# flask run --host=0.0.0.0 --port 8814
+# python3 -m pip install flask gpiozero psutil flask-cors --no-cache-dir
+# python3 RaspberryPiHWMonitorServer/server.py
 # cls; Remove-Item Y:\RaspberryPiHWMonitorServer\static\ -R -Force -Confirm:$False; Remove-Item Y:\RaspberryPiHWMonitorServer\templates\ -R -Force -Confirm:$False; Remove-Item Y:\RaspberryPiHWMonitorServer\server.py -Force -Confirm:$False; Copy-Item .\templates\ -R Y:\RaspberryPiHWMonitorServer\; Copy-Item .\static\ -R Y:\RaspberryPiHWMonitorServer\; Copy-Item .\server.py -R Y:\RaspberryPiHWMonitorServer\;
 
 from flask import Flask, render_template, jsonify
+from flask_cors import CORS
 import subprocess
 import gpiozero
 import datetime
@@ -13,6 +13,7 @@ import math
 import re
 
 app = Flask(__name__)
+cors = CORS(app, resources={r"/*": {"origins": "*"}})
 
 
 # Convert bytes to human readable sizes
@@ -75,12 +76,12 @@ def getInfo():
                 "Free": convert_size(psutil.disk_usage('/').free),
                 "Total": convert_size(psutil.disk_usage('/').total)
             },
-            "918": {
-                "Percentage": round(psutil.disk_usage('/media/pi/918').percent, 2),
-                "Used": convert_size(psutil.disk_usage('/media/pi/918').used),
-                "Free": convert_size(psutil.disk_usage('/media/pi/918').free),
-                "Total": convert_size(psutil.disk_usage('/media/pi/918').total)
-            },
+            # "918": {
+            #     "Percentage": round(psutil.disk_usage('/media/pi/918').percent, 2),
+            #     "Used": convert_size(psutil.disk_usage('/media/pi/918').used),
+            #     "Free": convert_size(psutil.disk_usage('/media/pi/918').free),
+            #     "Total": convert_size(psutil.disk_usage('/media/pi/918').total)
+            # },
         },
         "Network": {
             "Info": {
@@ -119,9 +120,14 @@ def index():
 
 
 @app.route("/json")
-def summary():
+def json():
     return jsonify(getInfo())
 
 
+@app.route("/status")
+def status():
+    return jsonify({"Status": "alive"})
+
+
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=8814)
+    app.run(host='0.0.0.0', port=8888)

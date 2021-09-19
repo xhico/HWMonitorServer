@@ -55,7 +55,7 @@
 
     <div class="row">
         <!-- Version -->
-        <div id="versionSection" class="col-xl-4 col-md-6 border-bottom border-end">
+        <div id="versionSection" class="col-xl-3 col-md-6 border-bottom border-end">
             <div class="text-center"><img src="{{ url_for('static', filename='images/version.png') }}" alt="Version"/>Version</div>
             <div class="text-center">
                 <p>Processor: <b><span id="Version_Processor"></span></b></p>
@@ -66,7 +66,7 @@
         </div>
 
         <!-- Uptime -->
-        <div id="UptimeSection" class="col-xl-4 col-md-6 border-bottom border-end">
+        <div id="UptimeSection" class="col-xl-3 col-md-6 border-bottom border-end">
             <div class="text-center"><img src="{{ url_for('static', filename='images/uptime.png') }}" alt="Uptime"/>Uptime</div>
             <div class="text-center">
                 <p>Date Now: <b><span id="Uptime_Date_Now"></span></b></p>
@@ -76,7 +76,7 @@
         </div>
 
         <!-- Temperature -->
-        <div id="TemperatureSection" class="col-xl-4 col-md-6 border-bottom border-end">
+        <div id="TemperatureSection" class="col-xl-3 col-md-6 border-bottom border-end">
             <div class="text-center"><img src="{{ url_for('static', filename='images/cpu_temp.png') }}" alt="Temperature"/>Temperature</div>
             <div class="text-center">
                 <canvas id="Temperature_Gauge"></canvas>
@@ -84,8 +84,17 @@
             </div>
         </div>
 
+        <!-- Ambient -->
+        <div id="AmbientSection" class="col-xl-3 col-md-6 border-bottom border-end">
+            <div class="text-center"><img src="{{ url_for('static', filename='images/ambient.png') }}" alt="Ambient"/>Ambient</div>
+            <div class="text-center">
+                <p class="col">Temperature: <b><span id="Ambient_Temperature"></span></b></p>
+                <p class="col">Humidity: <b><span id="Ambient_Humidity"></span></b></p>
+            </div>
+        </div>
+
         <!-- CPU -->
-        <div id="CPUSection" class="col-xl-4 col-md-6 border-bottom border-end">
+        <div id="CPUSection" class="col-xl-3 col-md-6 border-bottom border-end">
             <div class="text-center"><img src="{{ url_for('static', filename='images/cpu.png') }}" alt="CPU"/>CPU</div>
             <div class="text-center">
                 <div class="row px-4">
@@ -95,7 +104,7 @@
                     <div class="w-100"></div>
 
                     <p class="col">Processes: <b><span id="CPU_PIDs"></span></b></p>
-                    <p class="col">Frequency (MHz): <b><span id="CPU_Frequency"></span></b></p>
+                    <p class="col">Frequency: <b><span id="CPU_Frequency"></span></b></p>
 
                     <div class="w-100"></div>
 
@@ -110,7 +119,7 @@
         </div>
 
         <!-- Memory -->
-        <div id="MemorySection" class="col-xl-4 col-md-6 border-bottom border-end">
+        <div id="MemorySection" class="col-xl-3 col-md-6 border-bottom border-end">
             <div class="text-center"><img src="{{ url_for('static', filename='images/memory.png') }}" alt="Memory"/>Memory</div>
             <div class="text-center">
                 <p>Used: <b><span id="Memory_Used"></span></b></p>
@@ -123,7 +132,7 @@
         </div>
 
         <!-- SDCard -->
-        <div id="SDCardSection" class="col-xl-4 col-md-6 border-bottom border-end">
+        <div id="SDCardSection" class="col-xl-3 col-md-6 border-bottom border-end">
             <div class="text-center"><img src="{{ url_for('static', filename='images/sd.png') }}" alt="SD card"/>SD card</div>
             <div class="text-center">
                 <p>Used: <b><span id="Disks_SDCard_Used"></span></b></p>
@@ -136,59 +145,29 @@
         </div>
 
         <!-- Wired Network -->
-        <div id="WiredSection" class="col-xl-4 col-md-6 border-bottom border-end">
+        <div id="WiredSection" class="col-xl-3 col-md-6 border-bottom border-end">
             <div class="text-center"><img src="{{ url_for('static', filename='images/network.png') }}" alt="Wired Network"/>Wired Network</div>
             <div class="text-center">
-                <div class="row px-4">
-                    <p class="col">Sent: <b><span id="Network_Wired_Sent"></span></b></p>
-                    <p class="col">Errors (Sent): <b><span id="Network_Wired_Errors_Sent"></span></b></p>
-
-                    <div class="w-100"></div>
-
-                    <p class="col">Received: <b><span id="Network_Wired_Received"></span></b></p>
-                    <p class="col">Errors (Received): <b><span id="Network_Wired_Errors_Received"></span></b></p>
-
-                    <div class="w-100"></div>
-
-                    <p class="col">Packets (Sent): <b><span id="Network_Wired_Packets_Sent"></span></b></p>
-                    <p class="col">Dropped (Sent): <b><span id="Network_Wired_Dropped_Sent"></span></b></p>
-
-                    <div class="w-100"></div>
-
-                    <p class="col">Packets (Received): <b><span id="Network_Wired_Packets_Received"></span></b></p>
-                    <p class="col">Dropped (Received): <b><span id="Network_Wired_Dropped_Received"></span></b></p>
-                </div>
+                <p class="col">Sent: <b><span id="Network_Wired_Sent"></span></b></p>
+                <p class="col">Received: <b><span id="Network_Wired_Received"></span></b></p>
+                <p class="col">Packets (Sent): <b><span id="Network_Wired_Packets_Sent"></span></b></p>
+                <p class="col">Packets (Received): <b><span id="Network_Wired_Packets_Received"></span></b></p>
             </div>
         </div>
 
         <!-- Wifi Network -->
-        <div id="WifiSection" class="col-xl-4 col-md-6 border-bottom border-end">
+        <div id="WifiSection" class="col-xl-3 col-md-6 border-bottom border-end">
             <div class="text-center"><img src="{{ url_for('static', filename='images/wifi.png') }}" alt="Network"/>Wifi Network</div>
             <div class="text-center">
-                <div class="row px-4">
-                    <p class="col">Sent: <b><span id="Network_Wifi_Sent"></span></b></p>
-                    <p class="col">Errors (Sent): <b><span id="Network_Wifi_Errors_Sent"></span></b></p>
-
-                    <div class="w-100"></div>
-
-                    <p class="col">Received: <b><span id="Network_Wifi_Received"></span></b></p>
-                    <p class="col">Errors (Received): <b><span id="Network_Wifi_Errors_Received"></span></b></p>
-
-                    <div class="w-100"></div>
-
-                    <p class="col">Packets (Sent): <b><span id="Network_Wifi_Packets_Sent"></span></b></p>
-                    <p class="col">Dropped (Sent): <b><span id="Network_Wifi_Dropped_Sent"></span></b></p>
-
-                    <div class="w-100"></div>
-
-                    <p class="col">Packets (Received): <b><span id="Network_Wifi_Packets_Received"></span></b></p>
-                    <p class="col">Dropped (Received): <b><span id="Network_Wifi_Dropped_Received"></span></b></p>
-                </div>
+                <p class="col">Sent: <b><span id="Network_Wifi_Sent"></span></b></p>
+                <p class="col">Received: <b><span id="Network_Wifi_Received"></span></b></p>
+                <p class="col">Packets (Sent): <b><span id="Network_Wifi_Packets_Sent"></span></b></p>
+                <p class="col">Packets (Received): <b><span id="Network_Wifi_Packets_Received"></span></b></p>
             </div>
         </div>
 
         <!-- 918 -->
-        <div id="918Section" class="col-xl-4 col-md-6 border-bottom border-end">
+        <div id="918Section" class="col-xl-3 col-md-6 border-bottom border-end">
             <div class="text-center"><img src="{{ url_for('static', filename='images/usb_hdd.png') }}" alt="SD card"/>918</div>
             <div class="text-center">
                 <p class="col">Used: <b><span id="Disks_918_Used"></span></b></p>

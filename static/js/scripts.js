@@ -122,9 +122,9 @@ function getCPU(JSON) {
     document.getElementById("CPU_Percentage").style.width = CPU_Percentage + "%";
     document.getElementById("CPU_Percentage").ariaValueNow = CPU_Percentage;
     document.getElementById("CPU_Cores").innerText = CPU_Cores;
-    document.getElementById("CPU_Frequency").innerText = CPU_Frequency;
+    document.getElementById("CPU_Frequency").innerText = CPU_Frequency + " MHz";
     document.getElementById("CPU_PIDs").innerText = CPU_PIDs;
-    document.getElementById("CPU_Voltage").innerText = CPU_Voltage;
+    document.getElementById("CPU_Voltage").innerText = CPU_Voltage.split("V")[0] + " V";
 }
 
 function getTemperature(JSON) {
@@ -153,6 +153,19 @@ function getTemperature(JSON) {
     gauge.setMinValue(30);
     gauge.animationSpeed = 1;
     gauge.set(CPU_Temperature);
+}
+
+function getAmbientHumidityTemperature(JSON) {
+    if (JSON["AmbientHumidityTemperature"]["hasInfo"] === "None") {
+        document.getElementById("AmbientSection").hidden = true;
+        return;
+    }
+
+    // Humidity / Temperature
+    let Ambient_Humidity = JSON["AmbientHumidityTemperature"]["Humidity"];
+    let Ambient_Temperature = JSON["AmbientHumidityTemperature"]["Temperature"];
+    document.getElementById("Ambient_Humidity").innerText = Ambient_Humidity + " %";
+    document.getElementById("Ambient_Temperature").innerText = Ambient_Temperature + " °C";
 }
 
 function getMemory(JSON) {
@@ -262,19 +275,10 @@ function getWired(JSON) {
     let Network_Wired_Received = JSON["Network"]["Wired"]["Received"];
     let Network_Wired_Packets_Sent = JSON["Network"]["Wired"]["Packets_Sent"];
     let Network_Wired_Packets_Received = JSON["Network"]["Wired"]["Packets_Received"];
-    let Network_Wired_Errors_Sent = JSON["Network"]["Wired"]["Errors_Sent"];
-    let Network_Wired_Errors_Received = JSON["Network"]["Wired"]["Errors_Received"];
-    let Network_Wired_Dropped_Sent = JSON["Network"]["Wired"]["Dropped_Sent"];
-    let Network_Wired_Dropped_Received = JSON["Network"]["Wired"]["Dropped_Received"];
     document.getElementById("Network_Wired_Sent").innerText = Network_Wired_Sent;
     document.getElementById("Network_Wired_Received").innerText = Network_Wired_Received;
     document.getElementById("Network_Wired_Packets_Sent").innerText = Network_Wired_Packets_Sent;
     document.getElementById("Network_Wired_Packets_Received").innerText = Network_Wired_Packets_Received;
-    document.getElementById("Network_Wired_Errors_Sent").innerText = Network_Wired_Errors_Sent;
-    document.getElementById("Network_Wired_Errors_Received").innerText = Network_Wired_Errors_Received;
-    document.getElementById("Network_Wired_Dropped_Sent").innerText = Network_Wired_Dropped_Sent;
-    document.getElementById("Network_Wired_Dropped_Received").innerText = Network_Wired_Dropped_Received;
-
 }
 
 function getWifi(JSON) {
@@ -288,19 +292,10 @@ function getWifi(JSON) {
     let Network_Wifi_Received = JSON["Network"]["Wifi"]["Received"];
     let Network_Wifi_Packets_Sent = JSON["Network"]["Wifi"]["Packets_Sent"];
     let Network_Wifi_Packets_Received = JSON["Network"]["Wifi"]["Packets_Received"];
-    let Network_Wifi_Errors_Sent = JSON["Network"]["Wifi"]["Errors_Sent"];
-    let Network_Wifi_Errors_Received = JSON["Network"]["Wifi"]["Errors_Received"];
-    let Network_Wifi_Dropped_Sent = JSON["Network"]["Wifi"]["Dropped_Sent"];
-    let Network_Wifi_Dropped_Received = JSON["Network"]["Wifi"]["Dropped_Received"];
     document.getElementById("Network_Wifi_Sent").innerText = Network_Wifi_Sent;
     document.getElementById("Network_Wifi_Received").innerText = Network_Wifi_Received;
     document.getElementById("Network_Wifi_Packets_Sent").innerText = Network_Wifi_Packets_Sent;
     document.getElementById("Network_Wifi_Packets_Received").innerText = Network_Wifi_Packets_Received;
-    document.getElementById("Network_Wifi_Errors_Sent").innerText = Network_Wifi_Errors_Sent;
-    document.getElementById("Network_Wifi_Errors_Received").innerText = Network_Wifi_Errors_Received;
-    document.getElementById("Network_Wifi_Dropped_Sent").innerText = Network_Wifi_Dropped_Sent;
-    document.getElementById("Network_Wifi_Dropped_Received").innerText = Network_Wifi_Dropped_Received;
-
 }
 
 window.addEventListener('DOMContentLoaded', async function main() {
@@ -329,6 +324,7 @@ window.addEventListener('DOMContentLoaded', async function main() {
     getUptime(JSON);
     getCPU(JSON);
     getTemperature(JSON);
+    getAmbientHumidityTemperature(JSON);
     getMemory(JSON);
     getSDCard(JSON);
     get918(JSON);

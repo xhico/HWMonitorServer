@@ -1,7 +1,6 @@
 # python3 -m pip install flask gpiozero psutil flask-cors --no-cache-dir
 # python3 RaspberryPiHWMonitorServer/server.py
 
-
 import datetime
 import math
 import re
@@ -145,10 +144,6 @@ def getWired():
             "Received": convert_size(subprocess.getoutput("cat /sys/class/net/eth0/statistics/rx_bytes")),
             "Packets_Sent": subprocess.getoutput("cat /sys/class/net/eth0/statistics/rx_packets"),
             "Packets_Received": subprocess.getoutput("cat /sys/class/net/eth0/statistics/tx_packets"),
-            "Errors_Sent": subprocess.getoutput("cat /sys/class/net/eth0/statistics/tx_errors"),
-            "Errors_Received": subprocess.getoutput("cat /sys/class/net/eth0/statistics/rx_errors"),
-            "Dropped_Sent": subprocess.getoutput("cat /sys/class/net/eth0/statistics/tx_dropped"),
-            "Dropped_Received": subprocess.getoutput("cat /sys/class/net/eth0/statistics/rx_dropped")
         }
     except:
         return {"hasInfo": "None"}
@@ -163,10 +158,21 @@ def getWifi():
             "Received": convert_size(subprocess.getoutput("cat /sys/class/net/wlan0/statistics/rx_bytes")),
             "Packets_Sent": subprocess.getoutput("cat /sys/class/net/wlan0/statistics/rx_packets"),
             "Packets_Received": subprocess.getoutput("cat /sys/class/net/wlan0/statistics/tx_packets"),
-            "Errors_Sent": subprocess.getoutput("cat /sys/class/net/wlan0/statistics/tx_errors"),
-            "Errors_Received": subprocess.getoutput("cat /sys/class/net/wlan0/statistics/rx_errors"),
-            "Dropped_Sent": subprocess.getoutput("cat /sys/class/net/wlan0/statistics/tx_dropped"),
-            "Dropped_Received": subprocess.getoutput("cat /sys/class/net/wlan0/statistics/rx_dropped")
+        }
+    except:
+        return {"hasInfo": "None"}
+
+
+def getAmbientHumidityTemperature():
+    try:
+        with open('/home/pi/RaspberryPiHumiditySensor/HumiditySensor.txt', 'r') as csvFile:
+            data = csvFile.readlines()[1].split(",")
+        csvFile.close()
+
+        return {
+            "hasInfo": "Yes",
+            "Humidity": data[0],
+            "Temperature": data[1]
         }
     except:
         return {"hasInfo": "None"}
@@ -179,6 +185,7 @@ def getInfo():
         "Uptime": getUptime(),
         "CPU": getCPU(),
         "Temperature": getTemperature(),
+        "AmbientHumidityTemperature": getAmbientHumidityTemperature(),
         "Memory": getMemory(),
         "Disks": {
             "SDCard": getSDCard(),

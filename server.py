@@ -1,3 +1,6 @@
+# -*- coding: utf-8 -*-
+# !/usr/bin/python3
+
 # python3 -m pip install flask gpiozero psutil flask-cors --no-cache-dir
 # python3 RaspberryPiHWMonitorServer/server.py
 

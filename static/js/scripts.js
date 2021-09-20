@@ -161,9 +161,11 @@ function getAmbientHumidityTemperature(JSON) {
         return;
     }
 
-    // Humidity / Temperature
+    // Date / Humidity / Temperature
+    let Ambient_Date = JSON["AmbientHumidityTemperature"]["Date"];
     let Ambient_Humidity = JSON["AmbientHumidityTemperature"]["Humidity"];
     let Ambient_Temperature = JSON["AmbientHumidityTemperature"]["Temperature"];
+    document.getElementById("Ambient_Date").innerText = Ambient_Date;
     document.getElementById("Ambient_Humidity").innerText = Ambient_Humidity + " %";
     document.getElementById("Ambient_Temperature").innerText = Ambient_Temperature + " °C";
 }

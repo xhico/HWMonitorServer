@@ -171,8 +171,9 @@ def getAmbientHumidityTemperature():
 
         return {
             "hasInfo": "Yes",
-            "Humidity": data[0],
-            "Temperature": data[1]
+            "Date": data[0],
+            "Humidity": data[1],
+            "Temperature": data[2]
         }
     except:
         return {"hasInfo": "None"}

@@ -266,6 +266,38 @@ function get918(JSON) {
     document.getElementById("Disks_918_Total").innerText = Disks_918_Total;
 }
 
+function get911(JSON) {
+    if (JSON["Disks"]["911"]["hasInfo"] === "None") {
+        document.getElementById("911Section").hidden = true;
+        return;
+    }
+
+    // Disks -> 911
+    let Disks_911_Percentage = JSON["Disks"]["911"]["Percentage"];
+    let Disks_911_Used = JSON["Disks"]["911"]["Used"];
+    let Disks_911_Free = JSON["Disks"]["911"]["Free"];
+    let Disks_911_Total = JSON["Disks"]["911"]["Total"];
+    document.getElementById("Disks_911_Percentage").innerText = Disks_911_Percentage + " %";
+    document.getElementById("Disks_911_Percentage").style.width = Disks_911_Percentage + "%";
+    document.getElementById("Disks_911_Percentage").ariaValueNow = Disks_911_Percentage;
+    if (Disks_911_Percentage < 50) {
+        document.getElementById("Disks_911_Percentage").classList.remove("bg-warning");
+        document.getElementById("Disks_911_Percentage").classList.remove("bg-danger");
+        document.getElementById("Disks_911_Percentage").classList.add("bg-success");
+    } else if (Disks_911_Percentage >= 50 && Disks_911_Percentage < 80) {
+        document.getElementById("Disks_911_Percentage").classList.remove("bg-danger");
+        document.getElementById("Disks_911_Percentage").classList.remove("bg-success");
+        document.getElementById("Disks_911_Percentage").classList.add("bg-warning");
+    } else {
+        document.getElementById("Disks_911_Percentage").classList.remove("bg-success");
+        document.getElementById("Disks_911_Percentage").classList.remove("bg-warning");
+        document.getElementById("Disks_911_Percentage").classList.add("bg-danger");
+    }
+    document.getElementById("Disks_911_Used").innerText = Disks_911_Used;
+    document.getElementById("Disks_911_Free").innerText = Disks_911_Free;
+    document.getElementById("Disks_911_Total").innerText = Disks_911_Total;
+}
+
 function getWired(JSON) {
     if (JSON["Network"]["Wired"]["hasInfo"] === "None") {
         document.getElementById("WiredSection").hidden = true;
@@ -330,6 +362,7 @@ window.addEventListener('DOMContentLoaded', async function main() {
     getMemory(JSON);
     getSDCard(JSON);
     get918(JSON);
+    get911(JSON);
     getWired(JSON);
     getWifi(JSON);
 

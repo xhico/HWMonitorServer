@@ -48,7 +48,8 @@ def getVersions():
 def getUptime():
     date_now = datetime.datetime.now()
     boot_time = datetime.datetime.fromtimestamp(psutil.boot_time())
-    delta_time = datetime.timedelta(seconds=(date_now - boot_time).total_seconds())
+    delta_time = datetime.timedelta(
+        seconds=(date_now - boot_time).total_seconds())
     d = {"days": delta_time.days}
     d["hours"], rem = divmod(delta_time.seconds, 3600)
     d["minutes"], d["seconds"] = divmod(rem, 60)

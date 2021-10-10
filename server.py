@@ -128,20 +128,6 @@ def get918():
         return {"hasInfo": "None"}
 
 
-def get911():
-    try:
-        return {
-            "hasInfo": "Yes",
-            "Available": "Yes",
-            "Percentage": round(psutil.disk_usage('/media/pi/911').percent, 2),
-            "Used": convert_size(psutil.disk_usage('/media/pi/911').used),
-            "Free": convert_size(psutil.disk_usage('/media/pi/911').free),
-            "Total": convert_size(psutil.disk_usage('/media/pi/911').total)
-        }
-    except:
-        return {"hasInfo": "None"}
-
-
 def getHostname():
     try:
         return {
@@ -207,8 +193,7 @@ def getInfo():
         "Memory": getMemory(),
         "Disks": {
             "SDCard": getSDCard(),
-            "918": get918(),
-            "911": get911(),
+            "918": get918()
         },
         "Network": {
             "Info": getHostname(),

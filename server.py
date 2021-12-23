@@ -169,7 +169,7 @@ def getWifi():
 
 def getAmbientHumidityTemperature():
     try:
-        with open('/home/pi/RaspberryPiHumiditySensor/HumiditySensor.txt', 'r') as csvFile:
+        with open('/home/pi/HumiditySensor/HumiditySensor.txt', 'r') as csvFile:
             data = csvFile.readlines()[1].split(",")
         csvFile.close()
 

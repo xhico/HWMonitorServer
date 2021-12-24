@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 # !/usr/bin/python3
 
-# python3 -m pip install flask gpiozero psutil flask-cors --no-cache-dir
-# python3 RaspberryPiHWMonitorServer/server.py
+# python3 -m pip install flask requests gpiozero psutil flask-cors --no-cache-dir
+# python3 /home/pi/HWMonitorServer/server.py
 
 import datetime
 import math
@@ -12,6 +12,7 @@ import subprocess
 
 import gpiozero
 import psutil
+import requests
 from flask import Flask, render_template, jsonify
 from flask_cors import CORS
 
@@ -167,6 +168,20 @@ def getWifi():
         return {"hasInfo": "None"}
 
 
+def getIPAddress():
+    try:
+        localIP = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+        localIP.connect(("8.8.8.8", 80))
+
+        return {
+            "hasInfo": "Yes",
+            "Internal": localIP.getsockname()[0],
+            "External": requests.get('https://api.ipify.org').content.decode('utf8')
+        }
+    except:
+        return {"hasInfo": "None"}
+
+
 def getAmbientHumidityTemperature():
     try:
         with open('/home/pi/HumiditySensor/HumiditySensor.txt', 'r') as csvFile:
@@ -199,7 +214,8 @@ def getInfo():
         "Network": {
             "Info": getHostname(),
             "Wired": getWired(),
-            "Wifi": getWifi()
+            "Wifi": getWifi(),
+            "IPAddress": getIPAddress()
         }
     }
 

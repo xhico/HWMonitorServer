@@ -138,12 +138,12 @@ function getTemperature(JSON) {
     document.getElementById("Temperature").innerText = CPU_Temperature + " °C";
     let opts = {
         angle: 0.15, lineWidth: 0.44, radiusScale: 1,
-        pointer: { length: 0.6, strokeWidth: 0.035, color: '#000000' },
+        pointer: {length: 0.6, strokeWidth: 0.035, color: '#000000'},
         limitMax: false, limitMin: false,
         staticZones: [
-            { strokeStyle: "#198754", min: 30, max: 50 },
-            { strokeStyle: "#ffc107", min: 50, max: 65 },
-            { strokeStyle: "#dc3545", min: 65, max: 80 },
+            {strokeStyle: "#198754", min: 30, max: 50},
+            {strokeStyle: "#ffc107", min: 50, max: 65},
+            {strokeStyle: "#dc3545", min: 65, max: 80},
         ],
         highDpiSupport: true,
     };
@@ -234,38 +234,6 @@ function getSDCard(JSON) {
     document.getElementById("Disks_SDCard_Total").innerText = Disks_SDCard_Total;
 }
 
-function get918(JSON) {
-    if (JSON["Disks"]["918"]["hasInfo"] === "None") {
-        document.getElementById("918Section").hidden = true;
-        return;
-    }
-
-    // Disks -> 918
-    let Disks_918_Percentage = JSON["Disks"]["918"]["Percentage"];
-    let Disks_918_Used = JSON["Disks"]["918"]["Used"];
-    let Disks_918_Free = JSON["Disks"]["918"]["Free"];
-    let Disks_918_Total = JSON["Disks"]["918"]["Total"];
-    document.getElementById("Disks_918_Percentage").innerText = Disks_918_Percentage + " %";
-    document.getElementById("Disks_918_Percentage").style.width = Disks_918_Percentage + "%";
-    document.getElementById("Disks_918_Percentage").ariaValueNow = Disks_918_Percentage;
-    if (Disks_918_Percentage < 50) {
-        document.getElementById("Disks_918_Percentage").classList.remove("bg-warning");
-        document.getElementById("Disks_918_Percentage").classList.remove("bg-danger");
-        document.getElementById("Disks_918_Percentage").classList.add("bg-success");
-    } else if (Disks_918_Percentage >= 50 && Disks_918_Percentage < 80) {
-        document.getElementById("Disks_918_Percentage").classList.remove("bg-danger");
-        document.getElementById("Disks_918_Percentage").classList.remove("bg-success");
-        document.getElementById("Disks_918_Percentage").classList.add("bg-warning");
-    } else {
-        document.getElementById("Disks_918_Percentage").classList.remove("bg-success");
-        document.getElementById("Disks_918_Percentage").classList.remove("bg-warning");
-        document.getElementById("Disks_918_Percentage").classList.add("bg-danger");
-    }
-    document.getElementById("Disks_918_Used").innerText = Disks_918_Used;
-    document.getElementById("Disks_918_Free").innerText = Disks_918_Free;
-    document.getElementById("Disks_918_Total").innerText = Disks_918_Total;
-}
-
 function getWired(JSON) {
     if (JSON["Network"]["Wired"]["hasInfo"] === "None") {
         document.getElementById("WiredSection").hidden = true;
@@ -300,13 +268,45 @@ function getWifi(JSON) {
     document.getElementById("Network_Wifi_Packets_Received").innerText = Network_Wifi_Packets_Received;
 }
 
+function get918(JSON) {
+    if (JSON["Disks"]["918"]["hasInfo"] === "None") {
+        document.getElementById("918Section").hidden = true;
+        return;
+    }
+
+    // Disks -> 918
+    let Disks_918_Percentage = JSON["Disks"]["918"]["Percentage"];
+    let Disks_918_Used = JSON["Disks"]["918"]["Used"];
+    let Disks_918_Free = JSON["Disks"]["918"]["Free"];
+    let Disks_918_Total = JSON["Disks"]["918"]["Total"];
+    document.getElementById("Disks_918_Percentage").innerText = Disks_918_Percentage + " %";
+    document.getElementById("Disks_918_Percentage").style.width = Disks_918_Percentage + "%";
+    document.getElementById("Disks_918_Percentage").ariaValueNow = Disks_918_Percentage;
+    if (Disks_918_Percentage < 50) {
+        document.getElementById("Disks_918_Percentage").classList.remove("bg-warning");
+        document.getElementById("Disks_918_Percentage").classList.remove("bg-danger");
+        document.getElementById("Disks_918_Percentage").classList.add("bg-success");
+    } else if (Disks_918_Percentage >= 50 && Disks_918_Percentage < 80) {
+        document.getElementById("Disks_918_Percentage").classList.remove("bg-danger");
+        document.getElementById("Disks_918_Percentage").classList.remove("bg-success");
+        document.getElementById("Disks_918_Percentage").classList.add("bg-warning");
+    } else {
+        document.getElementById("Disks_918_Percentage").classList.remove("bg-success");
+        document.getElementById("Disks_918_Percentage").classList.remove("bg-warning");
+        document.getElementById("Disks_918_Percentage").classList.add("bg-danger");
+    }
+    document.getElementById("Disks_918_Used").innerText = Disks_918_Used;
+    document.getElementById("Disks_918_Free").innerText = Disks_918_Free;
+    document.getElementById("Disks_918_Total").innerText = Disks_918_Total;
+}
+
 window.addEventListener('DOMContentLoaded', async function main() {
     console.clear();
 
-    // Set alive Raspberry Pi's
+    // Check for alive Raspberry Pi's
     checkRPIs();
 
-    // Get JSON
+    // Get HW Info JSON
     console.log("Get JSON");
     let JSON = await $.ajax({
         url: "/json", success: function (data) {
@@ -329,9 +329,9 @@ window.addEventListener('DOMContentLoaded', async function main() {
     getAmbientHumidityTemperature(JSON);
     getMemory(JSON);
     getSDCard(JSON);
-    get918(JSON);
     getWired(JSON);
     getWifi(JSON);
+    get918(JSON);
 
     // Wait 2 secs -> Run again
     await new Promise(r => setTimeout(r, 2000));

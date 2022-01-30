@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta name="author" content="xhico"/>
 
-    <title></title>
+    <title>RaspberryPi Hardware Monitor</title>
 
     <!-- Favicon-->
     <link rel="shortcut icon" type="image/png" href="{{ url_for('static', filename='images/favicon.png') }}">
@@ -25,7 +25,7 @@
     <link href="{{ url_for('static', filename='css/styles.css') }}" rel="stylesheet"/>
 </head>
 
-<body class="d-flex flex-column h-100" style="margin-top: 60px;">
+<body class="d-flex flex-column h-100">
 
 <!-- Fixed navbar -->
 <header>
@@ -57,8 +57,7 @@
     <div class="row">
         <!-- Version -->
         <div id="versionSection" class="col-xl-3 col-md-6 border-bottom border-end">
-            <div class="text-center"><img src="{{ url_for('static', filename='images/version.png') }}" alt="Version"/>Version
-            </div>
+            <div class="text-center"><img src="{{ url_for('static', filename='images/version.png') }}" alt="Version"/>Version</div>
             <div class="text-center">
                 <p>Processor: <b><span id="Version_Processor"></span></b></p>
                 <p>Distribution: <b><span id="Version_Distribution"></span></b></p>
@@ -69,8 +68,7 @@
 
         <!-- Uptime -->
         <div id="UptimeSection" class="col-xl-3 col-md-6 border-bottom border-end">
-            <div class="text-center"><img src="{{ url_for('static', filename='images/uptime.png') }}" alt="Uptime"/>Uptime
-            </div>
+            <div class="text-center"><img src="{{ url_for('static', filename='images/uptime.png') }}" alt="Uptime"/>Uptime</div>
             <div class="text-center">
                 <p>Date Now: <b><span id="Uptime_Date_Now"></span></b></p>
                 <p>Boot Time: <b><span id="Uptime_Boot_Time"></span></b></p>
@@ -80,9 +78,7 @@
 
         <!-- Temperature -->
         <div id="TemperatureSection" class="col-xl-3 col-md-6 border-bottom border-end">
-            <div class="text-center"><img src="{{ url_for('static', filename='images/cpu_temp.png') }}"
-                                          alt="Temperature"/>Temperature
-            </div>
+            <div class="text-center"><img src="{{ url_for('static', filename='images/cpu_temp.png') }}" alt="Temperature"/>Temperature</div>
             <div class="text-center">
                 <canvas id="Temperature_Gauge"></canvas>
                 <p><b><span id="Temperature"></span></b></p>
@@ -91,8 +87,7 @@
 
         <!-- Ambient -->
         <div id="AmbientSection" class="col-xl-3 col-md-6 border-bottom border-end">
-            <div class="text-center"><img src="{{ url_for('static', filename='images/ambient.png') }}" alt="Ambient"/>Ambient
-            </div>
+            <div class="text-center"><img src="{{ url_for('static', filename='images/ambient.png') }}" alt="Ambient"/>Ambient</div>
             <div class="text-center">
                 <p class="col">Date: <b><span id="Ambient_Date"></span></b></p>
                 <p class="col">Temperature: <b><span id="Ambient_Temperature"></span></b></p>
@@ -115,52 +110,45 @@
 
                     <div class="w-100"></div>
 
-                    <p class="col">&nbsp;</p>
-                    <p class="col">&nbsp;</p>
+                    <p class="col"></p>
+                    <p class="col"></p>
                 </div>
 
-                <div class="progress mb-4 mx-4" style="height: 20px;">
-                    <div id="CPU_Percentage" class="progress-bar" role="progressbar" aria-valuemin="0"
-                         aria-valuemax="100"></div>
+                <div class="progress mb-4 mx-4 progress-20-div">
+                    <div id="CPU_Percentage" class="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
                 </div>
             </div>
         </div>
 
         <!-- Memory -->
         <div id="MemorySection" class="col-xl-3 col-md-6 border-bottom border-end">
-            <div class="text-center"><img src="{{ url_for('static', filename='images/memory.png') }}" alt="Memory"/>Memory
-            </div>
+            <div class="text-center"><img src="{{ url_for('static', filename='images/memory.png') }}" alt="Memory"/>Memory</div>
             <div class="text-center">
                 <p>Used: <b><span id="Memory_Used"></span></b></p>
                 <p>Available: <b><span id="Memory_Available"></span></b></p>
                 <p>Total: <b><span id="Memory_Total"></span></b></p>
-                <div class="progress mb-4 mx-4" style="height: 20px;">
-                    <div id="Memory_Percentage" class="progress-bar" role="progressbar" aria-valuemin="0"
-                         aria-valuemax="100"></div>
+                <div class="progress mb-4 mx-4 progress-20-div">
+                    <div id="Memory_Percentage" class="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
                 </div>
             </div>
         </div>
 
         <!-- SDCard -->
         <div id="SDCardSection" class="col-xl-3 col-md-6 border-bottom border-end">
-            <div class="text-center"><img src="{{ url_for('static', filename='images/sd.png') }}" alt="SD card"/>SD card
-            </div>
+            <div class="text-center"><img src="{{ url_for('static', filename='images/sd.png') }}" alt="SD card"/>SD card</div>
             <div class="text-center">
                 <p>Used: <b><span id="Disks_SDCard_Used"></span></b></p>
                 <p>Free: <b><span id="Disks_SDCard_Free"></span></b></p>
                 <p>Total: <b><span id="Disks_SDCard_Total"></span></b></p>
-                <div class="progress mb-4 mx-4" style="height: 20px;">
-                    <div id="Disks_SDCard_Percentage" class="progress-bar" role="progressbar" aria-valuemin="0"
-                         aria-valuemax="100"></div>
+                <div class="progress mb-4 mx-4 progress-20-div">
+                    <div id="Disks_SDCard_Percentage" class="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
                 </div>
             </div>
         </div>
 
         <!-- Wired Network -->
         <div id="WiredSection" class="col-xl-3 col-md-6 border-bottom border-end">
-            <div class="text-center"><img src="{{ url_for('static', filename='images/network.png') }}"
-                                          alt="Wired Network"/>Wired Network
-            </div>
+            <div class="text-center"><img src="{{ url_for('static', filename='images/network.png') }}" alt="Wired Network"/>Wired Network</div>
             <div class="text-center">
                 <p class="col">Sent: <b><span id="Network_Wired_Sent"></span></b></p>
                 <p class="col">Received: <b><span id="Network_Wired_Received"></span></b></p>
@@ -171,9 +159,7 @@
 
         <!-- Wifi Network -->
         <div id="WifiSection" class="col-xl-3 col-md-6 border-bottom border-end">
-            <div class="text-center"><img src="{{ url_for('static', filename='images/wifi.png') }}" alt="Network"/>Wifi
-                Network
-            </div>
+            <div class="text-center"><img src="{{ url_for('static', filename='images/wifi.png') }}" alt="Network"/>Wifi Network</div>
             <div class="text-center">
                 <p class="col">Sent: <b><span id="Network_Wifi_Sent"></span></b></p>
                 <p class="col">Received: <b><span id="Network_Wifi_Received"></span></b></p>
@@ -184,15 +170,13 @@
 
         <!-- 918 -->
         <div id="918Section" class="col-xl-3 col-md-6 border-bottom border-end">
-            <div class="text-center"><img src="{{ url_for('static', filename='images/usb_hdd.png') }}" alt="SD card"/>918
-            </div>
+            <div class="text-center"><img src="{{ url_for('static', filename='images/usb_hdd.png') }}" alt="SD card"/>918</div>
             <div class="text-center">
                 <p class="col">Used: <b><span id="Disks_918_Used"></span></b></p>
                 <p class="col">Free: <b><span id="Disks_918_Free"></span></b></p>
                 <p class="col">Total: <b><span id="Disks_918_Total"></span></b></p>
-                <div class="progress mb-4 mx-4" style="height: 20px;">
-                    <div id="Disks_918_Percentage" class="progress-bar" role="progressbar" aria-valuemin="0"
-                         aria-valuemax="100"></div>
+                <div class="progress mb-4 mx-4 progress-20-div">
+                    <div id="Disks_918_Percentage" class="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
                 </div>
             </div>
         </div>

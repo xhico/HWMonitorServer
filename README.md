@@ -1,6 +1,6 @@
 # RaspberryPi Hardware Monitor
 
-This is a Raspbbery RaspberryPi Hardware Monitor!
+This is a Raspberry Pi Hardware Monitor!
 </br>
 It was inspired by XavierBerger/RPi-Monitor, but built with Flask/Bootstrap
 

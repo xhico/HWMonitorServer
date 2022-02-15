@@ -2,11 +2,11 @@ function checkRPIs() {
     // Set alive Raspberry Pi's
     console.log("Get alive Raspberry Pi's");
     $.ajax({
-        url: "http://192.168.1.14:8888/status",
+        url: "http://192.168.0.14:8888/status",
         success: function (data) {
             if (data["Status"] === "alive") {
                 document.getElementById("navbar_RPI4").classList.add("active");
-                document.getElementById("navbar_RPI4").href = "http://192.168.1.14:8888";
+                document.getElementById("navbar_RPI4").href = "http://192.168.0.14:8888";
             }
         },
         error: function () {
@@ -16,11 +16,11 @@ function checkRPIs() {
         timeout: 2000
     });
     $.ajax({
-        url: "http://192.168.1.15:8888/status",
+        url: "http://192.168.0.15:8888/status",
         success: function (data) {
             if (data["Status"] === "alive") {
                 document.getElementById("navbar_RPI3BA").classList.add("active");
-                document.getElementById("navbar_RPI3BA").href = "http://192.168.1.15:8888";
+                document.getElementById("navbar_RPI3BA").href = "http://192.168.0.15:8888";
             }
         },
         error: function () {
@@ -30,11 +30,11 @@ function checkRPIs() {
         timeout: 2000
     });
     $.ajax({
-        url: "http://192.168.1.16:8888/status",
+        url: "http://192.168.0.16:8888/status",
         success: function (data) {
             if (data["Status"] === "alive") {
                 document.getElementById("navbar_RPI3BB").classList.add("active");
-                document.getElementById("navbar_RPI3BB").href = "http://192.168.1.16:8888";
+                document.getElementById("navbar_RPI3BB").href = "http://192.168.0.16:8888";
             }
         },
         error: function () {
@@ -44,11 +44,11 @@ function checkRPIs() {
         timeout: 2000
     });
     $.ajax({
-        url: "http://192.168.1.17:8888/status",
+        url: "http://192.168.0.17:8888/status",
         success: function (data) {
             if (data["Status"] === "alive") {
                 document.getElementById("navbar_RPIZW").classList.add("active");
-                document.getElementById("navbar_RPIZW").href = "http://192.168.1.17:8888";
+                document.getElementById("navbar_RPIZW").href = "http://192.168.0.17:8888";
             }
         },
         error: function () {

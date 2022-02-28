@@ -24,7 +24,7 @@ function checkRPIs() {
         success: function (data) {
             if (data["Status"] === "alive") {
                 document.getElementById("navbar_RPI3BA").classList.add("active");
-                document.getElementById("navbar_RPI3BA").href = "http://" + RPIBA + ":8888";
+                document.getElementById("navbar_RPI3BA").href = "http://" + RPI3BA + ":8888";
             }
         },
         error: function () {

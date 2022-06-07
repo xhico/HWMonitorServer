@@ -174,7 +174,7 @@ function getAmbientHumidityTemperature(JSON) {
     document.getElementById("Ambient_Date").innerText = Ambient_Date;
     document.getElementById("Ambient_TemperatureC").innerText = Ambient_TemperatureC + " ºC";
     document.getElementById("Ambient_TemperatureF").innerText = Ambient_TemperatureF + " °F";
-	document.getElementById("Ambient_Humidity").innerText = Ambient_Humidity + " º";
+	document.getElementById("Ambient_Humidity").innerText = Ambient_Humidity + " %";
 	document.getElementById("Ambient_Valid").innerText = Ambient_Valid;
 }
 

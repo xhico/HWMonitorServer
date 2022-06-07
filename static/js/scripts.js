@@ -6,11 +6,11 @@ function checkRPIs() {
 	let RPI3BB = "192.168.0.16";
 	let RPIZW = "192.168.0.17";
     $.ajax({
-        url: "http://" + RPI4 + ":8888/status",
+        url: "http://" + RPI4 + ":7777/status",
         success: function (data) {
             if (data["Status"] === "alive") {
                 document.getElementById("navbar_RPI4").classList.add("active");
-                document.getElementById("navbar_RPI4").href = "http://" + RPI4 + ":8888";
+                document.getElementById("navbar_RPI4").href = "http://" + RPI4 + ":7777";
             }
         },
         error: function () {
@@ -20,11 +20,11 @@ function checkRPIs() {
         timeout: 2000
     });
     $.ajax({
-        url: "http://" + RPI3BA + ":8888/status",
+        url: "http://" + RPI3BA + ":7777/status",
         success: function (data) {
             if (data["Status"] === "alive") {
                 document.getElementById("navbar_RPI3BA").classList.add("active");
-                document.getElementById("navbar_RPI3BA").href = "http://" + RPI3BA + ":8888";
+                document.getElementById("navbar_RPI3BA").href = "http://" + RPI3BA + ":7777";
             }
         },
         error: function () {
@@ -34,11 +34,11 @@ function checkRPIs() {
         timeout: 2000
     });
     $.ajax({
-        url: "http://" + RPI3BB + ":8888/status",
+        url: "http://" + RPI3BB + ":7777/status",
         success: function (data) {
             if (data["Status"] === "alive") {
                 document.getElementById("navbar_RPI3BB").classList.add("active");
-                document.getElementById("navbar_RPI3BB").href = "http://" + RPI3BB + ":8888";
+                document.getElementById("navbar_RPI3BB").href = "http://" + RPI3BB + ":7777";
             }
         },
         error: function () {
@@ -48,11 +48,11 @@ function checkRPIs() {
         timeout: 2000
     });
     $.ajax({
-        url: "http://" + RPIZW + ":8888/status",
+        url: "http://" + RPIZW + ":7777/status",
         success: function (data) {
             if (data["Status"] === "alive") {
                 document.getElementById("navbar_RPIZW").classList.add("active");
-                document.getElementById("navbar_RPIZW").href = "http://" + RPIZW + ":8888";
+                document.getElementById("navbar_RPIZW").href = "http://" + RPIZW + ":7777";
             }
         },
         error: function () {
@@ -167,11 +167,15 @@ function getAmbientHumidityTemperature(JSON) {
 
     // Date / Humidity / Temperature
     let Ambient_Date = JSON["AmbientHumidityTemperature"]["Date"];
-    let Ambient_Humidity = JSON["AmbientHumidityTemperature"]["Humidity"];
-    let Ambient_Temperature = JSON["AmbientHumidityTemperature"]["Temperature"];
+    let Ambient_TemperatureC = JSON["AmbientHumidityTemperature"]["TemperatureC"];
+	let Ambient_TemperatureF = JSON["AmbientHumidityTemperature"]["TemperatureF"];
+	let Ambient_Humidity = JSON["AmbientHumidityTemperature"]["Humidity"];
+	let Ambient_Valid = JSON["AmbientHumidityTemperature"]["Valid"];
     document.getElementById("Ambient_Date").innerText = Ambient_Date;
-    document.getElementById("Ambient_Humidity").innerText = Ambient_Humidity + " %";
-    document.getElementById("Ambient_Temperature").innerText = Ambient_Temperature + " °C";
+    document.getElementById("Ambient_TemperatureC").innerText = Ambient_TemperatureC + " ºC";
+    document.getElementById("Ambient_TemperatureF").innerText = Ambient_TemperatureF + " °F";
+	document.getElementById("Ambient_Humidity").innerText = Ambient_Humidity + " º";
+	document.getElementById("Ambient_Valid").innerText = Ambient_Valid;
 }
 
 function getMemory(JSON) {

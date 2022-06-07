@@ -185,14 +185,16 @@ def getIPAddress():
 def getAmbientHumidityTemperature():
     try:
         with open('/home/pi/HumiditySensor/HumiditySensor.txt', 'r') as csvFile:
-            data = csvFile.readlines()[1].split(",")
+            data = csvFile.readlines()[1].split(", ")
         csvFile.close()
 
         return {
             "hasInfo": "Yes",
             "Date": data[0],
-            "Humidity": data[1],
-            "Temperature": data[2]
+            "TemperatureC": data[1],
+            "TemperatureF": data[2],
+            "Humidity": data[3],
+            "Valid": data[4]
         }
     except:
         return {"hasInfo": "None"}
@@ -236,4 +238,4 @@ def status():
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=7777)
+    app.run(host='0.0.0.0', port=7777, debug=True)

@@ -1,67 +1,6 @@
-function checkRPIs() {
-    // Set alive Raspberry Pi's
-    console.log("Get alive Raspberry Pi's");
-	let RPI4 = "192.168.0.14";
-	let RPI3BA = "192.168.0.15";
-	let RPI3BB = "192.168.0.16";
-	let RPIZW = "192.168.0.17";
-    $.ajax({
-        url: "http://" + RPI4 + ":7777/status",
-        success: function (data) {
-            if (data["Status"] === "alive") {
-                document.getElementById("navbar_RPI4").classList.add("active");
-                document.getElementById("navbar_RPI4").href = "http://" + RPI4 + ":7777";
-            }
-        },
-        error: function () {
-            document.getElementById("navbar_RPI4").classList.remove("active");
-            document.getElementById("navbar_RPI4").href = "#";
-        },
-        timeout: 2000
-    });
-    $.ajax({
-        url: "http://" + RPI3BA + ":7777/status",
-        success: function (data) {
-            if (data["Status"] === "alive") {
-                document.getElementById("navbar_RPI3BA").classList.add("active");
-                document.getElementById("navbar_RPI3BA").href = "http://" + RPI3BA + ":7777";
-            }
-        },
-        error: function () {
-            document.getElementById("navbar_RPI3BA").classList.remove("active");
-            document.getElementById("navbar_RPI3BA").href = "#";
-        },
-        timeout: 2000
-    });
-    $.ajax({
-        url: "http://" + RPI3BB + ":7777/status",
-        success: function (data) {
-            if (data["Status"] === "alive") {
-                document.getElementById("navbar_RPI3BB").classList.add("active");
-                document.getElementById("navbar_RPI3BB").href = "http://" + RPI3BB + ":7777";
-            }
-        },
-        error: function () {
-            document.getElementById("navbar_RPI3BB").classList.remove("active");
-            document.getElementById("navbar_RPI3BB").href = "#";
-        },
-        timeout: 2000
-    });
-    $.ajax({
-        url: "http://" + RPIZW + ":7777/status",
-        success: function (data) {
-            if (data["Status"] === "alive") {
-                document.getElementById("navbar_RPIZW").classList.add("active");
-                document.getElementById("navbar_RPIZW").href = "http://" + RPIZW + ":7777";
-            }
-        },
-        error: function () {
-            document.getElementById("navbar_RPIZW").classList.remove("active");
-            document.getElementById("navbar_RPIZW").href = "#";
-        },
-        timeout: 2000
-    });
-}
+/*
+    @author: xhico
+ */
 
 function getVersions(JSON) {
     if (JSON["Version"]["hasInfo"] === "None") {
@@ -140,16 +79,10 @@ function getTemperature(JSON) {
     // Temperature
     let CPU_Temperature = JSON["Temperature"]["Temperature"];
     document.getElementById("Temperature").innerText = CPU_Temperature + " °C";
+
+    // Add Gauge info
     let opts = {
-        angle: 0.15, lineWidth: 0.44, radiusScale: 1,
-        pointer: {length: 0.6, strokeWidth: 0.035, color: '#000000'},
-        limitMax: false, limitMin: false,
-        staticZones: [
-            {strokeStyle: "#198754", min: 30, max: 50},
-            {strokeStyle: "#ffc107", min: 50, max: 65},
-            {strokeStyle: "#dc3545", min: 65, max: 80},
-        ],
-        highDpiSupport: true,
+        angle: 0.15, lineWidth: 0.44, radiusScale: 1, pointer: {length: 0.6, strokeWidth: 0.035, color: '#000000'}, limitMax: false, limitMin: false, staticZones: [{strokeStyle: "#198754", min: 30, max: 50}, {strokeStyle: "#ffc107", min: 50, max: 65}, {strokeStyle: "#dc3545", min: 65, max: 80},], highDpiSupport: true,
     };
     let target = document.getElementById('Temperature_Gauge');
     let gauge = new Gauge(target).setOptions(opts);
@@ -168,14 +101,14 @@ function getAmbientHumidityTemperature(JSON) {
     // Date / Humidity / Temperature
     let Ambient_Date = JSON["AmbientHumidityTemperature"]["Date"];
     let Ambient_TemperatureC = JSON["AmbientHumidityTemperature"]["TemperatureC"];
-	let Ambient_TemperatureF = JSON["AmbientHumidityTemperature"]["TemperatureF"];
-	let Ambient_Humidity = JSON["AmbientHumidityTemperature"]["Humidity"];
-	let Ambient_Valid = JSON["AmbientHumidityTemperature"]["Valid"];
+    let Ambient_TemperatureF = JSON["AmbientHumidityTemperature"]["TemperatureF"];
+    let Ambient_Humidity = JSON["AmbientHumidityTemperature"]["Humidity"];
+    let Ambient_Valid = JSON["AmbientHumidityTemperature"]["Valid"];
     document.getElementById("Ambient_Date").innerText = Ambient_Date;
     document.getElementById("Ambient_TemperatureC").innerText = Ambient_TemperatureC + " ºC";
     document.getElementById("Ambient_TemperatureF").innerText = Ambient_TemperatureF + " °F";
-	document.getElementById("Ambient_Humidity").innerText = Ambient_Humidity + " %";
-	document.getElementById("Ambient_Valid").innerText = Ambient_Valid;
+    document.getElementById("Ambient_Humidity").innerText = Ambient_Humidity + " %";
+    document.getElementById("Ambient_Valid").innerText = Ambient_Valid;
 }
 
 function getMemory(JSON) {
@@ -309,24 +242,16 @@ function get918(JSON) {
 }
 
 window.addEventListener('DOMContentLoaded', async function main() {
-    console.clear();
-
-    // Check for alive Raspberry Pi's
-    checkRPIs();
+    console.log("---------------------")
+    document.getElementById("navbar_stats").classList.add("active")
 
     // Get HW Info JSON
-    console.log("Get JSON");
+    console.log("Get HW Info JSON");
     let JSON = await $.ajax({
-        url: "/json", success: function (data) {
+        method: "get", url: "/json/hwInfo", success: function (data) {
             return data;
         }
     });
-
-    // Set Hostname
-    console.log("Get Hostname");
-    let Hostname = JSON["Network"]["Info"]["Hostname"];
-    document.title = Hostname;
-    document.getElementById("Hostname").innerText = Hostname;
 
     // Run sections
     console.log("Run Sections");

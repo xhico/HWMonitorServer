@@ -3,24 +3,24 @@
 
 # python3 -m pip install flask requests gpiozero psutil flask-cors --no-cache-dir
 # python3 /home/pi/HWMonitorServer/server.py
+# cls; Copy-Item .\server.py Y:\HWMonitorServer\server.py -Force; Remove-Item Y:\HWMonitorServer\templates\* -R -Force; Copy-Item .\templates\*  Y:\HWMonitorServer\templates\ -R -Force ; Remove-Item Y:\HWMonitorServer\static\* -R -Force; Copy-Item .\static\* Y:\HWMonitorServer\static\ -R -Force
 
 import datetime
 import math
 import re
 import socket
 import subprocess
-
+import requests
 import gpiozero
 import psutil
 import requests
-from flask import Flask, render_template, jsonify
+from flask import Flask, render_template, jsonify, request
 from flask_cors import CORS
 
 app = Flask(__name__)
 cors = CORS(app, resources={r"/*": {"origins": "*"}})
 
 
-# Convert bytes to human readable sizes
 def convert_size(size_bytes):
     if size_bytes == "0":
         return "0B"
@@ -49,8 +49,7 @@ def getVersions():
 def getUptime():
     date_now = datetime.datetime.now()
     boot_time = datetime.datetime.fromtimestamp(psutil.boot_time())
-    delta_time = datetime.timedelta(
-        seconds=(date_now - boot_time).total_seconds())
+    delta_time = datetime.timedelta(seconds=(date_now - boot_time).total_seconds())
     d = {"days": delta_time.days}
     d["hours"], rem = divmod(delta_time.seconds, 3600)
     d["minutes"], d["seconds"] = divmod(rem, 60)
@@ -200,7 +199,6 @@ def getAmbientHumidityTemperature():
         return {"hasInfo": "None"}
 
 
-# Get Hardware / Software Information
 def getInfo():
     return {
         "Version": getVersions(),
@@ -222,19 +220,106 @@ def getInfo():
     }
 
 
+# --------------------------------- #
+
+def getBotInfo(name):
+    pDict, proc_iter = {}, psutil.process_iter(attrs=["pid", "cmdline"])
+    p = [p for p in proc_iter if name in '\t'.join(p.info["cmdline"])]
+    if len(p) != 0:
+        p = p[0]
+        pid = p.pid
+        cpu = p.cpu_percent()
+        mem = p.memory_percent()
+        create_time = datetime.datetime.fromtimestamp(p.create_time())
+        running_time = datetime.timedelta(seconds=(datetime.datetime.now() - create_time).total_seconds())
+        d = {"days": running_time.days}
+        d["hours"], rem = divmod(running_time.seconds, 3600)
+        d["minutes"], d["seconds"] = divmod(rem, 60)
+        running_time = "{days} days {hours}h {minutes}m {seconds}s".format(**d)
+        pDict["Running"], pDict["info"] = "True", {"pid": pid, "cpu": round(cpu, 2), "mem": round(mem, 2), "create_time": create_time.strftime("%Y/%m/%d %H:%M:%S"), "running_time": running_time}
+    else:
+        pDict["Running"] = "False"
+
+    return pDict
+
+
+def getBots():
+    try:
+        botsName = ["HumiditySensor", "EZTV-AutoDownloader", "TV3U", "SIDEBot", "RandomF1Quotes", "RandomUrbanDictionary", "Random9GAG", "FIMDocs", "FIADocs", "WSeriesDocs", "FIAFormulaEDocs"]
+        d = {name: getBotInfo(name) for name in botsName}
+        d["hasInfo"] = "yes"
+        return d
+    except:
+        return {"hasInfo": "None"}
+
+
+def runBot(name):
+    scriptFile = "/home/pi/" + name + "/" + name + ".py"
+    logFile = "/home/pi/" + name + "/" + name + ".log"
+    proc = subprocess.Popen(("python3 " + scriptFile).split(" "), stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+    with open(logFile, "a") as logFile:
+        logFile.writelines([line.decode("UTF-8") for line in proc.stdout])
+    proc.wait()
+
+
+def getBotLog(name):
+    logFile = "/home/pi/" + name + "/" + name + ".log"
+    with open(logFile) as logFile:
+        logInfo = logFile.readlines()
+        logInfo = logInfo[-30:] if len(logInfo) > 30 else logInfo
+
+    return "".join(logInfo)
+
+
+# --------------------------------- #
+
 @app.route("/")
+@app.route("/stats")
 def index():
-    return render_template('index.html', conf=getInfo())
+    return render_template('stats.html')
 
 
-@app.route("/json")
-def json():
-    return jsonify(getInfo())
+@app.route("/bots")
+def bots():
+    return render_template('bots.html')
 
 
 @app.route("/status")
 def status():
     return jsonify({"Status": "alive"})
+
+
+@app.route("/hostname")
+def hostname():
+    return jsonify(getHostname())
+
+
+@app.route("/json/hwInfo")
+def hwInfo():
+    return jsonify(getInfo())
+
+
+@app.route("/json/botsInfo")
+def botsInfo():
+    return jsonify(getBots())
+
+
+@app.route("/bots/action", methods=['POST'])
+def action():
+    value = request.form.get('value', type=str)
+    name = request.form.get('name', type=str)
+
+    info = ""
+    if value == "kill":
+        allBots = getBots()
+        pid = int(allBots[name]["info"]["pid"])
+        psutil.Process(pid).kill()
+    elif value == "run":
+        runBot(name)
+    elif value == "log":
+        info = getBotLog(name)
+
+    return jsonify({"message": "success", "action": value, "info": info})
 
 
 if __name__ == '__main__':

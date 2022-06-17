@@ -25,3 +25,23 @@ body {
         border-left: none;
     }
 }
+
+.border-md-top {
+    border-top: none;
+}
+
+@media (max-width: 768px) {
+    .border-md-top {
+        border-top: 1px solid silver;
+    }
+}
+
+.border-md-bottom {
+    border-bottom: none;
+}
+
+@media (max-width: 768px) {
+    .border-md-bottom {
+        border-bottom: 1px solid silver;
+    }
+}

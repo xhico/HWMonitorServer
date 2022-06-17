@@ -74,5 +74,7 @@ window.addEventListener('DOMContentLoaded', async function main() {
     document.getElementById("navbar_ambient").classList.add("active");
 
     // Init Charts
-    initCharts(8, "hour");
+    let numberTime = document.getElementById("numberTime").value;
+    let unitTime = document.getElementById("unitTime").value;
+    initCharts(numberTime, unitTime);
 });

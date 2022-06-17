@@ -259,19 +259,16 @@ def runBot(name):
     proc = subprocess.Popen(("python3 " + scriptFile).split(" "), stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
     with open(logFile, "a") as logFile:
         logFile.writelines([line.decode("UTF-8") for line in proc.stdout])
-    proc.wait()
 
 
 def getBotLog(name):
     logFile = "/home/pi/" + name + "/" + name + ".log"
-    with open(logFile) as logFile:
-        logInfo = logFile.readlines()
-        logInfo = logInfo[-30:] if len(logInfo) > 30 else logInfo
-
-    return "".join(logInfo)
+    logInfo = subprocess.getoutput("tail -n 30 " + logFile)
+    return logInfo
 
 
 # --------------------------------- #
+
 
 @app.route("/")
 @app.route("/stats")

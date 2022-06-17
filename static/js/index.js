@@ -21,9 +21,31 @@ function checkRPIs() {
     }
 }
 
+function checkZero(data) {
+    if (data.length === 1) {
+        data = "0" + data;
+    }
+    return data;
+}
+
+function getDate() {
+    let today = new Date();
+    let day = checkZero(today.getDate() + "");
+    let month = checkZero((today.getMonth() + 1) + "");
+    let year = checkZero(today.getFullYear() + "");
+    let hour = checkZero(today.getHours() + "");
+    let minutes = checkZero(today.getMinutes() + "");
+    let seconds = checkZero(today.getSeconds() + "");
+    let date = year + "/" + month + "/" + day + " " + hour + ":" + minutes + ":" + seconds;
+    document.getElementById("datenow").innerText = date;
+}
+
 window.addEventListener('DOMContentLoaded', async function main() {
-    // Chek for alive RPIs
+    // Check for alive RPIs
     checkRPIs();
+
+    // Get Date
+    getDate();
 
     // Get Hostname
     console.log("Get Hostname");
@@ -38,6 +60,7 @@ window.addEventListener('DOMContentLoaded', async function main() {
     document.title = hostname;
     document.getElementById("Hostname").innerText = hostname;
 
+    // Show Bots navbar
     if (hostname !== "RPI4") {
         document.getElementById("navbar_bots").hidden = true;
     }

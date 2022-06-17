@@ -62,6 +62,7 @@ window.addEventListener('DOMContentLoaded', async function main() {
     // Show Bots navbar
     if (hostname !== "RPI4") {
         document.getElementById("navbar_bots").hidden = true;
+        document.getElementById("navbar_ambient").hidden = true;
     }
 
     // Wait 2 secs -> Run again

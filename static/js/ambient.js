@@ -71,6 +71,8 @@ async function initCharts(numberTime, unitTime) {
 
 window.addEventListener('DOMContentLoaded', async function main() {
     console.log("---------------------");
-    document.getElementById("navbar_humidity").classList.add("active");
+    document.getElementById("navbar_ambient").classList.add("active");
+
+    // Init Charts
     initCharts(8, "hour");
 });

@@ -281,9 +281,9 @@ def bots():
     return render_template('bots.html')
 
 
-@app.route("/humidity")
-def humidity():
-    return render_template('humidity.html')
+@app.route("/ambient")
+def ambient():
+    return render_template('ambient.html')
 
 
 @app.route("/status")

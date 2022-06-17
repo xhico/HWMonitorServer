@@ -36,8 +36,7 @@ function getDate() {
     let hour = checkZero(today.getHours() + "");
     let minutes = checkZero(today.getMinutes() + "");
     let seconds = checkZero(today.getSeconds() + "");
-    let date = year + "/" + month + "/" + day + " " + hour + ":" + minutes + ":" + seconds;
-    document.getElementById("datenow").innerText = date;
+    document.getElementById("datenow").innerText = year + "/" + month + "/" + day + " " + hour + ":" + minutes + ":" + seconds;
 }
 
 window.addEventListener('DOMContentLoaded', async function main() {

@@ -7,10 +7,11 @@
 
 import datetime
 import math
+import random
 import re
 import socket
 import subprocess
-import requests
+import json
 import gpiozero
 import psutil
 import requests
@@ -183,17 +184,16 @@ def getIPAddress():
 
 def getAmbientHumidityTemperature():
     try:
-        with open('/home/pi/HumiditySensor/HumiditySensor.txt', 'r') as csvFile:
-            data = csvFile.readlines()[1].split(", ")
-        csvFile.close()
+        with open("/home/pi/HumiditySensor/HumiditySensor.json") as inFile:
+            data = json.load(inFile)[0]
 
         return {
             "hasInfo": "Yes",
-            "Date": data[0],
-            "TemperatureC": data[1],
-            "TemperatureF": data[2],
-            "Humidity": data[3],
-            "Valid": data[4]
+            "Date": data["date"],
+            "TemperatureC": data["temp_c"],
+            "TemperatureF": data["temp_f"],
+            "Humidity": data["humidity"],
+            "Valid": data["valid"]
         }
     except:
         return {"hasInfo": "None"}
@@ -245,7 +245,7 @@ def getBotInfo(name):
 
 def getBots():
     try:
-        botsName = ["HumiditySensor", "EZTV-AutoDownloader", "TV3U", "SIDEBot", "RandomF1Quotes", "RandomUrbanDictionary", "Random9GAG", "FIMDocs", "FIADocs", "WSeriesDocs", "FIAFormulaEDocs"]
+        botsName = ["EZTV-AutoDownloader", "TV3U", "SIDEBot", "RandomF1Quotes", "RandomUrbanDictionary", "Random9GAG", "FIMDocs", "FIADocs", "WSeriesDocs", "FIAFormulaEDocs"]
         d = {name: getBotInfo(name) for name in botsName}
         d["hasInfo"] = "yes"
         return d
@@ -279,6 +279,11 @@ def index():
 @app.route("/bots")
 def bots():
     return render_template('bots.html')
+
+
+@app.route("/humidity")
+def humidity():
+    return render_template('humidity.html')
 
 
 @app.route("/status")
@@ -317,6 +322,48 @@ def action():
         info = getBotLog(name)
 
     return jsonify({"message": "success", "action": value, "info": info})
+
+
+@app.route("/json/ambientInfo", methods=['POST'])
+def ambientInfo():
+    numberTime = request.form.get('numberTime', type=int)
+    unitTime = request.form.get('unitTime', type=str)
+
+    if unitTime == "hour":
+        startDate = datetime.datetime.now() - datetime.timedelta(hours=numberTime)
+    elif unitTime == "day":
+        startDate = datetime.datetime.now() - datetime.timedelta(days=numberTime)
+    elif unitTime == "week":
+        startDate = datetime.datetime.now() - datetime.timedelta(weeks=numberTime)
+    else:
+        startDate = datetime.datetime.now() - datetime.timedelta(hours=8)
+
+    # Read JSON File
+    with open("/home/pi/HumiditySensor/HumiditySensor.json") as inFile:
+        data = json.load(inFile)
+
+    # Get valid data and inside timeframe
+    temp_cInfo, temp_fInfo, humidityInfo = [], [], []
+
+    for entry in data:
+        entryDate = datetime.datetime.strptime(entry["date"], "%Y/%m/%d %H:%M")
+
+        if entryDate >= startDate and entry["valid"] == "True":
+            temp_cInfo.append([entry["date"], float(entry["temp_c"])])
+            temp_fInfo.append([entry["date"], float(entry["temp_f"])])
+            humidityInfo.append([entry["date"], float(entry["humidity"])])
+
+    # Crop if > 100 entries
+    totalEntries = len(temp_cInfo)
+    if totalEntries >= 100:
+        to_delete = set(random.sample(range(len(temp_cInfo)), totalEntries - 100))
+        temp_cInfo = [x for i, x in enumerate(temp_cInfo) if i not in to_delete]
+        to_delete = set(random.sample(range(len(temp_fInfo)), totalEntries - 100))
+        temp_fInfo = [x for i, x in enumerate(temp_fInfo) if i not in to_delete]
+        to_delete = set(random.sample(range(len(humidityInfo)), totalEntries - 100))
+        humidityInfo = [x for i, x in enumerate(humidityInfo) if i not in to_delete]
+
+    return jsonify({"temp_c": list(reversed(temp_cInfo)), "temp_f": list(reversed(temp_fInfo)), "humidity": list(reversed(humidityInfo))})
 
 
 if __name__ == '__main__':

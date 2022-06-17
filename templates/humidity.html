@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <!-- Humidity View -->
+
+    <div class="input-group d-flex justify-content-center">
+        <span class="input-group-text">Time Delta</span>
+        <label><input style="width: 100px;" class="form-control" type="number" id="numberTime" value="8" placeholder="8"></label>
+        <label><select style="width: 100px;" class="form-select" id="unitTime">
+            <option value="hour">Hour</option>
+            <option value="day">Day</option>
+            <option value="week">Week</option>
+        </select></label>
+        <button class="btn btn-outline-secondary" type="button" id="btnTime" onclick="timeBtn()">Go</button>
+    </div>
+
+    <div class="row">
+        <figure id="temp_c" class="highcharts-figure"></figure>
+        <figure id="temp_f" class="highcharts-figure"></figure>
+        <figure id="humidity" class="highcharts-figure"></figure>
+    </div>
+{% endblock %}
+
+{% block script %}
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/series-label.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+    <script src="https://code.highcharts.com/modules/export-data.js"></script>
+    <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+    <script src="{{ url_for('static', filename='js/humidity.js') }}"></script>
+{% endblock %}

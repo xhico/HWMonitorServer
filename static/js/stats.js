@@ -242,8 +242,8 @@ function get918(JSON) {
 }
 
 window.addEventListener('DOMContentLoaded', async function main() {
-    console.log("---------------------")
-    document.getElementById("navbar_stats").classList.add("active")
+    console.log("---------------------");
+    document.getElementById("navbar_stats").classList.add("active");
 
     // Get HW Info JSON
     console.log("Get HW Info JSON");

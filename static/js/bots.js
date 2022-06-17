@@ -41,7 +41,7 @@ async function action(value, name) {
 }
 
 window.addEventListener('DOMContentLoaded', async function main() {
-    console.log("---------------------")
+    console.log("---------------------");
     document.getElementById("navbar_bots").classList.add("active");
 
     // Get Bots Info JSON
@@ -54,7 +54,7 @@ window.addEventListener('DOMContentLoaded', async function main() {
 
     // Run sections
     console.log("Run Sections");
-    let botsName = ["HumiditySensor", "EZTV-AutoDownloader", "TV3U", "SIDEBot", "RandomF1Quotes", "RandomUrbanDictionary", "Random9GAG", "FIMDocs", "FIADocs", "WSeriesDocs", "FIAFormulaEDocs"];
+    let botsName = ["EZTV-AutoDownloader", "TV3U", "SIDEBot", "RandomF1Quotes", "RandomUrbanDictionary", "Random9GAG", "FIMDocs", "FIADocs", "WSeriesDocs", "FIAFormulaEDocs"];
     botsName.forEach(function (name) {
         getBot(JSON, name);
     });

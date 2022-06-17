@@ -17,260 +17,232 @@
         </div>
     </div>
 
-    <!-- Bots View -->
-    <div class="container-fluid column-fluid flex-shrink-0" id="bots-view">
-
-    <div class="row">
-        <!-- HumiditySensor -->
-        <div id="" class="col-xl-3 col-md-6 border-bottom border-end">
-            <div class="text-center my-2"><b>HumiditySensor</b></div>
-            <div class="text-center my-2">
-                <div class="row px-4">
-                    <p class="col">Running: <b><span id="HumiditySensor_running"></span></b></p>
-                    <p class="col">PID: <b><span id="HumiditySensor_pid">-</span></b></p>
-                    <div class="w-100"></div>
-                    <p class="col">CPU: <b><span id="HumiditySensor_cpu">-</span></b></p>
-                    <p class="col">Memory: <b><span id="HumiditySensor_mem">-</span></b></p>
-                    <div class="w-100"></div>
-                    <p class="col">Create Time: <b><span id="HumiditySensor_create_time">-</span></b></p>
-                    <p class="col">Running Time: <b><span id="HumiditySensor_running_time">-</span></b></p>
-                </div>
-            </div>
-            <div class="text-center my-2">
-                <button class="btn btn-danger" id="HumiditySensor_kill" onclick="action('kill','HumiditySensor')">Kill</button>
-                <button class="btn btn-success" id="HumiditySensor_run" onclick="action('run','HumiditySensor')">Run</button>
-                <a class="btn btn-secondary" onclick="action('log','HumiditySensor')" href='javascript:void(0);'>View Log</a>
+    <!-- EZTV-AutoDownloader -->
+    <div class="col-xl-3 col-md-6 border-bottom border-end">
+        <div class="text-center my-2"><b>EZTV-AutoDownloader</b></div>
+        <div class="text-center my-2">
+            <div class="row px-4">
+                <p class="col">Running: <b><span id="EZTV-AutoDownloader_running"></span></b></p>
+                <p class="col">PID: <b><span id="EZTV-AutoDownloader_pid">-</span></b></p>
+                <div class="w-100"></div>
+                <p class="col">CPU: <b><span id="EZTV-AutoDownloader_cpu">-</span></b></p>
+                <p class="col">Memory: <b><span id="EZTV-AutoDownloader_mem">-</span></b></p>
+                <div class="w-100"></div>
+                <p class="col">Create Time: <b><span id="EZTV-AutoDownloader_create_time">-</span></b></p>
+                <p class="col">Running Time: <b><span id="EZTV-AutoDownloader_running_time">-</span></b></p>
             </div>
         </div>
+        <div class="text-center my-2">
+            <button class="btn btn-danger" id="EZTV-AutoDownloader_kill" onclick="action('kill','EZTV-AutoDownloader')">Kill</button>
+            <button class="btn btn-success" id="EZTV-AutoDownloader_run" onclick="action('run','EZTV-AutoDownloader')">Run</button>
+            <a class="btn btn-secondary" onclick="action('log','EZTV-AutoDownloader')" href='javascript:void(0);'>View Log</a>
+        </div>
+    </div>
 
 
-        <!-- EZTV-AutoDownloader -->
-        <div id="" class="col-xl-3 col-md-6 border-bottom border-end">
-            <div class="text-center my-2"><b>EZTV-AutoDownloader</b></div>
-            <div class="text-center my-2">
-                <div class="row px-4">
-                    <p class="col">Running: <b><span id="EZTV-AutoDownloader_running"></span></b></p>
-                    <p class="col">PID: <b><span id="EZTV-AutoDownloader_pid">-</span></b></p>
-                    <div class="w-100"></div>
-                    <p class="col">CPU: <b><span id="EZTV-AutoDownloader_cpu">-</span></b></p>
-                    <p class="col">Memory: <b><span id="EZTV-AutoDownloader_mem">-</span></b></p>
-                    <div class="w-100"></div>
-                    <p class="col">Create Time: <b><span id="EZTV-AutoDownloader_create_time">-</span></b></p>
-                    <p class="col">Running Time: <b><span id="EZTV-AutoDownloader_running_time">-</span></b></p>
-                </div>
-            </div>
-            <div class="text-center my-2">
-                <button class="btn btn-danger" id="EZTV-AutoDownloader_kill" onclick="action('kill','EZTV-AutoDownloader')">Kill</button>
-                <button class="btn btn-success" id="EZTV-AutoDownloader_run" onclick="action('run','EZTV-AutoDownloader')">Run</button>
-                <a class="btn btn-secondary" onclick="action('log','EZTV-AutoDownloader')" href='javascript:void(0);'>View Log</a>
+    <!-- TV3U -->
+    <div class="col-xl-3 col-md-6 border-bottom border-end">
+        <div class="text-center my-2"><b>TV3U</b></div>
+        <div class="text-center my-2">
+            <div class="row px-4">
+                <p class="col">Running: <b><span id="TV3U_running"></span></b></p>
+                <p class="col">PID: <b><span id="TV3U_pid">-</span></b></p>
+                <div class="w-100"></div>
+                <p class="col">CPU: <b><span id="TV3U_cpu">-</span></b></p>
+                <p class="col">Memory: <b><span id="TV3U_mem">-</span></b></p>
+                <div class="w-100"></div>
+                <p class="col">Create Time: <b><span id="TV3U_create_time">-</span></b></p>
+                <p class="col">Running Time: <b><span id="TV3U_running_time">-</span></b></p>
             </div>
         </div>
+        <div class="text-center my-2">
+            <button class="btn btn-danger" id="TV3U_kill" onclick="action('kill','TV3U')">Kill</button>
+            <button class="btn btn-success" id="TV3U_run" onclick="action('run','TV3U')">Run</button>
+            <a class="btn btn-secondary" onclick="action('log','TV3U')" href='javascript:void(0);'>View Log</a>
+        </div>
+    </div>
 
 
-        <!-- TV3U -->
-        <div id="" class="col-xl-3 col-md-6 border-bottom border-end">
-            <div class="text-center my-2"><b>TV3U</b></div>
-            <div class="text-center my-2">
-                <div class="row px-4">
-                    <p class="col">Running: <b><span id="TV3U_running"></span></b></p>
-                    <p class="col">PID: <b><span id="TV3U_pid">-</span></b></p>
-                    <div class="w-100"></div>
-                    <p class="col">CPU: <b><span id="TV3U_cpu">-</span></b></p>
-                    <p class="col">Memory: <b><span id="TV3U_mem">-</span></b></p>
-                    <div class="w-100"></div>
-                    <p class="col">Create Time: <b><span id="TV3U_create_time">-</span></b></p>
-                    <p class="col">Running Time: <b><span id="TV3U_running_time">-</span></b></p>
-                </div>
-            </div>
-            <div class="text-center my-2">
-                <button class="btn btn-danger" id="TV3U_kill" onclick="action('kill','TV3U')">Kill</button>
-                <button class="btn btn-success" id="TV3U_run" onclick="action('run','TV3U')">Run</button>
-                <a class="btn btn-secondary" onclick="action('log','TV3U')" href='javascript:void(0);'>View Log</a>
+    <!-- SIDEBot -->
+    <div class="col-xl-3 col-md-6 border-bottom border-end">
+        <div class="text-center my-2"><b>SIDEBot</b></div>
+        <div class="text-center my-2">
+            <div class="row px-4">
+                <p class="col">Running: <b><span id="SIDEBot_running"></span></b></p>
+                <p class="col">PID: <b><span id="SIDEBot_pid">-</span></b></p>
+                <div class="w-100"></div>
+                <p class="col">CPU: <b><span id="SIDEBot_cpu">-</span></b></p>
+                <p class="col">Memory: <b><span id="SIDEBot_mem">-</span></b></p>
+                <div class="w-100"></div>
+                <p class="col">Create Time: <b><span id="SIDEBot_create_time">-</span></b></p>
+                <p class="col">Running Time: <b><span id="SIDEBot_running_time">-</span></b></p>
             </div>
         </div>
+        <div class="text-center my-2">
+            <button class="btn btn-danger" id="SIDEBot_kill" onclick="action('kill','SIDEBot')">Kill</button>
+            <button class="btn btn-success" id="SIDEBot_run" onclick="action('run','SIDEBot')">Run</button>
+            <a class="btn btn-secondary" onclick="action('log','SIDEBot')" href='javascript:void(0);'>View Log</a>
+        </div>
+    </div>
 
 
-        <!-- SIDEBot -->
-        <div id="" class="col-xl-3 col-md-6 border-bottom border-end">
-            <div class="text-center my-2"><b>SIDEBot</b></div>
-            <div class="text-center my-2">
-                <div class="row px-4">
-                    <p class="col">Running: <b><span id="SIDEBot_running"></span></b></p>
-                    <p class="col">PID: <b><span id="SIDEBot_pid">-</span></b></p>
-                    <div class="w-100"></div>
-                    <p class="col">CPU: <b><span id="SIDEBot_cpu">-</span></b></p>
-                    <p class="col">Memory: <b><span id="SIDEBot_mem">-</span></b></p>
-                    <div class="w-100"></div>
-                    <p class="col">Create Time: <b><span id="SIDEBot_create_time">-</span></b></p>
-                    <p class="col">Running Time: <b><span id="SIDEBot_running_time">-</span></b></p>
-                </div>
-            </div>
-            <div class="text-center my-2">
-                <button class="btn btn-danger" id="SIDEBot_kill" onclick="action('kill','SIDEBot')">Kill</button>
-                <button class="btn btn-success" id="SIDEBot_run" onclick="action('run','SIDEBot')">Run</button>
-                <a class="btn btn-secondary" onclick="action('log','SIDEBot')" href='javascript:void(0);'>View Log</a>
+    <!-- RandomF1Quotes -->
+    <div class="col-xl-3 col-md-6 border-bottom border-end">
+        <div class="text-center my-2"><b>RandomF1Quotes</b></div>
+        <div class="text-center my-2">
+            <div class="row px-4">
+                <p class="col">Running: <b><span id="RandomF1Quotes_running"></span></b></p>
+                <p class="col">PID: <b><span id="RandomF1Quotes_pid">-</span></b></p>
+                <div class="w-100"></div>
+                <p class="col">CPU: <b><span id="RandomF1Quotes_cpu">-</span></b></p>
+                <p class="col">Memory: <b><span id="RandomF1Quotes_mem">-</span></b></p>
+                <div class="w-100"></div>
+                <p class="col">Create Time: <b><span id="RandomF1Quotes_create_time">-</span></b></p>
+                <p class="col">Running Time: <b><span id="RandomF1Quotes_running_time">-</span></b></p>
             </div>
         </div>
+        <div class="text-center my-2">
+            <button class="btn btn-danger" id="RandomF1Quotes_kill" onclick="action('kill','RandomF1Quotes')">Kill</button>
+            <button class="btn btn-success" id="RandomF1Quotes_run" onclick="action('run','RandomF1Quotes')">Run</button>
+            <a class="btn btn-secondary" onclick="action('log','RandomF1Quotes')" href='javascript:void(0);'>View Log</a>
+        </div>
+    </div>
 
 
-        <!-- RandomF1Quotes -->
-        <div id="" class="col-xl-3 col-md-6 border-bottom border-end">
-            <div class="text-center my-2"><b>RandomF1Quotes</b></div>
-            <div class="text-center my-2">
-                <div class="row px-4">
-                    <p class="col">Running: <b><span id="RandomF1Quotes_running"></span></b></p>
-                    <p class="col">PID: <b><span id="RandomF1Quotes_pid">-</span></b></p>
-                    <div class="w-100"></div>
-                    <p class="col">CPU: <b><span id="RandomF1Quotes_cpu">-</span></b></p>
-                    <p class="col">Memory: <b><span id="RandomF1Quotes_mem">-</span></b></p>
-                    <div class="w-100"></div>
-                    <p class="col">Create Time: <b><span id="RandomF1Quotes_create_time">-</span></b></p>
-                    <p class="col">Running Time: <b><span id="RandomF1Quotes_running_time">-</span></b></p>
-                </div>
-            </div>
-            <div class="text-center my-2">
-                <button class="btn btn-danger" id="RandomF1Quotes_kill" onclick="action('kill','RandomF1Quotes')">Kill</button>
-                <button class="btn btn-success" id="RandomF1Quotes_run" onclick="action('run','RandomF1Quotes')">Run</button>
-                <a class="btn btn-secondary" onclick="action('log','RandomF1Quotes')" href='javascript:void(0);'>View Log</a>
+    <!-- RandomUrbanDictionary -->
+    <div class="col-xl-3 col-md-6 border-bottom border-end">
+        <div class="text-center my-2"><b>RandomUrbanDictionary</b></div>
+        <div class="text-center my-2">
+            <div class="row px-4">
+                <p class="col">Running: <b><span id="RandomUrbanDictionary_running"></span></b></p>
+                <p class="col">PID: <b><span id="RandomUrbanDictionary_pid">-</span></b></p>
+                <div class="w-100"></div>
+                <p class="col">CPU: <b><span id="RandomUrbanDictionary_cpu">-</span></b></p>
+                <p class="col">Memory: <b><span id="RandomUrbanDictionary_mem">-</span></b></p>
+                <div class="w-100"></div>
+                <p class="col">Create Time: <b><span id="RandomUrbanDictionary_create_time">-</span></b></p>
+                <p class="col">Running Time: <b><span id="RandomUrbanDictionary_running_time">-</span></b></p>
             </div>
         </div>
+        <div class="text-center my-2">
+            <button class="btn btn-danger" id="RandomUrbanDictionary_kill" onclick="action('kill','RandomUrbanDictionary')">Kill</button>
+            <button class="btn btn-success" id="RandomUrbanDictionary_run" onclick="action('run','RandomUrbanDictionary')">Run</button>
+            <a class="btn btn-secondary" onclick="action('log','RandomUrbanDictionary')" href='javascript:void(0);'>View Log</a>
+        </div>
+    </div>
 
 
-        <!-- RandomUrbanDictionary -->
-        <div id="" class="col-xl-3 col-md-6 border-bottom border-end">
-            <div class="text-center my-2"><b>RandomUrbanDictionary</b></div>
-            <div class="text-center my-2">
-                <div class="row px-4">
-                    <p class="col">Running: <b><span id="RandomUrbanDictionary_running"></span></b></p>
-                    <p class="col">PID: <b><span id="RandomUrbanDictionary_pid">-</span></b></p>
-                    <div class="w-100"></div>
-                    <p class="col">CPU: <b><span id="RandomUrbanDictionary_cpu">-</span></b></p>
-                    <p class="col">Memory: <b><span id="RandomUrbanDictionary_mem">-</span></b></p>
-                    <div class="w-100"></div>
-                    <p class="col">Create Time: <b><span id="RandomUrbanDictionary_create_time">-</span></b></p>
-                    <p class="col">Running Time: <b><span id="RandomUrbanDictionary_running_time">-</span></b></p>
-                </div>
-            </div>
-            <div class="text-center my-2">
-                <button class="btn btn-danger" id="RandomUrbanDictionary_kill" onclick="action('kill','RandomUrbanDictionary')">Kill</button>
-                <button class="btn btn-success" id="RandomUrbanDictionary_run" onclick="action('run','RandomUrbanDictionary')">Run</button>
-                <a class="btn btn-secondary" onclick="action('log','RandomUrbanDictionary')" href='javascript:void(0);'>View Log</a>
+    <!-- Random9GAG -->
+    <div class="col-xl-3 col-md-6 border-bottom border-end">
+        <div class="text-center my-2"><b>Random9GAG</b></div>
+        <div class="text-center my-2">
+            <div class="row px-4">
+                <p class="col">Running: <b><span id="Random9GAG_running"></span></b></p>
+                <p class="col">PID: <b><span id="Random9GAG_pid">-</span></b></p>
+                <div class="w-100"></div>
+                <p class="col">CPU: <b><span id="Random9GAG_cpu">-</span></b></p>
+                <p class="col">Memory: <b><span id="Random9GAG_mem">-</span></b></p>
+                <div class="w-100"></div>
+                <p class="col">Create Time: <b><span id="Random9GAG_create_time">-</span></b></p>
+                <p class="col">Running Time: <b><span id="Random9GAG_running_time">-</span></b></p>
             </div>
         </div>
+        <div class="text-center my-2">
+            <button class="btn btn-danger" id="Random9GAG_kill" onclick="action('kill','Random9GAG')">Kill</button>
+            <button class="btn btn-success" id="Random9GAG_run" onclick="action('run','Random9GAG')">Run</button>
+            <a class="btn btn-secondary" onclick="action('log','Random9GAG')" href='javascript:void(0);'>View Log</a>
+        </div>
+    </div>
 
 
-        <!-- Random9GAG -->
-        <div id="" class="col-xl-3 col-md-6 border-bottom border-end">
-            <div class="text-center my-2"><b>Random9GAG</b></div>
-            <div class="text-center my-2">
-                <div class="row px-4">
-                    <p class="col">Running: <b><span id="Random9GAG_running"></span></b></p>
-                    <p class="col">PID: <b><span id="Random9GAG_pid">-</span></b></p>
-                    <div class="w-100"></div>
-                    <p class="col">CPU: <b><span id="Random9GAG_cpu">-</span></b></p>
-                    <p class="col">Memory: <b><span id="Random9GAG_mem">-</span></b></p>
-                    <div class="w-100"></div>
-                    <p class="col">Create Time: <b><span id="Random9GAG_create_time">-</span></b></p>
-                    <p class="col">Running Time: <b><span id="Random9GAG_running_time">-</span></b></p>
-                </div>
-            </div>
-            <div class="text-center my-2">
-                <button class="btn btn-danger" id="Random9GAG_kill" onclick="action('kill','Random9GAG')">Kill</button>
-                <button class="btn btn-success" id="Random9GAG_run" onclick="action('run','Random9GAG')">Run</button>
-                <a class="btn btn-secondary" onclick="action('log','Random9GAG')" href='javascript:void(0);'>View Log</a>
+    <!-- FIMDocs -->
+    <div class="col-xl-3 col-md-6 border-bottom border-end">
+        <div class="text-center my-2"><b>FIMDocs</b></div>
+        <div class="text-center my-2">
+            <div class="row px-4">
+                <p class="col">Running: <b><span id="FIMDocs_running"></span></b></p>
+                <p class="col">PID: <b><span id="FIMDocs_pid">-</span></b></p>
+                <div class="w-100"></div>
+                <p class="col">CPU: <b><span id="FIMDocs_cpu">-</span></b></p>
+                <p class="col">Memory: <b><span id="FIMDocs_mem">-</span></b></p>
+                <div class="w-100"></div>
+                <p class="col">Create Time: <b><span id="FIMDocs_create_time">-</span></b></p>
+                <p class="col">Running Time: <b><span id="FIMDocs_running_time">-</span></b></p>
             </div>
         </div>
+        <div class="text-center my-2">
+            <button class="btn btn-danger" id="FIMDocs_kill" onclick="action('kill','FIMDocs')">Kill</button>
+            <button class="btn btn-success" id="FIMDocs_run" onclick="action('run','FIMDocs')">Run</button>
+            <a class="btn btn-secondary" onclick="action('log','FIMDocs')" href='javascript:void(0);'>View Log</a>
+        </div>
+    </div>
 
 
-        <!-- FIMDocs -->
-        <div id="" class="col-xl-3 col-md-6 border-bottom border-end">
-            <div class="text-center my-2"><b>FIMDocs</b></div>
-            <div class="text-center my-2">
-                <div class="row px-4">
-                    <p class="col">Running: <b><span id="FIMDocs_running"></span></b></p>
-                    <p class="col">PID: <b><span id="FIMDocs_pid">-</span></b></p>
-                    <div class="w-100"></div>
-                    <p class="col">CPU: <b><span id="FIMDocs_cpu">-</span></b></p>
-                    <p class="col">Memory: <b><span id="FIMDocs_mem">-</span></b></p>
-                    <div class="w-100"></div>
-                    <p class="col">Create Time: <b><span id="FIMDocs_create_time">-</span></b></p>
-                    <p class="col">Running Time: <b><span id="FIMDocs_running_time">-</span></b></p>
-                </div>
-            </div>
-            <div class="text-center my-2">
-                <button class="btn btn-danger" id="FIMDocs_kill" onclick="action('kill','FIMDocs')">Kill</button>
-                <button class="btn btn-success" id="FIMDocs_run" onclick="action('run','FIMDocs')">Run</button>
-                <a class="btn btn-secondary" onclick="action('log','FIMDocs')" href='javascript:void(0);'>View Log</a>
+    <!-- FIADocs -->
+    <div class="col-xl-3 col-md-6 border-bottom border-end">
+        <div class="text-center my-2"><b>FIADocs</b></div>
+        <div class="text-center my-2">
+            <div class="row px-4">
+                <p class="col">Running: <b><span id="FIADocs_running"></span></b></p>
+                <p class="col">PID: <b><span id="FIADocs_pid">-</span></b></p>
+                <div class="w-100"></div>
+                <p class="col">CPU: <b><span id="FIADocs_cpu">-</span></b></p>
+                <p class="col">Memory: <b><span id="FIADocs_mem">-</span></b></p>
+                <div class="w-100"></div>
+                <p class="col">Create Time: <b><span id="FIADocs_create_time">-</span></b></p>
+                <p class="col">Running Time: <b><span id="FIADocs_running_time">-</span></b></p>
             </div>
         </div>
+        <div class="text-center my-2">
+            <button class="btn btn-danger" id="FIADocs_kill" onclick="action('kill','FIADocs')">Kill</button>
+            <button class="btn btn-success" id="FIADocs_run" onclick="action('run','FIADocs')">Run</button>
+            <a class="btn btn-secondary" onclick="action('log','FIADocs')" href='javascript:void(0);'>View Log</a>
+        </div>
+    </div>
 
 
-        <!-- FIADocs -->
-        <div id="" class="col-xl-3 col-md-6 border-bottom border-end">
-            <div class="text-center my-2"><b>FIADocs</b></div>
-            <div class="text-center my-2">
-                <div class="row px-4">
-                    <p class="col">Running: <b><span id="FIADocs_running"></span></b></p>
-                    <p class="col">PID: <b><span id="FIADocs_pid">-</span></b></p>
-                    <div class="w-100"></div>
-                    <p class="col">CPU: <b><span id="FIADocs_cpu">-</span></b></p>
-                    <p class="col">Memory: <b><span id="FIADocs_mem">-</span></b></p>
-                    <div class="w-100"></div>
-                    <p class="col">Create Time: <b><span id="FIADocs_create_time">-</span></b></p>
-                    <p class="col">Running Time: <b><span id="FIADocs_running_time">-</span></b></p>
-                </div>
-            </div>
-            <div class="text-center my-2">
-                <button class="btn btn-danger" id="FIADocs_kill" onclick="action('kill','FIADocs')">Kill</button>
-                <button class="btn btn-success" id="FIADocs_run" onclick="action('run','FIADocs')">Run</button>
-                <a class="btn btn-secondary" onclick="action('log','FIADocs')" href='javascript:void(0);'>View Log</a>
+    <!-- WSeriesDocs -->
+    <div class="col-xl-3 col-md-6 border-bottom border-end">
+        <div class="text-center my-2"><b>WSeriesDocs</b></div>
+        <div class="text-center my-2">
+            <div class="row px-4">
+                <p class="col">Running: <b><span id="WSeriesDocs_running"></span></b></p>
+                <p class="col">PID: <b><span id="WSeriesDocs_pid">-</span></b></p>
+                <div class="w-100"></div>
+                <p class="col">CPU: <b><span id="WSeriesDocs_cpu">-</span></b></p>
+                <p class="col">Memory: <b><span id="WSeriesDocs_mem">-</span></b></p>
+                <div class="w-100"></div>
+                <p class="col">Create Time: <b><span id="WSeriesDocs_create_time">-</span></b></p>
+                <p class="col">Running Time: <b><span id="WSeriesDocs_running_time">-</span></b></p>
             </div>
         </div>
+        <div class="text-center my-2">
+            <button class="btn btn-danger" id="WSeriesDocs_kill" onclick="action('kill','WSeriesDocs')">Kill</button>
+            <button class="btn btn-success" id="WSeriesDocs_run" onclick="action('run','WSeriesDocs')">Run</button>
+            <a class="btn btn-secondary" onclick="action('log','WSeriesDocs')" href='javascript:void(0);'>View Log</a>
+        </div>
+    </div>
 
 
-        <!-- WSeriesDocs -->
-        <div id="" class="col-xl-3 col-md-6 border-bottom border-end">
-            <div class="text-center my-2"><b>WSeriesDocs</b></div>
-            <div class="text-center my-2">
-                <div class="row px-4">
-                    <p class="col">Running: <b><span id="WSeriesDocs_running"></span></b></p>
-                    <p class="col">PID: <b><span id="WSeriesDocs_pid">-</span></b></p>
-                    <div class="w-100"></div>
-                    <p class="col">CPU: <b><span id="WSeriesDocs_cpu">-</span></b></p>
-                    <p class="col">Memory: <b><span id="WSeriesDocs_mem">-</span></b></p>
-                    <div class="w-100"></div>
-                    <p class="col">Create Time: <b><span id="WSeriesDocs_create_time">-</span></b></p>
-                    <p class="col">Running Time: <b><span id="WSeriesDocs_running_time">-</span></b></p>
-                </div>
-            </div>
-            <div class="text-center my-2">
-                <button class="btn btn-danger" id="WSeriesDocs_kill" onclick="action('kill','WSeriesDocs')">Kill</button>
-                <button class="btn btn-success" id="WSeriesDocs_run" onclick="action('run','WSeriesDocs')">Run</button>
-                <a class="btn btn-secondary" onclick="action('log','WSeriesDocs')" href='javascript:void(0);'>View Log</a>
+    <!-- FIAFormulaEDocs -->
+    <div class="col-xl-3 col-md-6 border-bottom border-end">
+        <div class="text-center my-2"><b>FIAFormulaEDocs</b></div>
+        <div class="text-center my-2">
+            <div class="row px-4">
+                <p class="col">Running: <b><span id="FIAFormulaEDocs_running"></span></b></p>
+                <p class="col">PID: <b><span id="FIAFormulaEDocs_pid">-</span></b></p>
+                <div class="w-100"></div>
+                <p class="col">CPU: <b><span id="FIAFormulaEDocs_cpu">-</span></b></p>
+                <p class="col">Memory: <b><span id="FIAFormulaEDocs_mem">-</span></b></p>
+                <div class="w-100"></div>
+                <p class="col">Create Time: <b><span id="FIAFormulaEDocs_create_time">-</span></b></p>
+                <p class="col">Running Time: <b><span id="FIAFormulaEDocs_running_time">-</span></b></p>
             </div>
         </div>
-
-
-        <!-- FIAFormulaEDocs -->
-        <div id="" class="col-xl-3 col-md-6 border-bottom border-end">
-            <div class="text-center my-2"><b>FIAFormulaEDocs</b></div>
-            <div class="text-center my-2">
-                <div class="row px-4">
-                    <p class="col">Running: <b><span id="FIAFormulaEDocs_running"></span></b></p>
-                    <p class="col">PID: <b><span id="FIAFormulaEDocs_pid">-</span></b></p>
-                    <div class="w-100"></div>
-                    <p class="col">CPU: <b><span id="FIAFormulaEDocs_cpu">-</span></b></p>
-                    <p class="col">Memory: <b><span id="FIAFormulaEDocs_mem">-</span></b></p>
-                    <div class="w-100"></div>
-                    <p class="col">Create Time: <b><span id="FIAFormulaEDocs_create_time">-</span></b></p>
-                    <p class="col">Running Time: <b><span id="FIAFormulaEDocs_running_time">-</span></b></p>
-                </div>
-            </div>
-            <div class="text-center my-2">
-                <button class="btn btn-danger" id="FIAFormulaEDocs_kill" onclick="action('kill','FIAFormulaEDocs')">Kill</button>
-                <button class="btn btn-success" id="FIAFormulaEDocs_run" onclick="action('run','FIAFormulaEDocs')">Run</button>
-                <a class="btn btn-secondary" onclick="action('log','FIAFormulaEDocs')" href='javascript:void(0);'>View Log</a>
-            </div>
+        <div class="text-center my-2">
+            <button class="btn btn-danger" id="FIAFormulaEDocs_kill" onclick="action('kill','FIAFormulaEDocs')">Kill</button>
+            <button class="btn btn-success" id="FIAFormulaEDocs_run" onclick="action('run','FIAFormulaEDocs')">Run</button>
+            <a class="btn btn-secondary" onclick="action('log','FIAFormulaEDocs')" href='javascript:void(0);'>View Log</a>
         </div>
     </div>
 {% endblock %}

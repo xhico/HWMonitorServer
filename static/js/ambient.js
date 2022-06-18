@@ -15,7 +15,9 @@ function timeBtn() {
 }
 
 function drawStuff(chartName, JSON) {
-    let seriesData = JSON[chartName];
+    let seriesData = JSON[chartName][0];
+    let avgData = JSON[chartName][1];
+
     let chartTitle;
     if (chartName === "temp_c") {
         chartTitle = "Temperature History (ºC)";
@@ -41,7 +43,9 @@ function drawStuff(chartName, JSON) {
             }
         },
         series: [{
-            name: chartTitle.replace(" History ", " "), data: seriesData
+            name: chartTitle.replace(" History ", " "), data: seriesData, color: "#1B4F72", marker: {enabled: false}
+        }, {
+            name: chartTitle.replace("Temperature History", "Average"), data: avgData, color: "#AED6F1", marker: {enabled: false}
         }]
     }
 

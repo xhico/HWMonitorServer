@@ -199,7 +199,7 @@ def getAmbientHumidityTemperature():
         return {"hasInfo": "None"}
 
 
-def getInfo():
+def getHWInfo():
     return {
         "Version": getVersions(),
         "Uptime": getUptime(),
@@ -270,19 +270,69 @@ def getBotLog(name):
 # --------------------------------- #
 
 
+def getAmbientInfo(numberTime, unitTime):
+    if unitTime == "hour":
+        startDate = datetime.datetime.now() - datetime.timedelta(hours=numberTime)
+    elif unitTime == "day":
+        startDate = datetime.datetime.now() - datetime.timedelta(days=numberTime)
+    elif unitTime == "week":
+        startDate = datetime.datetime.now() - datetime.timedelta(weeks=numberTime)
+    else:
+        startDate = datetime.datetime.now() - datetime.timedelta(hours=8)
+
+    # Read JSON File
+    with open("/home/pi/HumiditySensor/HumiditySensor.json") as inFile:
+        data = json.load(inFile)
+
+    # Get valid data and inside timeframe
+    temp_cInfo, temp_fInfo, humidityInfo = [], [], []
+    avgTemp_c, avgTemp_f, avgHumidity = 0, 0, 0
+
+    for entry in data:
+        entryDate = datetime.datetime.strptime(entry["date"], "%Y/%m/%d %H:%M")
+
+        if entryDate >= startDate and entry["valid"] == "True":
+            temp_cInfo.append([entry["date"], float(entry["temp_c"])])
+            temp_fInfo.append([entry["date"], float(entry["temp_f"])])
+            humidityInfo.append([entry["date"], float(entry["humidity"])])
+            avgTemp_c += float(entry["temp_c"])
+            avgTemp_f += float(entry["temp_f"])
+            avgHumidity += float(entry["humidity"])
+
+    # Crop if > 100 entries
+    totalEntries = len(temp_cInfo)
+    if totalEntries >= 100:
+        to_delete = set(random.sample(range(len(temp_cInfo)), totalEntries - 100))
+        temp_cInfo = [x for i, x in enumerate(temp_cInfo) if i not in to_delete]
+        to_delete = set(random.sample(range(len(temp_fInfo)), totalEntries - 100))
+        temp_fInfo = [x for i, x in enumerate(temp_fInfo) if i not in to_delete]
+        to_delete = set(random.sample(range(len(humidityInfo)), totalEntries - 100))
+        humidityInfo = [x for i, x in enumerate(humidityInfo) if i not in to_delete]
+
+    temp_cInfo, temp_fInfo, humidityInfo = list(reversed(temp_cInfo)), list(reversed(temp_fInfo)), list(reversed(humidityInfo))
+    avgTemp_c = [[temp_cInfo[i][0], round(avgTemp_c / len(temp_cInfo), 1)] for i in range(len(temp_cInfo))]
+    avgTemp_f = [[temp_fInfo[i][0], round(avgTemp_f / len(temp_fInfo), 1)] for i in range(len(temp_fInfo))]
+    avgHumidity = [[humidityInfo[i][0], round(avgHumidity / len(humidityInfo), 1)] for i in range(len(humidityInfo))]
+
+    return temp_cInfo, temp_fInfo, humidityInfo, avgTemp_c, avgTemp_f, avgHumidity
+
+
+# --------------------------------- #
+
+
 @app.route("/")
 @app.route("/stats")
-def index():
+def view_index():
     return render_template('stats.html')
 
 
 @app.route("/bots")
-def bots():
+def view_bots():
     return render_template('bots.html')
 
 
 @app.route("/ambient")
-def ambient():
+def view_ambient():
     return render_template('ambient.html')
 
 
@@ -298,7 +348,7 @@ def hostname():
 
 @app.route("/json/hwInfo")
 def hwInfo():
-    return jsonify(getInfo())
+    return jsonify(getHWInfo())
 
 
 @app.route("/json/botsInfo")
@@ -328,42 +378,8 @@ def action():
 def ambientInfo():
     numberTime = request.form.get('numberTime', type=int)
     unitTime = request.form.get('unitTime', type=str)
-
-    if unitTime == "hour":
-        startDate = datetime.datetime.now() - datetime.timedelta(hours=numberTime)
-    elif unitTime == "day":
-        startDate = datetime.datetime.now() - datetime.timedelta(days=numberTime)
-    elif unitTime == "week":
-        startDate = datetime.datetime.now() - datetime.timedelta(weeks=numberTime)
-    else:
-        startDate = datetime.datetime.now() - datetime.timedelta(hours=8)
-
-    # Read JSON File
-    with open("/home/pi/HumiditySensor/HumiditySensor.json") as inFile:
-        data = json.load(inFile)
-
-    # Get valid data and inside timeframe
-    temp_cInfo, temp_fInfo, humidityInfo = [], [], []
-
-    for entry in data:
-        entryDate = datetime.datetime.strptime(entry["date"], "%Y/%m/%d %H:%M")
-
-        if entryDate >= startDate and entry["valid"] == "True":
-            temp_cInfo.append([entry["date"], float(entry["temp_c"])])
-            temp_fInfo.append([entry["date"], float(entry["temp_f"])])
-            humidityInfo.append([entry["date"], float(entry["humidity"])])
-
-    # Crop if > 100 entries
-    totalEntries = len(temp_cInfo)
-    if totalEntries >= 100:
-        to_delete = set(random.sample(range(len(temp_cInfo)), totalEntries - 100))
-        temp_cInfo = [x for i, x in enumerate(temp_cInfo) if i not in to_delete]
-        to_delete = set(random.sample(range(len(temp_fInfo)), totalEntries - 100))
-        temp_fInfo = [x for i, x in enumerate(temp_fInfo) if i not in to_delete]
-        to_delete = set(random.sample(range(len(humidityInfo)), totalEntries - 100))
-        humidityInfo = [x for i, x in enumerate(humidityInfo) if i not in to_delete]
-
-    return jsonify({"temp_c": list(reversed(temp_cInfo)), "temp_f": list(reversed(temp_fInfo)), "humidity": list(reversed(humidityInfo))})
+    temp_cInfo, temp_fInfo, humidityInfo, avgTemp_c, avgTemp_f, avgHumidity = getAmbientInfo(numberTime, unitTime)
+    return jsonify({"temp_c": [temp_cInfo, avgTemp_c], "temp_f": [temp_fInfo, avgTemp_f], "humidity": [humidityInfo, avgHumidity]})
 
 
 if __name__ == '__main__':

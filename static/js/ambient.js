@@ -28,7 +28,7 @@ function drawStuff(chartName, JSON) {
     }
 
     let chartOptions = {
-        chart: {renderTo: chartName},
+        chart: {renderTo: chartName, type: "spline"},
         title: {text: chartTitle},
         exporting: {enabled: false},
         credits: {enabled: false},
@@ -36,16 +36,15 @@ function drawStuff(chartName, JSON) {
         yAxis: {title: {text: chartTitle.replace(" History ", " ")}},
         xAxis: {
             title: {text: ''}, type: 'string', labels: {
-                enabled: true,
-                formatter: function () {
+                enabled: true, formatter: function () {
                     return seriesData[this.value][0];
-                },
+                }
             }
         },
         series: [{
-            name: chartTitle.replace(" History ", " "), data: seriesData, color: "#1B4F72", marker: {enabled: false}
+            name: "Average", data: avgData, color: "#AED6F1", marker: {enabled: false}
         }, {
-            name: chartTitle.replace("Temperature History", "Average"), data: avgData, color: "#AED6F1", marker: {enabled: false}
+            name: chartTitle.replace(" History ", " "), data: seriesData, color: "#1B4F72", marker: {enabled: false}
         }]
     }
 

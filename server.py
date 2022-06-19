@@ -308,8 +308,8 @@ def getAmbientInfo(numberTime, unitTime):
         temp_fInfo = [x for i, x in enumerate(temp_fInfo) if i not in to_delete]
         to_delete = set(random.sample(range(len(humidityInfo)), totalEntries - 100))
         humidityInfo = [x for i, x in enumerate(humidityInfo) if i not in to_delete]
-
     temp_cInfo, temp_fInfo, humidityInfo = list(reversed(temp_cInfo)), list(reversed(temp_fInfo)), list(reversed(humidityInfo))
+
     avgTemp_c = [[temp_cInfo[i][0], round(avgTemp_c / len(temp_cInfo), 1)] for i in range(len(temp_cInfo))]
     avgTemp_f = [[temp_fInfo[i][0], round(avgTemp_f / len(temp_fInfo), 1)] for i in range(len(temp_fInfo))]
     avgHumidity = [[humidityInfo[i][0], round(avgHumidity / len(humidityInfo), 1)] for i in range(len(humidityInfo))]

@@ -271,14 +271,15 @@ def getBotLog(name):
 
 
 def getAmbientInfo(numberTime, unitTime):
-    if unitTime == "hour":
-        startDate = datetime.datetime.now() - datetime.timedelta(hours=numberTime)
-    elif unitTime == "day":
-        startDate = datetime.datetime.now() - datetime.timedelta(days=numberTime)
+    hours = numberTime
+
+    # Convert to hours
+    if unitTime == "day":
+        hours = numberTime * 24
     elif unitTime == "week":
-        startDate = datetime.datetime.now() - datetime.timedelta(weeks=numberTime)
-    else:
-        startDate = datetime.datetime.now() - datetime.timedelta(hours=8)
+        hours = numberTime * 24 * 7
+
+    startDate = datetime.datetime.now() - datetime.timedelta(hours=hours)
 
     # Read JSON File
     with open("/home/pi/HumiditySensor/HumiditySensor.json") as inFile:
@@ -286,7 +287,7 @@ def getAmbientInfo(numberTime, unitTime):
 
     # Get valid data and inside timeframe
     temp_cInfo, temp_fInfo, humidityInfo = [], [], []
-    avgTemp_c, avgTemp_f, avgHumidity = 0, 0, 0
+    avgTemp_c, avgTemp_f, avgHumidity, countTemp_c, countTemp_f, countHumidity = 0, 0, 0, 0, 0, 0
 
     for entry in data:
         entryDate = datetime.datetime.strptime(entry["date"], "%Y/%m/%d %H:%M")
@@ -298,6 +299,9 @@ def getAmbientInfo(numberTime, unitTime):
             avgTemp_c += float(entry["temp_c"])
             avgTemp_f += float(entry["temp_f"])
             avgHumidity += float(entry["humidity"])
+            countTemp_c += 1
+            countTemp_f += 1
+            countHumidity += 1
 
     # Crop if > 100 entries
     totalEntries = len(temp_cInfo)
@@ -310,9 +314,9 @@ def getAmbientInfo(numberTime, unitTime):
         humidityInfo = [x for i, x in enumerate(humidityInfo) if i not in to_delete]
     temp_cInfo, temp_fInfo, humidityInfo = list(reversed(temp_cInfo)), list(reversed(temp_fInfo)), list(reversed(humidityInfo))
 
-    avgTemp_c = [[temp_cInfo[i][0], round(avgTemp_c / len(temp_cInfo), 1)] for i in range(len(temp_cInfo))]
-    avgTemp_f = [[temp_fInfo[i][0], round(avgTemp_f / len(temp_fInfo), 1)] for i in range(len(temp_fInfo))]
-    avgHumidity = [[humidityInfo[i][0], round(avgHumidity / len(humidityInfo), 1)] for i in range(len(humidityInfo))]
+    avgTemp_c = [[temp_cInfo[i][0], round(avgTemp_c / countTemp_c, 1)] for i in range(len(temp_cInfo))]
+    avgTemp_f = [[temp_fInfo[i][0], round(avgTemp_f / countTemp_f, 1)] for i in range(len(temp_fInfo))]
+    avgHumidity = [[humidityInfo[i][0], round(avgHumidity / countHumidity, 1)] for i in range(len(humidityInfo))]
 
     return temp_cInfo, temp_fInfo, humidityInfo, avgTemp_c, avgTemp_f, avgHumidity
 

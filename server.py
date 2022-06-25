@@ -278,7 +278,6 @@ def getAmbientInfo(numberTime, unitTime):
         hours = numberTime * 24
     elif unitTime == "week":
         hours = numberTime * 24 * 7
-
     startDate = datetime.datetime.now() - datetime.timedelta(hours=hours)
 
     # Read JSON File

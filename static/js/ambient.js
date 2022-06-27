@@ -35,7 +35,7 @@ function drawStuff(chartName, JSON) {
         legend: {enabled: false},
         yAxis: {title: {text: chartTitle.replace(" History ", " ")}},
         xAxis: {
-            title: {text: ''}, tickInterval: 1, type: 'string', labels: {
+            title: {text: ''}, tickInterval: 3, type: 'string', labels: {
                 enabled: true, formatter: function () {
                     return seriesData[this.value][0];
                 }

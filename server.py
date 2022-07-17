@@ -36,12 +36,14 @@ def convert_size(size_bytes):
 
 def getVersions():
     try:
+        try:
+            processor = subprocess.getoutput("cat /proc/cpuinfo | grep Model | tail -1").split(':')[1].lstrip(),
+        except Exception:
+            processor = subprocess.getoutput("cat /proc/cpuinfo | grep model | tail -1").split(':')[1].lstrip(),
+                
         return {
             "hasInfo": "Yes",
-            try:
-                "Processor": subprocess.getoutput("cat /proc/cpuinfo | grep Model | tail -1").split(':')[1].lstrip(),
-            except Exception:
-                "Processor": subprocess.getoutput("cat /proc/cpuinfo | grep model | tail -1").split(':')[1].lstrip(),
+            "Processor": processor,
             "Distribution": subprocess.getoutput("cat /etc/os-release | head -n 1").split('=')[1][1:-1],
             "Kernel": subprocess.getoutput("uname -msr"),
             "Firmware": re.search(r"#\d+", subprocess.getoutput("cat /proc/version")).group()

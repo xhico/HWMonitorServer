@@ -40,7 +40,7 @@ def getVersions():
             processor = subprocess.getoutput("cat /proc/cpuinfo | grep Model | tail -1").split(':')[1].lstrip(),
         except Exception:
             processor = subprocess.getoutput("cat /proc/cpuinfo | grep model | tail -1").split(':')[1].lstrip(),
-                
+
         return {
             "hasInfo": "Yes",
             "Processor": processor,

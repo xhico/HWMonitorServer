@@ -38,7 +38,10 @@ def getVersions():
     try:
         return {
             "hasInfo": "Yes",
-            "Processor": subprocess.getoutput("cat /proc/cpuinfo | awk '{print tolower($0)}' | grep model | tail -1").split(':')[1].lstrip(),
+            try:
+                "Processor": subprocess.getoutput("cat /proc/cpuinfo | grep Model | tail -1").split(':')[1].lstrip(),
+            except Exception:
+                "Processor": subprocess.getoutput("cat /proc/cpuinfo | grep model | tail -1").split(':')[1].lstrip(),
             "Distribution": subprocess.getoutput("cat /etc/os-release | head -n 1").split('=')[1][1:-1],
             "Kernel": subprocess.getoutput("uname -msr"),
             "Firmware": re.search(r"#\d+", subprocess.getoutput("cat /proc/version")).group()

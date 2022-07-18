@@ -1,0 +1,5 @@
+flask
+requests
+gpiozero
+psutil
+flask-cors

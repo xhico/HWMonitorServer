@@ -4,7 +4,7 @@
 
 function checkRPIs() {
     // Set alive Raspberry Pi's
-    let rpiDict = {"RPI4": "192.168.0.14", "RPI3BA": "192.168.0.15", "RPI3BB": "192.168.0.16", "RPIZW": "192.168.0.17"}
+    let rpiDict = {"RPI4": "192.168.1.14", "RPI3BA": "192.168.1.15", "RPI3BB": "192.168.1.16", "RPIZW": "192.168.1.17"}
     for (let rpiName in rpiDict) {
         let rpiIp = rpiDict[rpiName];
         $.ajax({

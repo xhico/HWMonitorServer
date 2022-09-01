@@ -245,11 +245,11 @@ def getBotInfo(name):
 
 def getBots():
     try:
-        botsName = ["EZTV-AutoDownloader", "TV3U", "SIDEBot", "RandomF1Quotes", "RandomUrbanDictionary", "Random9GAG", "FIMDocs", "FIADocs", "WSeriesDocs", "FIAFormulaEDocs", "SoccerStreamsNotifications"]
+        botsName = ["EZTV-AutoDownloader", "TV3U", "SIDEBot", "RandomF1Quotes", "RandomUrbanDictionary", "Random9GAG", "FIMDocs", "FIADocs", "WSeriesDocs", "FIAFormulaEDocs", "ddnsUpdater"]
         d = {name: getBotInfo(name) for name in botsName}
         d["hasInfo"] = "yes"
         return d
-    except:
+    except Exception as ex:
         return {"hasInfo": "None"}
 
 

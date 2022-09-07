@@ -285,21 +285,18 @@ def getAmbientInfo(numberTime, unitTime):
         data = json.load(inFile)
 
     # Get valid data and inside timeframe
-    temp_cInfo, temp_fInfo, humidityInfo = [], [], []
-    avgTemp_c, avgTemp_f, avgHumidity, countTemp_c, countTemp_f, countHumidity = 0, 0, 0, 0, 0, 0
+    temp_cInfo, humidityInfo = [], []
+    avgTemp_c, avgHumidity, countTemp_c, countHumidity = 0, 0, 0, 0
 
     for entry in data:
         entryDate = datetime.datetime.strptime(entry["date"], "%Y/%m/%d %H:%M")
 
         if entryDate >= startDate and entry["valid"] == "True":
             temp_cInfo.append([entry["date"], float(entry["temp_c"])])
-            temp_fInfo.append([entry["date"], float(entry["temp_f"])])
             humidityInfo.append([entry["date"], float(entry["humidity"])])
             avgTemp_c += float(entry["temp_c"])
-            avgTemp_f += float(entry["temp_f"])
             avgHumidity += float(entry["humidity"])
             countTemp_c += 1
-            countTemp_f += 1
             countHumidity += 1
 
     # Crop if > 100 entries
@@ -307,17 +304,14 @@ def getAmbientInfo(numberTime, unitTime):
     if totalEntries >= 100:
         to_delete = set(random.sample(range(len(temp_cInfo)), totalEntries - 100))
         temp_cInfo = [x for i, x in enumerate(temp_cInfo) if i not in to_delete]
-        to_delete = set(random.sample(range(len(temp_fInfo)), totalEntries - 100))
-        temp_fInfo = [x for i, x in enumerate(temp_fInfo) if i not in to_delete]
         to_delete = set(random.sample(range(len(humidityInfo)), totalEntries - 100))
         humidityInfo = [x for i, x in enumerate(humidityInfo) if i not in to_delete]
-    temp_cInfo, temp_fInfo, humidityInfo = list(reversed(temp_cInfo)), list(reversed(temp_fInfo)), list(reversed(humidityInfo))
+    temp_cInfo, humidityInfo = list(reversed(temp_cInfo)), list(reversed(humidityInfo))
 
     avgTemp_c = [[temp_cInfo[i][0], round(avgTemp_c / countTemp_c, 1)] for i in range(len(temp_cInfo))]
-    avgTemp_f = [[temp_fInfo[i][0], round(avgTemp_f / countTemp_f, 1)] for i in range(len(temp_fInfo))]
     avgHumidity = [[humidityInfo[i][0], round(avgHumidity / countHumidity, 1)] for i in range(len(humidityInfo))]
 
-    return temp_cInfo, temp_fInfo, humidityInfo, avgTemp_c, avgTemp_f, avgHumidity
+    return temp_cInfo, humidityInfo, avgTemp_c, avgHumidity
 
 
 # --------------------------------- #
@@ -381,8 +375,8 @@ def action():
 def ambientInfo():
     numberTime = request.form.get('numberTime', type=int)
     unitTime = request.form.get('unitTime', type=str)
-    temp_cInfo, temp_fInfo, humidityInfo, avgTemp_c, avgTemp_f, avgHumidity = getAmbientInfo(numberTime, unitTime)
-    return jsonify({"temp_c": [temp_cInfo, avgTemp_c], "temp_f": [temp_fInfo, avgTemp_f], "humidity": [humidityInfo, avgHumidity]})
+    temp_cInfo, humidityInfo, avgTemp_c, avgHumidity = getAmbientInfo(numberTime, unitTime)
+    return jsonify({"temp_c": [temp_cInfo, avgTemp_c], "humidity": [humidityInfo, avgHumidity]})
 
 
 if __name__ == '__main__':

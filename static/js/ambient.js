@@ -2,15 +2,14 @@
     @author: xhico
  */
 
-let chart1, chart2, chart3;
-let chartNames = ["temp_c", "temp_f", "humidity"];
+let chart1, chart2;
+let chartNames = ["temp_c", "humidity"];
 
 function timeBtn() {
     let numberTime = document.getElementById("numberTime").value;
     let unitTime = document.getElementById("unitTime").value;
     chart1.destroy();
     chart2.destroy();
-    chart3.destroy();
     initCharts(numberTime, unitTime);
 }
 
@@ -21,8 +20,6 @@ function drawStuff(chartName, JSON) {
     let chartTitle;
     if (chartName === "temp_c") {
         chartTitle = "Temperature History (ºC)";
-    } else if (chartName === "temp_f") {
-        chartTitle = "Temperature History (ºF)";
     } else if (chartName === "humidity") {
         chartTitle = "Humidity History (%)";
     }
@@ -50,8 +47,6 @@ function drawStuff(chartName, JSON) {
 
     if (chartName === "temp_c") {
         chart1 = new Highcharts.Chart(chartOptions);
-    } else if (chartName === "temp_f") {
-        chart2 = new Highcharts.Chart(chartOptions);
     } else if (chartName === "humidity") {
         chart3 = new Highcharts.Chart(chartOptions);
     }

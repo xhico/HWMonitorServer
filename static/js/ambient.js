@@ -48,7 +48,7 @@ function drawStuff(chartName, JSON) {
     if (chartName === "temp_c") {
         chart1 = new Highcharts.Chart(chartOptions);
     } else if (chartName === "humidity") {
-        chart3 = new Highcharts.Chart(chartOptions);
+        chart2 = new Highcharts.Chart(chartOptions);
     }
 }
 

@@ -63,29 +63,6 @@
     </div>
 
 
-    <!-- SIDEBot -->
-    <div class="col-xl-3 col-md-6 border-bottom border-end">
-        <div class="text-center my-2"><b>SIDEBot</b></div>
-        <div class="text-center my-2">
-            <div class="row px-4">
-                <p class="col">Running: <b><span id="SIDEBot_running"></span></b></p>
-                <p class="col">PID: <b><span id="SIDEBot_pid">-</span></b></p>
-                <div class="w-100"></div>
-                <p class="col">CPU: <b><span id="SIDEBot_cpu">-</span></b></p>
-                <p class="col">Memory: <b><span id="SIDEBot_mem">-</span></b></p>
-                <div class="w-100"></div>
-                <p class="col">Create Time: <b><span id="SIDEBot_create_time">-</span></b></p>
-                <p class="col">Running Time: <b><span id="SIDEBot_running_time">-</span></b></p>
-            </div>
-        </div>
-        <div class="text-center my-2">
-            <button class="btn btn-danger" id="SIDEBot_kill" onclick="action('kill','SIDEBot')">Kill</button>
-            <button class="btn btn-success" id="SIDEBot_run" onclick="action('run','SIDEBot')">Run</button>
-            <a class="btn btn-secondary" onclick="action('log','SIDEBot')" href='javascript:void(0);'>View Log</a>
-        </div>
-    </div>
-
-
     <!-- RandomF1Quotes -->
     <div class="col-xl-3 col-md-6 border-bottom border-end">
         <div class="text-center my-2"><b>RandomF1Quotes</b></div>
@@ -177,30 +154,6 @@
         </div>
     </div>
 
-
-    <!-- FIADocs -->
-    <div class="col-xl-3 col-md-6 border-bottom border-end">
-        <div class="text-center my-2"><b>FIADocs</b></div>
-        <div class="text-center my-2">
-            <div class="row px-4">
-                <p class="col">Running: <b><span id="FIADocs_running"></span></b></p>
-                <p class="col">PID: <b><span id="FIADocs_pid">-</span></b></p>
-                <div class="w-100"></div>
-                <p class="col">CPU: <b><span id="FIADocs_cpu">-</span></b></p>
-                <p class="col">Memory: <b><span id="FIADocs_mem">-</span></b></p>
-                <div class="w-100"></div>
-                <p class="col">Create Time: <b><span id="FIADocs_create_time">-</span></b></p>
-                <p class="col">Running Time: <b><span id="FIADocs_running_time">-</span></b></p>
-            </div>
-        </div>
-        <div class="text-center my-2">
-            <button class="btn btn-danger" id="FIADocs_kill" onclick="action('kill','FIADocs')">Kill</button>
-            <button class="btn btn-success" id="FIADocs_run" onclick="action('run','FIADocs')">Run</button>
-            <a class="btn btn-secondary" onclick="action('log','FIADocs')" href='javascript:void(0);'>View Log</a>
-        </div>
-    </div>
-
-
     <!-- WSeriesDocs -->
     <div class="col-xl-3 col-md-6 border-bottom border-end">
         <div class="text-center my-2"><b>WSeriesDocs</b></div>
@@ -266,6 +219,29 @@
             <button class="btn btn-danger" id="ddnsUpdater_kill" onclick="action('kill','ddnsUpdater')">Kill</button>
             <button class="btn btn-success" id="ddnsUpdater_run" onclick="action('run','ddnsUpdater')">Run</button>
             <a class="btn btn-secondary" onclick="action('log','ddnsUpdater')" href='javascript:void(0);'>View Log</a>
+        </div>
+    </div>
+
+
+    <!-- RaspberryPiSurveillance -->
+    <div class="col-xl-3 col-md-6 border-bottom border-end">
+        <div class="text-center my-2"><b>RaspberryPiSurveillance</b></div>
+        <div class="text-center my-2">
+            <div class="row px-4">
+                <p class="col">Running: <b><span id="RaspberryPiSurveillance_running"></span></b></p>
+                <p class="col">PID: <b><span id="RaspberryPiSurveillance_pid">-</span></b></p>
+                <div class="w-100"></div>
+                <p class="col">CPU: <b><span id="RaspberryPiSurveillance_cpu">-</span></b></p>
+                <p class="col">Memory: <b><span id="RaspberryPiSurveillance_mem">-</span></b></p>
+                <div class="w-100"></div>
+                <p class="col">Create Time: <b><span id="RaspberryPiSurveillance_create_time">-</span></b></p>
+                <p class="col">Running Time: <b><span id="RaspberryPiSurveillance_running_time">-</span></b></p>
+            </div>
+        </div>
+        <div class="text-center my-2">
+            <button class="btn btn-danger" id="RaspberryPiSurveillance_kill" onclick="action('kill','RaspberryPiSurveillance')">Kill</button>
+            <button class="btn btn-success" id="RaspberryPiSurveillance_run" onclick="action('run','RaspberryPiSurveillance')">Run</button>
+            <a class="btn btn-secondary" onclick="action('log','RaspberryPiSurveillance')" href='javascript:void(0);'>View Log</a>
         </div>
     </div>
 {% endblock %}

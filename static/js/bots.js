@@ -54,7 +54,7 @@ window.addEventListener('DOMContentLoaded', async function main() {
 
     // Run sections
     console.log("Run Sections");
-    let botsName = ["EZTV-AutoDownloader", "TV3U", "SIDEBot", "RandomF1Quotes", "RandomUrbanDictionary", "Random9GAG", "FIMDocs", "FIADocs", "WSeriesDocs", "FIAFormulaEDocs", "ddnsUpdater"];
+    let botsName = ["EZTV-AutoDownloader", "TV3U", "RandomF1Quotes", "RandomUrbanDictionary", "Random9GAG", "FIMDocs", "WSeriesDocs", "FIAFormulaEDocs", "ddnsUpdater", "RaspberryPiSurveillance"]
     botsName.forEach(function (name) {
         getBot(JSON, name);
     });

@@ -2,11 +2,11 @@
 # !/usr/bin/python3
 
 # python3 -m pip install flask requests gpiozero psutil flask-cors --no-cache-dir
-# python3 /home/pi/HWMonitorServer/server.py
-# cls; Copy-Item .\server.py Y:\HWMonitorServer\server.py -Force; Remove-Item Y:\HWMonitorServer\templates\* -R -Force; Copy-Item .\templates\*  Y:\HWMonitorServer\templates\ -R -Force ; Remove-Item Y:\HWMonitorServer\static\* -R -Force; Copy-Item .\static\* Y:\HWMonitorServer\static\ -R -Force
+
 
 import datetime
 import math
+import os
 import random
 import re
 import socket
@@ -15,6 +15,7 @@ import json
 import gpiozero
 import psutil
 import requests
+from glob import glob
 from flask import Flask, render_template, jsonify, request
 from flask_cors import CORS
 
@@ -224,7 +225,7 @@ def getHWInfo():
 
 def getBotInfo(name):
     pDict, proc_iter = {}, psutil.process_iter(attrs=["pid", "cmdline"])
-    p = [p for p in proc_iter if name in '\t'.join(p.info["cmdline"])]
+    p = [p for p in proc_iter if name + ".py" in '\t'.join(p.info["cmdline"])]
     if len(p) != 0:
         p = p[0]
         pid = p.pid
@@ -245,7 +246,7 @@ def getBotInfo(name):
 
 def getBots():
     try:
-        botsName = ["EZTV-AutoDownloader", "TV3U", "SIDEBot", "RandomF1Quotes", "RandomUrbanDictionary", "Random9GAG", "FIMDocs", "FIADocs", "WSeriesDocs", "FIAFormulaEDocs", "ddnsUpdater"]
+        botsName = ["EZTV-AutoDownloader", "TV3U", "RandomF1Quotes", "RandomUrbanDictionary", "Random9GAG", "FIMDocs", "WSeriesDocs", "FIAFormulaEDocs", "ddnsUpdater", "RaspberryPiSurveillance"]
         d = {name: getBotInfo(name) for name in botsName}
         d["hasInfo"] = "yes"
         return d
@@ -314,6 +315,21 @@ def getAmbientInfo(numberTime, unitTime):
     return temp_cInfo, humidityInfo, avgTemp_c, avgHumidity
 
 
+def getRecordings():
+    RECORDINGS_FOLDER = "/home/pi/RaspberryPiSurveillance/_RECORDINGS/"
+    allFiles = [file for x in os.walk(RECORDINGS_FOLDER) for file in glob(os.path.join(x[0], '*.mp4'))]
+    allFiles = [file.replace(RECORDINGS_FOLDER, "").replace(".mp4", "") for file in allFiles]
+    allFiles = sorted(allFiles, reverse=True)
+
+    _recInfo = []
+    for idx, rec in enumerate(allFiles):
+        info = {"idx": idx, "rec": rec, "name": datetime.datetime.strptime(rec.split("/")[-1], "%Y-%m-%d_%H-%M-%S").strftime('%Y-%m-%d %H:%M:%S')}
+        info["TODAY"] = True if datetime.datetime.now().strftime("%Y-%m-%d") in info["name"] else False
+        _recInfo.append(info)
+
+    return _recInfo
+
+
 # --------------------------------- #
 
 
@@ -331,6 +347,11 @@ def view_bots():
 @app.route("/ambient")
 def view_ambient():
     return render_template('ambient.html')
+
+
+@app.route("/eye")
+def view_eye():
+    return render_template('eye.html', recInfo=getRecordings())
 
 
 @app.route("/status")

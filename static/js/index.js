@@ -65,7 +65,7 @@ window.addEventListener('DOMContentLoaded', async function main() {
         document.getElementById("navbar_ambient").hidden = true;
     }
 
-    // Wait 2 secs -> Run again
-    await new Promise(r => setTimeout(r, 2000));
-    await main();
+    // // Wait 2 secs -> Run again
+    // await new Promise(r => setTimeout(r, 2000));
+    // await main();
 });

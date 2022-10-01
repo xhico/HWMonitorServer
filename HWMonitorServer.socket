@@ -1,0 +1,8 @@
+[Unit]
+Description=HWMonitorServer socket
+
+[Socket]
+ListenStream=/run/HWMonitorServer.sock
+
+[Install]
+WantedBy=sockets.target

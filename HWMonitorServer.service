@@ -1,0 +1,13 @@
+[Unit]
+Description=HWMonitorServer
+Requires=HWMonitorServer.socket
+After=network.target
+
+[Service]
+User=pi
+Restart=on-failure
+WorkingDirectory=/home/pi/HWMonitorServer/
+ExecStart=/home/pi/.local/bin/gunicorn --config gunicorn_config.py server:app
+
+[Install]
+WantedBy=multi-user.target

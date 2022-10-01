@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # !/usr/bin/python3
 
-# python3 -m pip install flask requests gpiozero psutil flask-cors --no-cache-dir
+# python3 -m pip install flask gunicorn requests gpiozero psutil --no-cache-dir
 
 
 import datetime
@@ -399,5 +399,4 @@ def ambientInfo():
 
 
 if __name__ == '__main__':
-    # app.run(host='0.0.0.0', port=7777, debug=True)
     app.run()

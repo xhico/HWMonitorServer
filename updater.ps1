@@ -1,7 +1,6 @@
 cls
 
 Copy-Item .\server.py Y:\HWMonitorServer\server.py -Force
-Copy-Item .\gunicorn_config.py Y:\HWMonitorServer\gunicorn_config.py -Force
 
 Remove-Item Y:\HWMonitorServer\templates\* -R -Force
 Copy-Item .\templates\*  Y:\HWMonitorServer\templates\ -R -Force

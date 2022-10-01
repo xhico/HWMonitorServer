@@ -42,7 +42,7 @@ def getVersions():
             "Kernel": subprocess.getoutput("uname -msr"),
             "Firmware": re.search(r"#\d+", subprocess.getoutput("cat /proc/version")).group()
         }
-    except:
+    except Exception:
         return {"hasInfo": "None"}
 
 
@@ -61,7 +61,7 @@ def getUptime():
             "Boot_Time": boot_time.strftime("%Y/%m/%d %H:%M:%S"),
             "Uptime": "{days} days {hours}h {minutes}m {seconds}s".format(**d)
         }
-    except:
+    except Exception:
         return {"hasInfo": "None"}
 
 
@@ -75,7 +75,7 @@ def getCPU():
             "PIDs": len(psutil.pids()),
             "Voltage": subprocess.getoutput("vcgencmd measure_volts core").split('=')[1]
         }
-    except:
+    except Exception:
         return {"hasInfo": "None"}
 
 
@@ -85,7 +85,7 @@ def getTemperature():
             "hasInfo": "Yes",
             "Temperature": round(gpiozero.CPUTemperature().temperature, 2),
         }
-    except:
+    except Exception:
         return {"hasInfo": "None"}
 
 
@@ -98,7 +98,7 @@ def getMemory():
             "Available": convert_size(psutil.virtual_memory().available),
             "Total": convert_size(psutil.virtual_memory().total)
         }
-    except:
+    except Exception:
         return {"hasInfo": "None"}
 
 
@@ -111,7 +111,7 @@ def getSDCard():
             "Free": convert_size(psutil.disk_usage('/').free),
             "Total": convert_size(psutil.disk_usage('/').total)
         }
-    except:
+    except Exception:
         return {"hasInfo": "None"}
 
 
@@ -125,7 +125,7 @@ def get918():
             "Free": convert_size(psutil.disk_usage('/media/pi/918').free),
             "Total": convert_size(psutil.disk_usage('/media/pi/918').total)
         }
-    except:
+    except Exception:
         return {"hasInfo": "None"}
 
 
@@ -135,7 +135,7 @@ def getHostname():
             "hasInfo": "Yes",
             "Hostname": str(socket.gethostname()).upper(),
         }
-    except:
+    except Exception:
         return {"hasInfo": "None"}
 
 
@@ -149,7 +149,7 @@ def getWired():
             "Packets_Sent": subprocess.getoutput("cat /sys/class/net/eth0/statistics/rx_packets"),
             "Packets_Received": subprocess.getoutput("cat /sys/class/net/eth0/statistics/tx_packets"),
         }
-    except:
+    except Exception:
         return {"hasInfo": "None"}
 
 
@@ -163,7 +163,7 @@ def getWifi():
             "Packets_Sent": subprocess.getoutput("cat /sys/class/net/wlan0/statistics/rx_packets"),
             "Packets_Received": subprocess.getoutput("cat /sys/class/net/wlan0/statistics/tx_packets"),
         }
-    except:
+    except Exception:
         return {"hasInfo": "None"}
 
 
@@ -177,7 +177,7 @@ def getIPAddress():
             "Internal": localIP.getsockname()[0],
             "External": requests.get('https://api.ipify.org').content.decode('utf8')
         }
-    except:
+    except Exception:
         return {"hasInfo": "None"}
 
 
@@ -194,7 +194,7 @@ def getAmbientHumidityTemperature():
             "Humidity": data["humidity"],
             "Valid": data["valid"]
         }
-    except:
+    except Exception:
         return {"hasInfo": "None"}
 
 
@@ -248,7 +248,7 @@ def getBots():
         d = {name: getBotInfo(name) for name in botsName}
         d["hasInfo"] = "yes"
         return d
-    except Exception as ex:
+    except Exception:
         return {"hasInfo": "None"}
 
 

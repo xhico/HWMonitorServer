@@ -17,10 +17,8 @@ import psutil
 import requests
 from glob import glob
 from flask import Flask, render_template, jsonify, request
-from flask_cors import CORS
 
 app = Flask(__name__)
-cors = CORS(app, resources={r"/*": {"origins": "*"}})
 
 
 def convert_size(size_bytes):
@@ -401,4 +399,5 @@ def ambientInfo():
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=7777, debug=True)
+    # app.run(host='0.0.0.0', port=7777, debug=True)
+    app.run()

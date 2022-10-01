@@ -244,7 +244,7 @@ def getBotInfo(name):
 
 def getBots():
     try:
-        botsName = ["EZTV-AutoDownloader", "TV3U", "RandomF1Quotes", "RandomUrbanDictionary", "Random9GAG", "FIMDocs", "WSeriesDocs", "FIAFormulaEDocs", "ddnsUpdater", "RaspberryPiSurveillance"]
+        botsName = ["EZTV-AutoDownloader", "TV3U", "RandomF1Quotes", "RandomUrbanDictionary", "Random9GAG", "FIMDocs", "WSeriesDocs", "FIAFormulaEDocs", "ddnsUpdater", "RaspberryPiSurveillance", "noipUpdater"]
         d = {name: getBotInfo(name) for name in botsName}
         d["hasInfo"] = "yes"
         return d

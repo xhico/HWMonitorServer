@@ -244,6 +244,29 @@
             <a class="btn btn-secondary" onclick="action('log','RaspberryPiSurveillance')" href='javascript:void(0);'>View Log</a>
         </div>
     </div>
+
+
+    <!-- noipUpdater -->
+    <div class="col-xl-3 col-md-6 border-bottom border-end">
+        <div class="text-center my-2"><b>NOIP Updater</b></div>
+        <div class="text-center my-2">
+            <div class="row px-4">
+                <p class="col">Running: <b><span id="noipUpdater_running"></span></b></p>
+                <p class="col">PID: <b><span id="noipUpdater_pid">-</span></b></p>
+                <div class="w-100"></div>
+                <p class="col">CPU: <b><span id="noipUpdater_cpu">-</span></b></p>
+                <p class="col">Memory: <b><span id="noipUpdater_mem">-</span></b></p>
+                <div class="w-100"></div>
+                <p class="col">Create Time: <b><span id="noipUpdater_create_time">-</span></b></p>
+                <p class="col">Running Time: <b><span id="noipUpdater_running_time">-</span></b></p>
+            </div>
+        </div>
+        <div class="text-center my-2">
+            <button class="btn btn-danger" id="noipUpdater_kill" onclick="action('kill','noipUpdater')">Kill</button>
+            <button class="btn btn-success" id="noipUpdater_run" onclick="action('run','noipUpdater')">Run</button>
+            <a class="btn btn-secondary" onclick="action('log','noipUpdater')" href='javascript:void(0);'>View Log</a>
+        </div>
+    </div>
 {% endblock %}
 
 {% block script %}

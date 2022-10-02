@@ -235,7 +235,7 @@ def getBotInfo(name):
         d["hours"], rem = divmod(running_time.seconds, 3600)
         d["minutes"], d["seconds"] = divmod(rem, 60)
         running_time = "{days} days {hours}h {minutes}m {seconds}s".format(**d)
-        pDict["Running"], pDict["info"] = "True", {"pid": pid, "cpu": round(cpu, 2), "mem": round(mem, 2), "create_time": create_time.strftime("%Y/%m/%d %H:%M:%S"), "running_time": running_time}
+        pDict["Running"], pDict["info"] = "True", {"pid": pid, "cpu": round(cpu, 2), "memory": round(mem, 2), "create_time": create_time.strftime("%Y/%m/%d %H:%M:%S"), "running_time": running_time}
     else:
         pDict["Running"] = "False"
 
@@ -244,7 +244,7 @@ def getBotInfo(name):
 
 def getBots():
     try:
-        botsName = ["EZTV-AutoDownloader", "TV3U", "RandomF1Quotes", "RandomUrbanDictionary", "Random9GAG", "FIMDocs", "WSeriesDocs", "FIAFormulaEDocs", "ddnsUpdater", "RaspberryPiSurveillance", "noipUpdater"]
+        botsName = ["EZTV-AutoDownloader", "TV3U", "RandomF1Quotes", "RandomUrbanDictionary", "Random9GAG", "FIMDocs", "WSeriesDocs", "FIAFormulaEDocs", "ddnsUpdater", "RaspberryPiSurveillance", "NoIpUpdater"]
         d = {name: getBotInfo(name) for name in botsName}
         d["hasInfo"] = "yes"
         return d

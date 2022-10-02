@@ -268,7 +268,7 @@ async function updateSections() {
 window.addEventListener('DOMContentLoaded', async function main() {
     document.getElementById("navbar_stats").classList.add("active");
 
-    // Check config_updateSections
+    // Check config_updateStats
     if (config_updateStats === true) {
         await updateSections();
     }

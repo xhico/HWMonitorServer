@@ -168,7 +168,7 @@ async function updateSections() {
 window.addEventListener('DOMContentLoaded', async function main() {
     document.getElementById("navbar_bots").classList.add("active");
 
-    // Check config_updateSections
+    // Check config_updateBots
     if (config_updateBots === true) {
         await updateSections();
     }

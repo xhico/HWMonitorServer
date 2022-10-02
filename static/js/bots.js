@@ -164,8 +164,8 @@ async function updateSections() {
         getBot(JSON, name);
     }
 
-    // Wait 2 secs -> Run again
-    await new Promise(r => setTimeout(r, 2000));
+    // Wait x secs -> Run again
+    await sleep(config_updateTime);
     if (config_updateBots === true) {
         await updateSections();
     }

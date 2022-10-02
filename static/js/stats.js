@@ -264,8 +264,8 @@ async function updateSections() {
     getWifi(JSON);
     get918(JSON);
 
-    // Wait 2 secs -> Run again
-    await new Promise(r => setTimeout(r, 2000));
+    // Wait x secs -> Run again
+    await sleep(config_updateTime);
     if (config_updateStats === true) {
         await updateSections();
     }

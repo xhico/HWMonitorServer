@@ -163,17 +163,15 @@ async function updateSections() {
         let name = botsName[i];
         getBot(JSON, name);
     }
+
+    // Wait 2 secs -> Run again
+    await new Promise(r => setTimeout(r, 2000));
+    if (config_updateBots === true) {
+        await updateSections();
+    }
 }
 
 window.addEventListener('DOMContentLoaded', async function main() {
     document.getElementById("navbar_bots").classList.add("active");
-
-    // Check config_updateBots
-    if (config_updateBots === true) {
-        await updateSections();
-    }
-
-    // Wait 2 secs -> Run again
-    await new Promise(r => setTimeout(r, 2000));
-    await main();
+    await updateSections();
 });

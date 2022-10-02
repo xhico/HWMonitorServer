@@ -263,17 +263,15 @@ async function updateSections() {
     getWired(JSON);
     getWifi(JSON);
     get918(JSON);
+
+    // Wait 2 secs -> Run again
+    await new Promise(r => setTimeout(r, 2000));
+    if (config_updateStats === true) {
+        await updateSections();
+    }
 }
 
 window.addEventListener('DOMContentLoaded', async function main() {
     document.getElementById("navbar_stats").classList.add("active");
-
-    // Check config_updateStats
-    if (config_updateStats === true) {
-        await updateSections();
-    }
-
-    // Wait 2 secs -> Run again
-    await new Promise(r => setTimeout(r, 2000));
-    await main();
+    await updateSections();
 });

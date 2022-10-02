@@ -42,7 +42,7 @@ async function getCookie(cname) {
             return c.substring(name.length, c.length);
         }
     }
-    return "";
+    return "true";
 }
 
 async function saveConfig() {

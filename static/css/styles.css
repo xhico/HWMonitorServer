@@ -18,6 +18,11 @@
     border-bottom: none;
 }
 
+.form-check-input:checked {
+    background-color: #198754;
+    border-color: #198754;
+}
+
 @media (max-width: 768px) {
     .border-md-right {
         border-right: none;

@@ -26,6 +26,32 @@
 
 <body>
 
+<!-- Config Modal -->
+<div class="modal fade" id="configModal" tabindex="-1" aria-labelledby="configLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalCenterTitle">Configuration</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch" id="config_updateStats">
+                    <label class="form-check-label" for="config_updateStats">Update Stats</label>
+                </div>
+                <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch" id="config_updateBots">
+                    <label class="form-check-label" for="config_updateBots">Update Bots</label>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onclick="saveConfig()">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <!-- Fixed navbar -->
 <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-2">
     <div class="container-fluid">
@@ -45,10 +71,7 @@
                 <li class="nav-item"><a id="navbar_eye" class="nav-link" href="/eye">EYE</a></li>
             </ul>
             <ul class="navbar-nav ms-auto border-md-right border-md-left border-md-top">
-                <li class="nav-item"><a id="navbar_RPI4" class="nav-link" href="#">RPI4</a></li>
-                <li class="nav-item"><a id="navbar_RPI3BA" class="nav-link" href="#">RPI3BA</a></li>
-                <li class="nav-item"><a id="navbar_RPI3BB" class="nav-link" href="#">RPI3BB</a></li>
-                <li class="nav-item"><a id="navbar_RPIZW" class="nav-link" href="#">RPIZW</a></li>
+                <li class="nav-item"><a id="navbar_config" class="nav-link active" data-bs-toggle="modal" data-bs-target="#configModal" href="javascript:void(0);">Config</a></li>
             </ul>
             <ul class="navbar-nav border-md-top">
                 <li class="nav-item"><span class="nav-link active" id="datenow"></span></li>

@@ -241,10 +241,8 @@ function get918(JSON) {
     document.getElementById("Disks_918_Total").innerText = Disks_918_Total;
 }
 
-window.addEventListener('DOMContentLoaded', async function main() {
-    console.log("---------------------");
-    document.getElementById("navbar_stats").classList.add("active");
 
+async function updateSections() {
     // Get HW Info JSON
     console.log("Get HW Info JSON");
     let JSON = await $.ajax({
@@ -265,6 +263,15 @@ window.addEventListener('DOMContentLoaded', async function main() {
     getWired(JSON);
     getWifi(JSON);
     get918(JSON);
+}
+
+window.addEventListener('DOMContentLoaded', async function main() {
+    document.getElementById("navbar_stats").classList.add("active");
+
+    // Check config_updateSections
+    if (config_updateStats === true) {
+        await updateSections();
+    }
 
     // Wait 2 secs -> Run again
     await new Promise(r => setTimeout(r, 2000));

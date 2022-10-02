@@ -2,24 +2,7 @@
     @author: xhico
  */
 
-function checkRPIs() {
-    // Set alive Raspberry Pi's
-    let rpiDict = {"RPI4": "192.168.1.14", "RPI3BA": "192.168.1.15", "RPI3BB": "192.168.1.16", "RPIZW": "192.168.1.17"}
-    for (let rpiName in rpiDict) {
-        let rpiIp = rpiDict[rpiName];
-        $.ajax({
-            method: "get", timeout: 2000, url: "http://" + rpiIp + ":7777/status", success: function (data) {
-                if (data["Status"] === "alive") {
-                    document.getElementById("navbar_" + rpiName).classList.add("active");
-                    document.getElementById("navbar_" + rpiName).href = "http://" + rpiIp + ":7777";
-                }
-            }, error: function () {
-                document.getElementById("navbar_" + rpiName).classList.remove("active");
-                document.getElementById("navbar_" + rpiName).href = "#";
-            }
-        });
-    }
-}
+let config_updateStats, config_updateBots;
 
 function checkZero(data) {
     if (data.length === 1) {
@@ -39,15 +22,48 @@ function getDate() {
     document.getElementById("datenow").innerText = year + "/" + month + "/" + day + " " + hour + ":" + minutes + ":" + seconds;
 }
 
-window.addEventListener('DOMContentLoaded', async function main() {
-    // Check for alive RPIs
-    // checkRPIs();
+async function setCookie(cname, cvalue, exdays) {
+    const d = new Date();
+    d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+    let expires = "expires=" + d.toUTCString();
+    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+}
 
+async function getCookie(cname) {
+    let name = cname + "=";
+    let decodedCookie = decodeURIComponent(document.cookie);
+    let ca = decodedCookie.split(';');
+    for (let i = 0; i < ca.length; i++) {
+        let c = ca[i];
+        while (c.charAt(0) === ' ') {
+            c = c.substring(1);
+        }
+        if (c.indexOf(name) === 0) {
+            return c.substring(name.length, c.length);
+        }
+    }
+    return "";
+}
+
+async function saveConfig() {
+    config_updateStats = document.getElementById("config_updateStats").checked;
+    config_updateBots = document.getElementById("config_updateBots").checked;
+    await setCookie("config_updateStats", config_updateStats, 360);
+    await setCookie("config_updateBots", config_updateBots, 360);
+}
+
+async function loadConfig() {
+    config_updateStats = (await getCookie("config_updateStats") === 'true');
+    config_updateBots = (await getCookie("config_updateBots") === 'true');
+    document.getElementById("config_updateStats").checked = config_updateStats;
+    document.getElementById("config_updateBots").checked = config_updateBots;
+}
+
+async function updateNav() {
     // Get Date
     getDate();
 
     // Get Hostname
-    console.log("Get Hostname");
     let JSON = await $.ajax({
         method: "get", url: "/hostname", success: function (data) {
             return data;
@@ -67,5 +83,10 @@ window.addEventListener('DOMContentLoaded', async function main() {
 
     // Wait 2 secs -> Run again
     await new Promise(r => setTimeout(r, 2000));
-    await main();
+    await updateNav();
+}
+
+window.addEventListener('DOMContentLoaded', async function main() {
+    await loadConfig();
+    await updateNav();
 });

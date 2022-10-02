@@ -142,10 +142,7 @@ async function action(value, name) {
     });
 }
 
-window.addEventListener('DOMContentLoaded', async function main() {
-    console.log("---------------------");
-    document.getElementById("navbar_bots").classList.add("active");
-
+async function updateSections() {
     // Create sections
     console.log("Create Sections");
     let botsName = ["EZTV-AutoDownloader", "TV3U", "RandomF1Quotes", "RandomUrbanDictionary", "Random9GAG", "FIMDocs", "WSeriesDocs", "FIAFormulaEDocs", "ddnsUpdater", "RaspberryPiSurveillance", "NoIpUpdater"]
@@ -165,6 +162,15 @@ window.addEventListener('DOMContentLoaded', async function main() {
     for (let i = 0; i < botsName.length; i++) {
         let name = botsName[i];
         getBot(JSON, name);
+    }
+}
+
+window.addEventListener('DOMContentLoaded', async function main() {
+    document.getElementById("navbar_bots").classList.add("active");
+
+    // Check config_updateSections
+    if (config_updateBots === true) {
+        await updateSections();
     }
 
     // Wait 2 secs -> Run again

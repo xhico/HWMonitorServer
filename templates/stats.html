@@ -131,4 +131,7 @@
 
 {% block script %}
     <script src="{{ url_for('static', filename='js/stats.js') }}"></script>
+    <script>
+        updateSections();
+    </script>
 {% endblock %}

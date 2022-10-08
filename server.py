@@ -254,10 +254,9 @@ def getBots():
 
 def runBot(name):
     scriptFile = "/home/pi/" + name + "/" + name + ".py"
-    logFile = "/home/pi/" + name + "/" + name + ".log"
-    proc = subprocess.Popen(("python3 " + scriptFile).split(" "), stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
-    with open(logFile, "a") as logFile:
-        logFile.writelines([line.decode("UTF-8") for line in proc.stdout])
+    cmd = " ".join(["python3", scriptFile, "&"])
+    os.system(cmd)
+    
 
 
 def getBotLog(name):

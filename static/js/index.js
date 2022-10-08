@@ -2,7 +2,7 @@
     @author: xhico
  */
 
-let config_updateStats, config_updateBots, config_updateTime;
+let config_showBots, config_showAmbient, config_showEYE, config_updateStats, config_updateBots, config_updateTime;
 
 async function sleep(secs) {
     await new Promise(resolve => setTimeout(resolve, secs * 1000));
@@ -50,6 +50,13 @@ async function getCookie(cname) {
 }
 
 async function saveConfig() {
+    config_showBots = document.getElementById("config_showBots").checked;
+    config_showAmbient = document.getElementById("config_showAmbient").checked;
+    config_showEYE = document.getElementById("config_showEYE").checked;
+    await setCookie("config_showBots", config_showBots, 360);
+    await setCookie("config_showAmbient", config_showAmbient, 360);
+    await setCookie("config_showEYE", config_showEYE, 360);
+
     config_updateStats = document.getElementById("config_updateStats").checked;
     config_updateBots = document.getElementById("config_updateBots").checked;
     config_updateTime = document.getElementById("config_updateTime").value;
@@ -59,14 +66,22 @@ async function saveConfig() {
 }
 
 async function loadConfig() {
+    config_showBots = await getCookie("config_showBots");
+    config_showBots = ((config_showBots === null) ? true : (config_showBots === "true"))
+    document.getElementById("config_showBots").checked = config_showBots;
+    config_showAmbient = await getCookie("config_showAmbient");
+    config_showAmbient = ((config_showAmbient === null) ? true : (config_showAmbient === "true"))
+    document.getElementById("config_showAmbient").checked = config_showAmbient;
+    config_showEYE = await getCookie("config_showEYE");
+    config_showEYE = ((config_showEYE === null) ? true : (config_showEYE === "true"))
+    document.getElementById("config_showEYE").checked = config_showEYE;
+
     config_updateStats = await getCookie("config_updateStats");
     config_updateStats = ((config_updateStats === null) ? true : (config_updateStats === "true"))
     document.getElementById("config_updateStats").checked = config_updateStats;
-
     config_updateBots = await getCookie("config_updateBots");
     config_updateBots = ((config_updateBots === null) ? true : (config_updateBots === "true"))
     document.getElementById("config_updateBots").checked = config_updateBots;
-
     config_updateTime = await getCookie("config_updateTime");
     config_updateTime = ((config_updateTime === null) ? 2 : config_updateTime)
     document.getElementById("config_updateTime").value = config_updateTime;
@@ -88,11 +103,10 @@ async function updateNav() {
     document.title = hostname;
     document.getElementById("Hostname").innerText = hostname;
 
-    // Show Bots navbar
-    if (hostname !== "RPI4") {
-        document.getElementById("navbar_bots").hidden = true;
-        document.getElementById("navbar_ambient").hidden = true;
-    }
+    // Show navbar items
+    document.getElementById("navbar_bots").hidden = !config_showBots;
+    document.getElementById("navbar_ambient").hidden = !config_showAmbient;
+    document.getElementById("navbar_eye").hidden = !config_showEYE;
 
     // Wait x secs -> Run again
     await sleep(config_updateTime);

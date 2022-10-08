@@ -27,29 +27,50 @@
 <body>
 
 <!-- Config Modal -->
-<div class="modal fade" id="configModal" tabindex="-1" aria-labelledby="configLabel" aria-hidden="true">
+<div class="modal fade" id="configModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="configLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-sm">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalCenterTitle">Configuration</h5>
             </div>
             <div class="modal-body">
-                <div class="form-check form-switch">
-                    <input class="form-check-input" type="checkbox" role="switch" id="config_updateStats">
-                    <label class="form-check-label" for="config_updateStats">Update Stats</label>
-                </div>
-                <div class="form-check form-switch">
-                    <input class="form-check-input" type="checkbox" role="switch" id="config_updateBots">
-                    <label class="form-check-label" for="config_updateBots">Update Bots</label>
+
+                <div class="row border-bottom">
+                    <div class="col mb-2">
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" type="checkbox" role="switch" id="config_showBots">
+                            <label class="form-check-label" for="config_showBots">Show Bots</label>
+                        </div>
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" type="checkbox" role="switch" id="config_showAmbient">
+                            <label class="form-check-label" for="config_showAmbient">Show Ambient</label>
+                        </div>
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" type="checkbox" role="switch" id="config_showEYE">
+                            <label class="form-check-label" for="config_showEYE">Show EYE</label>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="input-group mt-2">
-                    <span class="input-group-text">Secs</span>
-                    <label><input type="number" class="form-control" id="config_updateTime" value="2" min="1"></label>
+                <div class="row">
+                    <div class="col mt-2">
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" type="checkbox" role="switch" id="config_updateStats">
+                            <label class="form-check-label" for="config_updateStats">Update Stats</label>
+                        </div>
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" type="checkbox" role="switch" id="config_updateBots">
+                            <label class="form-check-label" for="config_updateBots">Update Bots</label>
+                        </div>
+                        <div class="input-group mt-2">
+                            <span class="input-group-text">Secs</span>
+                            <label><input type="number" class="form-control" id="config_updateTime" value="2" min="1"></label>
+                        </div>
+                    </div>
                 </div>
+
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                 <button type="button" class="btn btn-success" data-bs-dismiss="modal" onclick="saveConfig()">Save changes</button>
             </div>
         </div>
@@ -75,7 +96,7 @@
                 <li class="nav-item"><a id="navbar_eye" class="nav-link" href="/eye">EYE</a></li>
             </ul>
             <ul class="navbar-nav ms-auto border-md-right border-md-left border-md-top">
-                <li class="nav-item"><a id="navbar_config" class="nav-link active" data-bs-toggle="modal" data-bs-target="#configModal" href="javascript:void(0);">Config</a></li>
+                <li class="nav-item"><a id="navbar_config" class="nav-link active" data-bs-toggle="modal" data-bs-target="#configModal" href="javascript:void(0);">Configuration</a></li>
             </ul>
             <ul class="navbar-nav border-md-top">
                 <li class="nav-item"><span class="nav-link active" id="datenow"></span></li>

@@ -8,6 +8,10 @@ async function sleep(secs) {
     await new Promise(resolve => setTimeout(resolve, secs * 1000));
 }
 
+function setShowBots() {
+    document.getElementById("divConfig_updateBots").hidden = !document.getElementById("config_showBots").checked;
+}
+
 function checkZero(data) {
     if (data.length === 1) {
         data = "0" + data;

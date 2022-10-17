@@ -38,7 +38,7 @@
                 <div class="row border-bottom">
                     <div class="col mb-2">
                         <div class="form-check form-switch">
-                            <input class="form-check-input" type="checkbox" role="switch" id="config_showBots">
+                            <input class="form-check-input" type="checkbox" role="switch" onclick="setShowBots()" id="config_showBots">
                             <label class="form-check-label" for="config_showBots">Show Bots</label>
                         </div>
                         <div class="form-check form-switch">
@@ -54,15 +54,15 @@
 
                 <div class="row">
                     <div class="col mt-2">
-                        <div class="form-check form-switch">
+                        <div id="divConfig_updateStats" class="form-check form-switch">
                             <input class="form-check-input" type="checkbox" role="switch" id="config_updateStats">
                             <label class="form-check-label" for="config_updateStats">Update Stats</label>
                         </div>
-                        <div class="form-check form-switch">
+                        <div id="divConfig_updateBots" class="form-check form-switch">
                             <input class="form-check-input" type="checkbox" role="switch" id="config_updateBots">
                             <label class="form-check-label" for="config_updateBots">Update Bots</label>
                         </div>
-                        <div class="input-group mt-2">
+                        <div id="divConfig_updateTime" class="input-group mt-2">
                             <span class="input-group-text">Secs</span>
                             <label><input type="number" class="form-control" id="config_updateTime" value="2" min="1"></label>
                         </div>

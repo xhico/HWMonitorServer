@@ -8,6 +8,10 @@ async function sleep(secs) {
     await new Promise(resolve => setTimeout(resolve, secs * 1000));
 }
 
+async function powerOpt(option) {
+    await $.ajax({method: "post", url: "/power", data: {option: option}});
+}
+
 function setShowBots() {
     document.getElementById("divConfig_updateBots").hidden = !document.getElementById("config_showBots").checked;
 }
@@ -27,7 +31,7 @@ function getDate() {
     let hour = checkZero(today.getHours() + "");
     let minutes = checkZero(today.getMinutes() + "");
     let seconds = checkZero(today.getSeconds() + "");
-    document.getElementById("datenow").innerText = year + "/" + month + "/" + day + " " + hour + ":" + minutes + ":" + seconds;
+    document.getElementById("navDateNow").innerText = year + "/" + month + "/" + day + " " + hour + ":" + minutes + ":" + seconds;
 }
 
 async function setCookie(cname, cvalue, exdays) {

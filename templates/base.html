@@ -77,6 +77,27 @@
     </div>
 </div>
 
+<!-- Power Modal -->
+<div class="modal fade" id="powerModal" tabindex="-1" aria-labelledby="powerLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Power</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row border-bottom">
+                    <div class="btn-group" role="group">
+                        <button type="button" class="btn btn-warning" onclick="powerOpt('reboot')">Reboot</button>
+                        <button type="button" class="btn btn-danger" onclick="powerOpt('poweroff')">Power off</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 <!-- Fixed navbar -->
 <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-2">
     <div class="container-fluid">
@@ -89,19 +110,23 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarCollapse">
-            <ul class="navbar-nav border-md-left border-md-right border-md-top">
+            <ul class="navbar-nav border-md-left border-md-top">
                 <li class="nav-item"><a id="navbar_stats" class="nav-link" href="/stats">Stats</a></li>
                 <li class="nav-item"><a id="navbar_bots" class="nav-link" href="/bots">Bots</a></li>
                 <li class="nav-item"><a id="navbar_ambient" class="nav-link" href="/ambient">Ambient</a></li>
                 <li class="nav-item"><a id="navbar_eye" class="nav-link" href="/eye">EYE</a></li>
             </ul>
-            <ul class="navbar-nav ms-auto border-md-right border-md-left border-md-top">
+            <ul class="navbar-nav ms-auto border-md-right border-md-top">
                 <li class="nav-item"><a id="navbar_config" class="nav-link active" data-bs-toggle="modal" data-bs-target="#configModal" href="javascript:void(0);">Configuration</a></li>
             </ul>
+            <ul class="navbar-nav border-md-right border-md-top">
+                <li class="nav-item"><span class="nav-link active" id="navDateNow"></span></li>
+            </ul>
             <ul class="navbar-nav border-md-top">
-                <li class="nav-item"><span class="nav-link active" id="datenow"></span></li>
+                <li class="nav-item"><a id="navbar_power" class="nav-link active" data-bs-toggle="modal" data-bs-target="#powerModal" href="javascript:void(0);">Power</a></li>
             </ul>
         </div>
+
     </div>
 </nav>
 

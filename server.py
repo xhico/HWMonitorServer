@@ -256,7 +256,6 @@ def runBot(name):
     scriptFile = "/home/pi/" + name + "/" + name + ".py"
     cmd = " ".join(["python3", scriptFile, "&"])
     os.system(cmd)
-    
 
 
 def getBotLog(name):
@@ -395,6 +394,12 @@ def ambientInfo():
     unitTime = request.form.get('unitTime', type=str)
     temp_cInfo, humidityInfo, avgTemp_c, avgHumidity = getAmbientInfo(numberTime, unitTime)
     return jsonify({"temp_c": [temp_cInfo, avgTemp_c], "humidity": [humidityInfo, avgHumidity]})
+
+
+@app.route("/power", methods=['POST'])
+def powerOpt():
+    option = request.form.get('option', type=str)
+    os.system("sudo " + option)
 
 
 @app.after_request

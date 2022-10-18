@@ -399,7 +399,12 @@ def ambientInfo():
 @app.route("/power", methods=['POST'])
 def powerOpt():
     option = request.form.get('option', type=str)
-    os.system("sudo " + option)
+    if option == "reboot" or option == "poweroff":
+        os.system("sudo " + option)
+    elif option == "restart":
+        os.system("sudo service HWMonitorServer restart")
+    else:
+        return
 
 
 @app.after_request

@@ -86,11 +86,10 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <div class="row border-bottom">
-                    <div class="btn-group" role="group">
-                        <button type="button" class="btn btn-warning" onclick="powerOpt('reboot')">Reboot</button>
-                        <button type="button" class="btn btn-danger" onclick="powerOpt('poweroff')">Power off</button>
-                    </div>
+                <div class="row border-bottom m-auto w-75">
+                    <button type="button" class="btn btn-warning mb-2" onclick="powerOpt('restart')">Restart</button>
+                    <button type="button" class="btn btn-warning mb-2" onclick="powerOpt('reboot')">Reboot</button>
+                    <button type="button" class="btn btn-danger" onclick="powerOpt('poweroff')">Power off</button>
                 </div>
             </div>
         </div>

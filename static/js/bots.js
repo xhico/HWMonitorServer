@@ -145,7 +145,7 @@ async function action(value, name) {
 async function updateSections() {
     // Create sections
     console.log("Create Sections");
-    let botsName = ["EZTV-AutoDownloader", "TV3U", "RandomF1Quotes", "RandomUrbanDictionary", "Random9GAG", "FIMDocs", "WSeriesDocs", "FIAFormulaEDocs", "ddnsUpdater", "RaspberryPiSurveillance", "NoIpUpdater", "ipSender"]
+    let botsName = ["EZTV-AutoDownloader", "TV3U", "RandomF1Quotes", "RandomUrbanDictionary", "Random9GAG", "FIMDocs", "WSeriesDocs", "FIAFormulaEDocs", "ddnsUpdater", "RaspberryPiSurveillance", "NoIpUpdater", "ipSender", "HardwareHistory"]
     if (alreadyCreatedBots === false) {
         await setBot(botsName);
     }

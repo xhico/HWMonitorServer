@@ -2,7 +2,7 @@
     @author: xhico
  */
 
-let config_showBots, config_showAmbient, config_showEYE, config_updateStats, config_updateBots, config_updateTime;
+let config_showBots, config_showHistory, config_showEYE, config_updateStats, config_updateBots, config_updateTime;
 
 async function sleep(secs) {
     await new Promise(resolve => setTimeout(resolve, secs * 1000));
@@ -59,10 +59,10 @@ async function getCookie(cname) {
 
 async function saveConfig() {
     config_showBots = document.getElementById("config_showBots").checked;
-    config_showAmbient = document.getElementById("config_showAmbient").checked;
+    config_showHistory = document.getElementById("config_showHistory").checked;
     config_showEYE = document.getElementById("config_showEYE").checked;
     await setCookie("config_showBots", config_showBots, 360);
-    await setCookie("config_showAmbient", config_showAmbient, 360);
+    await setCookie("config_showHistory", config_showHistory, 360);
     await setCookie("config_showEYE", config_showEYE, 360);
 
     config_updateStats = document.getElementById("config_updateStats").checked;
@@ -77,9 +77,9 @@ async function loadConfig() {
     config_showBots = await getCookie("config_showBots");
     config_showBots = ((config_showBots === null) ? true : (config_showBots === "true"))
     document.getElementById("config_showBots").checked = config_showBots;
-    config_showAmbient = await getCookie("config_showAmbient");
-    config_showAmbient = ((config_showAmbient === null) ? true : (config_showAmbient === "true"))
-    document.getElementById("config_showAmbient").checked = config_showAmbient;
+    config_showHistory = await getCookie("config_showHistory");
+    config_showHistory = ((config_showHistory === null) ? true : (config_showHistory === "true"))
+    document.getElementById("config_showHistory").checked = config_showHistory;
     config_showEYE = await getCookie("config_showEYE");
     config_showEYE = ((config_showEYE === null) ? true : (config_showEYE === "true"))
     document.getElementById("config_showEYE").checked = config_showEYE;
@@ -113,7 +113,7 @@ async function updateNav() {
 
     // Show navbar items
     document.getElementById("navbar_bots").hidden = !config_showBots;
-    document.getElementById("navbar_ambient").hidden = !config_showAmbient;
+    document.getElementById("navbar_history").hidden = !config_showHistory;
     document.getElementById("navbar_eye").hidden = !config_showEYE;
 
     // Wait x secs -> Run again

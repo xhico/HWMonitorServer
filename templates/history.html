@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <!-- Humidity View -->
+    <!-- History View -->
 
     <div class="input-group d-flex justify-content-center mb-2">
         <span class="input-group-text">Time Delta</span>
@@ -11,12 +11,19 @@
             <option value="day">Day</option>
             <option value="week">Week</option>
         </select></label>
-        <button class="btn btn-outline-secondary" type="button" id="btnTime" onclick="timeBtn()">Go</button>
+        <span class="input-group-text">HW Metric</span>
+        <label><select style="width: 100px;" class="form-select" id="hwMetric">
+            <option selected value="CPU">CPU</option>
+            <option value="Memory">Memory</option>
+            <option value="918">918</option>
+            <option value="SDCard">SDCard</option>
+            <option value="Temperature">Temperature</option>
+            <option value="AmbientHumidityTemperature">Ambient</option>
+        </select></label>
+        <button class="btn btn-outline-secondary" type="button" onclick="goBtn()">Go</button>
     </div>
 
-    <div class="row">
-        <figure id="temp_c" class="highcharts-figure col-xl-6 col-md-12 border-top border-end border-bottom mb-3"></figure>
-        <figure id="humidity" class="highcharts-figure col-xl-6 col-md-12 border-top border-bottom mb-3"></figure>
+    <div class="row" id="charts">
     </div>
 {% endblock %}
 
@@ -26,5 +33,5 @@
     <script src="{{ url_for('static', filename='js/exporting.js') }}"></script>
     <script src="{{ url_for('static', filename='js/export-data.js') }}"></script>
     <script src="{{ url_for('static', filename='js/accessibility.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/ambient.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/history.js') }}"></script>
 {% endblock %}

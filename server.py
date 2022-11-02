@@ -26,7 +26,7 @@ def convert_size(size_bytes):
         return "0B"
 
     size_bytes = int(size_bytes)
-    size_name = ("B", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB")
+    size_name = ("B", "KB", "MB", "GB", "TB")
     i = int(math.floor(math.log(size_bytes, 1024)))
     p = math.pow(1024, i)
     s = round(size_bytes / p, 2)
@@ -267,7 +267,7 @@ def getBotLog(name):
 # --------------------------------- #
 
 
-def getAmbientInfo(numberTime, unitTime):
+def getHistoricInfo(numberTime, unitTime, hwMetric):
     hours = numberTime
 
     # Convert to hours
@@ -277,38 +277,43 @@ def getAmbientInfo(numberTime, unitTime):
         hours = numberTime * 24 * 7
     startDate = datetime.datetime.now() - datetime.timedelta(hours=hours)
 
-    # Read JSON File
-    with open("/home/pi/HumiditySensor/HumiditySensor.json") as inFile:
+    # Open Historic JSON
+    with open("/home/pi/HardwareHistory/HardwareHistory.json") as inFile:
         data = json.load(inFile)
 
-    # Get valid data and inside timeframe
-    temp_cInfo, humidityInfo = [], []
-    avgTemp_c, avgHumidity, countTemp_c, countHumidity = 0, 0, 0, 0
-
+    # Get only valid data
+    validData = []
     for entry in data:
-        entryDate = datetime.datetime.strptime(entry["date"], "%Y/%m/%d %H:%M")
+        if datetime.datetime.strptime(entry["Date"], "%Y/%m/%d %H:%M") >= startDate:
+            entry[hwMetric]["Date"] = entry["Date"]
+            validData.append(entry[hwMetric])
 
-        if entryDate >= startDate and entry["valid"] == "True":
-            temp_cInfo.append([entry["date"], float(entry["temp_c"])])
-            humidityInfo.append([entry["date"], float(entry["humidity"])])
-            avgTemp_c += float(entry["temp_c"])
-            avgHumidity += float(entry["humidity"])
-            countTemp_c += 1
-            countHumidity += 1
+    # Split data
+    processData = {}
+    for entry in validData:
+        for k, v in entry.items():
+            v = float(re.sub(r"[a-zA-Z]", "", str(v)).strip()) if k != "Date" else v
+            if k in processData:
+                processData[k].append(v)
+            else:
+                processData[k] = [v]
 
-    # Crop if > 100 entries
-    totalEntries = len(temp_cInfo)
-    if totalEntries >= 100:
-        to_delete = set(random.sample(range(len(temp_cInfo)), totalEntries - 100))
-        temp_cInfo = [x for i, x in enumerate(temp_cInfo) if i not in to_delete]
-        to_delete = set(random.sample(range(len(humidityInfo)), totalEntries - 100))
-        humidityInfo = [x for i, x in enumerate(humidityInfo) if i not in to_delete]
-    temp_cInfo, humidityInfo = list(reversed(temp_cInfo)), list(reversed(humidityInfo))
+    # Process Data
+    for k, v in processData.items():
+        # Crop if > 100 entries
+        totalEntries = len(processData[k])
+        if totalEntries >= 100:
+            to_delete = set(random.sample(range(len(processData[k])), totalEntries - 100))
+            processData[k] = [x for i, x in enumerate(processData[k]) if i not in to_delete]
 
-    avgTemp_c = [[temp_cInfo[i][0], round(avgTemp_c / countTemp_c, 1)] for i in range(len(temp_cInfo))]
-    avgHumidity = [[humidityInfo[i][0], round(avgHumidity / countHumidity, 1)] for i in range(len(humidityInfo))]
+        # Reverse List
+        processData[k] = list(reversed(v))
 
-    return temp_cInfo, humidityInfo, avgTemp_c, avgHumidity
+        # Set Averages
+        if k != "Date":
+            processData[k] = [processData[k], [round(sum(v) / len(v), 1) for _ in range(len(v))]]
+
+    return processData
 
 
 def getRecordings():
@@ -340,9 +345,9 @@ def view_bots():
     return render_template('bots.html')
 
 
-@app.route("/ambient")
-def view_ambient():
-    return render_template('ambient.html')
+@app.route("/history")
+def view_history():
+    return render_template('history.html')
 
 
 @app.route("/eye")
@@ -388,12 +393,13 @@ def action():
     return jsonify({"message": "success", "action": value, "info": info})
 
 
-@app.route("/json/ambientInfo", methods=['POST'])
+@app.route("/json/history", methods=['POST'])
 def ambientInfo():
     numberTime = request.form.get('numberTime', type=int)
     unitTime = request.form.get('unitTime', type=str)
-    temp_cInfo, humidityInfo, avgTemp_c, avgHumidity = getAmbientInfo(numberTime, unitTime)
-    return jsonify({"temp_c": [temp_cInfo, avgTemp_c], "humidity": [humidityInfo, avgHumidity]})
+    hwMetric = request.form.get('hwMetric', type=str)
+    historicInfo = getHistoricInfo(numberTime, unitTime, hwMetric)
+    return jsonify(historicInfo)
 
 
 @app.route("/power", methods=['POST'])
@@ -421,4 +427,4 @@ def add_header(r):
 
 
 if __name__ == '__main__':
-    app.run()
+    app.run(host="0.0.0.0")

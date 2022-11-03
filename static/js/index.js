@@ -25,14 +25,18 @@ async function getHostname() {
     return hostname;
 }
 
-async function convert_size(size_bytes) {
+function convert_size(size_bytes) {
     let decimals = 2
     if (!+size_bytes) return '0 Bytes'
     let k = 1024
     let dm = decimals < 0 ? 0 : decimals
     let sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB']
     let i = Math.floor(Math.log(size_bytes) / Math.log(k))
-    return `${parseFloat((size_bytes / Math.pow(k, i)).toFixed(dm))} ${sizes[i]}`
+    let value = `${parseFloat((size_bytes / Math.pow(k, i)).toFixed(dm))}`
+    let unit = `${sizes[i]}`;
+
+    return value + " " + unit
+    // return value;
 }
 
 async function powerOpt(option) {

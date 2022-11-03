@@ -19,14 +19,16 @@ async function goBtn() {
 }
 
 async function initCharts(JSON) {
-    // Delete all Charts
+    // Reset Charts
     let chartsRow = document.getElementById("charts");
     chartsRow.innerHTML = "";
 
-    // Create Charts
+    // Get Charts
     let dates = JSON["Date"];
     delete JSON["Date"];
     let chartNames = Object.keys(JSON);
+
+    // Iterate over every Chart
     for (let chartName of chartNames) {
 
         // Create Figure
@@ -43,15 +45,31 @@ async function initCharts(JSON) {
         let avgData = JSON[chartName][1].map(function (e, i) {
             return [dates[i], e];
         });
+
         new Highcharts.Chart({
             chart: {renderTo: "chart_" + chartName, type: "spline"},
             title: {text: chartName},
             exporting: {enabled: false},
             credits: {enabled: false},
             legend: {enabled: false},
-            yAxis: {title: {text: chartName}},
+            tooltip: {
+                formatter: function () {
+                    let xValue = dates[this.x];
+                    let yValue = ((this.y < 100000) ? this.y : convert_size(this.y, 1));
+                    return "Date: <b>" + xValue + "</b> </br> Value: <b>" + yValue + "</b>";
+                }
+            },
+            yAxis: {
+                crosshair: true,
+                title: {text: ""}, labels: {
+                    formatter: function () {
+                        return ((this.value < 100000) ? this.value : convert_size(this.value, 1));
+                    }
+                }
+            },
             xAxis: {
-                title: {text: ''}, tickInterval: 3, type: 'string', labels: {
+                crosshair: true,
+                tickInterval: 3, type: 'datetime', labels: {
                     enabled: true, formatter: function () {
                         return seriesData[this.value][0];
                     }

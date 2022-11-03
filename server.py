@@ -5,7 +5,6 @@
 
 
 import datetime
-import math
 import os
 import random
 import re
@@ -19,18 +18,6 @@ from glob import glob
 from flask import Flask, render_template, jsonify, request
 
 app = Flask(__name__)
-
-
-def convert_size(size_bytes):
-    if size_bytes == "0":
-        return "0B"
-
-    size_bytes = int(size_bytes)
-    size_name = ("B", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB")
-    i = int(math.floor(math.log(size_bytes, 1024)))
-    p = math.pow(1024, i)
-    s = round(size_bytes / p, 2)
-    return "%s %s" % (s, size_name[i])
 
 
 def getVersions():
@@ -144,10 +131,10 @@ def getWired():
         return {
             "hasInfo": "Yes",
             "IP": subprocess.getoutput("ip addr show eth0 | grep 'inet\b' | awk '{print $2}' | cut -d/ -f1"),
-            "Sent": subprocess.getoutput("cat /sys/class/net/eth0/statistics/tx_bytes"),
-            "Received": subprocess.getoutput("cat /sys/class/net/eth0/statistics/rx_bytes"),
-            "Packets_Sent": subprocess.getoutput("cat /sys/class/net/eth0/statistics/rx_packets"),
-            "Packets_Received": subprocess.getoutput("cat /sys/class/net/eth0/statistics/tx_packets"),
+            "Sent": int(subprocess.getoutput("cat /sys/class/net/eth0/statistics/tx_bytes")),
+            "Received": int(subprocess.getoutput("cat /sys/class/net/eth0/statistics/rx_bytes")),
+            "Packets_Sent": int(subprocess.getoutput("cat /sys/class/net/eth0/statistics/rx_packets")),
+            "Packets_Received": int(subprocess.getoutput("cat /sys/class/net/eth0/statistics/tx_packets")),
         }
     except Exception:
         return {"hasInfo": "None"}
@@ -158,10 +145,10 @@ def getWifi():
         return {
             "hasInfo": "Yes",
             "IP": subprocess.getoutput("ip addr show wlan0 | grep 'inet\b' | awk '{print $2}' | cut -d/ -f1"),
-            "Sent": subprocess.getoutput("cat /sys/class/net/wlan0/statistics/tx_bytes"),
-            "Received": subprocess.getoutput("cat /sys/class/net/wlan0/statistics/rx_bytes"),
-            "Packets_Sent": subprocess.getoutput("cat /sys/class/net/wlan0/statistics/rx_packets"),
-            "Packets_Received": subprocess.getoutput("cat /sys/class/net/wlan0/statistics/tx_packets"),
+            "Sent": int(subprocess.getoutput("cat /sys/class/net/wlan0/statistics/tx_bytes")),
+            "Received": int(subprocess.getoutput("cat /sys/class/net/wlan0/statistics/rx_bytes")),
+            "Packets_Sent": int(subprocess.getoutput("cat /sys/class/net/wlan0/statistics/rx_packets")),
+            "Packets_Received": int(subprocess.getoutput("cat /sys/class/net/wlan0/statistics/tx_packets")),
         }
     except Exception:
         return {"hasInfo": "None"}
@@ -244,7 +231,7 @@ def getBotInfo(name):
 
 def getBots():
     try:
-        botsName = ["EZTV-AutoDownloader", "TV3U", "RandomF1Quotes", "RandomUrbanDictionary", "Random9GAG", "FIMDocs", "WSeriesDocs", "FIAFormulaEDocs", "ddnsUpdater", "RaspberryPiSurveillance", "NoIpUpdater", "ipSender", "HardwareHistory"]
+        botsName = ["HumiditySensor", "EZTV-AutoDownloader", "TV3U", "RandomF1Quotes", "RandomUrbanDictionary", "Random9GAG", "FIMDocs", "WSeriesDocs", "FIAFormulaEDocs", "ddnsUpdater", "RaspberryPiSurveillance", "NoIpUpdater", "ipSender", "HardwareHistory"]
         d = {name: getBotInfo(name) for name in botsName}
         d["hasInfo"] = "yes"
         return d

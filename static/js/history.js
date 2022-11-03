@@ -2,21 +2,10 @@
     @author: xhico
  */
 
-function goBtn() {
-    console.clear();
-
+async function goBtn() {
     let numberTime = document.getElementById("numberTime").value;
     let unitTime = document.getElementById("unitTime").value;
     let hwMetric = document.getElementById("hwMetric").value;
-    initCharts(numberTime, unitTime, hwMetric);
-}
-
-async function initCharts(numberTime, unitTime, hwMetric) {
-    console.log(numberTime, unitTime, hwMetric);
-
-    // Delete all Charts
-    let chartsRow = document.getElementById("charts");
-    chartsRow.innerHTML = "";
 
     // Get Ambient Data
     console.log("Get " + hwMetric + " Data");
@@ -25,6 +14,14 @@ async function initCharts(numberTime, unitTime, hwMetric) {
             return data;
         }
     });
+
+    initCharts(JSON, numberTime, unitTime, hwMetric);
+}
+
+async function initCharts(JSON) {
+    // Delete all Charts
+    let chartsRow = document.getElementById("charts");
+    chartsRow.innerHTML = "";
 
     // Create Charts
     let dates = JSON["Date"];
@@ -72,6 +69,25 @@ async function initCharts(numberTime, unitTime, hwMetric) {
 window.addEventListener('DOMContentLoaded', async function main() {
     console.log("---------------------");
     document.getElementById("navbar_history").classList.add("active");
+
+    // Build HW Selector
+    let hwMetricSelect = document.getElementById("hwMetric");
+
+    // Get Hostname
+    let hostname = await getHostname();
+    if (hostname === "RPI4") {
+        let divOne;
+        divOne = document.createElement("option");
+        divOne.value = "AmbientHumidityTemperature";
+        divOne.innerText = "Ambient";
+        hwMetricSelect.appendChild(divOne);
+
+        divOne = document.createElement("option");
+        divOne.value = "918";
+        divOne.innerText = "918";
+        hwMetricSelect.appendChild(divOne);
+    } else if (hostname === "RPI3A") {
+    }
 
     // Init Charts
     await goBtn();

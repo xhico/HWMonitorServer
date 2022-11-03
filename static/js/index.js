@@ -3,9 +3,26 @@
  */
 
 let config_showBots, config_showHistory, config_showEYE, config_updateStats, config_updateBots, config_updateTime;
+let hostname;
 
 async function sleep(secs) {
     await new Promise(resolve => setTimeout(resolve, secs * 1000));
+}
+
+async function getHostname() {
+    // Get Hostname
+    if (!(hostname)) {
+        let JSON = await $.ajax({
+            method: "get", url: "/hostname", success: function (data) {
+                return data;
+            }
+        });
+
+        // Set Hostname
+        hostname = JSON["Hostname"];
+    }
+
+    return hostname;
 }
 
 async function convert_size(size_bytes) {
@@ -109,15 +126,7 @@ async function updateNav() {
     // Get Date
     getDate();
 
-    // Get Hostname
-    let JSON = await $.ajax({
-        method: "get", url: "/hostname", success: function (data) {
-            return data;
-        }
-    });
-
-    // Set Hostname
-    let hostname = JSON["Hostname"];
+    hostname = await getHostname();
     document.title = hostname;
     document.getElementById("Hostname").innerText = hostname;
 

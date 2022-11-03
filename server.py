@@ -394,10 +394,12 @@ def powerOpt():
     option = request.form.get('option', type=str)
     if option == "reboot" or option == "poweroff":
         os.system("sudo " + option)
+        return jsonify({"message": "success"})
     elif option == "restart":
         os.system("sudo service HWMonitorServer restart")
+        return jsonify({"message": "success"})
     else:
-        return
+        return jsonify({"message": "failed"})
 
 
 @app.after_request

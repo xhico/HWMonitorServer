@@ -26,7 +26,7 @@ def convert_size(size_bytes):
         return "0B"
 
     size_bytes = int(size_bytes)
-    size_name = ("B", "KB", "MB", "GB", "TB")
+    size_name = ("B", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB")
     i = int(math.floor(math.log(size_bytes, 1024)))
     p = math.pow(1024, i)
     s = round(size_bytes / p, 2)
@@ -94,9 +94,9 @@ def getMemory():
         return {
             "hasInfo": "Yes",
             "Percentage": round(psutil.virtual_memory().percent, 2),
-            "Used": convert_size(psutil.virtual_memory().used),
-            "Available": convert_size(psutil.virtual_memory().available),
-            "Total": convert_size(psutil.virtual_memory().total)
+            "Used": psutil.virtual_memory().used,
+            "Available": psutil.virtual_memory().available,
+            "Total": psutil.virtual_memory().total
         }
     except Exception:
         return {"hasInfo": "None"}
@@ -107,9 +107,9 @@ def getSDCard():
         return {
             "hasInfo": "Yes",
             "Percentage": round(psutil.disk_usage('/').percent, 2),
-            "Used": convert_size(psutil.disk_usage('/').used),
-            "Free": convert_size(psutil.disk_usage('/').free),
-            "Total": convert_size(psutil.disk_usage('/').total)
+            "Used": psutil.disk_usage('/').used,
+            "Free": psutil.disk_usage('/').free,
+            "Total": psutil.disk_usage('/').total
         }
     except Exception:
         return {"hasInfo": "None"}
@@ -121,9 +121,9 @@ def get918():
             "hasInfo": "Yes",
             "Available": "Yes",
             "Percentage": round(psutil.disk_usage('/media/pi/918').percent, 2),
-            "Used": convert_size(psutil.disk_usage('/media/pi/918').used),
-            "Free": convert_size(psutil.disk_usage('/media/pi/918').free),
-            "Total": convert_size(psutil.disk_usage('/media/pi/918').total)
+            "Used": psutil.disk_usage('/media/pi/918').used,
+            "Free": psutil.disk_usage('/media/pi/918').free,
+            "Total": psutil.disk_usage('/media/pi/918').total
         }
     except Exception:
         return {"hasInfo": "None"}
@@ -144,8 +144,8 @@ def getWired():
         return {
             "hasInfo": "Yes",
             "IP": subprocess.getoutput("ip addr show eth0 | grep 'inet\b' | awk '{print $2}' | cut -d/ -f1"),
-            "Sent": convert_size(subprocess.getoutput("cat /sys/class/net/eth0/statistics/tx_bytes")),
-            "Received": convert_size(subprocess.getoutput("cat /sys/class/net/eth0/statistics/rx_bytes")),
+            "Sent": subprocess.getoutput("cat /sys/class/net/eth0/statistics/tx_bytes"),
+            "Received": subprocess.getoutput("cat /sys/class/net/eth0/statistics/rx_bytes"),
             "Packets_Sent": subprocess.getoutput("cat /sys/class/net/eth0/statistics/rx_packets"),
             "Packets_Received": subprocess.getoutput("cat /sys/class/net/eth0/statistics/tx_packets"),
         }
@@ -158,8 +158,8 @@ def getWifi():
         return {
             "hasInfo": "Yes",
             "IP": subprocess.getoutput("ip addr show wlan0 | grep 'inet\b' | awk '{print $2}' | cut -d/ -f1"),
-            "Sent": convert_size(subprocess.getoutput("cat /sys/class/net/wlan0/statistics/tx_bytes")),
-            "Received": convert_size(subprocess.getoutput("cat /sys/class/net/wlan0/statistics/rx_bytes")),
+            "Sent": subprocess.getoutput("cat /sys/class/net/wlan0/statistics/tx_bytes"),
+            "Received": subprocess.getoutput("cat /sys/class/net/wlan0/statistics/rx_bytes"),
             "Packets_Sent": subprocess.getoutput("cat /sys/class/net/wlan0/statistics/rx_packets"),
             "Packets_Received": subprocess.getoutput("cat /sys/class/net/wlan0/statistics/tx_packets"),
         }
@@ -292,7 +292,7 @@ def getHistoricInfo(numberTime, unitTime, hwMetric):
     processData = {}
     for entry in validData:
         for k, v in entry.items():
-            v = float(re.sub(r"[a-zA-Z]", "", str(v)).strip()) if k != "Date" else v
+            v = round(float(re.sub(r"[a-zA-Z]", "", str(v)).strip()), 1) if k != "Date" else v
             if k in processData:
                 processData[k].append(v)
             else:

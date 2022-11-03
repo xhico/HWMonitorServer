@@ -2,7 +2,7 @@
     @author: xhico
  */
 
-function getVersions(JSON) {
+async function getVersions(JSON) {
     if (JSON["Version"]["hasInfo"] === "None") {
         document.getElementById("versionSection").hidden = true;
         return;
@@ -19,7 +19,7 @@ function getVersions(JSON) {
     document.getElementById("Version_Firmware").innerText = Version_Firmware;
 }
 
-function getUptime(JSON) {
+async function getUptime(JSON) {
     if (JSON["Uptime"]["hasInfo"] === "None") {
         document.getElementById("UptimeSection").hidden = true;
         return;
@@ -34,7 +34,7 @@ function getUptime(JSON) {
     document.getElementById("Uptime_Uptime").innerText = Uptime_Uptime;
 }
 
-function getCPU(JSON) {
+async function getCPU(JSON) {
     if (JSON["CPU"]["hasInfo"] === "None") {
         document.getElementById("UptimeSection").hidden = true;
         return;
@@ -70,7 +70,7 @@ function getCPU(JSON) {
     document.getElementById("CPU_Voltage").innerText = CPU_Voltage.split("V")[0] + " V";
 }
 
-function getTemperature(JSON) {
+async function getTemperature(JSON) {
     if (JSON["Temperature"]["hasInfo"] === "None") {
         document.getElementById("TemperatureSectionSection").hidden = true;
         return;
@@ -92,7 +92,7 @@ function getTemperature(JSON) {
     gauge.set(CPU_Temperature);
 }
 
-function getAmbientHumidityTemperature(JSON) {
+async function getAmbientHumidityTemperature(JSON) {
     if (JSON["AmbientHumidityTemperature"]["hasInfo"] === "None") {
         document.getElementById("AmbientSection").hidden = true;
         return;
@@ -111,7 +111,7 @@ function getAmbientHumidityTemperature(JSON) {
     document.getElementById("Ambient_Valid").innerText = Ambient_Valid;
 }
 
-function getMemory(JSON) {
+async function getMemory(JSON) {
     if (JSON["Memory"]["hasInfo"] === "None") {
         document.getElementById("MemorySection").hidden = true;
         return;
@@ -138,12 +138,12 @@ function getMemory(JSON) {
         document.getElementById("Memory_Percentage").classList.remove("bg-warning");
         document.getElementById("Memory_Percentage").classList.add("bg-danger");
     }
-    document.getElementById("Memory_Used").innerText = Memory_Used;
-    document.getElementById("Memory_Available").innerText = Memory_Available;
-    document.getElementById("Memory_Total").innerText = Memory_Total;
+    document.getElementById("Memory_Used").innerText = await convert_size(Memory_Used);
+    document.getElementById("Memory_Available").innerText = await convert_size(Memory_Available);
+    document.getElementById("Memory_Total").innerText = await convert_size(Memory_Total);
 }
 
-function getSDCard(JSON) {
+async function getSDCard(JSON) {
     if (JSON["Disks"]["SDCard"]["hasInfo"] === "None") {
         document.getElementById("SDCardSection").hidden = true;
         return;
@@ -170,12 +170,12 @@ function getSDCard(JSON) {
         document.getElementById("Disks_SDCard_Percentage").classList.remove("bg-warning");
         document.getElementById("Disks_SDCard_Percentage").classList.add("bg-danger");
     }
-    document.getElementById("Disks_SDCard_Used").innerText = Disks_SDCard_Used;
-    document.getElementById("Disks_SDCard_Free").innerText = Disks_SDCard_Free;
-    document.getElementById("Disks_SDCard_Total").innerText = Disks_SDCard_Total;
+    document.getElementById("Disks_SDCard_Used").innerText = await convert_size(Disks_SDCard_Used);
+    document.getElementById("Disks_SDCard_Free").innerText = await convert_size(Disks_SDCard_Free);
+    document.getElementById("Disks_SDCard_Total").innerText = await convert_size(Disks_SDCard_Total);
 }
 
-function getWired(JSON) {
+async function getWired(JSON) {
     if (JSON["Network"]["Wired"]["hasInfo"] === "None") {
         document.getElementById("WiredSection").hidden = true;
         return;
@@ -186,13 +186,13 @@ function getWired(JSON) {
     let Network_Wired_Received = JSON["Network"]["Wired"]["Received"];
     let Network_Wired_Packets_Sent = JSON["Network"]["Wired"]["Packets_Sent"];
     let Network_Wired_Packets_Received = JSON["Network"]["Wired"]["Packets_Received"];
-    document.getElementById("Network_Wired_Sent").innerText = Network_Wired_Sent;
-    document.getElementById("Network_Wired_Received").innerText = Network_Wired_Received;
+    document.getElementById("Network_Wired_Sent").innerText = await convert_size(Network_Wired_Sent);
+    document.getElementById("Network_Wired_Received").innerText = await convert_size(Network_Wired_Received);
     document.getElementById("Network_Wired_Packets_Sent").innerText = Network_Wired_Packets_Sent;
     document.getElementById("Network_Wired_Packets_Received").innerText = Network_Wired_Packets_Received;
 }
 
-function getWifi(JSON) {
+async function getWifi(JSON) {
     if (JSON["Network"]["Wifi"]["hasInfo"] === "None") {
         document.getElementById("WifiSection").hidden = true;
         return;
@@ -203,13 +203,13 @@ function getWifi(JSON) {
     let Network_Wifi_Received = JSON["Network"]["Wifi"]["Received"];
     let Network_Wifi_Packets_Sent = JSON["Network"]["Wifi"]["Packets_Sent"];
     let Network_Wifi_Packets_Received = JSON["Network"]["Wifi"]["Packets_Received"];
-    document.getElementById("Network_Wifi_Sent").innerText = Network_Wifi_Sent;
-    document.getElementById("Network_Wifi_Received").innerText = Network_Wifi_Received;
+    document.getElementById("Network_Wifi_Sent").innerText = await convert_size(Network_Wifi_Sent);
+    document.getElementById("Network_Wifi_Received").innerText = await convert_size(Network_Wifi_Received);
     document.getElementById("Network_Wifi_Packets_Sent").innerText = Network_Wifi_Packets_Sent;
     document.getElementById("Network_Wifi_Packets_Received").innerText = Network_Wifi_Packets_Received;
 }
 
-function get918(JSON) {
+async function get918(JSON) {
     if (JSON["Disks"]["918"]["hasInfo"] === "None") {
         document.getElementById("918Section").hidden = true;
         return;
@@ -236,11 +236,10 @@ function get918(JSON) {
         document.getElementById("Disks_918_Percentage").classList.remove("bg-warning");
         document.getElementById("Disks_918_Percentage").classList.add("bg-danger");
     }
-    document.getElementById("Disks_918_Used").innerText = Disks_918_Used;
-    document.getElementById("Disks_918_Free").innerText = Disks_918_Free;
-    document.getElementById("Disks_918_Total").innerText = Disks_918_Total;
+    document.getElementById("Disks_918_Used").innerText = await convert_size(Disks_918_Used);
+    document.getElementById("Disks_918_Free").innerText = await convert_size(Disks_918_Free);
+    document.getElementById("Disks_918_Total").innerText = await convert_size(Disks_918_Total);
 }
-
 
 async function updateSections() {
     // Get HW Info JSON

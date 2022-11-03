@@ -8,6 +8,16 @@ async function sleep(secs) {
     await new Promise(resolve => setTimeout(resolve, secs * 1000));
 }
 
+async function convert_size(size_bytes) {
+    let decimals = 2
+    if (!+size_bytes) return '0 Bytes'
+    let k = 1024
+    let dm = decimals < 0 ? 0 : decimals
+    let sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB']
+    let i = Math.floor(Math.log(size_bytes) / Math.log(k))
+    return `${parseFloat((size_bytes / Math.pow(k, i)).toFixed(dm))} ${sizes[i]}`
+}
+
 async function powerOpt(option) {
     await $.ajax({method: "post", url: "/power", data: {option: option}});
 }

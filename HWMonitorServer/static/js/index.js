@@ -13,7 +13,7 @@ async function getHostname() {
     // Get Hostname
     if (!(hostname)) {
         let JSON = await $.ajax({
-            method: "get", url: "/hostname", success: function (data) {
+            method: "get", url: "/stats/hostname", success: function (data) {
                 return data;
             }
         });
@@ -39,8 +39,8 @@ function convert_size(size_bytes) {
     // return value;
 }
 
-async function powerOpt(option) {
-    await $.ajax({method: "post", url: "/power", data: {option: option}});
+async function power(option) {
+    await $.ajax({method: "post", url: "/main/power", data: {option: option}});
 }
 
 function setShowBots() {

@@ -10,7 +10,7 @@ async function goBtn() {
     // Get Ambient Data
     console.log("Get " + hwMetric + " Data");
     let JSON = await $.ajax({
-        method: "post", url: "/json/history", data: {numberTime: numberTime, unitTime: unitTime, hwMetric: hwMetric}, success: function (data) {
+        method: "post", url: "/history/info", data: {numberTime: numberTime, unitTime: unitTime, hwMetric: hwMetric}, success: function (data) {
             return data;
         }
     });

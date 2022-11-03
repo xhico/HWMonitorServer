@@ -245,7 +245,7 @@ async function updateSections() {
     // Get HW Info JSON
     console.log("Get HW Info JSON");
     let JSON = await $.ajax({
-        method: "get", url: "/json/hwInfo", success: function (data) {
+        method: "get", url: "/stats/getHWInfo", success: function (data) {
             return data;
         }
     });

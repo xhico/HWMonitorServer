@@ -7,7 +7,7 @@ foreach ($file in $files)
     Copy-Item .\$file X:\HWMonitorServer\$file -Force
 }
 
-$folders = @("main", "stats", "bots", "history", "eye", "static\css", "static\images", "static\js")
+$folders = @("main", "stats", "bots", "history", "eye", "templates", "static\css", "static\images", "static\js")
 foreach ($folder in $folders)
 {
     Remove-Item Y:\HWMonitorServer\HWMonitorServer\$folder\* -R -Force

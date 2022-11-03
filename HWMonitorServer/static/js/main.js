@@ -34,17 +34,11 @@ function convert_size(size_bytes) {
     let i = Math.floor(Math.log(size_bytes) / Math.log(k))
     let value = `${parseFloat((size_bytes / Math.pow(k, i)).toFixed(dm))}`
     let unit = `${sizes[i]}`;
-
     return value + " " + unit
-    // return value;
 }
 
 async function power(option) {
     await $.ajax({method: "post", url: "/main/power", data: {option: option}});
-}
-
-function setShowBots() {
-    document.getElementById("divConfig_updateBots").hidden = !document.getElementById("config_showBots").checked;
 }
 
 function checkZero(data) {
@@ -65,7 +59,7 @@ function getDate() {
     document.getElementById("navDateNow").innerText = year + "/" + month + "/" + day + " " + hour + ":" + minutes + ":" + seconds;
 }
 
-async function setCookie(cname, cvalue, exdays) {
+function setCookie(cname, cvalue, exdays) {
     const d = new Date();
     d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
     let expires = "expires=" + d.toUTCString();

@@ -23,6 +23,10 @@
     border-color: #198754;
 }
 
+.margin-0 {
+    margin: 0;
+}
+
 @media (max-width: 768px) {
     .border-md-right {
         border-right: none;

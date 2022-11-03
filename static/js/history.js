@@ -35,7 +35,7 @@ async function initCharts(numberTime, unitTime, hwMetric) {
         // Create Figure
         let divOne;
         divOne = document.createElement("figure");
-        divOne.classList.add("highcharts-figure", "col-xl-6", "col-md-12", "mb-3");
+        divOne.classList.add("highcharts-figure", "col-xl-6", "col-md-12", "border-top", "border-end", "border-bottom", "border-start", "margin-0");
         divOne.id = "chart_" + chartName;
         chartsRow.appendChild(divOne);
 

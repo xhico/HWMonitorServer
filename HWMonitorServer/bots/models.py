@@ -4,8 +4,9 @@
 import datetime
 import os
 import subprocess
-
 import psutil
+from HWMonitorServer.config import Config
+from HWMonitorServer.stats import models as statsModels
 
 
 def runBot(name):
@@ -43,7 +44,14 @@ def getBotInfo(name):
 
 def getBots():
     try:
-        botsName = ["HumiditySensor", "EZTV-AutoDownloader", "TV3U", "RandomF1Quotes", "RandomUrbanDictionary", "Random9GAG", "FIMDocs", "WSeriesDocs", "FIAFormulaEDocs", "ddnsUpdater", "RaspberryPiSurveillance", "NoIpUpdater", "ipSender", "HardwareHistory"]
+        hostname = statsModels.getHostname()["Hostname"]
+        if hostname == "RPI4":
+            botsName = Config.RPI4_BOTS
+        elif hostname == "RPI3A":
+            botsName = Config.RPI3A_BOTS
+        else:
+            botsName = []
+
         d = {name: getBotInfo(name) for name in botsName}
         d["hasInfo"] = "yes"
         return d

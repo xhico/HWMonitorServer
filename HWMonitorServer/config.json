@@ -1,3 +1,26 @@
 {
-  "ENV": "live"
+  "RPI4": {
+    "Bots": [
+      "HumiditySensor",
+      "EZTV-AutoDownloader",
+      "TV3U",
+      "RandomF1Quotes",
+      "RandomUrbanDictionary",
+      "Random9GAG",
+      "FIMDocs",
+      "WSeriesDocs",
+      "FIAFormulaEDocs",
+      "ddnsUpdater",
+      "RaspberryPiSurveillance",
+      "NoIpUpdater",
+      "ipSender",
+      "HardwareHistory"
+    ]
+  },
+  "RPI3A": {
+    "Bots": [
+      "ipSender",
+      "HardwareHistory"
+    ]
+  }
 }

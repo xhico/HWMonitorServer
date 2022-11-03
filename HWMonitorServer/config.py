@@ -16,4 +16,5 @@ class Config:
     CONFIG_FILE = configFile
 
     # Environment
-    ENV = config["ENV"]
+    RPI4_BOTS = config["RPI4"]["Bots"]
+    RPI3A_BOTS = config["RPI3A"]["Bots"]

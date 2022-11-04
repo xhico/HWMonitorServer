@@ -6,7 +6,6 @@ import os
 import socket
 import subprocess
 import psutil
-import requests
 
 from HWMonitorServer.config import Config
 
@@ -49,7 +48,7 @@ def getBots():
         hostname = str(socket.gethostname()).upper()
         botsName = Config.config[hostname]["Bots"]
         d = {name: getBotInfo(name) for name in botsName}
-        d["hasInfo"] = "yes"
+        d["hasInfo"] = "Yes"
         return d
     except Exception:
         return {"hasInfo": "None"}

@@ -1,5 +1,6 @@
 import json
 import os
+import socket
 
 
 def loadConfig():
@@ -11,3 +12,7 @@ def loadConfig():
 
 class Config:
     config, configFile = loadConfig()
+    hostname = str(socket.gethostname()).upper()
+
+    # Get Bots
+    botsName = config[hostname]["Bots"]

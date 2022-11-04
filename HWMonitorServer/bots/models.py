@@ -45,9 +45,7 @@ def getBotInfo(name):
 
 def getBots():
     try:
-        hostname = str(socket.gethostname()).upper()
-        botsName = Config.config[hostname]["Bots"]
-        d = {name: getBotInfo(name) for name in botsName}
+        d = {name: getBotInfo(name) for name in Config.botsName}
         d["hasInfo"] = "Yes"
         return d
     except Exception:

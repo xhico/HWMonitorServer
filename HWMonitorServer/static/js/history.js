@@ -92,6 +92,7 @@ window.addEventListener('DOMContentLoaded', async function main() {
     let hwMetricSelect = document.getElementById("hwMetric");
 
     // Get Hostname
+    await sleep(1);
     if (hostname === "RPI4") {
         let divOne;
         divOne = document.createElement("option");

@@ -149,12 +149,12 @@ async function updateSections() {
         }
     });
 
-
     // Remove hasInfo key
-    let botNames = Object.keys(JSON);
-    botNames = botNames.filter(function (e) {
+    let botNames = Object.keys(JSON).filter(function (e) {
         return e !== "hasInfo"
-    })
+    }).sort(function (a, b) {
+        return a.toLowerCase().localeCompare(b.toLowerCase());
+    });
 
     // Iterate over every Bot
     for (let botName of botNames) {

@@ -36,7 +36,8 @@ async function getUptime(JSON) {
 
 async function getCPU(JSON) {
     if (JSON["CPU"]["hasInfo"] === "None") {
-        document.getElementById("UptimeSection").hidden = true;
+        document.getElementById("CPUSection").hidden = true;
+        document.getElementById("CPU_TemperatureSection").hidden = true;
         return;
     }
 
@@ -68,23 +69,16 @@ async function getCPU(JSON) {
     document.getElementById("CPU_Frequency").innerText = CPU_Frequency + " MHz";
     document.getElementById("CPU_PIDs").innerText = CPU_PIDs;
     document.getElementById("CPU_Voltage").innerText = CPU_Voltage.split("V")[0] + " V";
-}
-
-async function getTemperature(JSON) {
-    if (JSON["Temperature"]["hasInfo"] === "None") {
-        document.getElementById("TemperatureSectionSection").hidden = true;
-        return;
-    }
 
     // Temperature
-    let CPU_Temperature = JSON["Temperature"]["Temperature"];
-    document.getElementById("Temperature").innerText = CPU_Temperature + " °C";
+    let CPU_Temperature = JSON["CPU"]["Temperature"];
+    document.getElementById("CPU_Temperature").innerText = CPU_Temperature + " °C";
 
     // Add Gauge info
     let opts = {
         angle: 0.15, lineWidth: 0.44, radiusScale: 1, pointer: {length: 0.6, strokeWidth: 0.035, color: '#000000'}, limitMax: false, limitMin: false, staticZones: [{strokeStyle: "#198754", min: 30, max: 50}, {strokeStyle: "#ffc107", min: 50, max: 65}, {strokeStyle: "#dc3545", min: 65, max: 80},], highDpiSupport: true,
     };
-    let target = document.getElementById('Temperature_Gauge');
+    let target = document.getElementById("CPU_Temperature_Gauge");
     let gauge = new Gauge(target).setOptions(opts);
     gauge.maxValue = 80;
     gauge.setMinValue(30);
@@ -255,7 +249,6 @@ async function updateSections() {
     getVersions(JSON);
     getUptime(JSON);
     getCPU(JSON);
-    getTemperature(JSON);
     getAmbientHumidityTemperature(JSON);
     getMemory(JSON);
     getSDCard(JSON);

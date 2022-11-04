@@ -4,9 +4,7 @@
 import datetime
 import json
 import re
-import socket
 import subprocess
-import urllib.request
 
 import gpiozero
 import psutil
@@ -52,17 +50,8 @@ def getCPU():
             "Cores": psutil.cpu_count(),
             "Frequency": round(psutil.cpu_freq().current, 2),
             "PIDs": len(psutil.pids()),
-            "Voltage": subprocess.getoutput("vcgencmd measure_volts core").split('=')[1]
-        }
-    except Exception:
-        return {"hasInfo": "None"}
-
-
-def getTemperature():
-    try:
-        return {
-            "hasInfo": "Yes",
-            "Temperature": round(gpiozero.CPUTemperature().temperature, 2),
+            "Voltage": subprocess.getoutput("vcgencmd measure_volts core").split('=')[1],
+            "Temperature": round(gpiozero.CPUTemperature().temperature, 2)
         }
     except Exception:
         return {"hasInfo": "None"}
@@ -158,7 +147,6 @@ def getHWInfo():
         "Version": getVersions(),
         "Uptime": getUptime(),
         "CPU": getCPU(),
-        "Temperature": getTemperature(),
         "AmbientHumidityTemperature": getAmbientHumidityTemperature(),
         "Memory": getMemory(),
         "Disks": {

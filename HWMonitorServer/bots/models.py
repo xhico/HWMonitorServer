@@ -45,8 +45,8 @@ def getBotInfo(name):
 
 def getBots():
     try:
-        d = {name: getBotInfo(name) for name in Config.botsName}
-        d["hasInfo"] = "Yes"
-        return d
+        bots = {name: getBotInfo(name) for name in Config.botsName}
+        bots["hasInfo"] = "Yes"
+        return bots
     except Exception:
         return {"hasInfo": "None"}

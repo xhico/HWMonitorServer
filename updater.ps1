@@ -19,4 +19,3 @@ foreach ($folder in $folders)
 
 Invoke-WebRequest -UseBasicParsing "http://192.168.1.14:33377/main/power" -Method POST -Body "{ 'option':'restart'}"
 Invoke-WebRequest -UseBasicParsing "http://192.168.1.15:33377/main/power" -Method POST -Body "{ 'option':'restart'}"
-

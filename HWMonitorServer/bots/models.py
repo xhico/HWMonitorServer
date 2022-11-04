@@ -6,6 +6,8 @@ import os
 import socket
 import subprocess
 import psutil
+import requests
+
 from HWMonitorServer.config import Config
 
 
@@ -45,13 +47,7 @@ def getBotInfo(name):
 def getBots():
     try:
         hostname = str(socket.gethostname()).upper()
-        if hostname == "RPI4":
-            botsName = Config.RPI4_BOTS
-        elif hostname == "RPI3A":
-            botsName = Config.RPI3A_BOTS
-        else:
-            botsName = []
-
+        botsName = Config.config[hostname]["Bots"]
         d = {name: getBotInfo(name) for name in botsName}
         d["hasInfo"] = "yes"
         return d

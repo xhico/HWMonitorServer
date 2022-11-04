@@ -11,10 +11,3 @@ def loadConfig():
 
 class Config:
     config, configFile = loadConfig()
-
-    # ConfigFile
-    CONFIG_FILE = configFile
-
-    # Environment
-    RPI4_BOTS = config["RPI4"]["Bots"]
-    RPI3A_BOTS = config["RPI3A"]["Bots"]

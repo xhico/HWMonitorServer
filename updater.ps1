@@ -17,5 +17,5 @@ foreach ($folder in $folders)
     Copy-Item .\HWMonitorServer\$folder\* X:\HWMonitorServer\HWMonitorServer\$folder\ -R -Force
 }
 
-Invoke-WebRequest -UseBasicParsing "http://192.168.1.14:33377/main/power" -Method POST -Body "{ 'option':'restart'}"
-Invoke-WebRequest -UseBasicParsing "http://192.168.1.15:33377/main/power" -Method POST -Body "{ 'option':'restart'}"
+Invoke-WebRequest -UseBasicParsing "http://192.168.1.14:33377/main/power" -Method POST -Body "{ 'option':'restart'}" | Out-Null
+Invoke-WebRequest -UseBasicParsing "http://192.168.1.15:33377/main/power" -Method POST -Body "{ 'option':'restart'}" | Out-Null

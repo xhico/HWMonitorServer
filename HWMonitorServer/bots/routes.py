@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 # !/usr/bin/python3
+
 import psutil
 from flask import render_template, jsonify, Blueprint, request
 import HWMonitorServer.bots.models as models

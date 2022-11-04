@@ -108,16 +108,6 @@ def get918():
         return {"hasInfo": "None"}
 
 
-def getHostname():
-    try:
-        return {
-            "hasInfo": "Yes",
-            "Hostname": str(socket.gethostname()).upper(),
-        }
-    except Exception:
-        return {"hasInfo": "None"}
-
-
 def getWired():
     try:
         return {
@@ -141,20 +131,6 @@ def getWifi():
             "Received": int(subprocess.getoutput("cat /sys/class/net/wlan0/statistics/rx_bytes")),
             "Packets_Sent": int(subprocess.getoutput("cat /sys/class/net/wlan0/statistics/rx_packets")),
             "Packets_Received": int(subprocess.getoutput("cat /sys/class/net/wlan0/statistics/tx_packets")),
-        }
-    except Exception:
-        return {"hasInfo": "None"}
-
-
-def getIPAddress():
-    try:
-        localIP = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-        localIP.connect(("8.8.8.8", 80))
-
-        return {
-            "hasInfo": "Yes",
-            "Internal": localIP.getsockname()[0],
-            "External": urllib.request.urlopen("https://v4.ident.me/").read().decode("utf8")
         }
     except Exception:
         return {"hasInfo": "None"}
@@ -190,9 +166,7 @@ def getHWInfo():
             "918": get918()
         },
         "Network": {
-            "Info": getHostname(),
             "Wired": getWired(),
-            "Wifi": getWifi(),
-            "IPAddress": getIPAddress()
+            "Wifi": getWifi()
         }
     }

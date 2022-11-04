@@ -3,10 +3,10 @@
 
 import datetime
 import os
+import socket
 import subprocess
 import psutil
 from HWMonitorServer.config import Config
-from HWMonitorServer.stats import models as statsModels
 
 
 def runBot(name):
@@ -44,7 +44,7 @@ def getBotInfo(name):
 
 def getBots():
     try:
-        hostname = statsModels.getHostname()["Hostname"]
+        hostname = str(socket.gethostname()).upper()
         if hostname == "RPI4":
             botsName = Config.RPI4_BOTS
         elif hostname == "RPI3A":

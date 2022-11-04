@@ -2,6 +2,7 @@
 # !/usr/bin/python3
 
 import os
+import socket
 
 from flask import jsonify, request, Blueprint
 
@@ -40,3 +41,8 @@ def json_power():
 @main.route("/main/status")
 def json_status():
     return jsonify({"Status": "alive"})
+
+
+@main.route("/main/hostname")
+def json_hostname():
+    return jsonify({"Hostname": str(socket.gethostname()).upper()})

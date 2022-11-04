@@ -13,7 +13,7 @@ async function getHostname() {
     // Get Hostname
     if (!(hostname)) {
         let JSON = await $.ajax({
-            method: "get", url: "/stats/hostname", success: function (data) {
+            method: "get", url: "/main/hostname", success: function (data) {
                 return data;
             }
         });

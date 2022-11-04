@@ -19,8 +19,3 @@ def index():
 @stats.route("/stats/getHWInfo")
 def json_getHWInfo():
     return jsonify(models.getHWInfo())
-
-
-@stats.route("/stats/hostname")
-def json_hostname():
-    return jsonify(models.getHostname())

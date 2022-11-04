@@ -14,10 +14,10 @@
     <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet">
 
     <!-- JQuery -->
-    <script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/libs/jquery.min.js') }}"></script>
 
     <!-- GaugeJs -->
-    <script src="{{ url_for('static', filename='js/gauge.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/libs/gauge.min.js') }}"></script>
 
     <!-- Custom -->
     <link href="{{ url_for('static', filename='css/styles.css') }}" rel="stylesheet"/>
@@ -139,7 +139,7 @@
 <!-- Scripts -->
 {% block script %}{% endblock %}
 <script src="{{ url_for('static', filename='js/main.js') }}"></script>
-<script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/libs/bootstrap.bundle.min.js') }}"></script>
 </body>
 
 </html>

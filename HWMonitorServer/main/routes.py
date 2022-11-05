@@ -28,14 +28,18 @@ def add_header(r):
 @main.route("/main/power", methods=['POST'])
 def json_power():
     option = request.form.get('option', type=str)
+
     if option == "reboot" or option == "poweroff":
         os.system("sudo " + option)
-        return jsonify({"message": "success"})
+        msg = {"message": "success"}
     elif option == "restart":
         os.system("sudo service HWMonitorServer restart")
-        return jsonify({"message": "success"})
+        msg = {"message": "success"}
     else:
-        return jsonify({"message": "failed"})
+        msg = {"message": "failed"}
+
+    msg["option"] = option
+    return jsonify(msg)
 
 
 @main.route("/main/status")

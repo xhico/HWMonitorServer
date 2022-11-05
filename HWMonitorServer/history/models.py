@@ -21,6 +21,8 @@ def getHistoricInfo(numberTime, unitTime, hwMetric):
     with open("/home/pi/HardwareHistory/HardwareHistory.json") as inFile:
         data = json.load(inFile)
 
+    keys = [key for key in list(data[0].keys()) if key != "Date"]
+
     # Get only valid data
     validData = []
     for entry in data:
@@ -53,4 +55,4 @@ def getHistoricInfo(numberTime, unitTime, hwMetric):
         if k != "Date":
             processData[k] = [processData[k], [round(sum(v) / len(v), 1) for _ in range(len(v))]]
 
-    return processData
+    return keys, processData

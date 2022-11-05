@@ -15,7 +15,21 @@ async function goBtn() {
         }
     });
 
-    initCharts(JSON, numberTime, unitTime, hwMetric);
+    // Set Select Options
+    let keys = JSON["keys"];
+    let selectOptions = document.getElementById("hwMetric");
+    selectOptions.innerHTML = "";
+    for (let key of keys) {
+        let divOne = document.createElement("option");
+        divOne.value = key;
+        divOne.innerText = key;
+        selectOptions.appendChild(divOne);
+    }
+    document.getElementById("hwMetric").value = hwMetric;
+
+    // Set Charts
+    let info = JSON["info"];
+    initCharts(info, numberTime, unitTime, hwMetric);
 }
 
 async function initCharts(JSON) {
@@ -87,25 +101,6 @@ async function initCharts(JSON) {
 window.addEventListener('DOMContentLoaded', async function main() {
     console.log("---------------------");
     document.getElementById("navbar_history").classList.add("active");
-
-    // Build HW Selector
-    let hwMetricSelect = document.getElementById("hwMetric");
-
-    // Get Hostname
-    await sleep(1);
-    if (hostname === "RPI4") {
-        let divOne;
-        divOne = document.createElement("option");
-        divOne.value = "AmbientHumidityTemperature";
-        divOne.innerText = "Ambient";
-        hwMetricSelect.appendChild(divOne);
-
-        divOne = document.createElement("option");
-        divOne.value = "918";
-        divOne.innerText = "918";
-        hwMetricSelect.appendChild(divOne);
-    } else if (hostname === "RPI3A") {
-    }
 
     // Init Charts
     await goBtn();

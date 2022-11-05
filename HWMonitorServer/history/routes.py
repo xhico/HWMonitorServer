@@ -20,5 +20,5 @@ def history_info():
     numberTime = request.form.get('numberTime', type=int)
     unitTime = request.form.get('unitTime', type=str)
     hwMetric = request.form.get('hwMetric', type=str)
-    historicInfo = models.getHistoricInfo(numberTime, unitTime, hwMetric)
-    return jsonify(historicInfo)
+    keys, historicInfo = models.getHistoricInfo(numberTime, unitTime, hwMetric)
+    return jsonify({"info": historicInfo, "keys": keys})

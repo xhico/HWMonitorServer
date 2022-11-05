@@ -4,7 +4,6 @@
 import logging
 import os.path
 import shutil
-import requests
 
 if __name__ == '__main__':
     # Set Logging

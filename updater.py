@@ -84,6 +84,7 @@ if __name__ == '__main__':
             remote_staticFolder = os.path.join(remote_StaticFolder, staticFolder)
             shutil.copytree(local_staticFolder, remote_staticFolder)
 
-        # Restart Servers
-        r = requests.post(url="http://" + ipAddress + ":33377/main/power", data={"option": "restart"})
-        logger.info(r.json())
+        # Restart Server
+        logger.info("Restart Server")
+        # r = requests.post(url="http://" + ipAddress + ":33377/main/power", data={"option": "restart"})
+        # logger.info(r.json())

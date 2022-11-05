@@ -37,8 +37,25 @@ function convert_size(size_bytes) {
     return value + " " + unit
 }
 
-async function power(option) {
+async function power(option, btn) {
+    // Disable Btn
+    btn.disabled = true;
+    btn.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span><span class="visually-hidden">Loading...</span>'
+
+    // Do Option
     await $.ajax({method: "post", url: "/main/power", data: {option: option}});
+
+    // Wait for alive
+    do {
+        try {
+            let statusJSON = await $.ajax({method: "get", url: "/main/status"});
+            if (statusJSON["Status"] === "alive") {
+                location.reload();
+            }
+        } catch (e) {
+            await sleep(2);
+        }
+    } while (1)
 }
 
 function checkZero(data) {

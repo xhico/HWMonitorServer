@@ -21,6 +21,7 @@ def getHistoricInfo(numberTime, unitTime, hwMetric):
     with open("/home/pi/HardwareHistory/HardwareHistory.json") as inFile:
         data = json.load(inFile)
 
+    # Get History Keys
     keys = [key for key in list(data[0].keys()) if key != "Date"]
 
     # Get only valid data

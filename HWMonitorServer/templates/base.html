@@ -96,7 +96,6 @@
     </div>
 </div>
 
-
 <!-- Fixed navbar -->
 <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-2">
     <div class="container-fluid">
@@ -131,7 +130,10 @@
 
 <!-- Begin page content -->
 <main class="container-fluid column-fluid flex-shrink-0">
-    <div class="row" id="content">
+    <div id="spinner" class="show">
+        <img src="{{ url_for('static', filename='images/loading.gif') }}" alt="Loading Icon"/>
+    </div>
+    <div class=" row" id="content">
         {% block content %}{% endblock %}
     </div>
 </main>

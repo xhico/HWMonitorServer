@@ -29,7 +29,7 @@ async function goBtn() {
 
     // Set Charts
     let info = JSON["info"];
-    initCharts(info, numberTime, unitTime, hwMetric);
+    await initCharts(info, numberTime, unitTime, hwMetric);
 }
 
 async function initCharts(JSON) {
@@ -104,4 +104,7 @@ window.addEventListener('DOMContentLoaded', async function main() {
 
     // Init Charts
     await goBtn();
+
+    // Remove Loading
+    await removeLoading()
 });

@@ -256,6 +256,9 @@ async function updateSections() {
     getWifi(JSON);
     get918(JSON);
 
+    // Remove Loading
+    await removeLoading()
+
     // Wait x secs -> Run again
     await sleep(config_updateTime);
     if (config_updateStats === true) {

@@ -137,6 +137,10 @@ async function loadConfig() {
     document.getElementById("config_updateTime").value = config_updateTime;
 }
 
+async function removeLoading() {
+    document.getElementById("spinner").classList.remove("show");
+}
+
 async function updateNav() {
     // Get Date
     getDate();
@@ -156,6 +160,7 @@ async function updateNav() {
 }
 
 window.addEventListener('DOMContentLoaded', async function main() {
+    // Run
     await loadConfig();
     await updateNav();
 });

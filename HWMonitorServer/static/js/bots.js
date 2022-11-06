@@ -162,12 +162,14 @@ async function updateSections() {
         await setBot(JSON, botName);
     }
 
+    // Remove Loading
+    await removeLoading()
+
     // Wait x secs -> Run again
     await sleep(config_updateTime);
     if (config_updateBots === true) {
         await updateSections();
     }
-
 }
 
 window.addEventListener('DOMContentLoaded', async function main() {

@@ -129,7 +129,6 @@ def getAmbientHumidityTemperature():
     try:
         with open("/home/pi/HumiditySensor/HumiditySensor.json") as inFile:
             data = json.load(inFile)[0]
-
         return {
             "hasInfo": "Yes",
             "Date": data["date"],

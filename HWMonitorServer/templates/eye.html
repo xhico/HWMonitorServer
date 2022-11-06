@@ -2,27 +2,6 @@
 
 {% block content %}
 
-    <div class="accordion accordion-flush text-center" id="accordionFlushExample">
-        {% for rec in recInfo %}
-            <div class="accordion-item">
-                <h2 class="accordion-header" id="flush-heading_{{ rec.idx }}">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse_{{ rec.idx }}" aria-expanded="false" aria-controls="flush-collapse_{{ rec.idx }}">
-                        {% if rec.TODAY %}
-                            <b>Today {{ rec.name }}</b>
-                        {% else %}
-                            {{ rec.name }}
-                        {% endif %}
-                    </button>
-                </h2>
-                <div id="flush-collapse_{{ rec.idx }}" class="accordion-collapse collapse" aria-labelledby="flush-heading_{{ rec.idx }}" data-bs-parent="#accordionFlushExample">
-                    <video width="70%" controls>
-                        <source src="{{ url_for('static', filename="_RECORDINGS/" + rec.rec + ".mp4") }}" type="video/mp4">
-                    </video>
-                </div>
-            </div>
-        {% endfor %}
-    </div>
-
 {% endblock %}
 
 {% block script %}

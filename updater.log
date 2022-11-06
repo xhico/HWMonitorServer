@@ -7933,3 +7933,587 @@
 2022-11-06 15:29:54,561 [INFO] Copy staticFolder: js
 2022-11-06 15:29:55,391 [INFO] Restart Server
 2022-11-06 15:29:55,466 [INFO] {'message': 'success', 'option': 'restart'}
+2022-11-06 15:45:00,315 [INFO] ----------------------------------------------------
+2022-11-06 15:45:00,315 [INFO] Device: Y:\HWMonitorServer
+2022-11-06 15:45:00,340 [INFO] Remove baseFile: gunicorn_config.py
+2022-11-06 15:45:00,352 [INFO] Remove baseFile: log_gunicorn_access.txt
+2022-11-06 15:45:00,371 [INFO] Remove baseFile: log_gunicorn_error.txt
+2022-11-06 15:45:00,386 [INFO] Remove baseFile: server.py
+2022-11-06 15:45:00,400 [INFO] Remove baseFile: updater.py
+2022-11-06 15:45:00,414 [INFO] Copy mainFile: gunicorn_config.py
+2022-11-06 15:45:00,450 [INFO] Copy mainFile: server.py
+2022-11-06 15:45:00,489 [INFO] Copy mainFile: updater.py
+2022-11-06 15:45:00,571 [INFO] Remove mainFile: config.json
+2022-11-06 15:45:00,586 [INFO] Remove mainFile: config.py
+2022-11-06 15:45:00,597 [INFO] Remove mainFile: __init__.py
+2022-11-06 15:45:00,609 [INFO] Copy mainFile: config.json
+2022-11-06 15:45:00,653 [INFO] Copy mainFile: config.py
+2022-11-06 15:45:00,699 [INFO] Copy mainFile: __init__.py
+2022-11-06 15:45:00,747 [INFO] Remove subFolder: bots
+2022-11-06 15:45:00,866 [INFO] Remove subFolder: eye
+2022-11-06 15:45:00,976 [INFO] Remove subFolder: history
+2022-11-06 15:45:01,101 [INFO] Remove subFolder: main
+2022-11-06 15:45:01,235 [INFO] Remove subFolder: stats
+2022-11-06 15:45:01,380 [INFO] Remove subFolder: templates
+2022-11-06 15:45:01,545 [INFO] Remove subFolder: __pycache__
+2022-11-06 15:45:01,628 [INFO] Copy subFolder: bots
+2022-11-06 15:45:01,828 [INFO] Copy subFolder: eye
+2022-11-06 15:45:02,019 [INFO] Copy subFolder: history
+2022-11-06 15:45:02,318 [INFO] Copy subFolder: main
+2022-11-06 15:45:02,517 [INFO] Copy subFolder: stats
+2022-11-06 15:45:02,747 [INFO] Copy subFolder: templates
+2022-11-06 15:45:03,115 [INFO] Remove staticFolder: css
+2022-11-06 15:45:03,188 [INFO] Remove staticFolder: images
+2022-11-06 15:45:04,088 [INFO] Remove staticFolder: js
+2022-11-06 15:45:04,494 [INFO] Copy staticFolder: css
+2022-11-06 15:45:04,697 [INFO] Copy staticFolder: images
+2022-11-06 15:45:05,426 [INFO] Copy staticFolder: js
+2022-11-06 15:45:06,248 [INFO] Restart Server
+2022-11-06 15:45:06,360 [INFO] {'message': 'success', 'option': 'restart'}
+2022-11-06 15:45:06,361 [INFO] Device: X:\HWMonitorServer
+2022-11-06 15:45:06,381 [INFO] Remove baseFile: gunicorn_config.py
+2022-11-06 15:45:06,393 [INFO] Remove baseFile: log_gunicorn_access.txt
+2022-11-06 15:45:06,405 [INFO] Remove baseFile: log_gunicorn_error.txt
+2022-11-06 15:45:06,421 [INFO] Remove baseFile: server.py
+2022-11-06 15:45:06,430 [INFO] Remove baseFile: updater.py
+2022-11-06 15:45:06,440 [INFO] Copy mainFile: gunicorn_config.py
+2022-11-06 15:45:06,467 [INFO] Copy mainFile: server.py
+2022-11-06 15:45:06,501 [INFO] Copy mainFile: updater.py
+2022-11-06 15:45:06,558 [INFO] Remove mainFile: config.json
+2022-11-06 15:45:06,566 [INFO] Remove mainFile: config.py
+2022-11-06 15:45:06,576 [INFO] Remove mainFile: __init__.py
+2022-11-06 15:45:06,585 [INFO] Copy mainFile: config.json
+2022-11-06 15:45:06,622 [INFO] Copy mainFile: config.py
+2022-11-06 15:45:06,650 [INFO] Copy mainFile: __init__.py
+2022-11-06 15:45:06,683 [INFO] Remove subFolder: bots
+2022-11-06 15:45:06,778 [INFO] Remove subFolder: eye
+2022-11-06 15:45:06,879 [INFO] Remove subFolder: history
+2022-11-06 15:45:06,967 [INFO] Remove subFolder: main
+2022-11-06 15:45:07,043 [INFO] Remove subFolder: stats
+2022-11-06 15:45:07,144 [INFO] Remove subFolder: templates
+2022-11-06 15:45:07,203 [INFO] Remove subFolder: __pycache__
+2022-11-06 15:45:07,241 [INFO] Copy subFolder: bots
+2022-11-06 15:45:07,360 [INFO] Copy subFolder: eye
+2022-11-06 15:45:07,475 [INFO] Copy subFolder: history
+2022-11-06 15:45:07,638 [INFO] Copy subFolder: main
+2022-11-06 15:45:07,762 [INFO] Copy subFolder: stats
+2022-11-06 15:45:07,976 [INFO] Copy subFolder: templates
+2022-11-06 15:45:08,276 [INFO] Remove staticFolder: css
+2022-11-06 15:45:08,347 [INFO] Remove staticFolder: images
+2022-11-06 15:45:08,656 [INFO] Remove staticFolder: js
+2022-11-06 15:45:08,988 [INFO] Copy staticFolder: css
+2022-11-06 15:45:09,122 [INFO] Copy staticFolder: images
+2022-11-06 15:45:09,756 [INFO] Copy staticFolder: js
+2022-11-06 15:45:10,361 [INFO] Restart Server
+2022-11-06 15:45:11,291 [INFO] {'message': 'success', 'option': 'restart'}
+2022-11-06 16:28:44,027 [INFO] ----------------------------------------------------
+2022-11-06 16:28:44,027 [INFO] Device: Y:\HWMonitorServer
+2022-11-06 16:28:44,089 [INFO] Remove baseFile: gunicorn_config.py
+2022-11-06 16:28:44,107 [INFO] Remove baseFile: log_gunicorn_access.txt
+2022-11-06 16:28:44,125 [INFO] Remove baseFile: log_gunicorn_error.txt
+2022-11-06 16:28:44,138 [INFO] Remove baseFile: server.py
+2022-11-06 16:28:44,156 [INFO] Remove baseFile: updater.py
+2022-11-06 16:28:44,172 [INFO] Copy mainFile: gunicorn_config.py
+2022-11-06 16:28:44,260 [INFO] Copy mainFile: server.py
+2022-11-06 16:28:44,314 [INFO] Copy mainFile: updater.py
+2022-11-06 16:28:44,380 [INFO] Remove mainFile: config.json
+2022-11-06 16:28:44,399 [INFO] Remove mainFile: config.py
+2022-11-06 16:28:44,412 [INFO] Remove mainFile: __init__.py
+2022-11-06 16:28:44,426 [INFO] Copy mainFile: config.json
+2022-11-06 16:28:44,462 [INFO] Copy mainFile: config.py
+2022-11-06 16:28:44,523 [INFO] Copy mainFile: __init__.py
+2022-11-06 16:28:44,588 [INFO] Remove subFolder: bots
+2022-11-06 16:28:44,793 [INFO] Remove subFolder: eye
+2022-11-06 16:28:44,938 [INFO] Remove subFolder: history
+2022-11-06 16:28:45,071 [INFO] Remove subFolder: main
+2022-11-06 16:28:45,240 [INFO] Remove subFolder: stats
+2022-11-06 16:28:45,556 [INFO] Remove subFolder: templates
+2022-11-06 16:28:45,737 [INFO] Remove subFolder: __pycache__
+2022-11-06 16:28:45,839 [INFO] Copy subFolder: bots
+2022-11-06 16:28:46,019 [INFO] Copy subFolder: eye
+2022-11-06 16:28:46,160 [INFO] Copy subFolder: history
+2022-11-06 16:28:46,300 [INFO] Copy subFolder: main
+2022-11-06 16:28:46,413 [INFO] Copy subFolder: stats
+2022-11-06 16:28:46,575 [INFO] Copy subFolder: templates
+2022-11-06 16:28:46,963 [INFO] Remove staticFolder: css
+2022-11-06 16:28:47,029 [INFO] Remove staticFolder: images
+2022-11-06 16:28:47,340 [INFO] Remove staticFolder: js
+2022-11-06 16:28:47,685 [INFO] Copy staticFolder: css
+2022-11-06 16:28:47,911 [INFO] Copy staticFolder: images
+2022-11-06 16:28:48,522 [INFO] Copy staticFolder: js
+2022-11-06 16:28:49,165 [INFO] Restart Server
+2022-11-06 16:28:49,328 [INFO] {'message': 'success', 'option': 'restart'}
+2022-11-06 16:28:49,328 [INFO] Device: X:\HWMonitorServer
+2022-11-06 16:28:49,344 [INFO] Remove baseFile: gunicorn_config.py
+2022-11-06 16:28:49,356 [INFO] Remove baseFile: log_gunicorn_access.txt
+2022-11-06 16:28:49,365 [INFO] Remove baseFile: log_gunicorn_error.txt
+2022-11-06 16:28:49,374 [INFO] Remove baseFile: server.py
+2022-11-06 16:28:49,384 [INFO] Remove baseFile: updater.py
+2022-11-06 16:28:49,395 [INFO] Copy mainFile: gunicorn_config.py
+2022-11-06 16:28:49,420 [INFO] Copy mainFile: server.py
+2022-11-06 16:28:49,464 [INFO] Copy mainFile: updater.py
+2022-11-06 16:28:49,518 [INFO] Remove mainFile: config.json
+2022-11-06 16:28:49,526 [INFO] Remove mainFile: config.py
+2022-11-06 16:28:49,535 [INFO] Remove mainFile: __init__.py
+2022-11-06 16:28:49,545 [INFO] Copy mainFile: config.json
+2022-11-06 16:28:49,568 [INFO] Copy mainFile: config.py
+2022-11-06 16:28:49,598 [INFO] Copy mainFile: __init__.py
+2022-11-06 16:28:49,635 [INFO] Remove subFolder: bots
+2022-11-06 16:28:49,732 [INFO] Remove subFolder: eye
+2022-11-06 16:28:49,818 [INFO] Remove subFolder: history
+2022-11-06 16:28:49,901 [INFO] Remove subFolder: main
+2022-11-06 16:28:49,969 [INFO] Remove subFolder: stats
+2022-11-06 16:28:50,060 [INFO] Remove subFolder: templates
+2022-11-06 16:28:50,132 [INFO] Remove subFolder: __pycache__
+2022-11-06 16:28:50,173 [INFO] Copy subFolder: bots
+2022-11-06 16:28:50,276 [INFO] Copy subFolder: eye
+2022-11-06 16:28:50,383 [INFO] Copy subFolder: history
+2022-11-06 16:28:50,525 [INFO] Copy subFolder: main
+2022-11-06 16:28:50,628 [INFO] Copy subFolder: stats
+2022-11-06 16:28:50,784 [INFO] Copy subFolder: templates
+2022-11-06 16:28:51,099 [INFO] Remove staticFolder: css
+2022-11-06 16:28:51,163 [INFO] Remove staticFolder: images
+2022-11-06 16:28:51,462 [INFO] Remove staticFolder: js
+2022-11-06 16:28:51,766 [INFO] Copy staticFolder: css
+2022-11-06 16:28:51,878 [INFO] Copy staticFolder: images
+2022-11-06 16:28:52,253 [INFO] Copy staticFolder: js
+2022-11-06 16:28:52,821 [INFO] Restart Server
+2022-11-06 16:28:55,396 [INFO] {'message': 'success', 'option': 'restart'}
+2022-11-06 16:29:12,602 [INFO] ----------------------------------------------------
+2022-11-06 16:29:12,602 [INFO] Device: Y:\HWMonitorServer
+2022-11-06 16:29:12,633 [INFO] Remove baseFile: gunicorn_config.py
+2022-11-06 16:29:12,655 [INFO] Remove baseFile: log_gunicorn_access.txt
+2022-11-06 16:29:12,668 [INFO] Remove baseFile: log_gunicorn_error.txt
+2022-11-06 16:29:12,685 [INFO] Remove baseFile: server.py
+2022-11-06 16:29:12,696 [INFO] Remove baseFile: updater.py
+2022-11-06 16:29:12,708 [INFO] Copy mainFile: gunicorn_config.py
+2022-11-06 16:29:12,760 [INFO] Copy mainFile: server.py
+2022-11-06 16:29:12,796 [INFO] Copy mainFile: updater.py
+2022-11-06 16:29:12,863 [INFO] Remove mainFile: config.json
+2022-11-06 16:29:12,877 [INFO] Remove mainFile: config.py
+2022-11-06 16:29:12,890 [INFO] Remove mainFile: __init__.py
+2022-11-06 16:29:12,902 [INFO] Copy mainFile: config.json
+2022-11-06 16:29:12,954 [INFO] Copy mainFile: config.py
+2022-11-06 16:29:13,006 [INFO] Copy mainFile: __init__.py
+2022-11-06 16:29:13,099 [INFO] Remove subFolder: bots
+2022-11-06 16:29:13,258 [INFO] Remove subFolder: eye
+2022-11-06 16:29:13,387 [INFO] Remove subFolder: history
+2022-11-06 16:29:13,517 [INFO] Remove subFolder: main
+2022-11-06 16:29:13,627 [INFO] Remove subFolder: stats
+2022-11-06 16:29:13,997 [INFO] Remove subFolder: templates
+2022-11-06 16:29:14,297 [INFO] Remove subFolder: __pycache__
+2022-11-06 16:29:14,442 [INFO] Copy subFolder: bots
+2022-11-06 16:29:14,656 [INFO] Copy subFolder: eye
+2022-11-06 16:29:14,890 [INFO] Copy subFolder: history
+2022-11-06 16:29:15,105 [INFO] Copy subFolder: main
+2022-11-06 16:29:15,268 [INFO] Copy subFolder: stats
+2022-11-06 16:29:15,574 [INFO] Copy subFolder: templates
+2022-11-06 16:29:16,026 [INFO] Remove staticFolder: css
+2022-11-06 16:29:16,122 [INFO] Remove staticFolder: images
+2022-11-06 16:29:16,656 [INFO] Remove staticFolder: js
+2022-11-06 16:29:17,198 [INFO] Copy staticFolder: css
+2022-11-06 16:29:17,380 [INFO] Copy staticFolder: images
+2022-11-06 16:29:18,288 [INFO] Copy staticFolder: js
+2022-11-06 16:29:19,188 [INFO] Restart Server
+2022-11-06 16:29:19,247 [INFO] {'message': 'success', 'option': 'restart'}
+2022-11-06 16:29:19,247 [INFO] Device: X:\HWMonitorServer
+2022-11-06 16:29:19,265 [INFO] Remove baseFile: gunicorn_config.py
+2022-11-06 16:29:19,276 [INFO] Remove baseFile: log_gunicorn_access.txt
+2022-11-06 16:29:19,285 [INFO] Remove baseFile: log_gunicorn_error.txt
+2022-11-06 16:29:19,294 [INFO] Remove baseFile: server.py
+2022-11-06 16:29:19,303 [INFO] Remove baseFile: updater.py
+2022-11-06 16:29:19,312 [INFO] Copy mainFile: gunicorn_config.py
+2022-11-06 16:29:19,336 [INFO] Copy mainFile: server.py
+2022-11-06 16:29:19,361 [INFO] Copy mainFile: updater.py
+2022-11-06 16:29:19,401 [INFO] Remove mainFile: config.json
+2022-11-06 16:29:19,409 [INFO] Remove mainFile: config.py
+2022-11-06 16:29:19,419 [INFO] Remove mainFile: __init__.py
+2022-11-06 16:29:19,433 [INFO] Copy mainFile: config.json
+2022-11-06 16:29:19,462 [INFO] Copy mainFile: config.py
+2022-11-06 16:29:19,489 [INFO] Copy mainFile: __init__.py
+2022-11-06 16:29:19,537 [INFO] Remove subFolder: bots
+2022-11-06 16:29:19,626 [INFO] Remove subFolder: eye
+2022-11-06 16:29:19,708 [INFO] Remove subFolder: history
+2022-11-06 16:29:19,786 [INFO] Remove subFolder: main
+2022-11-06 16:29:19,849 [INFO] Remove subFolder: stats
+2022-11-06 16:29:19,928 [INFO] Remove subFolder: templates
+2022-11-06 16:29:19,981 [INFO] Remove subFolder: __pycache__
+2022-11-06 16:29:20,015 [INFO] Copy subFolder: bots
+2022-11-06 16:29:20,122 [INFO] Copy subFolder: eye
+2022-11-06 16:29:20,238 [INFO] Copy subFolder: history
+2022-11-06 16:29:20,374 [INFO] Copy subFolder: main
+2022-11-06 16:29:20,471 [INFO] Copy subFolder: stats
+2022-11-06 16:29:20,642 [INFO] Copy subFolder: templates
+2022-11-06 16:29:21,093 [INFO] Remove staticFolder: css
+2022-11-06 16:29:21,209 [INFO] Remove staticFolder: images
+2022-11-06 16:29:21,719 [INFO] Remove staticFolder: js
+2022-11-06 16:29:22,419 [INFO] Copy staticFolder: css
+2022-11-06 16:29:22,636 [INFO] Copy staticFolder: images
+2022-11-06 16:29:23,394 [INFO] Copy staticFolder: js
+2022-11-06 16:29:24,277 [INFO] Restart Server
+2022-11-06 16:29:24,394 [INFO] {'message': 'success', 'option': 'restart'}
+2022-11-06 16:30:40,823 [INFO] ----------------------------------------------------
+2022-11-06 16:30:40,823 [INFO] Device: Y:\HWMonitorServer
+2022-11-06 16:30:40,847 [INFO] Remove baseFile: gunicorn_config.py
+2022-11-06 16:30:40,861 [INFO] Remove baseFile: log_gunicorn_access.txt
+2022-11-06 16:30:40,878 [INFO] Remove baseFile: log_gunicorn_error.txt
+2022-11-06 16:30:40,894 [INFO] Remove baseFile: server.py
+2022-11-06 16:30:40,916 [INFO] Remove baseFile: updater.py
+2022-11-06 16:30:40,933 [INFO] Copy mainFile: gunicorn_config.py
+2022-11-06 16:30:40,975 [INFO] Copy mainFile: server.py
+2022-11-06 16:30:41,032 [INFO] Copy mainFile: updater.py
+2022-11-06 16:30:41,099 [INFO] Remove mainFile: config.json
+2022-11-06 16:30:41,118 [INFO] Remove mainFile: config.py
+2022-11-06 16:30:41,136 [INFO] Remove mainFile: __init__.py
+2022-11-06 16:30:41,150 [INFO] Copy mainFile: config.json
+2022-11-06 16:30:41,189 [INFO] Copy mainFile: config.py
+2022-11-06 16:30:41,246 [INFO] Copy mainFile: __init__.py
+2022-11-06 16:30:41,315 [INFO] Remove subFolder: bots
+2022-11-06 16:30:41,444 [INFO] Remove subFolder: eye
+2022-11-06 16:30:41,579 [INFO] Remove subFolder: history
+2022-11-06 16:30:41,721 [INFO] Remove subFolder: main
+2022-11-06 16:30:41,918 [INFO] Remove subFolder: stats
+2022-11-06 16:30:42,184 [INFO] Remove subFolder: templates
+2022-11-06 16:30:42,390 [INFO] Remove subFolder: __pycache__
+2022-11-06 16:30:42,471 [INFO] Copy subFolder: bots
+2022-11-06 16:30:42,670 [INFO] Copy subFolder: eye
+2022-11-06 16:30:42,893 [INFO] Copy subFolder: history
+2022-11-06 16:30:43,144 [INFO] Copy subFolder: main
+2022-11-06 16:30:43,328 [INFO] Copy subFolder: stats
+2022-11-06 16:30:43,762 [INFO] Copy subFolder: templates
+2022-11-06 16:30:44,430 [INFO] Remove staticFolder: css
+2022-11-06 16:30:44,551 [INFO] Remove staticFolder: images
+2022-11-06 16:30:44,966 [INFO] Remove staticFolder: js
+2022-11-06 16:30:45,412 [INFO] Copy staticFolder: css
+2022-11-06 16:30:45,716 [INFO] Copy staticFolder: images
+2022-11-06 16:30:46,598 [INFO] Copy staticFolder: js
+2022-11-06 16:30:47,830 [INFO] Restart Server
+2022-11-06 16:30:47,912 [INFO] {'message': 'success', 'option': 'restart'}
+2022-11-06 16:30:47,912 [INFO] Device: X:\HWMonitorServer
+2022-11-06 16:30:47,930 [INFO] Remove baseFile: gunicorn_config.py
+2022-11-06 16:30:47,940 [INFO] Remove baseFile: log_gunicorn_access.txt
+2022-11-06 16:30:47,949 [INFO] Remove baseFile: log_gunicorn_error.txt
+2022-11-06 16:30:47,960 [INFO] Remove baseFile: server.py
+2022-11-06 16:30:47,971 [INFO] Remove baseFile: updater.py
+2022-11-06 16:30:47,981 [INFO] Copy mainFile: gunicorn_config.py
+2022-11-06 16:30:48,007 [INFO] Copy mainFile: server.py
+2022-11-06 16:30:48,037 [INFO] Copy mainFile: updater.py
+2022-11-06 16:30:48,076 [INFO] Remove mainFile: config.json
+2022-11-06 16:30:48,083 [INFO] Remove mainFile: config.py
+2022-11-06 16:30:48,091 [INFO] Remove mainFile: __init__.py
+2022-11-06 16:30:48,100 [INFO] Copy mainFile: config.json
+2022-11-06 16:30:48,130 [INFO] Copy mainFile: config.py
+2022-11-06 16:30:48,154 [INFO] Copy mainFile: __init__.py
+2022-11-06 16:30:48,191 [INFO] Remove subFolder: bots
+2022-11-06 16:30:48,295 [INFO] Remove subFolder: eye
+2022-11-06 16:30:48,384 [INFO] Remove subFolder: history
+2022-11-06 16:30:48,464 [INFO] Remove subFolder: main
+2022-11-06 16:30:48,539 [INFO] Remove subFolder: stats
+2022-11-06 16:30:48,625 [INFO] Remove subFolder: templates
+2022-11-06 16:30:48,680 [INFO] Remove subFolder: __pycache__
+2022-11-06 16:30:48,716 [INFO] Copy subFolder: bots
+2022-11-06 16:30:48,813 [INFO] Copy subFolder: eye
+2022-11-06 16:30:48,904 [INFO] Copy subFolder: history
+2022-11-06 16:30:48,997 [INFO] Copy subFolder: main
+2022-11-06 16:30:49,066 [INFO] Copy subFolder: stats
+2022-11-06 16:30:49,164 [INFO] Copy subFolder: templates
+2022-11-06 16:30:49,341 [INFO] Remove staticFolder: css
+2022-11-06 16:30:49,372 [INFO] Remove staticFolder: images
+2022-11-06 16:30:49,625 [INFO] Remove staticFolder: js
+2022-11-06 16:30:49,986 [INFO] Copy staticFolder: css
+2022-11-06 16:30:50,149 [INFO] Copy staticFolder: images
+2022-11-06 16:30:50,987 [INFO] Copy staticFolder: js
+2022-11-06 16:30:51,833 [INFO] Restart Server
+2022-11-06 16:30:51,938 [INFO] {'message': 'success', 'option': 'restart'}
+2022-11-06 16:31:51,760 [INFO] ----------------------------------------------------
+2022-11-06 16:31:51,761 [INFO] Device: Y:\HWMonitorServer
+2022-11-06 16:31:51,785 [INFO] Remove baseFile: gunicorn_config.py
+2022-11-06 16:31:51,796 [INFO] Remove baseFile: log_gunicorn_access.txt
+2022-11-06 16:31:51,806 [INFO] Remove baseFile: log_gunicorn_error.txt
+2022-11-06 16:31:51,816 [INFO] Remove baseFile: server.py
+2022-11-06 16:31:51,829 [INFO] Remove baseFile: updater.py
+2022-11-06 16:31:51,841 [INFO] Copy mainFile: gunicorn_config.py
+2022-11-06 16:31:51,892 [INFO] Copy mainFile: server.py
+2022-11-06 16:31:51,955 [INFO] Copy mainFile: updater.py
+2022-11-06 16:31:52,038 [INFO] Remove mainFile: config.json
+2022-11-06 16:31:52,057 [INFO] Remove mainFile: config.py
+2022-11-06 16:31:52,080 [INFO] Remove mainFile: __init__.py
+2022-11-06 16:31:52,097 [INFO] Copy mainFile: config.json
+2022-11-06 16:31:52,143 [INFO] Copy mainFile: config.py
+2022-11-06 16:31:52,186 [INFO] Copy mainFile: __init__.py
+2022-11-06 16:31:52,239 [INFO] Remove subFolder: bots
+2022-11-06 16:31:52,380 [INFO] Remove subFolder: eye
+2022-11-06 16:31:52,558 [INFO] Remove subFolder: history
+2022-11-06 16:31:52,726 [INFO] Remove subFolder: main
+2022-11-06 16:31:52,876 [INFO] Remove subFolder: stats
+2022-11-06 16:31:53,132 [INFO] Remove subFolder: templates
+2022-11-06 16:31:53,307 [INFO] Remove subFolder: __pycache__
+2022-11-06 16:31:53,421 [INFO] Copy subFolder: bots
+2022-11-06 16:31:53,632 [INFO] Copy subFolder: eye
+2022-11-06 16:31:53,830 [INFO] Copy subFolder: history
+2022-11-06 16:31:54,067 [INFO] Copy subFolder: main
+2022-11-06 16:31:54,269 [INFO] Copy subFolder: stats
+2022-11-06 16:31:54,523 [INFO] Copy subFolder: templates
+2022-11-06 16:31:54,919 [INFO] Remove staticFolder: css
+2022-11-06 16:31:55,068 [INFO] Remove staticFolder: images
+2022-11-06 16:31:55,550 [INFO] Remove staticFolder: js
+2022-11-06 16:31:55,997 [INFO] Copy staticFolder: css
+2022-11-06 16:31:56,194 [INFO] Copy staticFolder: images
+2022-11-06 16:31:57,008 [INFO] Copy staticFolder: js
+2022-11-06 16:31:57,963 [INFO] Restart Server
+2022-11-06 16:31:58,085 [INFO] {'message': 'success', 'option': 'restart'}
+2022-11-06 16:31:58,086 [INFO] Device: X:\HWMonitorServer
+2022-11-06 16:31:58,105 [INFO] Remove baseFile: gunicorn_config.py
+2022-11-06 16:31:58,123 [INFO] Remove baseFile: log_gunicorn_access.txt
+2022-11-06 16:31:58,132 [INFO] Remove baseFile: log_gunicorn_error.txt
+2022-11-06 16:31:58,143 [INFO] Remove baseFile: server.py
+2022-11-06 16:31:58,152 [INFO] Remove baseFile: updater.py
+2022-11-06 16:31:58,162 [INFO] Copy mainFile: gunicorn_config.py
+2022-11-06 16:31:58,188 [INFO] Copy mainFile: server.py
+2022-11-06 16:31:58,219 [INFO] Copy mainFile: updater.py
+2022-11-06 16:31:58,259 [INFO] Remove mainFile: config.json
+2022-11-06 16:31:58,268 [INFO] Remove mainFile: config.py
+2022-11-06 16:31:58,277 [INFO] Remove mainFile: __init__.py
+2022-11-06 16:31:58,286 [INFO] Copy mainFile: config.json
+2022-11-06 16:31:58,317 [INFO] Copy mainFile: config.py
+2022-11-06 16:31:58,344 [INFO] Copy mainFile: __init__.py
+2022-11-06 16:31:58,377 [INFO] Remove subFolder: bots
+2022-11-06 16:31:58,531 [INFO] Remove subFolder: eye
+2022-11-06 16:31:58,614 [INFO] Remove subFolder: history
+2022-11-06 16:31:58,701 [INFO] Remove subFolder: main
+2022-11-06 16:31:58,767 [INFO] Remove subFolder: stats
+2022-11-06 16:31:58,900 [INFO] Remove subFolder: templates
+2022-11-06 16:31:58,962 [INFO] Remove subFolder: __pycache__
+2022-11-06 16:31:58,989 [INFO] Copy subFolder: bots
+2022-11-06 16:31:59,075 [INFO] Copy subFolder: eye
+2022-11-06 16:31:59,164 [INFO] Copy subFolder: history
+2022-11-06 16:31:59,249 [INFO] Copy subFolder: main
+2022-11-06 16:31:59,313 [INFO] Copy subFolder: stats
+2022-11-06 16:31:59,404 [INFO] Copy subFolder: templates
+2022-11-06 16:31:59,587 [INFO] Remove staticFolder: css
+2022-11-06 16:31:59,615 [INFO] Remove staticFolder: images
+2022-11-06 16:31:59,745 [INFO] Remove staticFolder: js
+2022-11-06 16:31:59,938 [INFO] Copy staticFolder: css
+2022-11-06 16:32:00,119 [INFO] Copy staticFolder: images
+2022-11-06 16:32:00,829 [INFO] Copy staticFolder: js
+2022-11-06 16:32:01,798 [INFO] Restart Server
+2022-11-06 16:32:01,897 [INFO] {'message': 'success', 'option': 'restart'}
+2022-11-06 16:33:33,939 [INFO] ----------------------------------------------------
+2022-11-06 16:33:33,940 [INFO] Device: Y:\HWMonitorServer
+2022-11-06 16:33:33,973 [INFO] Remove baseFile: gunicorn_config.py
+2022-11-06 16:33:33,987 [INFO] Remove baseFile: log_gunicorn_access.txt
+2022-11-06 16:33:34,001 [INFO] Remove baseFile: log_gunicorn_error.txt
+2022-11-06 16:33:34,015 [INFO] Remove baseFile: server.py
+2022-11-06 16:33:34,032 [INFO] Remove baseFile: updater.py
+2022-11-06 16:33:34,048 [INFO] Copy mainFile: gunicorn_config.py
+2022-11-06 16:33:34,089 [INFO] Copy mainFile: server.py
+2022-11-06 16:33:34,148 [INFO] Copy mainFile: updater.py
+2022-11-06 16:33:34,228 [INFO] Remove mainFile: config.json
+2022-11-06 16:33:34,241 [INFO] Remove mainFile: config.py
+2022-11-06 16:33:34,257 [INFO] Remove mainFile: __init__.py
+2022-11-06 16:33:34,275 [INFO] Copy mainFile: config.json
+2022-11-06 16:33:34,320 [INFO] Copy mainFile: config.py
+2022-11-06 16:33:34,378 [INFO] Copy mainFile: __init__.py
+2022-11-06 16:33:34,461 [INFO] Remove subFolder: bots
+2022-11-06 16:33:34,618 [INFO] Remove subFolder: eye
+2022-11-06 16:33:34,738 [INFO] Remove subFolder: history
+2022-11-06 16:33:34,858 [INFO] Remove subFolder: main
+2022-11-06 16:33:34,969 [INFO] Remove subFolder: stats
+2022-11-06 16:33:35,347 [INFO] Remove subFolder: templates
+2022-11-06 16:33:35,678 [INFO] Remove subFolder: __pycache__
+2022-11-06 16:33:35,793 [INFO] Copy subFolder: bots
+2022-11-06 16:33:36,022 [INFO] Copy subFolder: eye
+2022-11-06 16:33:36,228 [INFO] Copy subFolder: history
+2022-11-06 16:33:36,488 [INFO] Copy subFolder: main
+2022-11-06 16:33:36,642 [INFO] Copy subFolder: stats
+2022-11-06 16:33:36,884 [INFO] Copy subFolder: templates
+2022-11-06 16:33:37,313 [INFO] Remove staticFolder: css
+2022-11-06 16:33:37,407 [INFO] Remove staticFolder: images
+2022-11-06 16:33:37,916 [INFO] Remove staticFolder: js
+2022-11-06 16:33:38,429 [INFO] Copy staticFolder: css
+2022-11-06 16:33:38,668 [INFO] Copy staticFolder: images
+2022-11-06 16:33:39,631 [INFO] Copy staticFolder: js
+2022-11-06 16:33:40,640 [INFO] Restart Server
+2022-11-06 16:33:40,709 [INFO] {'message': 'success', 'option': 'restart'}
+2022-11-06 16:33:40,715 [INFO] Device: X:\HWMonitorServer
+2022-11-06 16:33:40,731 [INFO] Remove baseFile: gunicorn_config.py
+2022-11-06 16:33:40,744 [INFO] Remove baseFile: log_gunicorn_access.txt
+2022-11-06 16:33:40,761 [INFO] Remove baseFile: log_gunicorn_error.txt
+2022-11-06 16:33:40,774 [INFO] Remove baseFile: server.py
+2022-11-06 16:33:40,784 [INFO] Remove baseFile: updater.py
+2022-11-06 16:33:40,795 [INFO] Copy mainFile: gunicorn_config.py
+2022-11-06 16:33:40,864 [INFO] Copy mainFile: server.py
+2022-11-06 16:33:40,901 [INFO] Copy mainFile: updater.py
+2022-11-06 16:33:40,960 [INFO] Remove mainFile: config.json
+2022-11-06 16:33:40,970 [INFO] Remove mainFile: config.py
+2022-11-06 16:33:40,979 [INFO] Remove mainFile: __init__.py
+2022-11-06 16:33:40,987 [INFO] Copy mainFile: config.json
+2022-11-06 16:33:41,016 [INFO] Copy mainFile: config.py
+2022-11-06 16:33:41,044 [INFO] Copy mainFile: __init__.py
+2022-11-06 16:33:41,080 [INFO] Remove subFolder: bots
+2022-11-06 16:33:41,167 [INFO] Remove subFolder: eye
+2022-11-06 16:33:41,266 [INFO] Remove subFolder: history
+2022-11-06 16:33:41,353 [INFO] Remove subFolder: main
+2022-11-06 16:33:41,415 [INFO] Remove subFolder: stats
+2022-11-06 16:33:41,501 [INFO] Remove subFolder: templates
+2022-11-06 16:33:41,572 [INFO] Remove subFolder: __pycache__
+2022-11-06 16:33:41,604 [INFO] Copy subFolder: bots
+2022-11-06 16:33:41,699 [INFO] Copy subFolder: eye
+2022-11-06 16:33:41,813 [INFO] Copy subFolder: history
+2022-11-06 16:33:41,915 [INFO] Copy subFolder: main
+2022-11-06 16:33:41,987 [INFO] Copy subFolder: stats
+2022-11-06 16:33:42,086 [INFO] Copy subFolder: templates
+2022-11-06 16:33:42,254 [INFO] Remove staticFolder: css
+2022-11-06 16:33:42,287 [INFO] Remove staticFolder: images
+2022-11-06 16:33:42,414 [INFO] Remove staticFolder: js
+2022-11-06 16:33:42,656 [INFO] Copy staticFolder: css
+2022-11-06 16:33:42,810 [INFO] Copy staticFolder: images
+2022-11-06 16:33:43,545 [INFO] Copy staticFolder: js
+2022-11-06 16:33:44,409 [INFO] Restart Server
+2022-11-06 16:33:44,537 [INFO] {'message': 'success', 'option': 'restart'}
+2022-11-06 16:33:56,496 [INFO] ----------------------------------------------------
+2022-11-06 16:33:56,496 [INFO] Device: Y:\HWMonitorServer
+2022-11-06 16:33:56,527 [INFO] Remove baseFile: gunicorn_config.py
+2022-11-06 16:33:56,538 [INFO] Remove baseFile: log_gunicorn_access.txt
+2022-11-06 16:33:56,550 [INFO] Remove baseFile: log_gunicorn_error.txt
+2022-11-06 16:33:56,561 [INFO] Remove baseFile: server.py
+2022-11-06 16:33:56,575 [INFO] Remove baseFile: updater.py
+2022-11-06 16:33:56,603 [INFO] Copy mainFile: gunicorn_config.py
+2022-11-06 16:33:56,702 [INFO] Copy mainFile: server.py
+2022-11-06 16:33:56,763 [INFO] Copy mainFile: updater.py
+2022-11-06 16:33:56,814 [INFO] Remove mainFile: config.json
+2022-11-06 16:33:56,825 [INFO] Remove mainFile: config.py
+2022-11-06 16:33:56,835 [INFO] Remove mainFile: __init__.py
+2022-11-06 16:33:56,846 [INFO] Copy mainFile: config.json
+2022-11-06 16:33:56,879 [INFO] Copy mainFile: config.py
+2022-11-06 16:33:56,915 [INFO] Copy mainFile: __init__.py
+2022-11-06 16:33:56,977 [INFO] Remove subFolder: bots
+2022-11-06 16:33:57,105 [INFO] Remove subFolder: eye
+2022-11-06 16:33:57,212 [INFO] Remove subFolder: history
+2022-11-06 16:33:57,349 [INFO] Remove subFolder: main
+2022-11-06 16:33:57,503 [INFO] Remove subFolder: stats
+2022-11-06 16:33:57,855 [INFO] Remove subFolder: templates
+2022-11-06 16:33:58,090 [INFO] Remove subFolder: __pycache__
+2022-11-06 16:33:58,187 [INFO] Copy subFolder: bots
+2022-11-06 16:33:58,387 [INFO] Copy subFolder: eye
+2022-11-06 16:33:58,620 [INFO] Copy subFolder: history
+2022-11-06 16:33:58,817 [INFO] Copy subFolder: main
+2022-11-06 16:33:58,989 [INFO] Copy subFolder: stats
+2022-11-06 16:33:59,269 [INFO] Copy subFolder: templates
+2022-11-06 16:33:59,747 [INFO] Remove staticFolder: css
+2022-11-06 16:33:59,870 [INFO] Remove staticFolder: images
+2022-11-06 16:34:00,336 [INFO] Remove staticFolder: js
+2022-11-06 16:34:00,772 [INFO] Copy staticFolder: css
+2022-11-06 16:34:00,970 [INFO] Copy staticFolder: images
+2022-11-06 16:34:01,750 [INFO] Copy staticFolder: js
+2022-11-06 16:34:02,883 [INFO] Restart Server
+2022-11-06 16:34:02,953 [INFO] {'message': 'success', 'option': 'restart'}
+2022-11-06 16:34:02,953 [INFO] Device: X:\HWMonitorServer
+2022-11-06 16:34:02,969 [INFO] Remove baseFile: gunicorn_config.py
+2022-11-06 16:34:02,979 [INFO] Remove baseFile: log_gunicorn_access.txt
+2022-11-06 16:34:02,988 [INFO] Remove baseFile: log_gunicorn_error.txt
+2022-11-06 16:34:02,997 [INFO] Remove baseFile: server.py
+2022-11-06 16:34:03,006 [INFO] Remove baseFile: updater.py
+2022-11-06 16:34:03,017 [INFO] Copy mainFile: gunicorn_config.py
+2022-11-06 16:34:03,046 [INFO] Copy mainFile: server.py
+2022-11-06 16:34:03,080 [INFO] Copy mainFile: updater.py
+2022-11-06 16:34:03,127 [INFO] Remove mainFile: config.json
+2022-11-06 16:34:03,136 [INFO] Remove mainFile: config.py
+2022-11-06 16:34:03,149 [INFO] Remove mainFile: __init__.py
+2022-11-06 16:34:03,161 [INFO] Copy mainFile: config.json
+2022-11-06 16:34:03,190 [INFO] Copy mainFile: config.py
+2022-11-06 16:34:03,221 [INFO] Copy mainFile: __init__.py
+2022-11-06 16:34:03,259 [INFO] Remove subFolder: bots
+2022-11-06 16:34:03,360 [INFO] Remove subFolder: eye
+2022-11-06 16:34:03,456 [INFO] Remove subFolder: history
+2022-11-06 16:34:03,535 [INFO] Remove subFolder: main
+2022-11-06 16:34:03,601 [INFO] Remove subFolder: stats
+2022-11-06 16:34:03,686 [INFO] Remove subFolder: templates
+2022-11-06 16:34:03,753 [INFO] Remove subFolder: __pycache__
+2022-11-06 16:34:03,790 [INFO] Copy subFolder: bots
+2022-11-06 16:34:03,912 [INFO] Copy subFolder: eye
+2022-11-06 16:34:04,027 [INFO] Copy subFolder: history
+2022-11-06 16:34:04,157 [INFO] Copy subFolder: main
+2022-11-06 16:34:04,255 [INFO] Copy subFolder: stats
+2022-11-06 16:34:04,394 [INFO] Copy subFolder: templates
+2022-11-06 16:34:04,651 [INFO] Remove staticFolder: css
+2022-11-06 16:34:04,796 [INFO] Remove staticFolder: images
+2022-11-06 16:34:04,994 [INFO] Remove staticFolder: js
+2022-11-06 16:34:05,181 [INFO] Copy staticFolder: css
+2022-11-06 16:34:05,274 [INFO] Copy staticFolder: images
+2022-11-06 16:34:06,093 [INFO] Copy staticFolder: js
+2022-11-06 16:34:07,091 [INFO] Restart Server
+2022-11-06 16:34:10,387 [INFO] {'message': 'success', 'option': 'restart'}
+2022-11-06 16:34:37,280 [INFO] ----------------------------------------------------
+2022-11-06 16:34:37,281 [INFO] Device: Y:\HWMonitorServer
+2022-11-06 16:34:37,303 [INFO] Remove baseFile: gunicorn_config.py
+2022-11-06 16:34:37,317 [INFO] Remove baseFile: log_gunicorn_access.txt
+2022-11-06 16:34:37,330 [INFO] Remove baseFile: log_gunicorn_error.txt
+2022-11-06 16:34:37,347 [INFO] Remove baseFile: server.py
+2022-11-06 16:34:37,359 [INFO] Remove baseFile: updater.py
+2022-11-06 16:34:37,377 [INFO] Copy mainFile: gunicorn_config.py
+2022-11-06 16:34:37,416 [INFO] Copy mainFile: server.py
+2022-11-06 16:34:37,455 [INFO] Copy mainFile: updater.py
+2022-11-06 16:34:37,554 [INFO] Remove mainFile: config.json
+2022-11-06 16:34:37,574 [INFO] Remove mainFile: config.py
+2022-11-06 16:34:37,595 [INFO] Remove mainFile: __init__.py
+2022-11-06 16:34:37,615 [INFO] Copy mainFile: config.json
+2022-11-06 16:34:37,659 [INFO] Copy mainFile: config.py
+2022-11-06 16:34:37,723 [INFO] Copy mainFile: __init__.py
+2022-11-06 16:34:37,808 [INFO] Remove subFolder: bots
+2022-11-06 16:34:37,989 [INFO] Remove subFolder: eye
+2022-11-06 16:34:38,131 [INFO] Remove subFolder: history
+2022-11-06 16:34:38,275 [INFO] Remove subFolder: main
+2022-11-06 16:34:38,447 [INFO] Remove subFolder: stats
+2022-11-06 16:34:38,794 [INFO] Remove subFolder: templates
+2022-11-06 16:34:39,048 [INFO] Remove subFolder: __pycache__
+2022-11-06 16:34:39,203 [INFO] Copy subFolder: bots
+2022-11-06 16:34:39,536 [INFO] Copy subFolder: eye
+2022-11-06 16:34:39,772 [INFO] Copy subFolder: history
+2022-11-06 16:34:40,036 [INFO] Copy subFolder: main
+2022-11-06 16:34:40,272 [INFO] Copy subFolder: stats
+2022-11-06 16:34:40,550 [INFO] Copy subFolder: templates
+2022-11-06 16:34:41,126 [INFO] Remove staticFolder: css
+2022-11-06 16:34:41,240 [INFO] Remove staticFolder: images
+2022-11-06 16:34:41,699 [INFO] Remove staticFolder: js
+2022-11-06 16:34:42,114 [INFO] Copy staticFolder: css
+2022-11-06 16:34:42,309 [INFO] Copy staticFolder: images
+2022-11-06 16:34:43,124 [INFO] Copy staticFolder: js
+2022-11-06 16:34:44,026 [INFO] Restart Server
+2022-11-06 16:34:44,102 [INFO] {'message': 'success', 'option': 'restart'}
+2022-11-06 16:34:44,102 [INFO] Device: X:\HWMonitorServer
+2022-11-06 16:34:44,121 [INFO] Remove baseFile: gunicorn_config.py
+2022-11-06 16:34:44,138 [INFO] Remove baseFile: log_gunicorn_access.txt
+2022-11-06 16:34:44,152 [INFO] Remove baseFile: log_gunicorn_error.txt
+2022-11-06 16:34:44,161 [INFO] Remove baseFile: server.py
+2022-11-06 16:34:44,173 [INFO] Remove baseFile: updater.py
+2022-11-06 16:34:44,184 [INFO] Copy mainFile: gunicorn_config.py
+2022-11-06 16:34:44,216 [INFO] Copy mainFile: server.py
+2022-11-06 16:34:44,243 [INFO] Copy mainFile: updater.py
+2022-11-06 16:34:44,281 [INFO] Remove mainFile: config.json
+2022-11-06 16:34:44,289 [INFO] Remove mainFile: config.py
+2022-11-06 16:34:44,297 [INFO] Remove mainFile: __init__.py
+2022-11-06 16:34:44,310 [INFO] Copy mainFile: config.json
+2022-11-06 16:34:44,333 [INFO] Copy mainFile: config.py
+2022-11-06 16:34:44,359 [INFO] Copy mainFile: __init__.py
+2022-11-06 16:34:44,393 [INFO] Remove subFolder: bots
+2022-11-06 16:34:44,474 [INFO] Remove subFolder: eye
+2022-11-06 16:34:44,581 [INFO] Remove subFolder: history
+2022-11-06 16:34:44,671 [INFO] Remove subFolder: main
+2022-11-06 16:34:44,756 [INFO] Remove subFolder: stats
+2022-11-06 16:34:44,846 [INFO] Remove subFolder: templates
+2022-11-06 16:34:44,926 [INFO] Remove subFolder: __pycache__
+2022-11-06 16:34:44,964 [INFO] Copy subFolder: bots
+2022-11-06 16:34:45,069 [INFO] Copy subFolder: eye
+2022-11-06 16:34:45,179 [INFO] Copy subFolder: history
+2022-11-06 16:34:45,277 [INFO] Copy subFolder: main
+2022-11-06 16:34:45,367 [INFO] Copy subFolder: stats
+2022-11-06 16:34:45,478 [INFO] Copy subFolder: templates
+2022-11-06 16:34:45,664 [INFO] Remove staticFolder: css
+2022-11-06 16:34:45,705 [INFO] Remove staticFolder: images
+2022-11-06 16:34:46,011 [INFO] Remove staticFolder: js
+2022-11-06 16:34:46,446 [INFO] Copy staticFolder: css
+2022-11-06 16:34:46,673 [INFO] Copy staticFolder: images
+2022-11-06 16:34:47,388 [INFO] Copy staticFolder: js
+2022-11-06 16:34:48,227 [INFO] Restart Server
+2022-11-06 16:34:48,348 [INFO] {'message': 'success', 'option': 'restart'}

@@ -12,4 +12,4 @@ eye = Blueprint("eye", __name__)
 
 @eye.route("/eye")
 def index():
-    return render_template('eye.html', recInfo=models.getRecordings())
+    return render_template('eye.html')

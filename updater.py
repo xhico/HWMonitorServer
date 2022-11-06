@@ -5,6 +5,8 @@ import logging
 import os.path
 import shutil
 
+import requests
+
 if __name__ == '__main__':
     # Set Logging
     LOG_FILE = os.path.join(os.path.dirname(os.path.abspath(__file__)), os.path.abspath(__file__).replace(".py", ".log"))
@@ -85,5 +87,5 @@ if __name__ == '__main__':
 
         # Restart Server
         logger.info("Restart Server")
-        # r = requests.post(url="http://" + ipAddress + ":33377/main/power", data={"option": "restart"})
-        # logger.info(r.json())
+        r = requests.post(url="http://" + ipAddress + ":33377/main/power", data={"option": "restart"})
+        logger.info(r.json())

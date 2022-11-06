@@ -163,7 +163,7 @@ async function updateSections() {
     }
 
     // Remove Loading
-    await removeLoading()
+    await removeLoading();
 
     // Wait x secs -> Run again
     await sleep(config_updateTime);

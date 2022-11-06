@@ -138,7 +138,7 @@ async function loadConfig() {
 }
 
 async function removeLoading() {
-    document.getElementById("spinner").classList.remove("show");
+    document.getElementById("overlay").hidden = true;
 }
 
 async function updateNav() {

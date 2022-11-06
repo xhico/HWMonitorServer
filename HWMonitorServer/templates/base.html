@@ -130,8 +130,8 @@
 
 <!-- Begin page content -->
 <main class="container-fluid column-fluid flex-shrink-0">
-    <div id="spinner" class="show">
-        <img src="{{ url_for('static', filename='images/loading.gif') }}" alt="Loading Icon"/>
+    <div id="overlay">
+        <div class="spinner-grow text-danger" role="status"></div>
     </div>
     <div class="row" id="content">
         {% block content %}{% endblock %}

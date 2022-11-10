@@ -14,9 +14,9 @@ ServerName 127.0.0.1
 """
 
 
-sudo mv HWMonitorServer/HWMonitorServer.conf /etc/apache2/sites-available/
-sudo mv HWMonitorServer/HWMonitorServer.socket /etc/systemd/system/
-sudo mv HWMonitorServer/HWMonitorServer.service /etc/systemd/system/
+sudo mv /home/pi/HWMonitorServer/HWMonitorServer.conf /etc/apache2/sites-available/
+sudo mv /home/pi/HWMonitorServer/HWMonitorServer.socket /etc/systemd/system/
+sudo mv /home/pi/HWMonitorServer/HWMonitorServer.service /etc/systemd/system/
 
 
 sudo nano /etc/apache2/ports.conf

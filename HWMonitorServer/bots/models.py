@@ -3,7 +3,6 @@
 
 import datetime
 import os
-import socket
 import subprocess
 import psutil
 

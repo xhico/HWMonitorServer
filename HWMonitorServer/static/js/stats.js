@@ -88,7 +88,6 @@ async function getCPU(JSON) {
 
 async function getAmbientHumidityTemperature(JSON) {
     if (JSON["AmbientHumidityTemperature"]["hasInfo"] === "None") {
-        document.getElementById("AmbientSection").hidden = true;
         return;
     }
 
@@ -103,6 +102,7 @@ async function getAmbientHumidityTemperature(JSON) {
     document.getElementById("Ambient_TemperatureF").innerText = Ambient_TemperatureF + " °F";
     document.getElementById("Ambient_Humidity").innerText = Ambient_Humidity + " %";
     document.getElementById("Ambient_Valid").innerText = Ambient_Valid;
+    document.getElementById("AmbientSection").hidden = false;
 }
 
 async function getMemory(JSON) {
@@ -205,7 +205,6 @@ async function getWifi(JSON) {
 
 async function get918(JSON) {
     if (JSON["Disks"]["918"]["hasInfo"] === "None") {
-        document.getElementById("918Section").hidden = true;
         return;
     }
 
@@ -233,6 +232,7 @@ async function get918(JSON) {
     document.getElementById("Disks_918_Used").innerText = await convert_size(Disks_918_Used);
     document.getElementById("Disks_918_Free").innerText = await convert_size(Disks_918_Free);
     document.getElementById("Disks_918_Total").innerText = await convert_size(Disks_918_Total);
+    document.getElementById("918Section").hidden = false;
 }
 
 async function updateSections() {

@@ -6,9 +6,9 @@ async function action(value, name) {
     $.ajax({
         method: "post", url: "/bots/action", data: {value: value, name: name}, success: function (response) {
             if (response["action"] === "log") {
-                $('#botLogModal').modal('show');
                 document.getElementById("modalTitle").innerText = name;
                 document.getElementById("modalBodyText").innerText = decodeURI(response["info"]);
+                $('#botLogModal').modal('show');
             }
         }
     });

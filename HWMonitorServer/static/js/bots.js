@@ -11,7 +11,7 @@ async function action(value, name) {
     console.log(resp["status"]);
 
     // Show Notification
-    await showNotification("Bot", resp["message"], resp["status"])
+    await showNotification("Bot - " + name, resp["message"], resp["status"])
 
     // Show log if necessary
     if (resp["action"] === "log") {

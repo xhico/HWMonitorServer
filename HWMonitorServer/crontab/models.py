@@ -35,6 +35,6 @@ def saveCrontab(cronjobs):
 
         os.system("crontab -u pi " + crontabFile)
         os.remove(crontabFile)
-        return "success"
+        return "success", "Crontab saved successfully!"
     except Exception as ex:
-        return str(ex)
+        return "error", str(ex)

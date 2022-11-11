@@ -15,14 +15,18 @@ async function saveCrontab() {
     cronjobs = JSON.stringify(cronjobs);
 
     // Save Crontab Info
-    await $.ajax({
+    let resp = await $.ajax({
         method: "post", url: "/crontab/save", data: {"cronjobs": cronjobs}, success: function (data) {
             return data;
         }
     });
 
-    // Add Cronjobs
-    await getCronjobs();
+    if (resp["status"] === "success") {
+        await getCronjobs();
+    }
+
+    // Show Notification
+    await showNotification("Crontab", resp["msg"], resp["status"])
 }
 
 async function addJobElem(jobJob, jobStatus, jobId) {
@@ -97,16 +101,11 @@ async function getCronjobs() {
 }
 
 async function addJob() {
-    let addNewJobModalId = "#addJobModal";
-    if (!$(addNewJobModalId).is(':visible')) {
-        $(addNewJobModalId).modal("show");
-    } else {
-        $(addNewJobModalId).modal("hide");
-        let jobId = "job_" + document.getElementById("cronjobs").children.length;
-        let jobStatus = "enabled";
-        let jobJob = document.getElementById("addJobInput").value;
-        await addJobElem(jobJob, jobStatus, jobId);
-    }
+    let jobId = "job_" + document.getElementById("cronjobs").children.length;
+    let jobStatus = "enabled";
+    let jobJob = "0 */1 * * python3 /home/pi/example/example.py";
+    await addJobElem(jobJob, jobStatus, jobId);
+    document.getElementById("job_" + jobId).disabled = false;
 }
 
 window.addEventListener('DOMContentLoaded', async function main() {

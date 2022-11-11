@@ -26,6 +26,17 @@
 
 <body>
 
+<!-- Notification -->
+<div class="toast-container position-fixed bottom-0 end-0 p-3" style="z-index: 11">
+    <div id="notificationPopup" class="toast text-white" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-header">
+            <strong id="notificationTitle" class="me-auto"></strong>
+            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+        <div id="notificationMsg" class="toast-body"></div>
+    </div>
+</div>
+
 <!-- Config Modal -->
 <div class="modal fade" id="configModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="configLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-sm">

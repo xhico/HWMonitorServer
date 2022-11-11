@@ -141,6 +141,13 @@ async function removeLoading() {
     document.getElementById("overlay").hidden = true;
 }
 
+async function showNotification(title, message, type) {
+    document.getElementById("notificationTitle").innerText = title;
+    document.getElementById("notificationMsg").innerText = message;
+    document.getElementById("notificationPopup").classList.add((type === "success" ? "bg-success" : "bg-danger"))
+    $('#notificationPopup').toast('show');
+}
+
 async function updateNav() {
     // Get Date
     getDate();

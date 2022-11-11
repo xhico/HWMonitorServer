@@ -3,15 +3,22 @@
  */
 
 async function action(value, name) {
-    $.ajax({
-        method: "post", url: "/bots/action", data: {value: value, name: name}, success: function (response) {
-            if (response["action"] === "log") {
-                document.getElementById("modalTitle").innerText = name;
-                document.getElementById("modalBodyText").innerText = decodeURI(response["info"]);
-                $("#botLogModal").modal("show");
-            }
+    let resp = await $.ajax({
+        method: "post", url: "/bots/action", data: {value: value, name: name}, success: function (data) {
+            return data;
         }
     });
+    console.log(resp["status"]);
+
+    // Show Notification
+    await showNotification("Bot", resp["message"], resp["status"])
+
+    // Show log if necessary
+    if (resp["action"] === "log") {
+        document.getElementById("modalTitle").innerText = name;
+        document.getElementById("modalBodyText").innerText = decodeURI(resp["info"]);
+        $("#botLogModal").modal("show");
+    }
 }
 
 function createBot(name) {

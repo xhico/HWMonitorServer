@@ -26,14 +26,22 @@ def json_action():
     value = request.form.get('value', type=str)
     name = request.form.get('name', type=str)
 
-    info = ""
-    if value == "kill":
-        allBots = models.getBots()
-        pid = int(allBots[name]["info"]["pid"])
-        psutil.Process(pid).kill()
-    elif value == "run":
-        models.runBot(name)
-    elif value == "log":
-        info = models.getBotLog(name)
+    try:
+        if value == "kill":
+            allBots = models.getBots()
+            pid = int(allBots[name]["info"]["pid"])
+            psutil.Process(pid).kill()
+            resp = {"status": "success", "message": name + " killed successfully"}
+        elif value == "run":
+            models.runBot(name)
+            resp = {"status": "success", "message": "Running " + name}
+        elif value == "log":
+            info = models.getBotLog(name)
+            resp = {"status": "success", "message": "View Log successfully", "info": info}
+        else:
+            resp = {"status": "error", "message": "Invalid action - " + value}
+        resp["action"] = value
+    except Exception as ex:
+        resp = {"status": "error", "message": str(ex)}
 
-    return jsonify({"message": "success", "action": value, "info": info})
+    return jsonify(resp)

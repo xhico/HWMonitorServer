@@ -26,7 +26,7 @@ async function saveCrontab() {
     }
 
     // Show Notification
-    await showNotification("Crontab", resp["msg"], resp["status"])
+    await showNotification("Crontab", resp["message"], resp["status"])
 }
 
 async function addJobElem(jobJob, jobStatus, jobId) {

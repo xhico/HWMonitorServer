@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <!-- Modal -->
+    <div class="modal fade" id="addJobModal" tabindex="-1" aria-labelledby="addJobModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="addJobModalLabel">Add Job</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="addJobInput" class="form-label">Job Command</label>
+                        <input type="text" class="form-control" id="addJobInput" placeholder="0 */1 * * python3 /home/pi/example/example.py">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success" onclick="addJob()">Add</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Cronjobs -->
+    <div class="col-xl-6 col-md-12 mb-4">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Crontab</h5>
+                <div id="cronjobs"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Actions -->
+    <div class="col-xl-6 col-md-12 mb-4">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Actions</h5>
+                <button type="button" class="btn btn-success" onclick="addJob()">Add</button>
+                <button type="button" class="btn btn-danger" onclick="saveCrontab()">Save</button>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block script %}
+    <script src="{{ url_for('static', filename='js/crontab.js') }}"></script>
+{% endblock %}

@@ -8,7 +8,7 @@ async function action(value, name) {
             if (response["action"] === "log") {
                 document.getElementById("modalTitle").innerText = name;
                 document.getElementById("modalBodyText").innerText = decodeURI(response["info"]);
-                $('#botLogModal').modal('show');
+                $("#botLogModal").modal("show");
             }
         }
     });

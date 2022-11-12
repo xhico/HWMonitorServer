@@ -118,8 +118,9 @@ async function downloadCrontab() {
 
     // Create download btn -> click
     let downloadElem = document.createElement("a");
+    let crontabFile = "crontab_" + hostname + ".txt";
     downloadElem.setAttribute("href", "data:text/plain;charset=utf-8," + encodeURIComponent(cronjobs));
-    downloadElem.setAttribute("download", "crontab.txt");
+    downloadElem.setAttribute("download", crontabFile);
     downloadElem.style.display = "none";
     document.body.appendChild(downloadElem);
     downloadElem.click();

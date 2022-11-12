@@ -22,7 +22,7 @@ async function goBtn() {
     for (let key of keys) {
         let divOne = document.createElement("option");
         divOne.value = key;
-        divOne.innerText = key;
+        divOne.innerText = key.length > 5 ? key.replace(/[A-Z]/g, ' $&').trim() : key;
         selectOptions.appendChild(divOne);
     }
     document.getElementById("hwMetric").value = hwMetric;
@@ -62,7 +62,7 @@ async function initCharts(JSON) {
 
         new Highcharts.Chart({
             chart: {renderTo: "chart_" + chartName, type: "spline"},
-            title: {text: chartName},
+            title: {text: chartName.length > 5 ? chartName.replace(/[A-Z]/g, ' $&').trim() : chartName},
             exporting: {enabled: false},
             credits: {enabled: false},
             legend: {enabled: false},

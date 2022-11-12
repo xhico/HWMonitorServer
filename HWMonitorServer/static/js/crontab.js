@@ -108,6 +108,24 @@ async function addJob() {
     document.getElementById("job_" + jobId).disabled = false;
 }
 
+async function downloadCrontab() {
+    // Get all entries
+    let jobsCounter = document.getElementById("cronjobs").children.length;
+    let cronjobs = "";
+    for (let i = 0; i < jobsCounter; i++) {
+        cronjobs += document.getElementById("job_job_" + i).value + "\n";
+    }
+
+    // Create download btn -> click
+    let downloadElem = document.createElement("a");
+    downloadElem.setAttribute("href", "data:text/plain;charset=utf-8," + encodeURIComponent(cronjobs));
+    downloadElem.setAttribute("download", "crontab.txt");
+    downloadElem.style.display = "none";
+    document.body.appendChild(downloadElem);
+    downloadElem.click();
+    document.body.removeChild(downloadElem);
+}
+
 window.addEventListener('DOMContentLoaded', async function main() {
     document.getElementById("navbar_crontab").classList.add("active");
     console.log("Get crontab info");

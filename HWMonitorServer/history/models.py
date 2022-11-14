@@ -10,7 +10,7 @@ import re
 def getHistoricInfo(numberTime, unitTime, hwMetric):
     hours = numberTime
 
-    # Convert to hours
+    # Convert to hours -> set startDate
     if unitTime == "day":
         hours = numberTime * 24
     elif unitTime == "week":
@@ -21,39 +21,32 @@ def getHistoricInfo(numberTime, unitTime, hwMetric):
     with open("/home/pi/HardwareHistory/HardwareHistory.json") as inFile:
         data = json.load(inFile)
 
-    # Get History Keys
-    keys = [key for key in list(data[0].keys()) if key != "Date"]
-
     # Get only valid data
-    validData = []
+    processData = {}
     for entry in data:
         if datetime.datetime.strptime(entry["Date"], "%Y/%m/%d %H:%M") >= startDate:
             entry[hwMetric]["Date"] = entry["Date"]
-            validData.append(entry[hwMetric])
+            for k, v in entry[hwMetric].items():
+                v = round(float(re.sub(r"[a-zA-Z]", "", str(v)).strip()), 1) if k != "Date" else v
+                if k in processData:
+                    processData[k].append(v)
+                else:
+                    processData[k] = [v]
 
-    # Split data
-    processData = {}
-    for entry in validData:
-        for k, v in entry.items():
-            v = round(float(re.sub(r"[a-zA-Z]", "", str(v)).strip()), 1) if k != "Date" else v
-            if k in processData:
-                processData[k].append(v)
-            else:
-                processData[k] = [v]
+    # If processData has more than 100 entries, remove at random
+    numbEntries = len(processData["Date"])
+    if numbEntries > 100:
+        toRemove = random.sample(range(0, numbEntries - 1), numbEntries - 100)
+        for key, values in processData.items():
+            # Remove unwanted values
+            values = [values[i] for i in range(len(values)) if i not in toRemove]
+            processData[key] = list(reversed(values))
 
-    # Process Data
-    for k, v in processData.items():
-        # Crop if > 100 entries
-        totalEntries = len(processData[k])
-        if totalEntries >= 100:
-            to_delete = set(random.sample(range(len(processData[k])), totalEntries - 100))
-            processData[k] = [x for i, x in enumerate(processData[k]) if i not in to_delete]
+            # Set Averages
+            if key != "Date":
+                processData[key] = [processData[key], [round(sum(values) / len(values), 1) for _ in range(len(values))]]
 
-        # Reverse List
-        processData[k] = list(reversed(v))
-
-        # Set Averages
-        if k != "Date":
-            processData[k] = [processData[k], [round(sum(v) / len(v), 1) for _ in range(len(v))]]
+    # Get History Keys
+    keys = [key for key in list(data[0].keys()) if key != "Date"]
 
     return keys, processData

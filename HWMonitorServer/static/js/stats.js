@@ -132,9 +132,9 @@ async function getMemory(JSON) {
         document.getElementById("Memory_Percentage").classList.remove("bg-warning");
         document.getElementById("Memory_Percentage").classList.add("bg-danger");
     }
-    document.getElementById("Memory_Used").innerText = await convert_size(Memory_Used);
-    document.getElementById("Memory_Available").innerText = await convert_size(Memory_Available);
-    document.getElementById("Memory_Total").innerText = await convert_size(Memory_Total);
+    document.getElementById("Memory_Used").innerText = convert_size(Memory_Used);
+    document.getElementById("Memory_Available").innerText = convert_size(Memory_Available);
+    document.getElementById("Memory_Total").innerText = convert_size(Memory_Total);
 }
 
 async function getSDCard(JSON) {
@@ -164,9 +164,9 @@ async function getSDCard(JSON) {
         document.getElementById("Disks_SDCard_Percentage").classList.remove("bg-warning");
         document.getElementById("Disks_SDCard_Percentage").classList.add("bg-danger");
     }
-    document.getElementById("Disks_SDCard_Used").innerText = await convert_size(Disks_SDCard_Used);
-    document.getElementById("Disks_SDCard_Free").innerText = await convert_size(Disks_SDCard_Free);
-    document.getElementById("Disks_SDCard_Total").innerText = await convert_size(Disks_SDCard_Total);
+    document.getElementById("Disks_SDCard_Used").innerText = convert_size(Disks_SDCard_Used);
+    document.getElementById("Disks_SDCard_Free").innerText = convert_size(Disks_SDCard_Free);
+    document.getElementById("Disks_SDCard_Total").innerText = convert_size(Disks_SDCard_Total);
 }
 
 async function getWired(JSON) {
@@ -180,8 +180,8 @@ async function getWired(JSON) {
     let Network_Wired_Received = JSON["Network"]["Wired"]["Received"];
     let Network_Wired_Packets_Sent = JSON["Network"]["Wired"]["Packets_Sent"];
     let Network_Wired_Packets_Received = JSON["Network"]["Wired"]["Packets_Received"];
-    document.getElementById("Network_Wired_Sent").innerText = await convert_size(Network_Wired_Sent);
-    document.getElementById("Network_Wired_Received").innerText = await convert_size(Network_Wired_Received);
+    document.getElementById("Network_Wired_Sent").innerText = convert_size(Network_Wired_Sent);
+    document.getElementById("Network_Wired_Received").innerText = convert_size(Network_Wired_Received);
     document.getElementById("Network_Wired_Packets_Sent").innerText = Network_Wired_Packets_Sent;
     document.getElementById("Network_Wired_Packets_Received").innerText = Network_Wired_Packets_Received;
 }
@@ -197,8 +197,8 @@ async function getWifi(JSON) {
     let Network_Wifi_Received = JSON["Network"]["Wifi"]["Received"];
     let Network_Wifi_Packets_Sent = JSON["Network"]["Wifi"]["Packets_Sent"];
     let Network_Wifi_Packets_Received = JSON["Network"]["Wifi"]["Packets_Received"];
-    document.getElementById("Network_Wifi_Sent").innerText = await convert_size(Network_Wifi_Sent);
-    document.getElementById("Network_Wifi_Received").innerText = await convert_size(Network_Wifi_Received);
+    document.getElementById("Network_Wifi_Sent").innerText = convert_size(Network_Wifi_Sent);
+    document.getElementById("Network_Wifi_Received").innerText = convert_size(Network_Wifi_Received);
     document.getElementById("Network_Wifi_Packets_Sent").innerText = Network_Wifi_Packets_Sent;
     document.getElementById("Network_Wifi_Packets_Received").innerText = Network_Wifi_Packets_Received;
 }
@@ -229,9 +229,9 @@ async function get918(JSON) {
         document.getElementById("Disks_918_Percentage").classList.remove("bg-warning");
         document.getElementById("Disks_918_Percentage").classList.add("bg-danger");
     }
-    document.getElementById("Disks_918_Used").innerText = await convert_size(Disks_918_Used);
-    document.getElementById("Disks_918_Free").innerText = await convert_size(Disks_918_Free);
-    document.getElementById("Disks_918_Total").innerText = await convert_size(Disks_918_Total);
+    document.getElementById("Disks_918_Used").innerText = convert_size(Disks_918_Used);
+    document.getElementById("Disks_918_Free").innerText = convert_size(Disks_918_Free);
+    document.getElementById("Disks_918_Total").innerText = convert_size(Disks_918_Total);
     document.getElementById("918Section").hidden = false;
 }
 

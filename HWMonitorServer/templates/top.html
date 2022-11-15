@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <div class="row">
+        <div class="col">
+            <div class="card-body text-center" id="topInfo"></div>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block script %}
+    <script src="{{ url_for('static', filename='js/top.js') }}"></script>
+{% endblock %}

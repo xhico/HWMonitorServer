@@ -2,7 +2,7 @@
     @author: xhico
  */
 
-let config_showBots, config_showHistory, config_showEYE, config_updateStats, config_updateBots, config_updateTime;
+let config_showBots, config_showHistory, config_showEYE, config_updateStats, config_updateBots, config_updateTOP, config_updateTime;
 let hostname;
 
 async function sleep(secs) {
@@ -109,32 +109,42 @@ async function saveConfig() {
 
     config_updateStats = document.getElementById("config_updateStats").checked;
     config_updateBots = document.getElementById("config_updateBots").checked;
+    config_updateTOP = document.getElementById("config_updateTOP").checked;
     config_updateTime = document.getElementById("config_updateTime").value;
     await setCookie("config_updateStats", config_updateStats, 360);
     await setCookie("config_updateBots", config_updateBots, 360);
+    await setCookie("config_updateTOP", config_updateTOP, 360);
     await setCookie("config_updateTime", config_updateTime, 360);
 }
 
 async function loadConfig() {
-    config_showBots = await getCookie("config_showBots");
-    config_showBots = ((config_showBots === null) ? true : (config_showBots === "true"))
-    document.getElementById("config_showBots").checked = config_showBots;
-    config_showHistory = await getCookie("config_showHistory");
-    config_showHistory = ((config_showHistory === null) ? true : (config_showHistory === "true"))
-    document.getElementById("config_showHistory").checked = config_showHistory;
-    config_showEYE = await getCookie("config_showEYE");
-    config_showEYE = ((config_showEYE === null) ? true : (config_showEYE === "true"))
-    document.getElementById("config_showEYE").checked = config_showEYE;
-
     config_updateStats = await getCookie("config_updateStats");
     config_updateStats = ((config_updateStats === null) ? true : (config_updateStats === "true"))
     document.getElementById("config_updateStats").checked = config_updateStats;
+
     config_updateBots = await getCookie("config_updateBots");
     config_updateBots = ((config_updateBots === null) ? true : (config_updateBots === "true"))
     document.getElementById("config_updateBots").checked = config_updateBots;
+
+    config_updateTOP = await getCookie("config_updateTOP");
+    config_updateTOP = ((config_updateTOP === null) ? true : (config_updateTOP === "true"))
+    document.getElementById("config_updateTOP").checked = config_updateTOP;
+
     config_updateTime = await getCookie("config_updateTime");
     config_updateTime = ((config_updateTime === null) ? 2 : config_updateTime)
     document.getElementById("config_updateTime").value = config_updateTime;
+
+    config_showBots = await getCookie("config_showBots");
+    config_showBots = ((config_showBots === null) ? true : (config_showBots === "true"))
+    document.getElementById("config_showBots").checked = config_showBots;
+
+    config_showHistory = await getCookie("config_showHistory");
+    config_showHistory = ((config_showHistory === null) ? true : (config_showHistory === "true"))
+    document.getElementById("config_showHistory").checked = config_showHistory;
+
+    config_showEYE = await getCookie("config_showEYE");
+    config_showEYE = ((config_showEYE === null) ? true : (config_showEYE === "true"))
+    document.getElementById("config_showEYE").checked = config_showEYE;
 }
 
 async function removeLoading() {

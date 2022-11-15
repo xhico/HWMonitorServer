@@ -10,14 +10,16 @@ def create_app(config_class=Config):
     from HWMonitorServer.stats.routes import stats
     from HWMonitorServer.bots.routes import bots
     from HWMonitorServer.history.routes import history
-    from HWMonitorServer.eye.routes import eye
     from HWMonitorServer.crontab.routes import crontab
+    from HWMonitorServer.top.routes import top
+    from HWMonitorServer.eye.routes import eye
 
     app.register_blueprint(main)
     app.register_blueprint(stats)
     app.register_blueprint(bots)
     app.register_blueprint(history)
-    app.register_blueprint(eye)
     app.register_blueprint(crontab)
+    app.register_blueprint(top)
+    app.register_blueprint(eye)
 
     return app

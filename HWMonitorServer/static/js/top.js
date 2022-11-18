@@ -2,6 +2,18 @@
     @author: xhico
  */
 
+async function killPID(pid) {
+    let resp = await $.ajax({
+        method: "post", url: "/top/kill", data: {pid: pid}, success: function (data) {
+            return data;
+        }
+    });
+    console.log(resp["status"]);
+
+    // Show Notification
+    await showNotification("PID - " + pid, resp["message"], resp["status"])
+}
+
 async function getInfo() {
     let resp = await $.ajax({
         method: "get", url: "/top/info", success: function (data) {
@@ -9,36 +21,55 @@ async function getInfo() {
         }
     });
 
-    let topInfoElem = document.getElementById("topInfo");
-    topInfoElem.innerHTML = "";
+    // Reset tableHeader && tableBody
+    let tableHeader = document.getElementById("tableHeader");
+    tableHeader.innerHTML = "";
+    let tableBody = document.getElementById("tableBody");
+    tableBody.innerHTML = "";
 
     for (let i = 0; i < resp.length; i++) {
         let line = resp[i];
-        let divRow = document.createElement("div");
-        divRow.classList.add("row");
-        if (i === 0 || i === 1) {
-            divRow.classList.add("fw-bolder");
-        }
 
+        // Set Table
+        let trElem = document.createElement("tr");
         for (let j = 0; j < line.length; j++) {
-            let item = line[j];
-            let divItem = document.createElement("div");
-            divItem.classList.add("border-start", "border-top", "border-dark");
-            if (j === 5) {
-                divItem.classList.add("col-6", "border-end");
+            let value = line[j];
+            let elemTag = document.createElement(((i <= 1 || j === 0) ? "th" : "td"));
+
+            // If Header or First Column
+            if (i === 0) {
+                elemTag.setAttribute("scope", "col");
+            } else if (j === 0) {
+                elemTag.setAttribute("scope", "row");
+            }
+
+            // Center every square except command
+            if (j !== line.length - 2) {
+                elemTag.classList.add("text-center");
+            }
+
+            // Add action btn || Normal values
+            if (i > 1 && j === line.length - 1) {
+                let actionBtn = document.createElement("button");
+                actionBtn.type = "button";
+                actionBtn.classList.add("btn", "btn-sm", "btn-danger");
+                actionBtn.innerText = "KILL";
+                actionBtn.onclick = function () {
+                    killPID(value);
+                }
+                elemTag.append(actionBtn);
             } else {
-                divItem.classList.add("col");
+                elemTag.innerText = value;
             }
 
-            if (i === resp.length - 1) {
-                divItem.classList.add("border-bottom");
-            }
-
-            divItem.innerText = item;
-            divRow.append(divItem);
+            trElem.append(elemTag);
         }
 
-        topInfoElem.append(divRow);
+        if (i === 0) {
+            tableHeader.append(trElem);
+        } else {
+            tableBody.append(trElem);
+        }
     }
 }
 

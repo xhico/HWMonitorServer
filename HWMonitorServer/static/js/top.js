@@ -78,7 +78,7 @@ async function updateInfo() {
     await getInfo();
 
     // Remove Loading
-    await removeLoading();
+    await loadingScreen("remove");
 
     // Wait x secs -> Run again
     await sleep(config_updateTime);

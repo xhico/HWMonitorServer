@@ -147,8 +147,17 @@ async function loadConfig() {
     document.getElementById("config_showEYE").checked = config_showEYE;
 }
 
-async function removeLoading() {
-    document.getElementById("overlay").hidden = true;
+async function loadingScreen(action) {
+    if (action === "show") {
+        action = false;
+    } else if (action === "remove") {
+        action = true;
+    } else {
+        console.log("Wrong action - " + action);
+        return
+    }
+
+    document.getElementById("overlay").hidden = action;
 }
 
 async function showNotification(title, message, type) {

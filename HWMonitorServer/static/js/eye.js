@@ -87,5 +87,5 @@ window.addEventListener('DOMContentLoaded', async function main() {
     }
 
     // Remove Loading
-    await removeLoading();
+    await loadingScreen("remove");
 });

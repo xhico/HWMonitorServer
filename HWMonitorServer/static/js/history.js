@@ -3,6 +3,9 @@
  */
 
 async function goBtn() {
+    // Show Loading
+    await loadingScreen("show");
+
     let numberTime = document.getElementById("numberTime").value;
     let unitTime = document.getElementById("unitTime").value;
     let hwMetric = document.getElementById("hwMetric").value;
@@ -30,6 +33,9 @@ async function goBtn() {
     // Set Charts
     let info = JSON["info"];
     await initCharts(info, numberTime, unitTime, hwMetric);
+
+    // Remove Loading
+    await loadingScreen("remove");
 }
 
 async function initCharts(JSON) {
@@ -105,6 +111,5 @@ window.addEventListener('DOMContentLoaded', async function main() {
     // Init Charts
     await goBtn();
 
-    // Remove Loading
-    await removeLoading()
+
 });

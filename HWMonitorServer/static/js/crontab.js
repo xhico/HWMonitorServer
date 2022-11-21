@@ -135,5 +135,5 @@ window.addEventListener('DOMContentLoaded', async function main() {
     await getCronjobs();
 
     // Remove Loading
-    await removeLoading();
+    await loadingScreen("remove");
 });

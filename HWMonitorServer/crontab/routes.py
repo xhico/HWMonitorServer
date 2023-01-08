@@ -22,9 +22,9 @@ def crontab_info():
     return jsonify(models.readCrontab())
 
 
-@crontab.route("/crontab/save", methods=['POST'])
+@crontab.route("/crontab/save", methods=["POST"])
 def crontab_save():
-    cronjobs = request.form.get('cronjobs', type=str)
+    cronjobs = request.form.get("cronjobs", type=str)
     cronjobs = json.loads(cronjobs)
     status, message = models.saveCrontab(cronjobs)
     return jsonify({"status": status, "message": message})

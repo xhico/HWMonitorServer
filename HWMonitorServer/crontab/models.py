@@ -26,7 +26,11 @@ def saveCrontab(cronjobs):
         for job in cronjobs:
             jobJob = job["job"]
             jobStatus = job["status"]
-            jobJob = jobJob[1:] if jobJob.startswith("#") else jobJob if jobStatus == "enabled" else "#" + jobJob if not jobJob.startswith("#") else jobJob
+
+            if jobStatus == "disabled" and not jobJob.startswith("#"):
+                jobJob = "#" + jobJob
+            elif jobStatus == "enabled" and jobJob.startswith("#"):
+                jobJob = jobJob[1::]
             newCrontab.append(jobJob + "\n")
 
         crontabFile = "/home/pi/crontab.txt"
@@ -34,7 +38,6 @@ def saveCrontab(cronjobs):
             outFile.writelines(newCrontab)
 
         os.system("crontab -u pi " + crontabFile)
-        os.remove(crontabFile)
         return "success", "Crontab saved successfully!"
     except Exception as ex:
         return "error", str(ex)

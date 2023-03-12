@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-# !/usr/bin/python3
 
 import datetime
 import json
@@ -7,10 +6,23 @@ import random
 import re
 
 
-def getHistoricInfo(numberTime, unitTime, hwMetric):
-    hours = numberTime
+def getHistoricInfo(numberTime: int, unitTime: str, hwMetric: str) -> tuple:
+    """
+    Given a number of time units, a time unit, and a hardware metric,
+    returns the history of the metric in the form of a dictionary.
+
+    Args:
+        numberTime (int): number of time units
+        unitTime (str): time unit ("day", "week")
+        hwMetric (str): hardware metric to retrieve
+
+    Returns:
+        tuple: tuple containing a list of keys and a dictionary of metric history
+
+    """
 
     # Convert to hours -> set startDate
+    hours = numberTime
     if unitTime == "day":
         hours = numberTime * 24
     elif unitTime == "week":
@@ -24,9 +36,11 @@ def getHistoricInfo(numberTime, unitTime, hwMetric):
     # Get only valid data
     processData = {}
     for entry in data:
+        # Filter entries older than startDate
         if datetime.datetime.strptime(entry["Date"], "%Y/%m/%d %H:%M") >= startDate:
             entry[hwMetric]["Date"] = entry["Date"]
             for k, v in entry[hwMetric].items():
+                # Parse values from string to float, round to 1 decimal place
                 v = round(float(re.sub(r"[a-zA-Z]", "", str(v)).strip()), 1) if k != "Date" else v
                 if k in processData:
                     processData[k].append(v)

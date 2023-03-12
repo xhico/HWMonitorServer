@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-# !/usr/bin/python3
 
 import datetime
 import json
@@ -10,7 +9,12 @@ import gpiozero
 import psutil
 
 
-def getVersions():
+def getVersions() -> dict:
+    """Retrieves information about the system's CPU, operating system distribution, kernel, and firmware version.
+
+    Returns:
+        A dictionary containing system information if successful, otherwise a dictionary with 'hasInfo' set to 'None'.
+    """
     try:
         return {
             "hasInfo": "Yes",
@@ -23,7 +27,12 @@ def getVersions():
         return {"hasInfo": "None"}
 
 
-def getUptime():
+def getUptime() -> dict:
+    """Retrieves information about the system's uptime, including the current date and time, boot time, and uptime duration in days, hours, minutes, and seconds.
+
+    Returns:
+        A dictionary containing system uptime information if successful, otherwise a dictionary with 'hasInfo' set to 'None'.
+    """
     date_now = datetime.datetime.now()
     boot_time = datetime.datetime.fromtimestamp(psutil.boot_time())
     delta_time = datetime.timedelta(seconds=(date_now - boot_time).total_seconds())
@@ -42,7 +51,20 @@ def getUptime():
         return {"hasInfo": "None"}
 
 
-def getCPU():
+def getCPU() -> dict:
+    """
+    Returns a dictionary of information related to the CPU.
+
+    Returns:
+        dict: A dictionary containing CPU information.
+            "hasInfo" (str): "Yes" if the information was successfully gathered, "None" otherwise.
+            "Percentage" (float): Percentage of CPU usage.
+            "Cores" (int): Number of CPU cores.
+            "Frequency" (float): Current CPU frequency in MHz.
+            "PIDs" (int): Number of currently running processes.
+            "Voltage" (float): Voltage of the CPU.
+            "Temperature" (float): Temperature of the CPU in degrees Celsius.
+    """
     try:
         return {
             "hasInfo": "Yes",
@@ -57,7 +79,18 @@ def getCPU():
         return {"hasInfo": "None"}
 
 
-def getMemory():
+def getMemory() -> dict:
+    """
+    Returns a dictionary of information related to the memory usage.
+
+    Returns:
+        dict: A dictionary containing memory information.
+            "hasInfo" (str): "Yes" if the information was successfully gathered, "None" otherwise.
+            "Percentage" (float): Percentage of memory used.
+            "Used" (int): Amount of used memory in bytes.
+            "Available" (int): Amount of available memory in bytes.
+            "Total" (int): Total amount of memory in bytes.
+    """
     try:
         return {
             "hasInfo": "Yes",
@@ -70,7 +103,19 @@ def getMemory():
         return {"hasInfo": "None"}
 
 
-def getSDCard():
+def getSDCard() -> dict:
+    """Returns information about the disk usage of the root filesystem.
+
+    Returns:
+        dict: A dictionary containing information about the root filesystem's disk usage.
+            The dictionary contains the following keys:
+            - "hasInfo": Indicates whether the disk information was successfully obtained.
+              Possible values are "Yes" or "None".
+            - "Percentage": The percentage of disk usage.
+            - "Used": The amount of disk space used, in bytes.
+            - "Free": The amount of free disk space, in bytes.
+            - "Total": The total size of the disk, in bytes.
+    """
     try:
         return {
             "hasInfo": "Yes",
@@ -83,7 +128,21 @@ def getSDCard():
         return {"hasInfo": "None"}
 
 
-def get918():
+def get918() -> dict:
+    """Returns information about the disk usage of the /media/pi/918 directory.
+
+    Returns:
+        dict: A dictionary containing information about the /media/pi/918 directory's disk usage.
+            The dictionary contains the following keys:
+            - "hasInfo": Indicates whether the disk information was successfully obtained.
+              Possible values are "Yes" or "None".
+            - "Available": Indicates whether the /media/pi/918 directory is available.
+              Possible values are "Yes" or "None".
+            - "Percentage": The percentage of disk usage.
+            - "Used": The amount of disk space used, in bytes.
+            - "Free": The amount of free disk space, in bytes.
+            - "Total": The total size of the disk, in bytes.
+    """
     try:
         return {
             "hasInfo": "Yes",
@@ -98,6 +157,17 @@ def get918():
 
 
 def getWired():
+    """
+    Returns a dictionary containing information about the wired network interface.
+    Returns:
+        dict: A dictionary containing the following keys and values:
+              - "hasInfo": "Yes" if the network interface is available, "None" otherwise.
+              - "IP": The IP address of the network interface.
+              - "Sent": The number of bytes sent by the network interface.
+              - "Received": The number of bytes received by the network interface.
+              - "Packets_Sent": The number of packets sent by the network interface.
+              - "Packets_Received": The number of packets received by the network interface.
+    """
     try:
         return {
             "hasInfo": "Yes",
@@ -112,6 +182,17 @@ def getWired():
 
 
 def getWifi():
+    """
+    Returns a dictionary containing information about the wireless network interface.
+    Returns:
+        dict: A dictionary containing the following keys and values:
+              - "hasInfo": "Yes" if the network interface is available, "None" otherwise.
+              - "IP": The IP address of the network interface.
+              - "Sent": The number of bytes sent by the network interface.
+              - "Received": The number of bytes received by the network interface.
+              - "Packets_Sent": The number of packets sent by the network interface.
+              - "Packets_Received": The number of packets received by the network interface.
+    """
     try:
         return {
             "hasInfo": "Yes",
@@ -125,7 +206,20 @@ def getWifi():
         return {"hasInfo": "None"}
 
 
-def getAmbientHumidityTemperature():
+def getAmbientHumidityTemperature() -> dict:
+    """
+    Reads data from a JSON file containing humidity and temperature readings from a sensor.
+    Returns a dictionary containing the relevant information.
+
+    Returns:
+        dict: A dictionary containing the following keys:
+            - 'hasInfo': A string indicating whether the function was able to read data from the file ('Yes') or not ('None').
+            - 'Date': A string representing the date and time the data was recorded.
+            - 'TemperatureC': A float representing the temperature in Celsius.
+            - 'TemperatureF': A float representing the temperature in Fahrenheit.
+            - 'Humidity': A float representing the relative humidity.
+            - 'Valid': A boolean indicating whether the data is valid.
+    """
     try:
         with open("/home/pi/HumiditySensor/HumiditySensor.json") as inFile:
             data = json.load(inFile)[0]
@@ -142,6 +236,23 @@ def getAmbientHumidityTemperature():
 
 
 def getHWInfo():
+    """
+    Returns a dictionary containing information about the hardware of the device.
+
+    The dictionary contains the following keys:
+    - Version: returns the version of the device
+    - Uptime: returns the time since the device was last started
+    - CPU: returns the CPU usage of the device
+    - AmbientHumidityTemperature: returns the ambient humidity and temperature of the device
+    - Memory: returns the memory usage of the device
+    - Disks: returns a dictionary containing information about the disks on the device
+        - SDCard: returns information about the SD card disk
+        - 918: returns information about the 918 disk
+    - Network: returns a dictionary containing information about the network
+        - Wired: returns information about the wired network
+        - Wifi: returns information about the WiFi network
+    """
+
     return {
         "Version": getVersions(),
         "Uptime": getUptime(),

@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
-# !/usr/bin/python3
 
 import psutil
 from flask import render_template, jsonify, Blueprint, request
 import HWMonitorServer.bots.models as models
 
+# Define a Flask Blueprint instance
 bots = Blueprint("bots", __name__)
 
 
@@ -13,16 +13,35 @@ bots = Blueprint("bots", __name__)
 
 @bots.route("/bots")
 def index():
+    """
+    Renders the "bots.html" template when the URL endpoint is visited.
+
+    Returns:
+        A rendered HTML template.
+    """
     return render_template("bots.html")
 
 
 @bots.route("/bots/info")
 def json_botsInfo():
+    """
+    Retrieves information about all bots and returns it in a JSON format.
+
+    Returns:
+        A JSON object containing information about all bots.
+    """
     return jsonify(models.getBots())
 
 
 @bots.route("/bots/action", methods=['POST'])
 def json_action():
+    """
+    Performs an action on a bot based on user input received from a form.
+    The available actions are: "kill", "run", and "log".
+
+    Returns:
+        A JSON object containing information about the success or failure of the action performed.
+    """
     value = request.form.get('value', type=str)
     name = request.form.get('name', type=str)
 

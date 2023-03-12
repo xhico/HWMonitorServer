@@ -1,14 +1,23 @@
 # -*- coding: utf-8 -*-
-# !/usr/bin/python3
+
 import os
 
 
 def getRecordings():
-    # Get all days folders
+    """
+    This function retrieves all recordings in a specified folder and returns them in a dictionary.
+
+    Returns:
+    recordings (dict): A dictionary containing all recordings in the specified folder.
+    """
+
+    # Specify the folder where recordings are located
     recordingsFolder = "/home/pi/RaspberryPiSurveillance/_RECORDINGS/"
+
+    # Retrieve all subfolders (i.e., each day's folder) within the specified folder
     subFolders = [f for f in os.listdir(recordingsFolder) if os.path.isdir(os.path.join(recordingsFolder, f))]
 
-    # Get all records for each day
+    # Retrieve all recordings for each day and add them to the dictionary
     recordings = {}
     for day in subFolders:
         dayFolder = os.path.join(recordingsFolder, day)

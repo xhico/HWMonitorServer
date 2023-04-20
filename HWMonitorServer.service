@@ -7,7 +7,7 @@ After=network.target
 User=pi
 Restart=on-failure
 WorkingDirectory=/home/pi/HWMonitorServer/
-ExecStart=/home/pi/.local/bin/gunicorn --config gunicorn_config.py server:app
+ExecStart=/home/pi/.local/bin/gunicorn --config gunicorn_config.py --log-level=debug server:app
 
 [Install]
 WantedBy=multi-user.target

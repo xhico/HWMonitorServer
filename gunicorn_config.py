@@ -3,9 +3,6 @@ import multiprocessing
 """
 Configures Gunicorn server settings with default values and returns them as a dictionary.
 
-Returns:
-dict: A dictionary containing Gunicorn server configuration settings.
-
 """
 # Determine the number of worker processes to run, based on CPU count
 workers = multiprocessing.cpu_count() * 2 + 1

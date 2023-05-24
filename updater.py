@@ -16,8 +16,8 @@ if __name__ == '__main__':
     logger.info("----------------------------------------------------")
 
     # Set RPIs
-    # RPIs = {"192.168.1.14": "Y:\HWMonitorServer"}
-    RPIs = {"192.168.1.14": "Y:\HWMonitorServer", "192.168.1.15": "X:\HWMonitorServer"}
+    RPIs = {"192.168.1.14": "/Volumes/RPI4/HWMonitorServer/"}
+    # RPIs = {"192.168.1.14": "/Volumes/RPI4/HWMonitorServer/", "192.168.1.15": "/Volumes/RPI3A/HWMonitorServer/"}
 
     # Set baseFolder
     baseFolder = os.path.dirname(__file__)

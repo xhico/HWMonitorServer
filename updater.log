@@ -56927,3 +56927,35 @@
 2023-01-06 22:49:51,053 [INFO] Copy staticFolder: js
 2023-01-06 22:49:51,937 [INFO] Restart Server
 2023-01-06 22:49:52,015 [INFO] {'message': 'success', 'option': 'restart'}
+2023-05-21 21:02:55,530 [INFO] ----------------------------------------------------
+2023-05-21 21:02:55,531 [INFO] Device: /Volumes/RPI4/HWMonitorServer/
+2023-05-21 21:03:04,712 [INFO] Remove baseFile: geckodriver.log
+2023-05-21 21:03:04,724 [INFO] Remove baseFile: INSTALL.txt
+2023-05-21 21:03:04,746 [INFO] Remove baseFile: updater.log
+2023-05-21 21:03:06,236 [INFO] Remove baseFile: HWMonitorServer.conf
+2023-05-21 21:03:12,754 [INFO] Remove baseFile: log_gunicorn_error.txt
+2023-05-21 21:03:17,379 [INFO] Remove baseFile: README.md
+2023-05-21 21:03:18,657 [INFO] Remove baseFile: HWMonitorServer.socket
+2023-05-21 21:03:19,680 [INFO] Remove baseFile: server.py
+2023-05-21 21:03:22,039 [INFO] Remove baseFile: HWMonitorServer.service
+2023-05-21 21:03:23,766 [INFO] Remove baseFile: .gitattributes
+2023-05-21 21:03:24,891 [INFO] Remove baseFile: .gitignore
+2023-05-21 21:03:25,862 [INFO] Remove baseFile: log_gunicorn_access.txt
+2023-05-21 21:03:29,946 [INFO] Remove baseFile: Dashboard.png
+2023-05-21 21:03:33,170 [INFO] Remove baseFile: gunicorn_config.py
+2023-05-21 21:03:34,217 [INFO] Remove baseFile: updater.py
+2023-05-21 21:03:34,267 [INFO] Copy mainFile: server.py
+2023-05-21 21:05:16,645 [INFO] ----------------------------------------------------
+2023-05-21 21:05:16,645 [INFO] Device: /Volumes/RPI4/HWMonitorServer/
+2023-05-21 21:05:16,707 [INFO] Remove baseFile: server.py
+2023-05-21 21:05:16,723 [INFO] Copy mainFile: server.py
+2023-05-21 21:09:47,549 [INFO] ----------------------------------------------------
+2023-05-21 21:09:47,550 [INFO] Device: /Volumes/RPI4/HWMonitorServer/
+2023-05-21 21:09:47,579 [INFO] Remove baseFile: ._INSTALL.txt
+2023-05-21 21:09:47,585 [INFO] Remove baseFile: INSTALL.txt
+2023-05-21 21:09:47,618 [INFO] Remove baseFile: updater.log
+2023-05-21 21:09:47,668 [INFO] Remove baseFile: HWMonitorServer.conf
+2023-05-21 21:09:47,717 [INFO] Remove baseFile: log_gunicorn_error.txt
+2023-05-21 21:09:47,813 [INFO] Remove baseFile: ._HWMonitorServer.socket
+2023-05-21 21:09:47,907 [INFO] Remove baseFile: README.md
+2023-05-21 21:09:47,986 [INFO] Remove baseFile: ._README.md

@@ -40,7 +40,7 @@ def getHistoricInfo(numberTime: int, unitTime: str, hwMetric: str):
     data = [{entry["Date"]: entry[hwMetric]} for entry in data if datetime.datetime.strptime(entry["Date"], "%Y/%m/%d %H:%M") >= startDate]
 
     # Decrease data size
-    maxItems = 100
+    maxItems = 50
     if len(data) > maxItems:
         indices_to_remove = random.sample(range(len(data)), len(data) - maxItems)
         indices_to_remove.sort(reverse=True)

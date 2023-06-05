@@ -56959,3 +56959,55 @@
 2023-05-21 21:09:47,813 [INFO] Remove baseFile: ._HWMonitorServer.socket
 2023-05-21 21:09:47,907 [INFO] Remove baseFile: README.md
 2023-05-21 21:09:47,986 [INFO] Remove baseFile: ._README.md
+2023-06-04 22:29:40,353 [INFO] ----------------------------------------------------
+2023-06-04 22:29:40,354 [INFO] Device: /Volumes/RPI4/HWMonitorServer/
+2023-06-04 22:29:40,649 [INFO] Remove baseFile: INSTALL.txt
+2023-06-04 22:29:40,663 [INFO] Remove baseFile: updater.log
+2023-06-04 22:29:40,683 [INFO] Remove baseFile: HWMonitorServer.conf
+2023-06-04 22:29:40,700 [INFO] Remove baseFile: log_gunicorn_error.txt
+2023-06-04 22:29:40,720 [INFO] Remove baseFile: README.md
+2023-06-04 22:29:40,739 [INFO] Remove baseFile: HWMonitorServer.socket
+2023-06-04 22:29:40,757 [INFO] Remove baseFile: server.py
+2023-06-04 22:29:40,779 [INFO] Remove baseFile: HWMonitorServer.service
+2023-06-04 22:29:40,797 [INFO] Remove baseFile: .gitattributes
+2023-06-04 22:29:40,815 [INFO] Remove baseFile: .gitignore
+2023-06-04 22:29:40,834 [INFO] Remove baseFile: log_gunicorn_access.txt
+2023-06-04 22:29:40,873 [INFO] Remove baseFile: Dashboard.png
+2023-06-04 22:29:40,898 [INFO] Remove baseFile: gunicorn_config.py
+2023-06-04 22:29:40,917 [INFO] Remove baseFile: updater.py
+2023-06-04 22:29:40,939 [INFO] Copy mainFile: server.py
+2023-06-04 22:34:02,636 [INFO] ----------------------------------------------------
+2023-06-04 22:34:02,637 [INFO] Device: /Volumes/RPI4/HWMonitorServer/
+2023-06-04 22:34:02,771 [INFO] Remove baseFile: HWMonitorServer.conf
+2023-06-04 22:34:02,790 [INFO] Remove baseFile: log_gunicorn_error.txt
+2023-06-04 22:34:02,824 [INFO] Remove baseFile: ._HWMonitorServer.socket
+2023-06-04 22:34:02,848 [INFO] Remove baseFile: ._HWMonitorServer.conf
+2023-06-04 22:34:32,811 [INFO] ----------------------------------------------------
+2023-06-04 22:34:32,811 [INFO] Device: /Volumes/RPI4/HWMonitorServer/
+2023-06-04 22:34:32,901 [INFO] Remove baseFile: HWMonitorServer.socket
+2023-06-04 22:34:32,918 [INFO] Remove baseFile: server.py
+2023-06-04 22:34:32,981 [INFO] Remove baseFile: HWMonitorServer.service
+2023-06-04 22:34:33,038 [INFO] Remove baseFile: ._HWMonitorServer.service
+2023-06-04 22:34:34,538 [INFO] ----------------------------------------------------
+2023-06-04 22:34:34,538 [INFO] Device: /Volumes/RPI4/HWMonitorServer/
+2023-06-04 22:34:34,560 [INFO] Remove baseFile: ._gunicorn_config.py
+2023-06-04 22:34:34,568 [INFO] Remove baseFile: log_gunicorn_access.txt
+2023-06-04 22:34:34,598 [INFO] Remove baseFile: gunicorn_config.py
+2023-06-04 22:34:34,636 [INFO] Copy mainFile: server.py
+2023-06-05 09:06:25,333 [INFO] ----------------------------------------------------
+2023-06-05 09:06:25,334 [INFO] Device: /Volumes/RPI4/HWMonitorServer/
+2023-06-05 09:06:49,758 [INFO] ----------------------------------------------------
+2023-06-05 09:06:49,758 [INFO] Device: /Volumes/RPI4/HWMonitorServer/
+2023-06-05 09:06:49,938 [INFO] Remove baseFile: HWMonitorServer.conf
+2023-06-05 09:06:49,953 [INFO] Remove baseFile: log_gunicorn_error.txt
+2023-06-05 09:06:49,972 [INFO] Remove baseFile: ._HWMonitorServer.socket
+2023-06-05 09:06:49,987 [INFO] Remove baseFile: ._HWMonitorServer.conf
+2023-06-05 09:06:50,105 [INFO] Remove baseFile: HWMonitorServer.socket
+2023-06-05 09:06:50,126 [INFO] Remove baseFile: server.py
+2023-06-05 09:06:50,151 [INFO] Remove baseFile: HWMonitorServer.service
+2023-06-05 09:06:50,173 [INFO] Remove baseFile: ._HWMonitorServer.service
+2023-06-05 09:06:50,184 [INFO] Remove baseFile: ._gunicorn_config.py
+2023-06-05 09:06:50,193 [INFO] Remove baseFile: ._server.py
+2023-06-05 09:06:50,199 [INFO] Remove baseFile: log_gunicorn_access.txt
+2023-06-05 09:06:50,220 [INFO] Remove baseFile: gunicorn_config.py
+2023-06-05 09:06:50,244 [INFO] Copy mainFile: server.py

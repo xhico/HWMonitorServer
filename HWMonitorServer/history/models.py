@@ -6,7 +6,7 @@ import random
 import re
 
 
-def getHistoricInfo(numberTime: int, unitTime: str, hwMetric: str) -> tuple:
+def getHistoricInfo(numberTime: int, unitTime: str, hwMetric: str):
     """
     Given a number of time units, a time unit, and a hardware metric,
     returns the history of the metric in the form of a dictionary.
@@ -17,7 +17,7 @@ def getHistoricInfo(numberTime: int, unitTime: str, hwMetric: str) -> tuple:
         hwMetric (str): hardware metric to retrieve
 
     Returns:
-        tuple: tuple containing a list of keys and a dictionary of metric history
+        list: list of dictionary of metric history
 
     """
 
@@ -29,38 +29,38 @@ def getHistoricInfo(numberTime: int, unitTime: str, hwMetric: str) -> tuple:
         hours = numberTime * 24 * 7
     startDate = datetime.datetime.now() - datetime.timedelta(hours=hours)
 
-    # Open Historic JSON
+    # Retrieve Historic JSON
     with open("/home/pi/HardwareHistory/HardwareHistory.json") as inFile:
-        data = json.load(inFile)
+        data = list(reversed(json.load(inFile)))
 
-    # Get only valid data
-    processData = {}
+    # Get available metrics
+    availableMetrics = [key for key in data[0].keys() if key != "Date"]
+
+    # Filter data by startDate
+    data = [{entry["Date"]: entry[hwMetric]} for entry in data if datetime.datetime.strptime(entry["Date"], "%Y/%m/%d %H:%M") >= startDate]
+
+    # Decrease data size
+    maxItems = 100
+    if len(data) > maxItems:
+        indices_to_remove = random.sample(range(len(data)), len(data) - maxItems)
+        indices_to_remove.sort(reverse=True)
+        for index in indices_to_remove:
+            data.pop(index)
+
+    # Calculate averages
+    result = {"timestamps": [], }
+    key_averages = {}
     for entry in data:
-        # Filter entries older than startDate
-        if datetime.datetime.strptime(entry["Date"], "%Y/%m/%d %H:%M") >= startDate:
-            entry[hwMetric]["Date"] = entry["Date"]
-            for k, v in entry[hwMetric].items():
-                # Parse values from string to float, round to 1 decimal place
-                v = round(float(re.sub(r"[a-zA-Z]", "", str(v)).strip()), 1) if k != "Date" else v
-                if k in processData:
-                    processData[k].append(v)
-                else:
-                    processData[k] = [v]
+        timestamp = next(iter(entry))
+        result["timestamps"].append(timestamp)
+        for key, value in entry[timestamp].items():
+            if key not in result:
+                result[key] = []
+                key_averages[key] = 0.0
+            result[key].append(value)
 
-    # If processData has more than 100 entries, remove at random
-    numbEntries = len(processData["Date"])
-    if numbEntries > 100:
-        toRemove = random.sample(range(0, numbEntries - 1), numbEntries - 100)
-        for key, values in processData.items():
-            # Remove unwanted values
-            values = [values[i] for i in range(len(values)) if i not in toRemove]
-            processData[key] = list(reversed(values))
+    for key in key_averages:
+        key_averages[key] = round(sum(result[key]) / len(result[key]), 2)
+        result[key + "_avg"] = [key_averages[key]] * len(result[key])
 
-            # Set Averages
-            if key != "Date":
-                processData[key] = [processData[key], [round(sum(values) / len(values), 1) for _ in range(len(values))]]
-
-    # Get History Keys
-    keys = [key for key in list(data[0].keys()) if key != "Date"]
-
-    return keys, processData
+    return availableMetrics, result

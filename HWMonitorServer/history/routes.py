@@ -46,8 +46,8 @@ def history_info():
     TypeError
         If the 'numberTime' parameter is not an integer, or the 'unitTime' and 'hwMetric' parameters are not strings.
     """
-    numberTime = request.form.get('numberTime', type=int)
-    unitTime = request.form.get('unitTime', type=str)
-    hwMetric = request.form.get('hwMetric', type=str)
-    keys, historicInfo = models.getHistoricInfo(numberTime, unitTime, hwMetric)
-    return jsonify({"info": historicInfo, "keys": keys})
+    numberTime = request.form.get("numberTime", type=int)
+    unitTime = request.form.get("unitTime", type=str)
+    hwMetric = request.form.get("hwMetric", type=str)
+    availableMetrics, historicInfo = models.getHistoricInfo(numberTime, unitTime, hwMetric)
+    return jsonify({"availableMetrics": availableMetrics, "historicInfo": historicInfo})

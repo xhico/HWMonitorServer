@@ -18,21 +18,20 @@ async function goBtn() {
         }
     });
 
-    // Set Select Options
-    let keys = JSON["keys"];
+    // Add metrics to select options
+    let availableMetrics = JSON["availableMetrics"];
     let selectOptions = document.getElementById("hwMetric");
     selectOptions.innerHTML = "";
-    for (let key of keys) {
+    for (let key of availableMetrics) {
         let divOne = document.createElement("option");
         divOne.value = key;
-        divOne.innerText = key.length > 5 ? key.replace(/[A-Z]/g, ' $&').trim() : key;
+        divOne.innerText = key;
         selectOptions.appendChild(divOne);
     }
     document.getElementById("hwMetric").value = hwMetric;
 
     // Set Charts
-    let info = JSON["info"];
-    await initCharts(info, numberTime, unitTime, hwMetric);
+    await initCharts(JSON["historicInfo"]);
 
     // Remove Loading
     await loadingScreen("remove");
@@ -43,14 +42,14 @@ async function initCharts(JSON) {
     let chartsRow = document.getElementById("charts");
     chartsRow.innerHTML = "";
 
+    // Get chartNames
+    let chartNames = Object.keys(JSON).filter(key => key !== "timestamps" && !key.endsWith("_avg"));
+
     // Get Charts
-    let dates = JSON["Date"];
-    delete JSON["Date"];
-    let chartNames = Object.keys(JSON);
+    let dates = JSON["timestamps"];
 
     // Iterate over every Chart
     for (let chartName of chartNames) {
-
         // Create Figure
         let divOne;
         divOne = document.createElement("figure");
@@ -59,13 +58,8 @@ async function initCharts(JSON) {
         chartsRow.appendChild(divOne);
 
         // Add info to Chart
-        let seriesData = JSON[chartName][0].map(function (e, i) {
-            return [dates[i], e];
-        });
-        let avgData = JSON[chartName][1].map(function (e, i) {
-            return [dates[i], e];
-        });
-
+        let seriesData = JSON[chartName];
+        let avgData = JSON[chartName + "_avg"];
         new Highcharts.Chart({
             chart: {renderTo: "chart_" + chartName, type: "spline"},
             title: {text: chartName.length > 5 ? chartName.replace(/[A-Z]/g, ' $&').trim() : chartName},
@@ -89,9 +83,9 @@ async function initCharts(JSON) {
             },
             xAxis: {
                 crosshair: true,
-                tickInterval: 3, type: 'datetime', labels: {
+                tickInterval: 3, type: "datetime", labels: {
                     enabled: true, formatter: function () {
-                        return seriesData[this.value][0];
+                        return dates;
                     }
                 }
             },

@@ -182,8 +182,8 @@ async function getWired(JSON) {
     let Network_Wired_Packets_Received = JSON["Network"]["Wired"]["Packets_Received"];
     document.getElementById("Network_Wired_Sent").innerText = convert_size(Network_Wired_Sent);
     document.getElementById("Network_Wired_Received").innerText = convert_size(Network_Wired_Received);
-    document.getElementById("Network_Wired_Packets_Sent").innerText = Network_Wired_Packets_Sent;
-    document.getElementById("Network_Wired_Packets_Received").innerText = Network_Wired_Packets_Received;
+    document.getElementById("Network_Wired_Packets_Sent").innerText = parseInt(Network_Wired_Packets_Sent).toLocaleString();
+    document.getElementById("Network_Wired_Packets_Received").innerText = parseInt(Network_Wired_Packets_Received).toLocaleString();
 }
 
 async function getWifi(JSON) {
@@ -199,8 +199,8 @@ async function getWifi(JSON) {
     let Network_Wifi_Packets_Received = JSON["Network"]["Wifi"]["Packets_Received"];
     document.getElementById("Network_Wifi_Sent").innerText = convert_size(Network_Wifi_Sent);
     document.getElementById("Network_Wifi_Received").innerText = convert_size(Network_Wifi_Received);
-    document.getElementById("Network_Wifi_Packets_Sent").innerText = Network_Wifi_Packets_Sent;
-    document.getElementById("Network_Wifi_Packets_Received").innerText = Network_Wifi_Packets_Received;
+    document.getElementById("Network_Wifi_Packets_Sent").innerText = parseInt(Network_Wifi_Packets_Sent).toLocaleString();
+    document.getElementById("Network_Wifi_Packets_Received").innerText = parseInt(Network_Wifi_Packets_Received).toLocaleString();
 }
 
 async function get918(JSON) {

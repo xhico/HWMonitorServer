@@ -44,7 +44,7 @@ def json_power():
         msg = {"message": "success"}
     elif option == "restart":
         # Restart the HWMonitorServer service using sudo privileges
-        os.system("sudo service HWMonitorServer restart")
+        os.system("sudo systemctl restart HWMonitorServer.service HWMonitorServer.socket")
         msg = {"message": "success"}
     else:
         # The option provided is not supported

@@ -2,7 +2,6 @@
 
 import json
 import os
-import socket
 
 
 def loadConfig():
@@ -16,8 +15,13 @@ def loadConfig():
     configFile = os.path.join(os.path.dirname(os.path.abspath(__file__)), "config.json")
 
     # Load the contents of the config file into a dictionary
-    with open(configFile) as inFile:
-        config = json.load(inFile)
+    try:
+        with open(configFile) as inFile:
+            config = json.load(inFile)
+    except Exception as e:
+        with open(configFile, "w") as outFile:
+            configFile = {"Bots": []}
+            json.dump(configFile, outFile, indent=4)
 
     return config, configFile
 
@@ -29,13 +33,11 @@ class Config:
     Attributes:
         config (dict): A dictionary containing configuration settings.
         configFile (str): The absolute path to the configuration file.
-        hostname (str): The current hostname in uppercase.
         botsName (list): A list of bot names associated with the current hostname.
     """
 
     # Load the config file and get the current hostname
     config, configFile = loadConfig()
-    hostname = str(socket.gethostname()).upper()
 
     # Get the names of the bots associated with the current hostname
-    botsName = config[hostname]["Bots"]
+    botsName = config["Bots"]

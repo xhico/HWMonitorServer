@@ -13,11 +13,29 @@
 
     <!-- Right Pane -->
     <div class="col-xl-4 col-md-12 mb-4">
-        <div class="card">
-            <div class="card-body">
-                <h5 class="card-title">Actions</h5>
-                <button type="button" class="btn btn-danger" onclick="toggleEditConfigurationArea()">Edit</button>
-                <button type="button" class="btn btn-success" onclick="saveConfigurationArea()">Save</button>
+        <div class="row">
+            <div class="col-12 mb-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Actions</h5>
+                        <button type="button" class="btn btn-danger" onclick="toggleEditConfigurationArea()">Edit</button>
+                        <button type="button" class="btn btn-success" onclick="saveConfigJSON()">Save</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12 mb-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Bots</h5>
+                        <div class="input-group mb-3">
+                            <input id="addBotText" type="text" class="form-control" placeholder="Bot Folder name" aria-label="Bot Folder name" aria-describedby="addBot">
+                            <button class="btn btn-outline-success" type="button" id="addBot" onclick="addBot()">Add</button>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

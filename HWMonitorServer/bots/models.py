@@ -95,5 +95,5 @@ def getBots():
         bots = {name: getBotInfo(name) for name in Config.botsName}
         bots["hasInfo"] = "Yes"
         return bots
-    except Exception:
+    except Exception as e:
         return {"hasInfo": "None"}

@@ -37,7 +37,14 @@ function convert_size(size_bytes) {
     return value + " " + unit
 }
 
-async function power(option, btn) {
+function capitalize(string) {
+    // Capitalize the first letter and concatenate with the rest of the string
+    return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
+async function power(option) {
+    let btn = document.getElementById("power" + await capitalize(option) + "Btn")
+
     // Disable Btn
     btn.disabled = true;
     btn.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span><span class="visually-hidden">Loading...</span>'

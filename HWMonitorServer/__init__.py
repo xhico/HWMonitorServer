@@ -39,5 +39,8 @@ def create_app(config_class=Config):
     from HWMonitorServer.eye.routes import eye
     app.register_blueprint(eye)
 
+    from HWMonitorServer.configuration.routes import configuration
+    app.register_blueprint(configuration)
+
     # return the Flask application instance
     return app

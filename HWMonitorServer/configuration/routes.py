@@ -1,7 +1,5 @@
 # -*- coding: utf-8 -*-
 
-import json
-
 from flask import render_template, jsonify, Blueprint, request
 import HWMonitorServer.configuration.models as models
 

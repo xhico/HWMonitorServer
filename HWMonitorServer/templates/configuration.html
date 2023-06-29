@@ -31,8 +31,9 @@
                     <div class="card-body">
                         <h5 class="card-title">Bots</h5>
                         <div class="input-group mb-3">
-                            <input id="addBotText" type="text" class="form-control" placeholder="Bot Folder name" aria-label="Bot Folder name" aria-describedby="addBot">
-                            <button class="btn btn-outline-success" type="button" id="addBotBtn" onclick="addBot()">Add</button>
+                            <input id="manageBot" type="text" class="form-control" placeholder="Bot Folder name" aria-label="Bot Folder name" aria-describedby="manageBot">
+                            <button class="btn btn-outline-success" type="button" id="addBotBtn" onclick="manageBot('add')">Add</button>
+                            <button class="btn btn-outline-danger" type="button" id="removeBotBtn" onclick="manageBot('remove')">Remove</button>
                         </div>
                     </div>
                 </div>

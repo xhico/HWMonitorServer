@@ -44,21 +44,32 @@ async function saveConfigJSON() {
 
     // Restart if success
     if (resp["status"] === "success") {
-        await showNotification("Saving Configuration", "Restarting Service", "success");
+        await showNotification("Saving Configuration", "Restarting Service", resp["status"]);
         await power("restart");
     }
 }
 
-async function addBot() {
-    let botNameElem = document.getElementById("addBotText");
+async function manageBot(action) {
+    let botNameElem = document.getElementById("manageBot");
     botNameElem.disabled = true;
     let botNameElemText = botNameElem.value;
 
     // Convert from String to Object
     configJSON = typeof configJSON === "string" ? JSON.parse(configJSON) : configJSON;
 
-    // Add botName to configJSON
-    configJSON.Bots.push(botNameElemText);
+    // Add/Remove botName to configJSON
+    if (action === "add") {
+        configJSON.Bots.push(botNameElemText);
+    } else {
+        const index = configJSON.Bots.indexOf(botNameElemText);
+        if (index !== -1) {
+            configJSON.Bots.splice(index, 1);
+        } else {
+            await showNotification("Missing value", "Failed to find value inside JSON", "warning");
+            botNameElem.disabled = false;
+            return
+        }
+    }
 
     // Add to configurationArea
     configJSON = JSON.stringify(configJSON, null, 4);

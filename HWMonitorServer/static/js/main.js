@@ -172,7 +172,8 @@ async function showNotification(title, message, type) {
     document.getElementById("notificationMsg").innerText = message;
     let notificationPopupElem = document.getElementById("notificationPopup");
     notificationPopupElem.className = "toast text-white";
-    notificationPopupElem.classList.add((type === "success" ? "bg-success" : "bg-danger"))
+    if (type === "error") type = "danger";
+    notificationPopupElem.classList.add("bg-" + type);
     $('#notificationPopup').toast('show');
 }
 

@@ -2,7 +2,7 @@
     @author: xhico
  */
 
-let config_showBots, config_showHistory, config_showEYE, config_updateStats, config_updateBots, config_updateTOP, config_updateTime;
+let config_updateStats, config_updateBots, config_updateTOP, config_updateTime;
 let hostname;
 
 async function sleep(secs) {
@@ -107,13 +107,6 @@ async function getCookie(cname) {
 }
 
 async function saveConfig() {
-    config_showBots = document.getElementById("config_showBots").checked;
-    config_showHistory = document.getElementById("config_showHistory").checked;
-    config_showEYE = document.getElementById("config_showEYE").checked;
-    await setCookie("config_showBots", config_showBots, 360);
-    await setCookie("config_showHistory", config_showHistory, 360);
-    await setCookie("config_showEYE", config_showEYE, 360);
-
     config_updateStats = document.getElementById("config_updateStats").checked;
     config_updateBots = document.getElementById("config_updateBots").checked;
     config_updateTOP = document.getElementById("config_updateTOP").checked;
@@ -140,18 +133,14 @@ async function loadConfig() {
     config_updateTime = await getCookie("config_updateTime");
     config_updateTime = ((config_updateTime === null) ? 2 : config_updateTime)
     document.getElementById("config_updateTime").value = config_updateTime;
+}
 
-    config_showBots = await getCookie("config_showBots");
-    config_showBots = ((config_showBots === null) ? true : (config_showBots === "true"))
-    document.getElementById("config_showBots").checked = config_showBots;
-
-    config_showHistory = await getCookie("config_showHistory");
-    config_showHistory = ((config_showHistory === null) ? true : (config_showHistory === "true"))
-    document.getElementById("config_showHistory").checked = config_showHistory;
-
-    config_showEYE = await getCookie("config_showEYE");
-    config_showEYE = ((config_showEYE === null) ? true : (config_showEYE === "true"))
-    document.getElementById("config_showEYE").checked = config_showEYE;
+async function getConfigContent() {
+    return await $.ajax({
+        method: "get", url: "/configuration/info", success: function (configContent) {
+            return configContent;
+        }
+    });
 }
 
 async function loadingScreen(action) {
@@ -185,10 +174,13 @@ async function updateNav() {
     document.title = hostname;
     document.getElementById("Hostname").innerText = hostname;
 
+    // Load configJSON
+    let configJSON = JSON.parse(await getConfigContent());
+
     // Show navbar items
-    document.getElementById("navbar_bots").hidden = !config_showBots;
-    document.getElementById("navbar_history").hidden = !config_showHistory;
-    document.getElementById("navbar_eye").hidden = !config_showEYE;
+    document.getElementById("navbar_bots").hidden = !(configJSON.Bots.length !== 0);
+    document.getElementById("navbar_history").hidden = !configJSON.History;
+    document.getElementById("navbar_eye").hidden = !configJSON.EYE;
 
     // Wait x secs -> Run again
     await sleep(config_updateTime);

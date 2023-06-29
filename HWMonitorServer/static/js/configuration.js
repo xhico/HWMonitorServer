@@ -17,6 +17,9 @@ async function toggleEditConfigurationArea() {
 }
 
 async function saveConfigJSON() {
+    document.getElementById("toggleEditConfigurationAreaBtn").disabled = true;
+    document.getElementById("saveConfigJSONBtn").disabled = true;
+    document.getElementById("addBotBtn").disabled = true;
     if (!configurationArea.disabled) {
         await toggleEditConfigurationArea();
     }

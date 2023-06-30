@@ -245,7 +245,6 @@ async function updateSections() {
     });
 
     // Run sections
-    console.log("Run Sections");
     getVersions(JSON);
     getUptime(JSON);
     getCPU(JSON);

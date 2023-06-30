@@ -74,6 +74,8 @@ async function getInfo() {
 }
 
 async function updateInfo() {
+    console.log("Get TOP Info");
+
     // Get TOP Info
     await getInfo();
 

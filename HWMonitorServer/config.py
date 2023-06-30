@@ -15,7 +15,7 @@ def loadConfig():
     configFile = os.path.join(os.path.dirname(os.path.abspath(__file__)), "config.json")
 
     # Set default config values
-    defaultConfig = {"Bots": [], "History": True, "Eye": False, "UpdateTime": 2, "UpdateStats": True, "UpdateBots": True, "UpdateTop": True}
+    defaultConfig = {"Bots": [], "History": True, "Eye": False, "UpdateTime": 2, "UpdateStats": True, "UpdateBots": True, "UpdateTOP": True}
 
     # Load the contents of the config file into a dictionary
     try:

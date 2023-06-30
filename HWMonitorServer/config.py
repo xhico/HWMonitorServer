@@ -15,8 +15,7 @@ def loadConfig():
     configFile = os.path.join(os.path.dirname(os.path.abspath(__file__)), "config.json")
 
     # Set default config values
-    bots, history, eye = [], True, False
-    defaultConfig = {"Bots": bots, "History": history, "EYE": eye}
+    defaultConfig = {"Bots": [], "History": True, "Eye": False, "UpdateTime": 2, "UpdateStats": True, "UpdateBots": True, "UpdateTop": True}
 
     # Load the contents of the config file into a dictionary
     try:
@@ -29,9 +28,9 @@ def loadConfig():
             json.dump(config, outFile, indent=4)
 
     # Check if "key" key is missing and add it if needed
-    for key in defaultConfig:
+    for key, val in defaultConfig.items():
         if key not in config:
-            config[key] = eye
+            config[key] = val
 
     # Write the updated config back to the file
     with open(configFile, "w") as outFile:
@@ -48,7 +47,6 @@ class Config:
         config (dict): A dictionary containing configuration settings.
         configFile (str): The absolute path to the configuration file.
         botsName (list): A list of bot names.
-        eyeFeature (bool): True or False
     """
 
     # Load the config file
@@ -56,6 +54,3 @@ class Config:
 
     # Get the names of the bots
     botsName = config["Bots"]
-
-    # Get the EYE setting
-    eyeFeature = config["EYE"]

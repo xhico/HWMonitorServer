@@ -2,11 +2,10 @@
     @author: xhico
  */
 
-let configurationArea, configJSON;
+let configurationArea;
 let actionBtns = ["configurationArea", "toggleEditConfigurationAreaBtn", "saveConfigJSONBtn",
     "manageBot", "addBotBtn", "removeBotBtn",
-    "eyeEnabledBtn", "eyeDisabledBtn",
-    "historyEnabledBtn", "historyDisabledBtn"];
+    "updateTime", "updateTimeBtn"];
 
 async function toggleEditConfigurationArea() {
     let flag = configurationArea.disabled;
@@ -25,18 +24,20 @@ async function toggleBtns(flag) {
 async function saveConfigJSON() {
     await toggleBtns(false);
 
-    // Convert from Object to String
-    configJSON = configurationArea.value;
-
     // Check if JSON is valid
+    configJSON = configurationArea.value;
     try {
-        JSON.parse(configJSON);
+        configJSON = JSON.parse(configJSON);
     } catch (e) {
         await showNotification("Failed to parse JSON", "Check JSON Again", "error");
         return
     }
 
+    // Sort the Bots array in ascending order -> ignore lower/upper cases
+    configJSON.Bots.sort((a, b) => a.localeCompare(b, undefined, {sensitivity: 'base'}));
+
     // Save Crontab Info
+    configJSON = JSON.stringify(configJSON, null, 4);
     let resp = await $.ajax({
         method: "post", url: "/configuration/save", data: {"configContent": configJSON}, success: function (data) {
             return data;
@@ -63,17 +64,27 @@ async function manageBot(action) {
 
     // Add/Remove botName to configJSON
     if (action === "add") {
+        if (configJSON.Bots.includes(botNameElemText)) {
+            await showNotification("Duplicated Entry", "'" + botNameElemText + "' already exists", "warning");
+            await toggleBtns(true);
+            await toggleEditConfigurationArea();
+            return
+        }
         configJSON.Bots.push(botNameElemText);
     } else {
         const index = configJSON.Bots.indexOf(botNameElemText);
         if (index !== -1) {
             configJSON.Bots.splice(index, 1);
         } else {
-            await showNotification("Missing value", "Failed to find value inside JSON", "warning");
+            await showNotification("Missing value", "Failed to find '" + botNameElemText + "'", "warning");
             await toggleBtns(true);
+            await toggleEditConfigurationArea();
             return
         }
     }
+
+    // Sort the Bots array in ascending order -> ignore lower/upper cases
+    configJSON.Bots.sort((a, b) => a.localeCompare(b, undefined, {sensitivity: 'base'}));
 
     // Add to configurationArea
     configJSON = JSON.stringify(configJSON, null, 4);
@@ -88,7 +99,7 @@ async function manageBot(action) {
 
 async function navToggle(key, btn) {
     // Convert from Object to String
-    configJSON = configurationArea.value;
+    let configJSON = configurationArea.value;
     configJSON = JSON.parse(configJSON);
 
     // Check which radio button was clicked
@@ -110,6 +121,39 @@ async function navToggle(key, btn) {
     await saveConfigJSON();
 }
 
+async function setUpdateTime() {
+    await toggleBtns(false);
+
+    // Get Bot Text
+    let updateTimeElem = document.getElementById("updateTime");
+    updateTimeElem.disabled = true;
+    let updateTimeElemText = updateTimeElem.value;
+
+    // Check if value is not empty
+    if (updateTimeElemText === "") {
+        await showNotification("Invalid Value", "Update Time can't be empty", "warning");
+        await toggleBtns(true);
+        await toggleEditConfigurationArea();
+        return
+    }
+
+    // Convert from String to Object
+    configJSON = typeof configJSON === "string" ? JSON.parse(configJSON) : configJSON;
+
+    // Add/Remove botName to configJSON
+    configJSON.UpdateTime = parseInt(updateTimeElemText);
+
+    // Add to configurationArea
+    configJSON = JSON.stringify(configJSON, null, 4);
+    configurationArea.value = configJSON;
+
+    // Set number of rows
+    configurationArea.setAttribute("rows", configurationArea.value.split("\n").length);
+
+    // Save configJSON
+    await saveConfigJSON();
+}
+
 window.addEventListener('DOMContentLoaded', async function main() {
     document.getElementById("navbar_configuration").classList.add("active");
     console.log("Get configuration info");
@@ -118,32 +162,25 @@ window.addEventListener('DOMContentLoaded', async function main() {
     configurationArea = document.getElementById("configurationArea");
 
     // Get configJSON
-    configJSON = await getConfigContent(configurationArea);
-    configJSON = JSON.parse(configJSON);
+    let configJSON = await getConfigContent(configurationArea);
 
-    // Set History Feature
-    let historyEnabledBtn = document.getElementById("historyEnabledBtn");
-    let historyDisabledBtn = document.getElementById("historyDisabledBtn");
-    configJSON.History === true ? historyEnabledBtn.click() : historyDisabledBtn.click();
-    historyEnabledBtn.addEventListener("change", function () {
-        navToggle("History", this);
-    });
-    historyDisabledBtn.addEventListener("change", function () {
-        navToggle("History", this);
-    });
+    // Set NAV ToggleButtons
+    for (let entry of ["history", "eye", "updateStats", "updateBots", "updateTop"]) {
+        let entryEnabledBtn = document.getElementById(entry + "EnabledBtn");
+        let entryDisabledBtn = document.getElementById(entry + "DisabledBtn");
+        actionBtns.push(entry + "EnabledBtn");
+        actionBtns.push(entry + "DisabledBtn");
+        configJSON[capitalize(entry)] === true ? entryEnabledBtn.click() : entryDisabledBtn.click();
+        entryEnabledBtn.addEventListener("change", function () {
+            navToggle(capitalize(entry), this);
+        });
+        entryDisabledBtn.addEventListener("change", function () {
+            navToggle(capitalize(entry), this);
+        });
+    }
 
-    // Set EYE Feature
-    let eyeEnabledBtn = document.getElementById("eyeEnabledBtn");
-    let eyeDisabledBtn = document.getElementById("eyeDisabledBtn");
-    configJSON.EYE === true ? eyeEnabledBtn.click() : eyeDisabledBtn.click();
-    eyeEnabledBtn.addEventListener("change", function () {
-        navToggle("EYE", this);
-    });
-    eyeDisabledBtn.addEventListener("change", function () {
-        navToggle("EYE", this);
-    });
-
-    // Set configurationArea value
+    // Set configurationArea && updateTime value
+    document.getElementById("updateTime").placeholder += " (" + configJSON.UpdateTime + " secs)"
     configJSON = JSON.stringify(configJSON, null, 4);
     configurationArea.value = configJSON;
 

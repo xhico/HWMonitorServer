@@ -2,22 +2,28 @@
 
 {% block content %}
 
+    <!-- Left Pane -->
     <div class="col-xl-8 col-md-12 mb-4">
-        <div class="card">
-            <div class="card-body">
-                <h5 class="card-title">Configuration File</h5>
-                <textarea disabled class="form-control" id="configurationArea"></textarea>
+        <div class="row">
+            <div class="col-12 mb-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Configuration File</h5>
+                        <label hidden for="configurationArea">Configuration Area</label>
+                        <textarea disabled class="form-control" id="configurationArea"></textarea>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 
     <!-- Right Pane -->
-    <div class="col-xl-4 col-md-12 mb-4">
+    <div class="col-xl-4 col-md-12">
         <div class="row">
             <div class="col-12 mb-4">
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title">Actions</h5>
+                        <h5 class="card-title">File Actions</h5>
                         <button id="toggleEditConfigurationAreaBtn" type="button" class="btn btn-danger" onclick="toggleEditConfigurationArea()">Edit</button>
                         <button id="saveConfigJSONBtn" type="button" class="btn btn-success" onclick="saveConfigJSON()">Save</button>
                     </div>
@@ -30,7 +36,7 @@
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title">Bots</h5>
-                        <div class="input-group mb-3">
+                        <div class="input-group flex-nowrap mb-3">
                             <input id="manageBot" type="text" class="form-control" placeholder="Bot Folder name" aria-label="Bot Folder name" aria-describedby="manageBot">
                             <button class="btn btn-outline-success" type="button" id="addBotBtn" onclick="manageBot('add')">Add</button>
                             <button class="btn btn-outline-danger" type="button" id="removeBotBtn" onclick="manageBot('remove')">Remove</button>
@@ -66,8 +72,46 @@
             </div>
         </div>
 
-    </div>
+        <div class="row">
+            <div class="col-12 mb-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Auto-Update Sections</h5>
 
+                        <div class="input-group flex-nowrap mb-3">
+                            <span class="input-group-text" id="addon-wrapping">Stats</span>
+                            <input type="radio" class="btn-check" name="updateStatsOptions" id="updateStatsEnabledBtn" autocomplete="off" checked>
+                            <label class="btn btn-outline-success" for="updateStatsEnabledBtn">Enabled</label>
+                            <input type="radio" class="btn-check" name="updateStatsOptions" id="updateStatsDisabledBtn" autocomplete="off">
+                            <label class="btn btn-outline-danger" for="updateStatsDisabledBtn">Disabled</label>
+                        </div>
+
+                        <div class="input-group flex-nowrap mb-3">
+                            <span class="input-group-text" id="addon-wrapping">Bots</span>
+                            <input type="radio" class="btn-check" name="updateBotsOptions" id="updateBotsEnabledBtn" autocomplete="off" checked>
+                            <label class="btn btn-outline-success" for="updateBotsEnabledBtn">Enabled</label>
+                            <input type="radio" class="btn-check" name="updateBotsOptions" id="updateBotsDisabledBtn" autocomplete="off">
+                            <label class="btn btn-outline-danger" for="updateBotsDisabledBtn">Disabled</label>
+                        </div>
+
+                        <div class="input-group flex-nowrap mb-3">
+                            <span class="input-group-text" id="addon-wrapping">TOP</span>
+                            <input type="radio" class="btn-check" name="updateTopOptions" id="updateTopEnabledBtn" autocomplete="off" checked>
+                            <label class="btn btn-outline-success" for="updateTopEnabledBtn">Enabled</label>
+                            <input type="radio" class="btn-check" name="updateTopOptions" id="updateTopDisabledBtn" autocomplete="off">
+                            <label class="btn btn-outline-danger" for="updateTopDisabledBtn">Disabled</label>
+                        </div>
+
+                        <div class="input-group flex-nowrap">
+                            <input id="updateTime" class="form-control" type="number" min="1" placeholder="Update Time" aria-label="Update Time" aria-describedby="updateTime">
+                            <button class="btn btn-outline-success" type="button" id="updateTimeBtn" onclick="setUpdateTime()">Save</button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
 {% endblock %}
 

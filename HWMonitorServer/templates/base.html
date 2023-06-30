@@ -37,46 +37,6 @@
     </div>
 </div>
 
-<!-- Config Modal -->
-<div class="modal fade" id="settingsModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="configLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-sm">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalCenterTitle">Configuration</h5>
-            </div>
-            <div class="modal-body">
-
-                <div class="row">
-                    <div class="col mt-2">
-                        <div id="divConfig_updateStats" class="form-check form-switch">
-                            <input class="form-check-input" type="checkbox" role="switch" id="config_updateStats">
-                            <label class="form-check-label" for="config_updateStats">Update Stats</label>
-                        </div>
-                        <div id="divConfig_updateBots" class="form-check form-switch">
-                            <input class="form-check-input" type="checkbox" role="switch" id="config_updateBots">
-                            <label class="form-check-label" for="config_updateBots">Update Bots</label>
-                        </div>
-                        <div id="divConfig_updateTOP" class="form-check form-switch">
-                            <input class="form-check-input" type="checkbox" role="switch" id="config_updateTOP">
-                            <label class="form-check-label" for="config_updateTOP">Update TOP</label>
-                        </div>
-                        <div id="divConfig_updateTime" class="input-group mt-2">
-                            <span class="input-group-text">Secs</span>
-                            <label><input type="number" class="form-control" id="config_updateTime" value="2" min="1"></label>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-success" data-bs-dismiss="modal" onclick="saveConfig()">Save
-                    changes
-                </button>
-            </div>
-        </div>
-    </div>
-</div>
-
 <!-- Power Modal -->
 <div class="modal fade" id="powerModal" tabindex="-1" aria-labelledby="powerLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-sm">
@@ -118,9 +78,6 @@
                 <li class="nav-item"><a id="navbar_configuration" class="nav-link" href="/configuration">Config</a></li>
             </ul>
             <ul class="navbar-nav ms-auto border-md-right border-md-top">
-                <li class="nav-item"><a id="navbar_settings" class="nav-link active" data-bs-toggle="modal" data-bs-target="#settingsModal" href="javascript:void(0);">Settings</a></li>
-            </ul>
-            <ul class="navbar-nav border-md-right border-md-top">
                 <li class="nav-item"><span class="nav-link active" id="navDateNow"></span></li>
             </ul>
             <ul class="navbar-nav border-md-top">

@@ -3,7 +3,7 @@
  */
 
 let hostname, configJSON;
-let config_updateStats, config_updateBots, config_updateTOP, config_updateTime;
+let config_updateStats, config_updateBots, config_updateTop, config_updateTime;
 
 async function sleep(secs) {
     await new Promise(resolve => setTimeout(resolve, secs * 1000));
@@ -82,12 +82,12 @@ async function getConfigContent() {
     // Set update configs
     config_updateStats = configJSON.UpdateStats;
     config_updateBots = configJSON.UpdateBots;
-    config_updateTOP = configJSON.UpdateTOP;
+    config_updateTop = configJSON.UpdateTop;
     config_updateTime = configJSON.UpdateTime;
 
     // Set Hostname
     hostname = await getHostname();
-    document.title = hostname;
+    document.title += " | " + hostname;
     document.getElementById("Hostname").innerText = hostname;
 
     // Show navbar items

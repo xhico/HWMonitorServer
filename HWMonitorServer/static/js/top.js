@@ -84,7 +84,7 @@ async function updateInfo() {
 
     // Wait x secs -> Run again
     await sleep(config_updateTime);
-    if (config_updateTOP === true) {
+    if (config_updateTop === true) {
         await updateInfo();
     }
 }

@@ -39,6 +39,9 @@ def create_app(config_class=Config):
     from HWMonitorServer.eye.routes import eye
     app.register_blueprint(eye)
 
+    from HWMonitorServer.pivpn.routes import pivpn
+    app.register_blueprint(pivpn)
+
     from HWMonitorServer.configuration.routes import configuration
     app.register_blueprint(configuration)
 

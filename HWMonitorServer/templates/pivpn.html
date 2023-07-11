@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}PiVPN{% endblock %}
+
+{% block content %}
+
+    <div class="container">
+        <div class="row row-cols-1 row-cols-md-3 g-4" id="profiles"></div>
+    </div>
+
+{% endblock %}
+
+{% block script %}
+    <script src="{{ url_for('static', filename='js/pivpn.js') }}"></script>
+{% endblock %}

@@ -94,6 +94,7 @@ async function getConfigContent() {
     document.getElementById("navbar_bots").hidden = !(configJSON.Bots.length !== 0);
     document.getElementById("navbar_history").hidden = !configJSON.History;
     document.getElementById("navbar_eye").hidden = !configJSON.Eye;
+    document.getElementById("navbar_pivpn").hidden = !configJSON.Pivpn;
 
     return configJSON;
 }

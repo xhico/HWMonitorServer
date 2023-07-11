@@ -87,7 +87,7 @@ async function getConfigContent() {
 
     // Set Hostname
     hostname = await getHostname();
-    document.title += " | " + hostname;
+    document.title = document.title.includes("|") ? document.title : document.title + " | " + hostname
     document.getElementById("Hostname").innerText = hostname;
 
     // Show navbar items

@@ -2,7 +2,14 @@
     @author: xhico
  */
 
-async function addProfileElem(profile) {
+async function revoke() {
+    let name = document.getElementById("profileName").innerText;
+    console.log(name);
+
+    $("#revokeModal").modal("hide");
+}
+
+function addProfileElem(profile) {
     let profileElemCol = document.createElement("div");
     profileElemCol.classList.add("col");
 
@@ -12,7 +19,14 @@ async function addProfileElem(profile) {
 
     let profileElemCardHeader = document.createElement("div");
     profileElemCardHeader.classList.add("card-header");
-    profileElemCardHeader.innerText = profile["name"];
+    if (profile["connected"]) {
+        profileElemCardHeader.classList.add("text-bg-success");
+    } else if (!profile["connected"] && profile["status"] === "Valid") {
+        profileElemCardHeader.classList.add("text-bg-warning");
+    } else {
+        profileElemCardHeader.classList.add("text-bg-danger");
+    }
+    profileElemCardHeader.innerHTML = "<b>" + profile["name"] + "</b>";
     profileElemCard.appendChild(profileElemCardHeader);
 
     let profileElemCardBody = document.createElement("div");
@@ -26,25 +40,51 @@ async function addProfileElem(profile) {
     profileElemCardFooter.appendChild(profileElemCardFooterSmall);
     profileElemCard.appendChild(profileElemCardFooter);
 
-    let profileElemCardRemoteIP = document.createElement("p");
-    profileElemCardRemoteIP.classList.add("card-text");
-    profileElemCardRemoteIP.innerHTML = "<b>Remote IP: </b>" + profile["remoteIP"];
-    profileElemCardBody.appendChild(profileElemCardRemoteIP);
+    let profileElemCardEntry = document.createElement("p");
+    profileElemCardEntry.classList.add("card-text");
+    profileElemCardEntry.innerHTML = "<b>Remote IP: </b>" + profile["remoteIP"];
+    profileElemCardEntry.hidden = !profile["remoteIP"]
+    profileElemCardBody.appendChild(profileElemCardEntry);
 
-    let profileElemCardVirtualIP = document.createElement("p");
-    profileElemCardVirtualIP.classList.add("card-text");
-    profileElemCardVirtualIP.innerHTML = "<b>Virtual IP: </b>" + profile["virtualIP"];
-    profileElemCardBody.appendChild(profileElemCardVirtualIP);
+    profileElemCardEntry = document.createElement("p");
+    profileElemCardEntry.classList.add("card-text");
+    profileElemCardEntry.innerHTML = "<b>Virtual IP: </b>" + profile["virtualIP"];
+    profileElemCardEntry.hidden = !profile["virtualIP"]
+    profileElemCardBody.appendChild(profileElemCardEntry);
 
-    let profileElemCardBytesReceived = document.createElement("p");
-    profileElemCardBytesReceived.classList.add("card-text");
-    profileElemCardBytesReceived.innerHTML = "<b>Bytes Received: </b>" + profile["bytesReceived"];
-    profileElemCardBody.appendChild(profileElemCardBytesReceived);
+    profileElemCardEntry = document.createElement("p");
+    profileElemCardEntry.classList.add("card-text");
+    profileElemCardEntry.innerHTML = "<b>Bytes Received: </b>" + profile["bytesReceived"];
+    profileElemCardEntry.hidden = !profile["bytesReceived"]
+    profileElemCardBody.appendChild(profileElemCardEntry);
 
-    let profileElemCardBytesSent = document.createElement("p");
-    profileElemCardBytesSent.classList.add("card-text");
-    profileElemCardBytesSent.innerHTML = "<b>Bytes Sent: </b>" + profile["bytesSent"];
-    profileElemCardBody.appendChild(profileElemCardBytesSent);
+    profileElemCardEntry = document.createElement("p");
+    profileElemCardEntry.classList.add("card-text");
+    profileElemCardEntry.innerHTML = "<b>Bytes Sent: </b>" + profile["bytesSent"];
+    profileElemCardEntry.hidden = !profile["remoteIP"]
+    profileElemCardBody.appendChild(profileElemCardEntry);
+
+    profileElemCardEntry = document.createElement("p");
+    profileElemCardEntry.classList.add("card-text");
+    profileElemCardEntry.innerHTML = "<b>Status: </b>" + profile["status"];
+    profileElemCardBody.appendChild(profileElemCardEntry);
+
+    profileElemCardEntry = document.createElement("p");
+    profileElemCardEntry.classList.add("card-text");
+    profileElemCardEntry.innerHTML = "<b>Expiration: </b>" + profile["expiration"];
+    profileElemCardBody.appendChild(profileElemCardEntry);
+
+    let profileElemCardRevoke = document.createElement("button");
+    profileElemCardRevoke.type = "button";
+    profileElemCardRevoke.setAttribute("data-bs-toggle", "modal");
+    profileElemCardRevoke.setAttribute("data-bs-target", "#revokeModal");
+    profileElemCardRevoke.classList.add("btn", "btn-danger");
+    profileElemCardRevoke.innerText = "Revoke";
+    profileElemCardRevoke.onclick = function () {
+        document.getElementById('profileName').innerText = name;
+    }
+    profileElemCardRevoke.disabled = profile["status"] === "Revoked";
+    profileElemCardBody.appendChild(profileElemCardRevoke);
 
     let profilesElem = document.getElementById("profiles");
     profilesElem.appendChild(profileElemCol);
@@ -64,7 +104,7 @@ window.addEventListener('DOMContentLoaded', async function main() {
 
     // Add PiVPN Profiles
     for (let profile of resp) {
-        await addProfileElem(profile);
+        addProfileElem(profile)
     }
 
     // Remove Loading

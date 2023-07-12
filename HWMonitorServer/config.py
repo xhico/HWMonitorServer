@@ -2,6 +2,7 @@
 
 import json
 import os
+import socket
 
 
 def loadConfig():
@@ -46,11 +47,13 @@ class Config:
     Attributes:
         config (dict): A dictionary containing configuration settings.
         configFile (str): The absolute path to the configuration file.
+        hostname (str): The current hostname in uppercase.
         botsName (list): A list of bot names.
     """
 
     # Load the config file
     config, configFile = loadConfig()
+    hostname = str(socket.gethostname()).upper()
 
     # Get the names of the bots
     botsName = config["Bots"]

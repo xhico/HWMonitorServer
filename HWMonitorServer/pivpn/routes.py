@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
+import os
 
-from flask import render_template, jsonify, Blueprint
+from flask import render_template, jsonify, Blueprint, request
 import HWMonitorServer.pivpn.models as models
 
 # Define a Flask pivpn instance
@@ -26,3 +27,17 @@ def pivpn_info():
     """
     pivpnInfo = models.getPiVPNInfo()
     return jsonify(pivpnInfo)
+
+
+@pivpn.route("/pivpn/revoke", methods=['POST'])
+def pivpn_revoke():
+    """
+    Revokes a profile from PiVPN
+
+    Returns:
+        A JSON response containing success message
+    """
+
+    name = request.form.get("name", type=str)
+    os.system("pivpn revoke " + name + " -y")
+    return jsonify({"message": "success"})

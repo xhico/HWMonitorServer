@@ -2,11 +2,25 @@
     @author: xhico
  */
 
-async function revoke() {
-    let name = document.getElementById("profileName").innerText;
-    console.log(name);
+async function revoke(btn) {
+    // Action spinner
+    let spinnerElem = btn.getElementsByClassName("spinner-grow")[0];
+    spinnerElem.hidden = false;
 
+    // Make POST Request
+    let name = document.getElementById("profileName").innerText;
+    await $.ajax({
+        method: "post", url: "/pivpn/revoke", data: {name: name}, success: function (data) {
+            return data;
+        }
+    });
+
+    // Load Clients
+    await loadClients();
+
+    // Dismiss Modal
     $("#revokeModal").modal("hide");
+    spinnerElem.hidden = true;
 }
 
 function addProfileElem(profile) {
@@ -91,9 +105,9 @@ function addProfileElem(profile) {
 
 }
 
-window.addEventListener('DOMContentLoaded', async function main() {
-    document.getElementById("navbar_pivpn").classList.add("active");
-    console.log("Get PiVPN info");
+async function loadClients() {
+    // Clear existing profiles
+    document.getElementById("profiles").innerHTML = "";
 
     // Get PiVPN Info
     let resp = await $.ajax({
@@ -106,6 +120,14 @@ window.addEventListener('DOMContentLoaded', async function main() {
     for (let profile of resp) {
         addProfileElem(profile)
     }
+}
+
+window.addEventListener('DOMContentLoaded', async function main() {
+    document.getElementById("navbar_pivpn").classList.add("active");
+    console.log("Get PiVPN info");
+
+    // Load Clients
+    await loadClients();
 
     // Remove Loading
     await loadingScreen("remove");

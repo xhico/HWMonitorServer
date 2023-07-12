@@ -17,7 +17,11 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-danger" onclick="revoke()">Confirm</button>
+                    <button type="button" class="btn btn-danger" onclick="revoke(this)">
+                        <span hidden class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
+                        Confirm
+                    </button>
+
                 </div>
             </div>
         </div>

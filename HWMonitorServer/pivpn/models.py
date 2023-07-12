@@ -95,6 +95,42 @@ def convert_to_units(data_size):
         raise ValueError("Invalid data size format. Please use 'GiB', 'MiB', or 'KiB'.")
 
 
+def sort_profiles(profiles):
+    """
+    Sorts the profiles based on their status and name.
+
+    Args:
+        profiles (dict): Dictionary containing profile data.
+
+    Returns:
+        list: A list of profiles sorted first by connected profiles (in alphabetical order),
+              then valid profiles (in alphabetical order), and finally revoked profiles (in alphabetical order).
+    """
+
+    connected_profiles = []
+    valid_profiles = []
+    revoked_profiles = []
+
+    for profile_id, profile_data in profiles.items():
+        profile_status = profile_data['status']
+        profile_name = profile_data['name']
+
+        if profile_data['connected']:
+            connected_profiles.append((profile_id, profile_name))
+        elif profile_status == 'Valid':
+            valid_profiles.append((profile_id, profile_name))
+        elif profile_status == 'Revoked':
+            revoked_profiles.append((profile_id, profile_name))
+
+    connected_profiles = sorted(connected_profiles, key=lambda x: x[1].lower())
+    valid_profiles = sorted(valid_profiles, key=lambda x: x[1].lower())
+    revoked_profiles = sorted(revoked_profiles, key=lambda x: x[1].lower())
+
+    sorted_profiles = connected_profiles + valid_profiles + revoked_profiles
+    sorted_profiles = [profiles[profile[0]] for profile in sorted_profiles]
+    return sorted_profiles
+
+
 def getPiVPNInfo():
     """
     Retrieves PiVPN information for clients.
@@ -130,8 +166,7 @@ def getPiVPNInfo():
     # Remove Local Profile
     remove_by_name(clients, Config.hostname)
 
-    # Sort by connect
-    clients = list(sorted(clients.items(), key=lambda x: x[1]["connected"], reverse=True))
-    clients = [c[1] for c in clients]
+    # Sort the profiles based on their status and name
+    clients = sort_profiles(clients)
 
     return clients

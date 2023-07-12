@@ -81,7 +81,7 @@ function addProfileElem(profile) {
     profileElemCardRevoke.classList.add("btn", "btn-danger");
     profileElemCardRevoke.innerText = "Revoke";
     profileElemCardRevoke.onclick = function () {
-        document.getElementById('profileName').innerText = name;
+        document.getElementById('profileName').innerText = profile["name"];
     }
     profileElemCardRevoke.disabled = profile["status"] === "Revoked";
     profileElemCardBody.appendChild(profileElemCardRevoke);

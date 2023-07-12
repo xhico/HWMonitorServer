@@ -131,7 +131,7 @@ async function updateDate() {
     let hour = checkZero(today.getHours() + "");
     let minutes = checkZero(today.getMinutes() + "");
     let seconds = checkZero(today.getSeconds() + "");
-    document.getElementById("navDateNow").innerText = year + "/" + month + "/" + day + " " + hour + ":" + minutes + ":" + seconds;
+    document.getElementById("navDateNow").innerText = year + "-" + month + "-" + day + " " + hour + ":" + minutes + ":" + seconds;
 
     // Wait x secs -> Run again
     await sleep(config_updateTime);

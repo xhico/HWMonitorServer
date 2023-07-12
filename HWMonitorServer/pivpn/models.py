@@ -114,6 +114,7 @@ def getPiVPNInfo():
     # Get Connected Clients information
     client_lines = subprocess.check_output(["pivpn", "clients"], universal_newlines=True).strip().split("\n")[5:]
     clients_info = extractInfo(client_lines, 0, "\t")
+    clients_info = [] if clients_info[0][0] == "No Clients Connected!" else clients_info
     for info in clients_info:
         name, remoteIP, virtualIP, bytesReceived, bytesSent = info[0], info[1], info[2], info[3], info[4]
         connectedSince = datetime.datetime.fromtimestamp(int(info[5].split(" ")[1])).strftime('%Y/%m/%d %H:%M:%S')

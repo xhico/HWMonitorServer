@@ -108,7 +108,7 @@ def getPiVPNInfo():
     list_lines = subprocess.check_output(["pivpn", "list"], universal_newlines=True).strip().split("\n")[4:]
     list_info = extractInfo(list_lines, 0, "\t")
     for idx, info in enumerate(list_info):
-        status, name, expiration = info[0], info[1], datetime.datetime.strptime(info[2], "%b %d %Y").strftime("%Y-%m-%d")
+        status, name, expiration = info[0], info[1], datetime.datetime.strptime(info[2], "%b %d %Y").strftime("%Y/%m/%d")
         clients[idx] = {"name": name, "connected": False, "status": status, "expiration": expiration}
 
     # Get Connected Clients information
@@ -116,7 +116,7 @@ def getPiVPNInfo():
     clients_info = extractInfo(client_lines, 0, "\t")
     for info in clients_info:
         name, remoteIP, virtualIP, bytesReceived, bytesSent = info[0], info[1], info[2], info[3], info[4]
-        connectedSince = datetime.datetime.fromtimestamp(int(info[5].split(" ")[1])).strftime('%Y-%m-%d %H:%M:%S')
+        connectedSince = datetime.datetime.fromtimestamp(int(info[5].split(" ")[1])).strftime('%Y/%m/%d %H:%M:%S')
 
         idx = int(getClientIdx(clients, name))
         clients[idx]["connected"] = True

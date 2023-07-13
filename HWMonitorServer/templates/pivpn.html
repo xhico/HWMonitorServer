@@ -17,7 +17,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-danger" onclick="revoke(this)">
+                    <button type="button" class="btn btn-danger" onclick="revokeClient(this)">
                         <span hidden class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
                         Confirm
                     </button>
@@ -27,9 +27,30 @@
         </div>
     </div>
 
-    <!-- Profiles -->
-    <div class="container">
-        <div class="row row-cols-1 row-cols-md-4 g-4" id="profiles"></div>
+    <!-- Left Pane -->
+    <div class="col-xl-8 col-md-12 mb-4">
+        <div class="row row-cols-auto g-4" id="profiles"></div>
+    </div>
+
+    <div class="col-xl-4 col-md-12">
+        <div class="row">
+            <div class="col-12 mb-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Add Client</h5>
+                        <form class="input-group flex-nowrap mb-3">
+                            <input id="addClientName" autocomplete="off" type="text" class="form-control" placeholder="Name" aria-label="Name" aria-describedby="addClientName">
+                            <input id="addClientPW" autocomplete="off" type="password" class="form-control" placeholder="Password" aria-label="Password" aria-describedby="addClientPW">
+                            <input id="addClientDays" value="1080" autocomplete="off" type="number" min="1" max="3650" class="form-control" placeholder="Expiration Days" aria-label="Expiration Days" aria-describedby="addClientDays">
+                            <button class="btn btn-outline-success" type="button" id="addClientBtn" onclick="addClient(this)">
+                                <span hidden class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
+                                Add
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
 {% endblock %}

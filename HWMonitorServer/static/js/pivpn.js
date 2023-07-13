@@ -2,27 +2,6 @@
     @author: xhico
  */
 
-async function revoke(btn) {
-    // Action spinner
-    let spinnerElem = btn.getElementsByClassName("spinner-grow")[0];
-    spinnerElem.hidden = false;
-
-    // Make POST Request
-    let name = document.getElementById("profileName").innerText;
-    await $.ajax({
-        method: "post", url: "/pivpn/revoke", data: {name: name}, success: function (data) {
-            return data;
-        }
-    });
-
-    // Load Clients
-    await loadClients();
-
-    // Dismiss Modal
-    $("#revokeModal").modal("hide");
-    spinnerElem.hidden = true;
-}
-
 function addProfileElem(profile) {
     let profileElemCol = document.createElement("div");
     profileElemCol.classList.add("col");
@@ -50,6 +29,7 @@ function addProfileElem(profile) {
     let profileElemCardFooter = document.createElement("div");
     profileElemCardFooter.classList.add("card-footer", "text-muted");
     let profileElemCardFooterSmall = document.createElement("small");
+    profile["connectedSince"] = profile["connectedSince"] ? profile["connectedSince"] : "-";
     profileElemCardFooterSmall.innerHTML = "<b>Connected Since: </b>" + profile["connectedSince"]
     profileElemCardFooter.appendChild(profileElemCardFooterSmall);
     profileElemCard.appendChild(profileElemCardFooter);
@@ -120,6 +100,74 @@ async function loadClients() {
     for (let profile of resp) {
         addProfileElem(profile)
     }
+}
+
+async function revokeClient(revokeBtn) {
+    // Action spinner
+    let spinnerElem = revokeBtn.getElementsByClassName("spinner-grow")[0];
+    spinnerElem.hidden = false;
+    revokeBtn.disabled = true;
+
+    // Make POST Request
+    let name = document.getElementById("profileName").innerText;
+    await $.ajax({
+        method: "post", url: "/pivpn/revoke", data: {name: name}, success: function (data) {
+            return data;
+        }
+    });
+
+    // Load Clients
+    await loadClients();
+
+    // Dismiss Modal
+    $("#revokeModal").modal("hide");
+    revokeBtn.disabled = false;
+    spinnerElem.hidden = true;
+}
+
+async function addClient(addBtn) {
+    // Get Client Information
+    let spinnerElem = addBtn.getElementsByClassName("spinner-grow")[0];
+    let clientName = document.getElementById("addClientName");
+    let clientPW = document.getElementById("addClientPW");
+    let clientDays = document.getElementById("addClientDays");
+    let clientNameValue = clientName.value;
+    let clientPWValue = clientPW.value;
+    let clientDaysValue = clientDays.value;
+
+    // Check Client Information
+    if (clientNameValue === "" || clientPWValue === "" || clientPWValue.length < 4 || clientDaysValue === "" || 1 > clientDaysValue > 3650) {
+        await showNotification("Invalid Client Information", "Please check Name, Password (Min Length: 4), Expiration Days", "error");
+    } else {
+        // Disable Btns
+        await loadingScreen("show");
+        spinnerElem.hidden = false;
+        addBtn.disabled = true;
+        clientPW.disabled = true;
+        clientDays.disabled = true;
+        clientName.disabled = true;
+
+        // Make Post Request
+        await $.ajax({
+            method: "post",
+            url: "/pivpn/add",
+            data: {clientName: clientNameValue, clientPW: clientPWValue, clientDays: clientDaysValue},
+            success: function (data) {
+                return data;
+            }
+        });
+
+        // Load Clients
+        await loadClients();
+    }
+
+    // Clear Spinner
+    addBtn.disabled = false;
+    spinnerElem.hidden = true;
+    clientPW.disabled = false;
+    clientDays.disabled = false;
+    clientName.disabled = false;
+    await loadingScreen("remove");
 }
 
 window.addEventListener('DOMContentLoaded', async function main() {

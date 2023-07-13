@@ -105,7 +105,7 @@ async function loadingScreen(action) {
     } else if (action === "remove") {
         action = true;
     } else {
-        console.log("Wrong action - " + action);
+        console.log("Wrong loadingScreen action - " + action);
         return
     }
 

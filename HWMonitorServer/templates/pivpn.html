@@ -17,11 +17,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-danger" onclick="revokeClient(this)">
-                        <span hidden class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
-                        Confirm
-                    </button>
-
+                    <button type="button" class="btn btn-danger" onclick="revokeClient(this)">Confirm</button>
                 </div>
             </div>
         </div>
@@ -29,28 +25,95 @@
 
     <!-- Left Pane -->
     <div class="col-xl-8 col-md-12 mb-4">
-        <div class="row row-cols-auto g-4" id="profiles"></div>
+        <div class="row">
+            <div class="col-12 mb-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">PiVPN Clients</h5>
+                        <div class="row row-cols-1 row-cols-md-3 g-4" id="profiles"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
+    <!-- Right Pane -->
     <div class="col-xl-4 col-md-12">
+
+        <!-- Overview -->
+        <div class="row">
+            <div class="col-12 mb-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Overview</h5>
+                        <ol class="list-group">
+                            <li class="list-group-item d-flex justify-content-between align-items-start">
+                                <div class="ms-2 me-auto">
+                                    <div class="fw-bold">Valid</div>
+                                </div>
+                                <span id="overviewValid" class="badge bg-warning rounded-pill">0</span>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-start">
+                                <div class="ms-2 me-auto">
+                                    <div class="fw-bold">Revoked</div>
+                                </div>
+                                <span id="overviewRevoked" class="badge bg-danger rounded-pill">0</span>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-start">
+                                <div class="ms-2 me-auto">
+                                    <div class="fw-bold">Connected</div>
+                                </div>
+                                <span id="overviewConnected" class="badge bg-success rounded-pill">0</span>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-start">
+                                <div class="ms-2 me-auto">
+                                    <div class="fw-bold">Total</div>
+                                </div>
+                                <span id="overviewTotal" class="badge bg-secondary rounded-pill">0</span>
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Filter Clients -->
+        <div class="row">
+            <div class="col-12 mb-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Filter Clients</h5>
+                        <div class="input-group flex-nowrap">
+                            <select class="form-select" id="clientFilterSelect" aria-label="Client Select Filter">
+                                <option value="Valid" selected>Valid</option>
+                                <option value="Revoked">Revoked</option>
+                                <option value="Connected">Connected</option>
+                                <option value="All">All</option>
+                            </select>
+                            <button class="btn btn-outline-success" type="button" id="filterClientBtn" onclick="loadClients()">Filter</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Add Client -->
         <div class="row">
             <div class="col-12 mb-4">
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title">Add Client</h5>
-                        <form class="input-group flex-nowrap mb-3">
+                        <div class="input-group flex-nowrap">
                             <input id="addClientName" autocomplete="off" type="text" class="form-control" placeholder="Name" aria-label="Name" aria-describedby="addClientName">
                             <input id="addClientPW" autocomplete="off" type="password" class="form-control" placeholder="Password" aria-label="Password" aria-describedby="addClientPW">
                             <input id="addClientDays" value="1080" autocomplete="off" type="number" min="1" max="3650" class="form-control" placeholder="Expiration Days" aria-label="Expiration Days" aria-describedby="addClientDays">
-                            <button class="btn btn-outline-success" type="button" id="addClientBtn" onclick="addClient(this)">
-                                <span hidden class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
-                                Add
-                            </button>
-                        </form>
+                            <button class="btn btn-outline-success" type="button" id="addClientBtn" onclick="addClient(this)">Add</button>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
+
     </div>
 
 {% endblock %}

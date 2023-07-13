@@ -85,7 +85,22 @@ function addProfileElem(profile) {
 
 }
 
+async function filterClients(data, filterOption) {
+    if (filterOption === "Valid") {
+        return data.filter(item => item.status === "Valid");
+    } else if (filterOption === "Revoked") {
+        return data.filter(item => item.status === "Revoked");
+    } else if (filterOption === "Connected") {
+        return data.filter(item => item.connected === true);
+    } else {
+        return data;
+    }
+}
+
 async function loadClients() {
+    // Show Loading
+    await loadingScreen("show");
+
     // Clear existing profiles
     document.getElementById("profiles").innerHTML = "";
 
@@ -96,16 +111,50 @@ async function loadClients() {
         }
     });
 
+    // Check if no Clients
+    if (resp.length === 0) {
+        document.getElementById("profiles").innerHTML = "<span>No Clients to show</span>";
+    }
+
+    // Set Overview
+    let validCount = 0;
+    let revokedCount = 0;
+    let connectedCount = 0;
+    let totalCount = resp.length;
+    for (let entry of resp) {
+        if (entry.status === "Valid") {
+            validCount++;
+        }
+        if (entry.status === "Revoked") {
+            revokedCount++;
+        }
+        if (entry.connected === true) {
+            connectedCount++;
+        }
+    }
+    document.getElementById("overviewValid").innerText = validCount.toString();
+    document.getElementById("overviewRevoked").innerText = revokedCount.toString();
+    document.getElementById("overviewConnected").innerText = connectedCount.toString();
+    document.getElementById("overviewTotal").innerText = totalCount.toString();
+
+    // Filter Clients
+    let filterOption = document.getElementById("clientFilterSelect").value;
+    resp = await filterClients(resp, filterOption);
+
     // Add PiVPN Profiles
     for (let profile of resp) {
-        addProfileElem(profile)
+        addProfileElem(profile);
     }
+
+    // Remove Loading
+    await loadingScreen("remove");
 }
 
 async function revokeClient(revokeBtn) {
-    // Action spinner
-    let spinnerElem = revokeBtn.getElementsByClassName("spinner-grow")[0];
-    spinnerElem.hidden = false;
+    // Show Loading
+    await loadingScreen("show");
+
+    // Disable Btns
     revokeBtn.disabled = true;
 
     // Make POST Request
@@ -119,15 +168,19 @@ async function revokeClient(revokeBtn) {
     // Load Clients
     await loadClients();
 
-    // Dismiss Modal
+    // Clear Btns
     $("#revokeModal").modal("hide");
     revokeBtn.disabled = false;
-    spinnerElem.hidden = true;
+
+    // Remove Loading
+    await loadingScreen("remove");
 }
 
 async function addClient(addBtn) {
+    // Show Loading
+    await loadingScreen("show");
+
     // Get Client Information
-    let spinnerElem = addBtn.getElementsByClassName("spinner-grow")[0];
     let clientName = document.getElementById("addClientName");
     let clientPW = document.getElementById("addClientPW");
     let clientDays = document.getElementById("addClientDays");
@@ -140,12 +193,7 @@ async function addClient(addBtn) {
         await showNotification("Invalid Client Information", "Please check Name, Password (Min Length: 4), Expiration Days", "error");
     } else {
         // Disable Btns
-        await loadingScreen("show");
-        spinnerElem.hidden = false;
         addBtn.disabled = true;
-        clientPW.disabled = true;
-        clientDays.disabled = true;
-        clientName.disabled = true;
 
         // Make Post Request
         await $.ajax({
@@ -163,10 +211,8 @@ async function addClient(addBtn) {
 
     // Clear Spinner
     addBtn.disabled = false;
-    spinnerElem.hidden = true;
-    clientPW.disabled = false;
-    clientDays.disabled = false;
-    clientName.disabled = false;
+
+    // Remove Loading
     await loadingScreen("remove");
 }
 

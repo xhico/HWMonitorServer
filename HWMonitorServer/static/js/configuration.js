@@ -22,6 +22,8 @@ async function toggleBtns(flag) {
 }
 
 async function saveConfigJSON() {
+    // Show Loading
+    await loadingScreen("show");
     await toggleBtns(false);
 
     // Check if JSON is valid
@@ -49,6 +51,9 @@ async function saveConfigJSON() {
         await showNotification("Saving Configuration", "Restarting Service", resp["status"]);
         await power("restart");
     }
+
+    // Remove Loading
+    await loadingScreen("remove");
 }
 
 async function manageBot(action) {

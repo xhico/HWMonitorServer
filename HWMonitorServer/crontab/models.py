@@ -20,7 +20,10 @@ def readCrontab():
     os.remove(crontabFile)
 
     # Parse jobs and their status
-    cronjobs = [{"job": job, "status": "disabled" if job.startswith("#") else "enabled"} for job in cronjobs]
+    cronjobs = [{"job": job.lstrip("#"), "status": "disabled" if job.startswith("#") else "enabled"} for job in cronjobs]
+
+    # Sort the list of dictionaries by the "status" key
+    cronjobs = sorted(cronjobs, key=lambda x: x["status"] == "enabled", reverse=True)
 
     return cronjobs
 
@@ -38,10 +41,8 @@ def saveCrontab(cronjobs):
             jobJob = job["job"]
             jobStatus = job["status"]
 
-            if jobStatus == "disabled" and not jobJob.startswith("#"):
-                jobJob = "#" + jobJob
-            elif jobStatus == "enabled" and jobJob.startswith("#"):
-                jobJob = jobJob[1::]
+            # Set job command
+            jobJob = "#" + jobJob if jobStatus == "disabled" else jobJob.lstrip("#")
             newCrontab.append(jobJob + "\n")
 
         crontabFile = "/home/pi/crontab.txt"

@@ -4,7 +4,7 @@
 
 function addProfileElem(profile) {
     let profileElemCol = document.createElement("div");
-    profileElemCol.classList.add("col");
+    profileElemCol.classList.add("col-12");
 
     let profileElemCard = document.createElement("div");
     profileElemCard.classList.add("card", "text-center");
@@ -97,12 +97,15 @@ async function filterClients(data, filterOption) {
     }
 }
 
-async function loadClients() {
+async function loadClients(status) {
     // Show Loading
     await loadingScreen("show");
 
     // Clear existing profiles
     document.getElementById("profiles").innerHTML = "";
+
+    // Set clientsTitle
+    document.getElementById("clientsTitle").innerText = status;
 
     // Get PiVPN Info
     let resp = await $.ajax({
@@ -132,14 +135,20 @@ async function loadClients() {
             connectedCount++;
         }
     }
-    document.getElementById("overviewValid").innerText = validCount.toString();
-    document.getElementById("overviewRevoked").innerText = revokedCount.toString();
-    document.getElementById("overviewConnected").innerText = connectedCount.toString();
-    document.getElementById("overviewTotal").innerText = totalCount.toString();
+    document.getElementById("overviewBadgeValid").innerText = validCount.toString();
+    document.getElementById("overviewBadgeRevoked").innerText = revokedCount.toString();
+    document.getElementById("overviewBadgeConnected").innerText = connectedCount.toString();
+    document.getElementById("overviewBadgeTotal").innerText = totalCount.toString();
+
+    // Toggle Overview Btn
+    const overviewButtons = document.querySelectorAll('[id^="overviewBtn-"]');
+    overviewButtons.forEach(button => {
+        button.classList.remove("active");
+    });
+    document.getElementById("overviewBtn-" + status).classList.add("active");
 
     // Filter Clients
-    let filterOption = document.getElementById("clientFilterSelect").value;
-    resp = await filterClients(resp, filterOption);
+    resp = await filterClients(resp, status);
 
     // Add PiVPN Profiles
     for (let profile of resp) {
@@ -166,7 +175,7 @@ async function revokeClient(revokeBtn) {
     });
 
     // Load Clients
-    await loadClients();
+    await loadClients("Valid");
 
     // Clear Btns
     $("#revokeModal").modal("hide");
@@ -206,7 +215,7 @@ async function addClient(addBtn) {
         });
 
         // Load Clients
-        await loadClients();
+        await loadClients("Valid");
     }
 
     // Clear Spinner
@@ -221,7 +230,7 @@ window.addEventListener('DOMContentLoaded', async function main() {
     console.log("Get PiVPN info");
 
     // Load Clients
-    await loadClients();
+    await loadClients("Valid");
 
     // Remove Loading
     await loadingScreen("remove");

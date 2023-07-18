@@ -18,11 +18,10 @@ def getRecordings():
     subFolders = [f for f in os.listdir(recordingsFolder) if os.path.isdir(os.path.join(recordingsFolder, f))]
 
     # Retrieve all recordings for each day and add them to the dictionary
-    recordings = {}
+    recordingsInfo = {}
     for day in subFolders:
-        dayFolder = os.path.join(recordingsFolder, day)
-        recs = [os.path.join(day, file) for file in os.listdir(dayFolder)]
-        if len(recs) != 0:
-            recordings[day] = recs
+        recFiles = [file for file in os.listdir(os.path.join(recordingsFolder, day)) if file.endswith(".mp4")]
+        if len(recFiles) != 0:
+            recordingsInfo[day] = [file for file in recFiles]
 
-    return recordings
+    return recordingsInfo

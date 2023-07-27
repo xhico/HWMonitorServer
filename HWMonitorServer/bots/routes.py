@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import os
 
 import psutil
 from flask import render_template, jsonify, Blueprint, request
@@ -46,14 +47,12 @@ def json_action():
     name = request.form.get('name', type=str)
 
     try:
-        if value == "kill":
-            allBots = models.getBots()
-            pid = int(allBots[name]["info"]["pid"])
-            psutil.Process(pid).kill()
-            resp = {"status": "success", "message": name + " killed successfully"}
-        elif value == "run":
-            models.runBot(name)
+        if value == "start":
+            os.system("sudo service " + name + " start")
             resp = {"status": "success", "message": "Running " + name}
+        elif value == "stop":
+            os.system("sudo service " + name + " stop")
+            resp = {"status": "success", "message": name + " killed successfully"}
         elif value == "log":
             info = models.getBotLog(name)
             resp = {"status": "success", "message": "View Log successfully", "info": info}

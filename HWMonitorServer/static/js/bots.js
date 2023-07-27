@@ -96,19 +96,19 @@ function createBot(name) {
 
     btnOne = document.createElement("button");
     btnOne.classList.add("btn", "btn-danger", "m-1");
-    btnOne.id = name + "_kill";
-    btnOne.innerText = "Kill";
+    btnOne.id = name + "_stop";
+    btnOne.innerText = "Stop";
     btnOne.onclick = function () {
-        action("kill", name)
+        action("stop", name)
     }
     divThree.appendChild(btnOne);
 
     btnTwo = document.createElement("button");
     btnTwo.classList.add("btn", "btn-success", "m-1");
-    btnTwo.id = name + "_run";
-    btnTwo.innerText = "Run";
+    btnTwo.id = name + "_start";
+    btnTwo.innerText = "Start";
     btnTwo.onclick = function () {
-        action("run", name)
+        action("start", name)
     }
     divThree.appendChild(btnTwo);
 
@@ -143,8 +143,8 @@ function setBot(JSON, name) {
     document.getElementById(name + "_memory").innerText = memory;
     document.getElementById(name + "_create_time").innerText = create_time;
     document.getElementById(name + "_running_time").innerText = running_time;
-    document.getElementById(name + "_kill").disabled = ((running === "False"));
-    document.getElementById(name + "_run").disabled = ((running === "True"));
+    document.getElementById(name + "_start").disabled = ((running === "True"));
+    document.getElementById(name + "_stop").disabled = ((running === "False"));
 }
 
 async function updateSections() {
@@ -155,6 +155,7 @@ async function updateSections() {
             return data;
         }
     });
+    console.log(JSON);
 
     // Remove hasInfo key
     let botNames = Object.keys(JSON).filter(function (e) {

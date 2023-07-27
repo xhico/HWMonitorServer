@@ -1,26 +1,9 @@
 # -*- coding: utf-8 -*-
 
-import datetime
-import os
 import subprocess
 import psutil
-
+import datetime
 from HWMonitorServer.config import Config
-
-
-def runBot(name: str) -> None:
-    """
-    Run a Python script in the background.
-
-    Parameters:
-        name (str): Name of the Python script to run.
-
-    Returns:
-        None
-    """
-    script_file = f"/home/pi/{name}/{name}.py"
-    command = f"python3 {script_file} &"
-    os.system(command)
 
 
 def getBotLog(name: str) -> str:
@@ -46,6 +29,7 @@ def getBotInfo(name):
     :return: a dictionary containing information about the bot process, or an empty dictionary if the process is not running
     :rtype: dict
     """
+
     # create an empty dictionary to store the process information
     pDict = {}
 

@@ -102,6 +102,20 @@ async function manageBot(action) {
     await saveConfigJSON();
 }
 
+async function downloadConfig() {
+    // Create download btn -> click
+    let configJSON = await getConfigContent(configurationArea);
+    configJSON = JSON.stringify(configJSON, null, 4);
+    let downloadElem = document.createElement("a");
+    let crontabFile = "config_" + hostname + ".txt";
+    downloadElem.setAttribute("href", "data:text/plain;charset=utf-8," + encodeURIComponent(configJSON));
+    downloadElem.setAttribute("download", crontabFile);
+    downloadElem.style.display = "none";
+    document.body.appendChild(downloadElem);
+    downloadElem.click();
+    document.body.removeChild(downloadElem);
+}
+
 async function navToggle(key, btn) {
     // Convert from Object to String
     let configJSON = configurationArea.value;

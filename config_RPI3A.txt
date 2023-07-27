@@ -1,0 +1,13 @@
+{
+    "Bots": [
+        "HardwareHistory",
+        "ipSender"
+    ],
+    "History": true,
+    "Eye": false,
+    "Pivpn": true,
+    "UpdateTime": 2,
+    "UpdateStats": true,
+    "UpdateBots": true,
+    "UpdateTop": true
+}

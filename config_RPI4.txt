@@ -1,0 +1,19 @@
+{
+    "Bots": [
+        "ddnsUpdater",
+        "EZTV-AutoDownloader",
+        "FIAFormulaEDocs",
+        "HardwareHistory",
+        "HumiditySensor",
+        "ipSender",
+        "NoIpUpdater",
+        "RaspberryPiSurveillance"
+    ],
+    "History": true,
+    "Eye": true,
+    "Pivpn": false,
+    "UpdateTime": 2,
+    "UpdateStats": true,
+    "UpdateBots": true,
+    "UpdateTop": true
+}

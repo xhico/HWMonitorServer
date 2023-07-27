@@ -155,7 +155,6 @@ async function updateSections() {
             return data;
         }
     });
-    console.log(JSON);
 
     // Remove hasInfo key
     let botNames = Object.keys(JSON).filter(function (e) {

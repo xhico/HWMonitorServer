@@ -3,12 +3,17 @@
  */
 
 async function action(value, name) {
+    // Show Loading
+    await loadingScreen("show");
+
     let resp = await $.ajax({
         method: "post", url: "/bots/action", data: {value: value, name: name}, success: function (data) {
             return data;
         }
     });
-    console.log(resp["status"]);
+
+    // Remove Loading
+    await loadingScreen("remove");
 
     // Show Notification
     await showNotification("Bot - " + name, resp["message"], resp["status"])

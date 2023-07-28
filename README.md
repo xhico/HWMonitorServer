@@ -1,10 +1,10 @@
-# RaspberryPi Hardware Monitor
+# RaspberryPi Monitor
 
-This is a Raspberry Pi Hardware Monitor!
+This is a Raspberry Pi Monitor!
 </br>
-It was inspired by XavierBerger/RPi-Monitor, but built with Flask/Bootstrap
+It was inspired by XavierBerger/RPi-Monitor, but built with Flask
 
-![Dashboard](https://github.com/xhico/HWMonitorServer/blob/main/Dashboard.png "Dashboard")
+![Stats](https://github.com/xhico/HWMonitorServer/blob/main/ScreenImages/Stats.jpg "Stats")
 
 ## Features
 * Auto-detect for other RPIs running the Monitor
@@ -12,6 +12,11 @@ It was inspired by XavierBerger/RPi-Monitor, but built with Flask/Bootstrap
 * Lightweight
 * Highly modular
 * Built-in JSON Info generator. Useful for other projects that require the same stats.
+* PiVPN Manager
+* RaspberryPiSurveillance Manager
+* Crontab Manager
+* Bots Manager
+* Hardware History
 
 ## Stats available
 * Version
@@ -24,4 +29,19 @@ It was inspired by XavierBerger/RPi-Monitor, but built with Flask/Bootstrap
 * Wired Network
 * Wifi Network
 * HDD Storage
+
+### Bots
+![Bots](https://github.com/xhico/HWMonitorServer/blob/main/ScreenImages/Bots.jpg "Bots")
+### History
+![History](https://github.com/xhico/HWMonitorServer/blob/main/ScreenImages/History.jpg "History")
+### Crontab
+![History](https://github.com/xhico/HWMonitorServer/blob/main/ScreenImages/Crontab.jpg "Crontab")
+### TOP
+![TOP](https://github.com/xhico/HWMonitorServer/blob/main/ScreenImages/TOP.jpg "TOP")
+### EYE
+![EYE](https://github.com/xhico/HWMonitorServer/blob/main/ScreenImages/EYE.jpg "EYE")
+### PiVPN
+![PiVPN](https://github.com/xhico/HWMonitorServer/blob/main/ScreenImages/PiVPN.jpg "PiVPN")
+### Config
+![Config](https://github.com/xhico/HWMonitorServer/blob/main/ScreenImages/Config.jpg "Config")
 

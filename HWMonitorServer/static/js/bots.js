@@ -12,11 +12,11 @@ async function action(value, name) {
         }
     });
 
-    // Remove Loading
-    await loadingScreen("remove");
-
     // Show Notification
     await showNotification("Bot - " + name, resp["message"], resp["status"])
+
+    // Remove Loading
+    await loadingScreen("remove");
 
     // Show log if necessary
     if (resp["action"] === "log") {
@@ -52,7 +52,6 @@ function createBot(name) {
     divTwo.classList.add("row", "px-4");
     divOne.appendChild(divTwo);
 
-
     pElem = document.createElement("p");
     pElem.classList.add("col");
     pElem.innerHTML = "Running: <b><span id=\"" + name + "_running\">-</span></b>"
@@ -67,7 +66,6 @@ function createBot(name) {
     w100.classList.add("w-100");
     divTwo.appendChild(w100);
 
-
     pElem = document.createElement("p");
     pElem.classList.add("col");
     pElem.innerHTML = "CPU: <b><span id=\"" + name + "_cpu\">-</span></b>"
@@ -78,22 +76,32 @@ function createBot(name) {
     pElem.innerHTML = "Memory: <b><span id=\"" + name + "_memory\">-</span></b>"
     divTwo.appendChild(pElem);
 
-
     w100 = document.createElement("div");
     w100.classList.add("w-100");
     divTwo.appendChild(w100);
-
 
     pElem = document.createElement("p");
     pElem.classList.add("col");
     pElem.innerHTML = "Create Time: <b><span id=\"" + name + "_create_time\">-</span></b>"
     divTwo.appendChild(pElem);
 
+    w100 = document.createElement("div");
+    w100.classList.add("w-100");
+    divTwo.appendChild(w100);
+
     pElem = document.createElement("p");
     pElem.classList.add("col");
     pElem.innerHTML = "Running Time: <b><span id=\"" + name + "_running_time\">-</span></b>"
     divTwo.appendChild(pElem);
 
+    w100 = document.createElement("div");
+    w100.classList.add("w-100");
+    divTwo.appendChild(w100);
+
+    pElem = document.createElement("p");
+    pElem.classList.add("col");
+    pElem.innerHTML = "Last Run: <b><span id=\"" + name + "_last_run\">-</span></b>"
+    divTwo.appendChild(pElem);
 
     divThree = document.createElement("div");
     divThree.classList.add("text-center", "my-2");
@@ -132,6 +140,7 @@ function createBot(name) {
 
 function setBot(JSON, name) {
     let running = JSON[name]["Running"];
+    let last_run = JSON[name]["last_run"];
     document.getElementById(name + "_running").innerText = running;
     let [pid, cpu, memory, create_time, running_time] = Array(5).fill("-");
 
@@ -148,6 +157,7 @@ function setBot(JSON, name) {
     document.getElementById(name + "_memory").innerText = memory;
     document.getElementById(name + "_create_time").innerText = create_time;
     document.getElementById(name + "_running_time").innerText = running_time;
+    document.getElementById(name + "_last_run").innerText = last_run;
     document.getElementById(name + "_start").disabled = ((running === "True"));
     document.getElementById(name + "_stop").disabled = ((running === "False"));
 }

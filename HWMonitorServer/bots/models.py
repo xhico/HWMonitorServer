@@ -64,6 +64,11 @@ def getBotInfo(name):
         # if the process is not running, indicate that in the dictionary
         pDict["Running"] = "False"
 
+    # Get last run
+    last_run = subprocess.getoutput("tail -n 1 /home/pi/" + name + "/" + name + ".log | cut -d ',' -f 1")
+    last_run = datetime.datetime.strptime(last_run, "%Y-%m-%d %H:%M:%S").strftime("%Y/%m/%d %H:%M:%S")
+    pDict["last_run"] = last_run
+
     return pDict
 
 

@@ -19,10 +19,10 @@ def loadConfig():
     defaultConfig = {"Bots": [], "History": True, "Eye": False, "Pivpn": False, "UpdateTime": 2, "UpdateStats": True, "UpdateBots": True, "UpdateTop": True}
 
     # Load the contents of the config file into a dictionary
-    try:
+    if os.path.exists(configFile):
         with open(configFile) as inFile:
             config = json.load(inFile)
-    except Exception as e:
+    else:
         # If the file doesn't exist or is not valid JSON, create a new config file
         with open(configFile, "w") as outFile:
             config = defaultConfig

@@ -3,6 +3,7 @@
         "ddnsUpdater",
         "EZTV-AutoDownloader",
         "FIAFormulaEDocs",
+        "FogosPtAlerts",
         "HardwareHistory",
         "HumiditySensor",
         "ipSender",
@@ -13,7 +14,7 @@
     "Eye": true,
     "Pivpn": false,
     "UpdateTime": 2,
-    "UpdateStats": true,
+    "UpdateStats": false,
     "UpdateBots": true,
     "UpdateTop": true
 }

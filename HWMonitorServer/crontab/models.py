@@ -23,7 +23,7 @@ def readCrontab():
     cronjobs = [{"job": job.lstrip("#"), "status": "disabled" if job.startswith("#") else "enabled"} for job in cronjobs]
 
     # Sort the list of dictionaries by the "status" key
-    cronjobs = sorted(cronjobs, key=lambda x: x["status"] == "enabled", reverse=True)
+    # cronjobs = sorted(cronjobs, key=lambda x: x["status"] == "enabled", reverse=True)
 
     return cronjobs
 

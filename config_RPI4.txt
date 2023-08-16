@@ -14,7 +14,7 @@
     "Eye": true,
     "Pivpn": false,
     "UpdateTime": 2,
-    "UpdateStats": false,
+    "UpdateStats": true,
     "UpdateBots": true,
     "UpdateTop": true
 }

@@ -107,7 +107,7 @@ async function downloadConfig() {
     let configJSON = await getConfigContent(configurationArea);
     configJSON = JSON.stringify(configJSON, null, 4);
     let downloadElem = document.createElement("a");
-    let crontabFile = "config_" + hostname + ".txt";
+    let crontabFile = "config_" + hostname + ".json";
     downloadElem.setAttribute("href", "data:text/plain;charset=utf-8," + encodeURIComponent(configJSON));
     downloadElem.setAttribute("download", crontabFile);
     downloadElem.style.display = "none";

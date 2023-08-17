@@ -5,7 +5,7 @@ import os
 import socket
 
 
-def loadConfig():
+def loadConfig(hostname):
     """
     Load configuration settings from a JSON file and return the configuration dictionary and the path to the file.
 
@@ -13,7 +13,7 @@ def loadConfig():
         tuple: A tuple containing the configuration dictionary and the absolute path to the configuration file.
     """
     # Construct the absolute path to the config file
-    configFile = os.path.join(os.path.dirname(os.path.abspath(__file__)), "config.json")
+    configFile = os.path.join(os.path.dirname(os.path.abspath(__file__)), "config_" + hostname + ".json")
 
     # Set default config values
     defaultConfig = {"Bots": [], "History": True, "Eye": False, "Pivpn": False, "UpdateTime": 2, "UpdateStats": True, "UpdateBots": True, "UpdateTop": True}
@@ -51,9 +51,11 @@ class Config:
         botsName (list): A list of bot names.
     """
 
-    # Load the config file
-    config, configFile = loadConfig()
+    # Get Hostname
     hostname = str(socket.gethostname()).upper()
+
+    # Load the config file
+    config, configFile = loadConfig(hostname)
 
     # Get the names of the bots
     botsName = config["Bots"]

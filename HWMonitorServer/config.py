@@ -8,7 +8,7 @@ import socket
 def loadConfig(hostname):
     """
     Load configuration settings from a JSON file and return the configuration dictionary and the path to the file.
-    
+
     Args:
         hostname (str): String containing device hostname.
 

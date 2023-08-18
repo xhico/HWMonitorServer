@@ -7,11 +7,7 @@ mkdir /home/pi/HWMonitorServer/
 sudo apt install apache2 -y
 sudo a2enmod include ssl rewrite proxy_http
 sudo systemctl restart apache2
-
-sudo nano /etc/apache2/apache2.conf
-"""
-ServerName 127.0.0.1
-"""
+echo "ServerName 127.0.0.1" | sudo tee -a /etc/apache2/apache2.conf
 
 
 sudo mv /home/pi/HWMonitorServer/HWMonitorServer.conf /etc/apache2/sites-available/

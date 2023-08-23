@@ -11,9 +11,6 @@ from HWMonitorServer import create_app
 app = create_app()
 
 # Check if this script is being run as the main module
-# If it is, start the Flask development server with the following settings:
-# - Listen on all network interfaces (0.0.0.0)
-# - Listen on port 33377
-# - Enable debug mode
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=33377, debug=True)
+    #app.run()
+    app.run(host='0.0.0.0')

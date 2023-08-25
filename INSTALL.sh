@@ -1,9 +1,5 @@
 sudo apt install python3 python3-pip python3-setuptools python3-venv -y
 python3 -m pip install flask gunicorn requests gpiozero psutil --no-cache-dir
-sudo apt install apache2 -y
-sudo a2enmod include ssl rewrite proxy proxy_http
-sudo systemctl restart apache2
-echo "ServerName 127.0.0.1" | sudo tee -a /etc/apache2/apache2.conf
 
 sudo mv /home/pi/HWMonitorServer/HWMonitorServer.conf /etc/apache2/sites-available/
 sudo mv /home/pi/HWMonitorServer/HWMonitorServer.socket /etc/systemd/system/
@@ -17,3 +13,4 @@ sudo systemctl enable HWMonitorServer.socket
 sudo systemctl enable HWMonitorServer.service
 sudo systemctl daemon-reload && sudo systemctl restart apache2
 sudo systemctl restart HWMonitorServer
+chmod +x -R /home/pi/HWMonitorServer/*

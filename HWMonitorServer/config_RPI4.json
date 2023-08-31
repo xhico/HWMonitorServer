@@ -2,7 +2,6 @@
     "Bots": [
         "ddnsUpdater",
         "EZTV-AutoDownloader",
-        "FIAFormulaEDocs",
         "FogosPtAlerts",
         "HardwareHistory",
         "HumiditySensor",

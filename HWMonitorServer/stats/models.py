@@ -221,7 +221,7 @@ def getAmbientHumidityTemperature() -> dict:
             - 'Valid': A boolean indicating whether the data is valid.
     """
     try:
-        with open("/home/pi/HumiditySensor/HumiditySensor.json") as inFile:
+        with open("/home/pi/HumiditySensor/config.json") as inFile:
             data = json.load(inFile)[0]
         return {
             "hasInfo": "Yes",

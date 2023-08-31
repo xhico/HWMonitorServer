@@ -11,8 +11,8 @@ openssl x509 -req -days 365 -in /home/pi/certs/HWMonitorServer.csr -signkey /hom
 echo """
 <VirtualHost *:443>
     ServerName monitor.$(hostname).xhico
-    ErrorLog ${APACHE_LOG_DIR}/HWMonitorServer-error.log
-    CustomLog ${APACHE_LOG_DIR}/HWMonitorServer-access.log combined
+    ErrorLog /var/www/HWMonitorServer-error.log
+    CustomLog /var/www/HWMonitorServer-access.log combined
 
     <Proxy *>
         Order deny,allow

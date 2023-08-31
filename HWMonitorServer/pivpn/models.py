@@ -1,172 +1,92 @@
 # -*- coding: utf-8 -*-
 
 import datetime
-import re
 import subprocess
-from HWMonitorServer.config import Config
+
+import pytz
 
 
-def extractInfo(lines, start_index, delimiter):
+def convertTime(input_string):
     """
-    Extracts information from lines based on a given start index and delimiter.
+    Convert a date string from one time zone to another.
 
     Args:
-        lines (list): List of lines containing the information.
-        start_index (int): Index to start extracting information from.
-        delimiter (str): Delimiter used to split the lines and extract information.
+        input_string (str): Input date string in the format "d %b %Y, %H:%M, %Z".
 
     Returns:
-        list: Extracted information as a list of lists.
+        str: Converted date string in the format "%Y/%m/%d %H:%M:%S".
     """
-    extracted_info = []
-    for line in lines[start_index:]:
-        info = line.strip().split(delimiter)[0]
-        extracted_info.append(re.split(r"\s{2,}", info))
-    return extracted_info
+    # Define time zones
+    input_timezone = pytz.timezone("Europe/Lisbon")
+    output_timezone = pytz.timezone("UTC")
+
+    # Convert input string to datetime object
+    input_datetime = datetime.datetime.strptime(input_string, "%d %b %Y, %H:%M, %Z")
+    input_datetime = input_timezone.localize(input_datetime)
+
+    # Convert to output time zone (UTC)
+    output_datetime = input_datetime.astimezone(output_timezone)
+
+    # Format the output datetime
+    output_string = output_datetime.strftime("%Y/%m/%d %H:%M:%S")
+    return output_string
 
 
-def getClientIdx(dictionary, name):
+def process_list(output):
     """
-    Returns the index of a client in the dictionary based on the client's name.
+    Process the output of 'pivpn list' command and extract information about VPN lists.
 
     Args:
-        dictionary (dict): The dictionary containing client information.
-        name (str): The name of the client to search for.
+        output (str): Output of the 'pivpn list' command.
 
     Returns:
-        str: The index of the client in the dictionary, or None if not found.
+        dict: A dictionary containing VPN list information.
     """
-    for idx, value in dictionary.items():
-        if value["name"] == name:
-            return idx
-    return None
+    lists = {}
+    lines = output.strip().split('\n')
+    for line in lines[2:-1]:
+        parts = line.split()
+        name = parts[0]
+        public_key = parts[1]
+        creation_date = convertTime(' '.join(parts[2:]))
+        lists[name] = {"public_key": public_key, "creation_date": creation_date}
+    return lists
 
 
-def remove_by_name(dictionary, name):
+def process_clients(output):
     """
-    Removes dictionary items with a specific name from the dictionary.
+    Process the output of 'pivpn clients' command and extract information about VPN clients.
 
     Args:
-        dictionary (dict): The dictionary to remove items from.
-        name (str): The name to search for in the dictionary items.
+        output (str): Output of the 'pivpn clients' command.
 
     Returns:
-        None
+        dict: A dictionary containing VPN client information.
     """
-    keys_to_remove = []
-    for key, value in dictionary.items():
-        if isinstance(value, dict) and "name" in value and name in value["name"]:
-            keys_to_remove.append(key)
-
-    for key in keys_to_remove:
-        dictionary.pop(key)
-
-
-def convert_to_units(data_size):
-    """
-    Converts data size from different units to their corresponding units (GiB to GB, MiB to MB, KiB to KB).
-    Rounds the results to two decimal places.
-
-    Args:
-        data_size (str): The data size to convert in the format 'X{unit}', where X is a float and {unit}
-                         is one of 'GiB', 'MiB', or 'KiB'.
-
-    Returns:
-        str: The converted data size in the corresponding unit with two decimal places.
-
-    Raises:
-        ValueError: If the data size format is invalid.
-
-    """
-
-    if data_size.endswith("GiB"):
-        size_in_gib = float(data_size[:-3])
-        size_in_gb = round(size_in_gib * 1.073741824, 2)
-        return f"{size_in_gb} GB"
-    elif data_size.endswith("MiB"):
-        size_in_mib = float(data_size[:-3])
-        size_in_mb = round(size_in_mib * 1.048576, 2)
-        return f"{size_in_mb} MB"
-    elif data_size.endswith("KiB"):
-        size_in_kib = float(data_size[:-3])
-        size_in_kb = round(size_in_kib * 1.024, 2)
-        return f"{size_in_kb} KB"
-    else:
-        raise ValueError("Invalid data size format. Please use 'GiB', 'MiB', or 'KiB'.")
-
-
-def sort_profiles(profiles):
-    """
-    Sorts the profiles based on their status and name.
-
-    Args:
-        profiles (dict): Dictionary containing profile data.
-
-    Returns:
-        list: A list of profiles sorted first by connected profiles (in alphabetical order),
-              then valid profiles (in alphabetical order), and finally revoked profiles (in alphabetical order).
-    """
-
-    connected_profiles = []
-    valid_profiles = []
-    revoked_profiles = []
-
-    for profile_id, profile_data in profiles.items():
-        profile_status = profile_data['status']
-        profile_name = profile_data['name']
-
-        if profile_data['connected']:
-            connected_profiles.append((profile_id, profile_name))
-        elif profile_status == 'Valid':
-            valid_profiles.append((profile_id, profile_name))
-        elif profile_status == 'Revoked':
-            revoked_profiles.append((profile_id, profile_name))
-
-    connected_profiles = sorted(connected_profiles, key=lambda x: x[1].lower())
-    valid_profiles = sorted(valid_profiles, key=lambda x: x[1].lower())
-    revoked_profiles = sorted(revoked_profiles, key=lambda x: x[1].lower())
-
-    sorted_profiles = connected_profiles + valid_profiles + revoked_profiles
-    sorted_profiles = [profiles[profile[0]] for profile in sorted_profiles]
-    return sorted_profiles
+    clients = {}
+    lines = output.strip().split('\n')
+    for line in lines[2:-1]:
+        parts = line.split()
+        name = parts[0]
+        remoteIP = parts[1]
+        virtualIP = parts[2]
+        bytesReceived = parts[3]
+        bytesSent = parts[4]
+        lastSeen = ' '.join(parts[5:])
+        lastSeen = datetime.datetime.strptime(lastSeen, "%b %d %Y - %H:%M:%S").strftime("%Y/%m/%d %H:%M:%S") if lastSeen != "(not yet)" else lastSeen
+        connected = False if lastSeen == "(not yet)" else (datetime.datetime.now() - datetime.datetime.strptime(lastSeen, "%Y/%m/%d %H:%M:%S")).total_seconds() < 60
+        clients[name] = {"remoteIP": remoteIP, "virtualIP": virtualIP, "bytesReceived": bytesReceived, "bytesSent": bytesSent, "lastSeen": lastSeen, "connected": connected}
+    return clients
 
 
 def getPiVPNInfo():
     """
-    Retrieves PiVPN information for clients.
+    Get merged information about VPN lists and clients using 'pivpn list' and 'pivpn clients' commands.
 
     Returns:
-        dict: Dictionary containing the PiVPN information for clients.
+        dict: A dictionary containing merged VPN information.
     """
-    clients = {}
-
-    # Get List Clients information
-    list_lines = subprocess.check_output(["pivpn", "list"], universal_newlines=True).strip().split("\n")[4:]
-    list_info = extractInfo(list_lines, 0, "\t")
-    for idx, info in enumerate(list_info):
-        status, name, expiration = info[0], info[1], datetime.datetime.strptime(info[2], "%b %d %Y").strftime("%Y/%m/%d")
-        clients[idx] = {"name": name, "connected": False, "status": status, "expiration": expiration}
-
-    # Get Connected Clients information
-    client_lines = subprocess.check_output(["pivpn", "clients"], universal_newlines=True).strip().split("\n")[5:]
-    clients_info = extractInfo(client_lines, 0, "\t")
-    clients_info = [] if clients_info[0][0] == "No Clients Connected!" else clients_info
-    for info in clients_info:
-        name, remoteIP, virtualIP, bytesReceived, bytesSent = info[0], info[1], info[2], info[3], info[4]
-        connectedSince = datetime.datetime.fromtimestamp(int(info[5].split(" ")[1])).strftime('%Y/%m/%d %H:%M:%S')
-
-        idx = int(getClientIdx(clients, name))
-        clients[idx]["connected"] = True
-        clients[idx]["remoteIP"] = remoteIP
-        clients[idx]["virtualIP"] = virtualIP
-        clients[idx]["bytesReceived"] = convert_to_units(bytesReceived)
-        clients[idx]["bytesSent"] = convert_to_units(bytesSent)
-        clients[idx]["connectedSince"] = connectedSince
-
-    # Remove Local Profile
-    remove_by_name(clients, Config.hostname)
-
-    # Sort the profiles based on their status and name
-    clients = sort_profiles(clients)
-
-    return clients
+    list_info = process_list(subprocess.check_output(["pivpn", "list"], universal_newlines=True))
+    client_info = process_clients(subprocess.check_output(["pivpn", "clients"], universal_newlines=True))
+    merged_clients_info = {key: {**list_info[key], **client_info[key]} for key in list_info}
+    return merged_clients_info

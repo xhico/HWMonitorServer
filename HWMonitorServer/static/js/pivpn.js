@@ -2,7 +2,7 @@
     @author: xhico
  */
 
-function addProfileElem(profile) {
+function addProfileElem(name, profile) {
     let profileElemCol = document.createElement("div");
     profileElemCol.classList.add("col-12");
 
@@ -12,14 +12,8 @@ function addProfileElem(profile) {
 
     let profileElemCardHeader = document.createElement("div");
     profileElemCardHeader.classList.add("card-header");
-    if (profile["connected"]) {
-        profileElemCardHeader.classList.add("text-bg-success");
-    } else if (!profile["connected"] && profile["status"] === "Valid") {
-        profileElemCardHeader.classList.add("text-bg-warning");
-    } else {
-        profileElemCardHeader.classList.add("text-bg-danger");
-    }
-    profileElemCardHeader.innerHTML = "<b>" + profile["name"] + "</b>";
+    profileElemCardHeader.classList.add(profile["connected"] ? "text-bg-success" : "text-bg-warning");
+    profileElemCardHeader.innerText = name;
     profileElemCard.appendChild(profileElemCardHeader);
 
     let profileElemCardBody = document.createElement("div");
@@ -29,8 +23,8 @@ function addProfileElem(profile) {
     let profileElemCardFooter = document.createElement("div");
     profileElemCardFooter.classList.add("card-footer", "text-muted");
     let profileElemCardFooterSmall = document.createElement("small");
-    profile["connectedSince"] = profile["connectedSince"] ? profile["connectedSince"] : "-";
-    profileElemCardFooterSmall.innerHTML = "<b>Connected Since: </b>" + profile["connectedSince"]
+    profile["lastSeen"] = profile["lastSeen"] ? profile["lastSeen"] : "-";
+    profileElemCardFooterSmall.innerHTML = "<b>Last Seen: </b>" + profile["lastSeen"]
     profileElemCardFooter.appendChild(profileElemCardFooterSmall);
     profileElemCard.appendChild(profileElemCardFooter);
 
@@ -58,46 +52,13 @@ function addProfileElem(profile) {
     profileElemCardEntry.hidden = !profile["remoteIP"]
     profileElemCardBody.appendChild(profileElemCardEntry);
 
-    profileElemCardEntry = document.createElement("p");
-    profileElemCardEntry.classList.add("card-text");
-    profileElemCardEntry.innerHTML = "<b>Status: </b>" + profile["status"];
-    profileElemCardBody.appendChild(profileElemCardEntry);
-
-    profileElemCardEntry = document.createElement("p");
-    profileElemCardEntry.classList.add("card-text");
-    profileElemCardEntry.innerHTML = "<b>Expiration: </b>" + profile["expiration"];
-    profileElemCardBody.appendChild(profileElemCardEntry);
-
-    let profileElemCardRevoke = document.createElement("button");
-    profileElemCardRevoke.type = "button";
-    profileElemCardRevoke.setAttribute("data-bs-toggle", "modal");
-    profileElemCardRevoke.setAttribute("data-bs-target", "#revokeModal");
-    profileElemCardRevoke.classList.add("btn", "btn-danger");
-    profileElemCardRevoke.innerText = "Revoke";
-    profileElemCardRevoke.onclick = function () {
-        document.getElementById('profileName').innerText = profile["name"];
-    }
-    profileElemCardRevoke.disabled = profile["status"] === "Revoked";
-    profileElemCardBody.appendChild(profileElemCardRevoke);
-
     let profilesElem = document.getElementById("profiles");
     profilesElem.appendChild(profileElemCol);
 
 }
 
-async function filterClients(data, filterOption) {
-    if (filterOption === "Valid") {
-        return data.filter(item => item.status === "Valid");
-    } else if (filterOption === "Revoked") {
-        return data.filter(item => item.status === "Revoked");
-    } else if (filterOption === "Connected") {
-        return data.filter(item => item.connected === true);
-    } else {
-        return data;
-    }
-}
-
 async function loadClients(status) {
+    console.log(status);
     // Show Loading
     await loadingScreen("show");
 
@@ -114,29 +75,29 @@ async function loadClients(status) {
         }
     });
 
+    // Filter Clients
+    if (status === "Connected") {
+        const connectedEntries = {};
+        for (const key in resp) {
+            if (resp[key]["connected"]) {
+                connectedEntries[key] = resp[key];
+            }
+        }
+        resp = connectedEntries;
+    }
+
     // Check if no Clients
-    if (resp.length === 0) {
+    if (Object.keys(resp).length === 0) {
         document.getElementById("profiles").innerHTML = "<span>No Clients to show</span>";
     }
 
     // Set Overview
-    let validCount = 0;
-    let revokedCount = 0;
     let connectedCount = 0;
-    let totalCount = resp.length;
-    for (let entry of resp) {
-        if (entry.status === "Valid") {
-            validCount++;
-        }
-        if (entry.status === "Revoked") {
-            revokedCount++;
-        }
-        if (entry.connected === true) {
-            connectedCount++;
-        }
+    let totalCount = 0;
+    for (const name in resp) {
+        totalCount++;
+        connectedCount += resp[name].connected === true ? 1 : 0;
     }
-    document.getElementById("overviewBadgeValid").innerText = validCount.toString();
-    document.getElementById("overviewBadgeRevoked").innerText = revokedCount.toString();
     document.getElementById("overviewBadgeConnected").innerText = connectedCount.toString();
     document.getElementById("overviewBadgeTotal").innerText = totalCount.toString();
 
@@ -147,79 +108,11 @@ async function loadClients(status) {
     });
     document.getElementById("overviewBtn-" + status).classList.add("active");
 
-    // Filter Clients
-    resp = await filterClients(resp, status);
-
     // Add PiVPN Profiles
-    for (let profile of resp) {
-        addProfileElem(profile);
+    for (const name in resp) {
+        let profile = resp[name];
+        addProfileElem(name, profile);
     }
-
-    // Remove Loading
-    await loadingScreen("remove");
-}
-
-async function revokeClient(revokeBtn) {
-    // Show Loading
-    await loadingScreen("show");
-
-    // Disable Btns
-    revokeBtn.disabled = true;
-
-    // Make POST Request
-    let name = document.getElementById("profileName").innerText;
-    await $.ajax({
-        method: "post", url: "/pivpn/revoke", data: {name: name}, success: function (data) {
-            return data;
-        }
-    });
-
-    // Load Clients
-    await loadClients("Valid");
-
-    // Clear Btns
-    $("#revokeModal").modal("hide");
-    revokeBtn.disabled = false;
-
-    // Remove Loading
-    await loadingScreen("remove");
-}
-
-async function addClient(addBtn) {
-    // Show Loading
-    await loadingScreen("show");
-
-    // Get Client Information
-    let clientName = document.getElementById("addClientName");
-    let clientPW = document.getElementById("addClientPW");
-    let clientDays = document.getElementById("addClientDays");
-    let clientNameValue = clientName.value;
-    let clientPWValue = clientPW.value;
-    let clientDaysValue = clientDays.value;
-
-    // Check Client Information
-    if (clientNameValue === "" || clientPWValue === "" || clientPWValue.length < 4 || clientDaysValue === "" || 1 > clientDaysValue > 3650) {
-        await showNotification("Invalid Client Information", "Please check Name, Password (Min Length: 4), Expiration Days", "error");
-    } else {
-        // Disable Btns
-        addBtn.disabled = true;
-
-        // Make Post Request
-        await $.ajax({
-            method: "post",
-            url: "/pivpn/add",
-            data: {clientName: clientNameValue, clientPW: clientPWValue, clientDays: clientDaysValue},
-            success: function (data) {
-                return data;
-            }
-        });
-
-        // Load Clients
-        await loadClients("Valid");
-    }
-
-    // Clear Spinner
-    addBtn.disabled = false;
 
     // Remove Loading
     await loadingScreen("remove");
@@ -230,7 +123,7 @@ window.addEventListener('DOMContentLoaded', async function main() {
     console.log("Get PiVPN info");
 
     // Load Clients
-    await loadClients("Valid");
+    await loadClients("Total");
 
     // Remove Loading
     await loadingScreen("remove");

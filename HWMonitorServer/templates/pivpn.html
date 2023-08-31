@@ -4,25 +4,6 @@
 
 {% block content %}
 
-    <!-- Revoke Modal -->
-    <div class="modal fade" id="revokeModal" tabindex="-1" aria-labelledby="revokeModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="revokeModalLabel">Revoke Confirm</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    Are you sure you want to revoke this profile: <b><span id="profileName"></span></b>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-danger" onclick="revokeClient(this)">Confirm</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <!-- Left Pane -->
     <div class="col-xl-8 order-lg-1 order-2 mb-4">
         <div class="row">
@@ -47,14 +28,6 @@
                     <div class="card-body">
                         <h5 class="card-title">Overview</h5>
                         <div class="list-group">
-                            <button onclick="loadClients('Valid')" id="overviewBtn-Valid" class="list-group-item list-group-item-action list-group-item-warning d-flex justify-content-between align-items-start">
-                                Valid
-                                <span id="overviewBadgeValid" class="badge bg-warning rounded-pill">0</span>
-                            </button>
-                            <button onclick="loadClients('Revoked')" id="overviewBtn-Revoked" class="list-group-item list-group-item-action list-group-item-danger d-flex justify-content-between align-items-start">
-                                Revoked
-                                <span id="overviewBadgeRevoked" class="badge bg-danger rounded-pill">0</span>
-                            </button>
                             <button onclick="loadClients('Connected')" id="overviewBtn-Connected" class="list-group-item list-group-item-action list-group-item-success d-flex justify-content-between align-items-start">
                                 Connected
                                 <span id="overviewBadgeConnected" class="badge bg-success rounded-pill">0</span>
@@ -68,24 +41,6 @@
                 </div>
             </div>
         </div>
-
-        <!-- Add Client -->
-        <div class="row">
-            <div class="col-12 mb-4">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">Add Client</h5>
-                        <div class="input-group flex-nowrap">
-                            <input id="addClientName" autocomplete="off" type="text" class="form-control" placeholder="Name" aria-label="Name" aria-describedby="addClientName">
-                            <input id="addClientPW" autocomplete="off" type="password" class="form-control" placeholder="Password" aria-label="Password" aria-describedby="addClientPW">
-                            <input id="addClientDays" value="1080" autocomplete="off" type="number" min="1" max="3650" class="form-control" placeholder="Expiration Days" aria-label="Expiration Days" aria-describedby="addClientDays">
-                            <button class="btn btn-outline-success" type="button" id="addClientBtn" onclick="addClient(this)">Add</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
     </div>
 
 {% endblock %}

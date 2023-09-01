@@ -1,7 +1,8 @@
 {
     "Bots": [
         "HardwareHistory",
-        "ipSender"
+        "ipSender",
+        "RPiBackups"
     ],
     "History": true,
     "Eye": false,

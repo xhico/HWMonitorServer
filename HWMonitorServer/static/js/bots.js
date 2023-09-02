@@ -108,20 +108,20 @@ function createBot(name) {
     botElem.appendChild(divThree);
 
     btnOne = document.createElement("button");
-    btnOne.classList.add("btn", "btn-danger", "m-1");
-    btnOne.id = name + "_stop";
-    btnOne.innerText = "Stop";
+    btnOne.classList.add("btn", "btn-success", "m-1");
+    btnOne.id = name + "_start";
+    btnOne.innerText = "Start";
     btnOne.onclick = function () {
-        action("stop", name)
+        action("start", name)
     }
     divThree.appendChild(btnOne);
 
     btnTwo = document.createElement("button");
-    btnTwo.classList.add("btn", "btn-success", "m-1");
-    btnTwo.id = name + "_start";
-    btnTwo.innerText = "Start";
+    btnTwo.classList.add("btn", "btn-danger", "m-1");
+    btnTwo.id = name + "_stop";
+    btnTwo.innerText = "Stop";
     btnTwo.onclick = function () {
-        action("start", name)
+        action("stop", name)
     }
     divThree.appendChild(btnTwo);
 

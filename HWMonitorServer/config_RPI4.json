@@ -1,5 +1,6 @@
 {
     "Bots": [
+        "CheckInternet",
         "ddnsUpdater",
         "EZTV-AutoDownloader",
         "FogosPtAlerts",

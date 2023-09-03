@@ -3,7 +3,6 @@
 import datetime
 import json
 import random
-import re
 
 
 def getHistoricInfo(numberTime: int, unitTime: str, hwMetric: str):
@@ -59,6 +58,7 @@ def getHistoricInfo(numberTime: int, unitTime: str, hwMetric: str):
                 key_averages[key] = 0.0
             result[key].append(value)
 
+    # Add Averages to Results
     for key in key_averages:
         key_averages[key] = round(sum(result[key]) / len(result[key]), 2)
         result[key + "_avg"] = [key_averages[key]] * len(result[key])

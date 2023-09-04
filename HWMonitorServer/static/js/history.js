@@ -62,7 +62,7 @@ async function initCharts(JSON) {
         let avgData = JSON[chartName + "_avg"];
         new Highcharts.Chart({
             chart: {renderTo: "chart_" + chartName, type: "spline"},
-            title: {text: chartName.length > 5 ? chartName.replace(/[A-Z]/g, ' $&').trim() : chartName},
+            title: {text: chartName.replaceAll("_", " ")},
             exporting: {enabled: false},
             credits: {enabled: false},
             legend: {enabled: false},

@@ -6,20 +6,53 @@ let recordingsJSON;
 
 function formatDate(inputDate) {
     let months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-    let [year, month, day] = inputDate.split("-").map(Number);
-    day = day.toString().length === 1 ? "0" + day : day;
-    return day + " " + months[month - 1] + " " + year;
+
+    // Split the inputDate by "-"
+    let parts = inputDate.split("-");
+
+    // Check the length of the parts array
+    if (parts.length === 2) {
+        let [year, month] = parts.map(Number);
+        return months[month - 1] + " " + year;
+    } else if (parts.length === 3) {
+        let [year, month, day] = parts.map(Number);
+        day = day.toString().length === 1 ? "0" + day : day;
+        return day + " " + months[month - 1] + " " + year;
+    } else {
+        return "Invalid date format";
+    }
 }
 
-async function setOverview() {
-    // Clear Overview
+async function setSelectOverview() {
+    // Add months to select overview
+    let months = [...new Set(Object.keys(recordingsJSON).map(date => date.substring(0, 7)))];
+    let selectElement = document.getElementById("overviewMonthSelect");
+    for (let month of months) {
+        let newOption = document.createElement("option");
+        newOption.value = month;
+        newOption.text = formatDate(month);
+        selectElement.appendChild(newOption);
+    }
+}
+
+async function setOverviewMonth() {
+    // Clear Overview Month
     let overviewListGroup = document.getElementById("overviewListGroup");
     overviewListGroup.innerHTML = "";
 
+    // Get Value of Month
+    let monthValue = document.getElementById("overviewMonthSelect").value;
+
+    // Filter recordingsJSON to only get the Month
+    let filteredRecordings = {};
+    Object.keys(recordingsJSON).filter(key => key.startsWith(monthValue)).forEach(key => {
+        filteredRecordings[key] = recordingsJSON[key];
+    });
+
     // Set Overview Counters
-    for (const [day, recordings] of Object.entries(recordingsJSON)) {
+    for (let [day, recordings] of Object.entries(filteredRecordings)) {
         // Create the button element with classes
-        const button = document.createElement("button");
+        let button = document.createElement("button");
         button.setAttribute("type", "button");
         button.classList.add("list-group-item", "list-group-item-action", "list-group-item-success", "d-flex", "justify-content-between", "align-items-center");
         button.id = "overviewBtn-" + day;
@@ -29,7 +62,7 @@ async function setOverview() {
         }
 
         // Create the span element with classes "badge", "bg-success", and "rounded-pill"
-        const badgeSpan = document.createElement("span");
+        let badgeSpan = document.createElement("span");
         badgeSpan.classList.add("badge", "bg-success", "rounded-pill");
         badgeSpan.textContent = recordings.length;
 
@@ -39,6 +72,10 @@ async function setOverview() {
         // Append the button element to the document body (or any other desired parent element)
         overviewListGroup.appendChild(button);
     }
+
+    // Load Last Recordings
+    let lastDayName = Object.keys(filteredRecordings)[0];
+    await createRecordingCards(lastDayName);
 }
 
 async function createRecordingCards(lastDayName) {
@@ -130,6 +167,10 @@ document.getElementById("recordingModal").addEventListener("hidden.bs.modal", ev
     document.getElementById("recVideo").remove();
 });
 
+document.getElementById("overviewMonthSelect").addEventListener("change", function () {
+    setOverviewMonth();
+});
+
 window.addEventListener("DOMContentLoaded", async function main() {
     console.log("---------------------");
     document.getElementById("navbar_eye").classList.add("active");
@@ -146,11 +187,8 @@ window.addEventListener("DOMContentLoaded", async function main() {
     recordingsJSON = Object.fromEntries(Object.entries(recordingsJSON).reverse());
 
     // Set Overview
-    await setOverview();
-
-    // Load Last Recordings
-    let lastDayName = Object.keys(recordingsJSON)[0];
-    await createRecordingCards(lastDayName);
+    await setSelectOverview();
+    await setOverviewMonth();
 
     // Remove Loading
     await loadingScreen("remove");

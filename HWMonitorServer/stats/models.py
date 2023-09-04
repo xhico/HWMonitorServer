@@ -72,7 +72,7 @@ def getCPU() -> dict:
             "Cores": psutil.cpu_count(),
             "Frequency": round(psutil.cpu_freq().current, 2),
             "PIDs": len(psutil.pids()),
-            "Voltage": subprocess.getoutput("vcgencmd measure_volts core").split('=')[1],
+            "Voltage": float(re.search(r'\d+\.\d+', subprocess.getoutput("vcgencmd measure_volts core").split('=')[1]).group()),
             "Temperature": round(gpiozero.CPUTemperature().temperature, 2)
         }
     except Exception:

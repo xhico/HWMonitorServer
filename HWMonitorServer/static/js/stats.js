@@ -68,7 +68,7 @@ async function getCPU(JSON) {
     document.getElementById("CPU_Cores").innerText = CPU_Cores;
     document.getElementById("CPU_Frequency").innerText = CPU_Frequency + " MHz";
     document.getElementById("CPU_PIDs").innerText = CPU_PIDs;
-    document.getElementById("CPU_Voltage").innerText = CPU_Voltage.split("V")[0] + " V";
+    document.getElementById("CPU_Voltage").innerText = CPU_Voltage + " V";
 
     // Temperature
     let CPU_Temperature = JSON["CPU"]["Temperature"];

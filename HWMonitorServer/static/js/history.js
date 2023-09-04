@@ -92,7 +92,7 @@ async function initCharts(JSON) {
             series: [{
                 name: "Average", data: avgData, color: "#AED6F1", marker: {enabled: false}
             }, {
-                name: chartName, data: seriesData, color: "#1B4F72", marker: {enabled: false}
+                name: chartName.replaceAll("_", " "), data: seriesData, color: "#1B4F72", marker: {enabled: false}
             }]
         });
     }

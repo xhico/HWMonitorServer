@@ -6,7 +6,7 @@ import datetime
 from HWMonitorServer.config import Config
 
 
-def getBotLog(name: str) -> str:
+def getBotLog(name):
     """
     Returns the last 30 lines of a log file for a bot with the given name.
 
@@ -21,7 +21,7 @@ def getBotLog(name: str) -> str:
     return log_info
 
 
-def getBotConfig(name: str) -> str:
+def getBotConfig(name):
     """
     Returns the content of a config file for a bot with the given name.
 
@@ -36,7 +36,7 @@ def getBotConfig(name: str) -> str:
     return config_file
 
 
-def getBotSavedInfo(name: str) -> str:
+def getBotSavedInfo(name):
     """
     Returns the content of a config file for a bot with the given name.
 
@@ -52,6 +52,15 @@ def getBotSavedInfo(name: str) -> str:
 
 
 def checkIfError(name):
+    """
+    Check if there is an error in the bot log.
+
+    Args:
+        name (str): The name of the bot.
+
+    Returns:
+        bool: True if an error is found in the bot log, False otherwise.
+    """
     # Get Bot Log
     log_string = getBotLog(name)
 

@@ -8,17 +8,32 @@ from HWMonitorServer.config import Config
 
 def getBotLog(name):
     """
-    Returns the last 30 lines of a log file for a bot with the given name.
+    Returns the log file for a bot with the given name, last maxCount times it ran.
 
     Args:
         name: A string representing the name of the bot.
 
     Returns:
-        A string containing the last 30 lines of the bot's log file.
+        A string containing the lines of the bot's log file, last maxCount times it ran.
     """
     log_file = f"/home/pi/{name}/{name}.log"
-    log_info = subprocess.getoutput(f"tail -n 30 {log_file}")
-    return log_info
+    log_string = subprocess.getoutput(f"cat {log_file}")
+
+    # Split the log string into lines and reverse it
+    lines = log_string.strip().split('\n')[::-1]
+
+    # Find the index of the third occurrence of "[INFO] ------------"
+    start_index, count, maxCount = 0, 0, 3
+    for i, line in enumerate(lines):
+        if "[INFO]" in line and "------------" in line:
+            count += 1
+            if count == maxCount:
+                start_index = len(lines) - i
+                break
+
+    log_string = "\n".join(lines[::-1][start_index - 1:])
+
+    return log_string
 
 
 def getBotConfig(name):

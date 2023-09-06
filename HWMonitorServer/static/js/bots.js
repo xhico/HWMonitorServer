@@ -56,7 +56,7 @@ async function loadFile(value, name) {
     }
 }
 
-function editConfig() {
+async function editConfig() {
     let modalBodyText = document.getElementById("modalConfigBodyText");
     let loadConfigEditBtn = document.getElementById("configEditBtn");
     let loadConfigSaveBtn = document.getElementById("configSaveBtn");
@@ -89,7 +89,7 @@ async function saveConfig() {
     await showNotification("Bot - " + name, resp["message"], resp["status"])
 }
 
-function createBot(JSON, name) {
+async function createBot(JSON, name) {
 
     // Skip if already created
     if (document.getElementById("bot_" + name)) {
@@ -190,7 +190,7 @@ function createBot(JSON, name) {
     divThree.appendChild(actionBtn);
 
     actionBtn = document.createElement("button");
-    actionBtn.classList.add("btn", "btn-secondary", "m-1");
+    actionBtn.classList.add("btn", "btn-warning", "m-1");
     actionBtn.innerText = "Config";
     actionBtn.onclick = function () {
         loadFile("Config", name);
@@ -217,7 +217,7 @@ function createBot(JSON, name) {
     document.getElementById("content").appendChild(botElem);
 }
 
-function setBot(JSON, name) {
+async function setBot(JSON, name) {
     let running = JSON[name]["Running"];
     let last_run = JSON[name]["last_run"];
     document.getElementById(name + "_running").innerText = running;

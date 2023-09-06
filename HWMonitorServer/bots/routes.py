@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
+import json
 import os
 
-import psutil
 from flask import render_template, jsonify, Blueprint, request
 import HWMonitorServer.bots.models as models
 
@@ -75,6 +75,17 @@ def json_saveConfig():
     try:
         status, message = models.saveConfiguration(name, value)
         resp = {"status": status, "message": message}
+    except Exception as ex:
+        resp = {"status": "error", "message": str(ex)}
+
+    return jsonify(resp)
+
+
+@bots.route("/bots/loadSavedInfo/<name>", methods=['GET'])
+def json_loadSavedInfo(name):
+    try:
+        info = models.getBotSavedInfo(name)
+        return "<pre>" + info + "</pre>"
     except Exception as ex:
         resp = {"status": "error", "message": str(ex)}
 

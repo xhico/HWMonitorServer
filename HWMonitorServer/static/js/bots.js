@@ -74,7 +74,7 @@ function createBot(JSON, name) {
 
     // Create element
     let botElem = document.createElement("div");
-    let divOne, divTwo, divThree, pElem, w100, btnOne, btnTwo, btnThree, btnFour;
+    let divOne, divTwo, divThree, pElem, w100, actionBtn;
 
     botElem.classList.add("col-xl-3", "col-md-6", "border-bottom", "border-end");
     botElem.id = "bot_" + name;
@@ -147,39 +147,47 @@ function createBot(JSON, name) {
     divThree.classList.add("text-center", "my-2");
     botElem.appendChild(divThree);
 
-    btnOne = document.createElement("button");
-    btnOne.classList.add("btn", "btn-success", "m-1");
-    btnOne.id = name + "_start";
-    btnOne.innerText = "Start";
-    btnOne.onclick = function () {
+    actionBtn = document.createElement("button");
+    actionBtn.classList.add("btn", "btn-success", "m-1");
+    actionBtn.id = name + "_start";
+    actionBtn.innerText = "Start";
+    actionBtn.onclick = function () {
         action("start", name)
     }
-    divThree.appendChild(btnOne);
+    divThree.appendChild(actionBtn);
 
-    btnTwo = document.createElement("button");
-    btnTwo.classList.add("btn", "btn-danger", "m-1");
-    btnTwo.id = name + "_stop";
-    btnTwo.innerText = "Stop";
-    btnTwo.onclick = function () {
+    actionBtn = document.createElement("button");
+    actionBtn.classList.add("btn", "btn-danger", "m-1");
+    actionBtn.id = name + "_stop";
+    actionBtn.innerText = "Stop";
+    actionBtn.onclick = function () {
         action("stop", name)
     }
-    divThree.appendChild(btnTwo);
+    divThree.appendChild(actionBtn);
 
-    btnThree = document.createElement("button");
-    btnThree.classList.add("btn", "btn-secondary", "m-1");
-    btnThree.innerText = "Config";
-    btnThree.onclick = function () {
+    actionBtn = document.createElement("button");
+    actionBtn.classList.add("btn", "btn-secondary", "m-1");
+    actionBtn.innerText = "Config";
+    actionBtn.onclick = function () {
         action("LoadConfig", name)
     }
-    JSON[name]["has_config"] && divThree.appendChild(btnThree);
+    JSON[name]["has_config"] && divThree.appendChild(actionBtn);
 
-    btnFour = document.createElement("button");
-    btnFour.classList.add("btn", "btn-secondary", "m-1");
-    btnFour.innerText = "View Log";
-    btnFour.onclick = function () {
+    actionBtn = document.createElement("button");
+    actionBtn.classList.add("btn", "btn-secondary", "m-1");
+    actionBtn.innerText = "Log";
+    actionBtn.onclick = function () {
         action("Log", name)
     }
-    divThree.appendChild(btnFour);
+    divThree.appendChild(actionBtn);
+
+    actionBtn = document.createElement("button");
+    actionBtn.classList.add("btn", "btn-secondary", "m-1");
+    actionBtn.innerText = "Saved Info";
+    actionBtn.onclick = function () {
+        window.open("/bots/loadSavedInfo/" + name, "_blank");
+    }
+    JSON[name]["has_saved_info"] && divThree.appendChild(actionBtn);
 
     // Append to contentDiv
     document.getElementById("content").appendChild(botElem);

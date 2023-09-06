@@ -23,17 +23,32 @@ def getBotLog(name: str) -> str:
 
 def getBotConfig(name: str) -> str:
     """
-    Returns the last 30 lines of a config file for a bot with the given name.
+    Returns the content of a config file for a bot with the given name.
 
     Args:
         name: A string representing the name of the bot.
 
     Returns:
-        A string containing the last 30 lines of the bot's getBotConfig file.
+        A string containing the contents of the bot's config file.
     """
     config_file = f"/home/pi/{name}/config.json"
     config_file = subprocess.getoutput(f"cat {config_file}")
     return config_file
+
+
+def getBotSavedInfo(name: str) -> str:
+    """
+    Returns the content of a config file for a bot with the given name.
+
+    Args:
+        name: A string representing the name of the bot.
+
+    Returns:
+        A string containing the contents of the bot's saved info file.
+    """
+    saved_info_file = f"/home/pi/{name}/saved_info.json"
+    saved_info_file = subprocess.getoutput(f"cat {saved_info_file}")
+    return saved_info_file
 
 
 def getBotInfo(name):
@@ -84,6 +99,7 @@ def getBotInfo(name):
     last_run = datetime.datetime.strptime(last_run, "%Y-%m-%d %H:%M:%S").strftime("%Y/%m/%d %H:%M:%S")
     pDict["last_run"] = last_run
     pDict["has_config"] = os.path.exists(os.path.join("/home/pi/", name, "config.json"))
+    pDict["has_saved_info"] = os.path.exists(os.path.join("/home/pi/", name, "saved_info.json"))
 
     return pDict
 

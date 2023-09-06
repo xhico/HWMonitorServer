@@ -5,9 +5,11 @@
 {% block content %}
 
     <!-- Left Pane -->
-    <div class="col-xl-8 col-md-12 mb-4">
+    <div class="col-xl-4 col-md-12 mb-4">
+
+        <!-- Configuration File -->
         <div class="row">
-            <div class="col-12 mb-4">
+            <div class="col-12">
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title">Configuration File</h5>
@@ -17,10 +19,11 @@
                 </div>
             </div>
         </div>
+
     </div>
 
     <!-- Right Pane -->
-    <div class="col-xl-4 col-md-12">
+    <div class="col-xl-8 col-md-12">
 
         <!-- File Actions -->
         <div class="row">
@@ -36,60 +39,10 @@
             </div>
         </div>
 
-        <!-- Bots -->
-        <div class="row">
-            <div class="col-12 mb-4">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">Bots</h5>
-                        <div class="input-group flex-nowrap mb-3">
-                            <input id="manageBot" type="text" class="form-control" placeholder="Bot Folder name" aria-label="Bot Folder name" aria-describedby="manageBot">
-                            <button class="btn btn-outline-success" type="button" id="addBotBtn" onclick="manageBot('add')">Add</button>
-                            <button class="btn btn-outline-danger" type="button" id="removeBotBtn" onclick="manageBot('remove')">Remove</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Navigation -->
-        <div class="row">
-            <div class="col-12 mb-4">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">Navigation</h5>
-
-                        <div class="input-group flex-nowrap mb-3">
-                            <span class="input-group-text" id="addon-wrapping">History</span>
-                            <input type="radio" class="btn-check" name="historyOptions" id="historyEnabledBtn" autocomplete="off" checked>
-                            <label class="btn btn-outline-success" for="historyEnabledBtn">Enabled</label>
-                            <input type="radio" class="btn-check" name="historyOptions" id="historyDisabledBtn" autocomplete="off">
-                            <label class="btn btn-outline-danger" for="historyDisabledBtn">Disabled</label>
-                        </div>
-
-                        <div class="input-group flex-nowrap mb-3">
-                            <span class="input-group-text" id="addon-wrapping">EYE</span>
-                            <input type="radio" class="btn-check" name="eyeOptions" id="eyeEnabledBtn" autocomplete="off" checked>
-                            <label class="btn btn-outline-success" for="eyeEnabledBtn">Enabled</label>
-                            <input type="radio" class="btn-check" name="eyeOptions" id="eyeDisabledBtn" autocomplete="off">
-                            <label class="btn btn-outline-danger" for="eyeDisabledBtn">Disabled</label>
-                        </div>
-
-                        <div class="input-group flex-nowrap">
-                            <span class="input-group-text" id="addon-wrapping">PiVPN</span>
-                            <input type="radio" class="btn-check" name="pivpnOptions" id="pivpnEnabledBtn" autocomplete="off" checked>
-                            <label class="btn btn-outline-success" for="pivpnEnabledBtn">Enabled</label>
-                            <input type="radio" class="btn-check" name="pivpnOptions" id="pivpnDisabledBtn" autocomplete="off">
-                            <label class="btn btn-outline-danger" for="pivpnDisabledBtn">Disabled</label>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
         <!-- Auto-Update Sections -->
+        <!-- Navigation Sections -->
         <div class="row">
-            <div class="col-12 mb-4">
+            <div class="col-xl-6 col-md-12 mb-4">
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title">Auto-Update Sections</h5>
@@ -123,6 +76,62 @@
                             <button class="btn btn-outline-success" type="button" id="updateTimeBtn" onclick="setUpdateTime()">Save</button>
                         </div>
 
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-6 col-md-12 mb-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Navigation</h5>
+
+                        <div class="input-group flex-nowrap mb-3">
+                            <span class="input-group-text" id="addon-wrapping">History</span>
+                            <input type="radio" class="btn-check" name="historyOptions" id="historyEnabledBtn" autocomplete="off" checked>
+                            <label class="btn btn-outline-success" for="historyEnabledBtn">Enabled</label>
+                            <input type="radio" class="btn-check" name="historyOptions" id="historyDisabledBtn" autocomplete="off">
+                            <label class="btn btn-outline-danger" for="historyDisabledBtn">Disabled</label>
+                        </div>
+
+                        <div class="input-group flex-nowrap mb-3">
+                            <span class="input-group-text" id="addon-wrapping">EYE</span>
+                            <input type="radio" class="btn-check" name="eyeOptions" id="eyeEnabledBtn" autocomplete="off" checked>
+                            <label class="btn btn-outline-success" for="eyeEnabledBtn">Enabled</label>
+                            <input type="radio" class="btn-check" name="eyeOptions" id="eyeDisabledBtn" autocomplete="off">
+                            <label class="btn btn-outline-danger" for="eyeDisabledBtn">Disabled</label>
+                        </div>
+
+                        <div class="input-group flex-nowrap">
+                            <span class="input-group-text" id="addon-wrapping">PiVPN</span>
+                            <input type="radio" class="btn-check" name="pivpnOptions" id="pivpnEnabledBtn" autocomplete="off" checked>
+                            <label class="btn btn-outline-success" for="pivpnEnabledBtn">Enabled</label>
+                            <input type="radio" class="btn-check" name="pivpnOptions" id="pivpnDisabledBtn" autocomplete="off">
+                            <label class="btn btn-outline-danger" for="pivpnDisabledBtn">Disabled</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bots Sections -->
+        <!-- About -->
+        <div class="row">
+            <div class="col-xl-6 col-md-12 mb-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Bots</h5>
+                        <div class="input-group flex-nowrap mb-3">
+                            <input id="manageBot" type="text" class="form-control" placeholder="Bot Folder name" aria-label="Bot Folder name" aria-describedby="manageBot">
+                            <button class="btn btn-outline-success" type="button" id="addBotBtn" onclick="manageBot('add')">Add</button>
+                            <button class="btn btn-outline-danger" type="button" id="removeBotBtn" onclick="manageBot('remove')">Remove</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-6 col-md-12 mb-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">About</h5>
+                        <div>Francisco 'xhico' Filipe | <a target="_blank" href="https://github.com/xhico">GitHub</a></div>
                     </div>
                 </div>
             </div>

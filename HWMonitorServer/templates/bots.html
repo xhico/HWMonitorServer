@@ -3,15 +3,33 @@
 {% block title %}Bots{% endblock %}
 
 {% block content %}
+    <!-- View Bot Config Modal -->
+    <div class="modal fade" id="botLoadConfigModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title w-100 text-center"><span id="modalLoadConfigTitle"></span> Config</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <label for="modalLoadConfigBodyText"></label><textarea disabled id="modalLoadConfigBodyText" class="modal-body"></textarea>
+                <div class="modal-footer">
+                    <button onclick="editConfig()" id="loadConfigEditBtn" type="button" class="btn btn-danger">Edit</button>
+                    <button hidden onclick="saveConfig()" id="loadConfigSaveBtn" type="button" class="btn btn-success">Save</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- View Bot Log Modal -->
     <div class="modal fade" id="botLogModal" tabindex="-1">
         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title w-100 text-center"><span id="modalTitle"></span> Log</h5>
+                    <h5 class="modal-title w-100 text-center"><span id="modalLogTitle"></span> Log</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div id="modalBodyText" class="modal-body"></div>
+                <label for="modalLogBodyText"></label><textarea disabled id="modalLogBodyText" class="modal-body"></textarea>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                 </div>

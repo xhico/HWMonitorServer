@@ -53,12 +53,28 @@ def json_action():
         elif value == "stop":
             os.system("sudo service " + name + " stop")
             resp = {"status": "success", "message": name + " killed successfully"}
-        elif value == "log":
+        elif value == "LoadConfig":
+            info = models.getBotConfig(name)
+            resp = {"status": "success", "message": "View Config successfully", "info": info}
+        elif value == "Log":
             info = models.getBotLog(name)
             resp = {"status": "success", "message": "View Log successfully", "info": info}
         else:
             resp = {"status": "error", "message": "Invalid action - " + value}
-        resp["action"] = value
+    except Exception as ex:
+        resp = {"status": "error", "message": str(ex)}
+
+    return jsonify(resp)
+
+
+@bots.route("/bots/saveConfig", methods=['POST'])
+def json_saveConfig():
+    name = request.form.get('name', type=str)
+    value = request.form.get('value', type=str)
+
+    try:
+        status, message = models.saveConfiguration(name, value)
+        resp = {"status": status, "message": message}
     except Exception as ex:
         resp = {"status": "error", "message": str(ex)}
 

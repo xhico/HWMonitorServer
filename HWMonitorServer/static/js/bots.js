@@ -4,7 +4,9 @@
 
 async function action(value, name) {
     // Show Loading
-    await loadingScreen("show");
+    if (value === "start" || value === "stop") {
+        await loadingScreen("show");
+    }
 
     let resp = await $.ajax({
         method: "post", url: "/bots/action", data: {value: value, name: name}, success: function (data) {
@@ -16,17 +18,55 @@ async function action(value, name) {
     await showNotification("Bot - " + name, resp["message"], resp["status"])
 
     // Remove Loading
-    await loadingScreen("remove");
+    if (value === "start" || value === "stop") {
+        await loadingScreen("remove");
+    }
 
-    // Show log if necessary
-    if (resp["action"] === "log") {
-        document.getElementById("modalTitle").innerText = name;
-        document.getElementById("modalBodyText").innerText = decodeURI(resp["info"]);
-        $("#botLogModal").modal("show");
+    // Show Config / Log if necessary
+    if (value === "Log" || value === "LoadConfig") {
+        document.getElementById("modal" + value + "Title").innerText = name;
+        let modalBodyText = document.getElementById("modal" + value + "BodyText");
+        modalBodyText.value = resp["info"];
+        modalBodyText.setAttribute("rows", resp["info"].split("\n").length);
+        $("#bot" + value + "Modal").modal("show");
     }
 }
 
-function createBot(name) {
+function editConfig() {
+    let modalBodyText = document.getElementById("modalLoadConfigBodyText");
+    let loadConfigEditBtn = document.getElementById("loadConfigEditBtn");
+    let loadConfigSaveBtn = document.getElementById("loadConfigSaveBtn");
+    modalBodyText.disabled = !modalBodyText.disabled;
+    loadConfigEditBtn.hidden = !loadConfigEditBtn.hidden;
+    loadConfigSaveBtn.hidden = !loadConfigSaveBtn.hidden;
+}
+
+async function saveConfig() {
+    let modalBodyText = document.getElementById("modalLoadConfigBodyText");
+    let loadConfigEditBtn = document.getElementById("loadConfigEditBtn");
+    let loadConfigSaveBtn = document.getElementById("loadConfigSaveBtn");
+    let name = document.getElementById("modalLoadConfigTitle").innerText;
+    let value = modalBodyText.value;
+
+    // Save Config
+    let resp = await $.ajax({
+        method: "post", url: "/bots/saveConfig", data: {value: value, name: name}, success: function (data) {
+            return data;
+        }
+    });
+
+    // Hide Modal
+    modalBodyText.disabled = !modalBodyText.disabled;
+    loadConfigEditBtn.hidden = !loadConfigEditBtn.hidden;
+    loadConfigSaveBtn.hidden = !loadConfigSaveBtn.hidden;
+    $("#botLoadConfigModal").modal("hide");
+
+    // Show Notification
+    await showNotification("Bot - " + name, resp["message"], resp["status"])
+}
+
+function createBot(JSON, name) {
+
     // Skip if already created
     if (document.getElementById("bot_" + name)) {
         return
@@ -34,7 +74,7 @@ function createBot(name) {
 
     // Create element
     let botElem = document.createElement("div");
-    let divOne, divTwo, divThree, pElem, w100, btnOne, btnTwo, aOne;
+    let divOne, divTwo, divThree, pElem, w100, btnOne, btnTwo, btnThree, btnFour;
 
     botElem.classList.add("col-xl-3", "col-md-6", "border-bottom", "border-end");
     botElem.id = "bot_" + name;
@@ -125,14 +165,21 @@ function createBot(name) {
     }
     divThree.appendChild(btnTwo);
 
-    aOne = document.createElement("a");
-    aOne.classList.add("btn", "btn-secondary", "m-1");
-    aOne.innerText = "View Log";
-    aOne.onclick = function () {
-        action("log", name)
+    btnThree = document.createElement("button");
+    btnThree.classList.add("btn", "btn-secondary", "m-1");
+    btnThree.innerText = "Config";
+    btnThree.onclick = function () {
+        action("LoadConfig", name)
     }
-    aOne.href = "javascript:void(0);";
-    divThree.appendChild(aOne);
+    JSON[name]["has_config"] && divThree.appendChild(btnThree);
+
+    btnFour = document.createElement("button");
+    btnFour.classList.add("btn", "btn-secondary", "m-1");
+    btnFour.innerText = "View Log";
+    btnFour.onclick = function () {
+        action("Log", name)
+    }
+    divThree.appendChild(btnFour);
 
     // Append to contentDiv
     document.getElementById("content").appendChild(botElem);
@@ -180,7 +227,7 @@ async function updateSections() {
 
     // Iterate over every Bot
     for (let botName of botNames) {
-        await createBot(botName);
+        await createBot(JSON, botName);
         await setBot(JSON, botName);
     }
 

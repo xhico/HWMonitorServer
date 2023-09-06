@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-
+import os
 import subprocess
 import psutil
 import datetime
@@ -19,6 +19,21 @@ def getBotLog(name: str) -> str:
     log_file = f"/home/pi/{name}/{name}.log"
     log_info = subprocess.getoutput(f"tail -n 30 {log_file}")
     return log_info
+
+
+def getBotConfig(name: str) -> str:
+    """
+    Returns the last 30 lines of a config file for a bot with the given name.
+
+    Args:
+        name: A string representing the name of the bot.
+
+    Returns:
+        A string containing the last 30 lines of the bot's getBotConfig file.
+    """
+    config_file = f"/home/pi/{name}/config.json"
+    config_file = subprocess.getoutput(f"cat {config_file}")
+    return config_file
 
 
 def getBotInfo(name):
@@ -68,6 +83,7 @@ def getBotInfo(name):
     last_run = subprocess.getoutput("tail -n 1 /home/pi/" + name + "/" + name + ".log | cut -d ',' -f 1")
     last_run = datetime.datetime.strptime(last_run, "%Y-%m-%d %H:%M:%S").strftime("%Y/%m/%d %H:%M:%S")
     pDict["last_run"] = last_run
+    pDict["has_config"] = os.path.exists(os.path.join("/home/pi/", name, "config.json"))
 
     return pDict
 
@@ -86,3 +102,28 @@ def getBots():
         return bots
     except Exception as e:
         return {"hasInfo": "None"}
+
+
+def saveConfiguration(name, value):
+    """
+    Saves the configuration content to the configuration file.
+
+    Args:
+        name (str): Bot name.
+        value (str): The modified configuration content.
+
+    Returns:
+        tuple: A tuple containing the status ("success" or "error") and a message.
+
+    Raises:
+        Exception: If an error occurs while writing the configuration file.
+    """
+    try:
+        # Write the modified configuration to the configuration file
+        with open(os.path.join("/home/pi/", name, "config.json"), "w") as outFile:
+            outFile.writelines(value)
+
+        return "success", "Configuration saved successfully!"
+    except Exception as ex:
+        # Return an error message if an exception occurs
+        return "error", str(ex)

@@ -48,6 +48,12 @@ async function loadFile(value, name) {
     modalBodyText.value = resp["info"];
     modalBodyText.setAttribute("rows", resp["info"].split("\n").length);
     $("#bot" + value + "Modal").modal("show");
+
+    // Scroll to the bottom if LOG
+    if (value === "Log") {
+        await sleep(0.2);
+        modalBodyText.scrollTop = modalBodyText.scrollHeight;
+    }
 }
 
 function editConfig() {

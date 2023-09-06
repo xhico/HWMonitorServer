@@ -82,7 +82,7 @@ def checkIfError(name):
     # Split the log string into lines and reverse it
     lines = log_string.strip().split('\n')[::-1]
 
-    # Find the index of the first line with "[INFO]" and "------------"
+    # Find the index of the last line with "[INFO]" and "------------"
     start_index = next((i for i, line in enumerate(lines) if "[INFO]" in line and "------------" in line), None)
     start_index = len(lines) - start_index
 

@@ -70,7 +70,7 @@ async function saveConfig() {
     let configEditBtn = document.getElementById("configEditBtn");
     let configSaveBtn = document.getElementById("configSaveBtn");
     let name = document.getElementById("modalConfigTitle").innerText;
-    let value = modalBodyText.value;
+    let value = JSON.stringify(JSON.parse(modalBodyText.value), null, 4);
 
     // Save Config
     let resp = await $.ajax({
@@ -98,120 +98,136 @@ async function createBot(JSON, name) {
 
     // Create element
     let botElem = document.createElement("div");
-    let divOne, divTwo, divThree, pElem, w100, actionBtn;
+    let divHeader, divInfo, divInfoRow, divBtnsRow, divBtns, pElem, w100, actionBtn;
 
     botElem.classList.add("col-xl-3", "col-md-6", "border-bottom", "border-end");
     botElem.id = "bot_" + name;
 
-    divOne = document.createElement("div");
-    divOne.classList.add("text-center", "my-2");
-    divOne.innerHTML = "<b>" + name + "</b>"
-    botElem.appendChild(divOne);
+    divHeader = document.createElement("div");
+    divHeader.classList.add("text-center", "my-2");
+    divHeader.innerHTML = "<b>" + name + "</b>"
+    botElem.appendChild(divHeader);
 
-    divOne = document.createElement("div");
-    divOne.classList.add("text-center", "my-2");
-    botElem.appendChild(divOne);
+    divInfo = document.createElement("div");
+    divInfo.classList.add("text-center", "my-2");
+    botElem.appendChild(divInfo);
 
-    divTwo = document.createElement("div");
-    divTwo.classList.add("row", "px-4");
-    divOne.appendChild(divTwo);
+    divInfoRow = document.createElement("div");
+    divInfoRow.classList.add("row", "px-4");
+    divInfo.appendChild(divInfoRow);
 
     pElem = document.createElement("p");
     pElem.classList.add("col");
     pElem.innerHTML = "Running: <b><span id=\"" + name + "_running\">-</span></b>"
-    divTwo.appendChild(pElem);
+    divInfoRow.appendChild(pElem);
 
     pElem = document.createElement("p");
     pElem.classList.add("col");
     pElem.innerHTML = "PID: <b><span id=\"" + name + "_pid\">-</span></b>"
-    divTwo.appendChild(pElem);
+    divInfoRow.appendChild(pElem);
 
     w100 = document.createElement("div");
     w100.classList.add("w-100");
-    divTwo.appendChild(w100);
+    divInfoRow.appendChild(w100);
 
     pElem = document.createElement("p");
     pElem.classList.add("col");
     pElem.innerHTML = "CPU: <b><span id=\"" + name + "_cpu\">-</span></b>"
-    divTwo.appendChild(pElem);
+    divInfoRow.appendChild(pElem);
 
     pElem = document.createElement("p");
     pElem.classList.add("col");
     pElem.innerHTML = "Memory: <b><span id=\"" + name + "_memory\">-</span></b>"
-    divTwo.appendChild(pElem);
+    divInfoRow.appendChild(pElem);
 
     w100 = document.createElement("div");
     w100.classList.add("w-100");
-    divTwo.appendChild(w100);
+    divInfoRow.appendChild(w100);
 
     pElem = document.createElement("p");
     pElem.classList.add("col");
     pElem.innerHTML = "Create Time: <b><span id=\"" + name + "_create_time\">-</span></b>"
-    divTwo.appendChild(pElem);
+    divInfoRow.appendChild(pElem);
 
     w100 = document.createElement("div");
     w100.classList.add("w-100");
-    divTwo.appendChild(w100);
+    divInfoRow.appendChild(w100);
 
     pElem = document.createElement("p");
     pElem.classList.add("col");
     pElem.innerHTML = "Running Time: <b><span id=\"" + name + "_running_time\">-</span></b>"
-    divTwo.appendChild(pElem);
+    divInfoRow.appendChild(pElem);
 
     w100 = document.createElement("div");
     w100.classList.add("w-100");
-    divTwo.appendChild(w100);
+    divInfoRow.appendChild(w100);
 
     pElem = document.createElement("p");
     pElem.classList.add("col");
     pElem.innerHTML = "Last Run: <b><span id=\"" + name + "_last_run\">-</span></b>"
-    divTwo.appendChild(pElem);
+    divInfoRow.appendChild(pElem);
 
-    divThree = document.createElement("div");
-    divThree.classList.add("text-center", "my-2");
-    botElem.appendChild(divThree);
+    divBtns = document.createElement("div");
+    divBtns.classList.add("text-center", "my-2");
+    botElem.appendChild(divBtns);
+
+    divBtnsRow = document.createElement("div");
+    divBtnsRow.classList.add("row", "justify-content-center", "px-4");
+    divBtns.appendChild(divBtnsRow);
 
     actionBtn = document.createElement("button");
-    actionBtn.classList.add("btn", "btn-success", "m-1");
+    actionBtn.classList.add("col-3", "btn", "btn-success", "m-1");
     actionBtn.id = name + "_start";
     actionBtn.innerText = "Start";
     actionBtn.onclick = function () {
         action("start", name)
     }
-    divThree.appendChild(actionBtn);
+    divBtnsRow.appendChild(actionBtn);
 
     actionBtn = document.createElement("button");
-    actionBtn.classList.add("btn", "btn-danger", "m-1");
+    actionBtn.classList.add("col-3", "btn", "btn-danger", "m-1");
     actionBtn.id = name + "_stop";
     actionBtn.innerText = "Stop";
     actionBtn.onclick = function () {
         action("stop", name)
     }
-    divThree.appendChild(actionBtn);
+    divBtnsRow.appendChild(actionBtn);
 
     actionBtn = document.createElement("button");
-    actionBtn.classList.add("btn", "btn-warning", "m-1");
-    actionBtn.innerText = "Config";
-    actionBtn.onclick = function () {
-        loadFile("Config", name);
-    }
-    JSON[name]["has_config"] && divThree.appendChild(actionBtn);
+    actionBtn.classList.add("col-3", "btn", "m-1");
+    actionBtn.classList.add(JSON[name]["has_error"] ? "btn-outline-danger" : "btn-outline-success");
+    actionBtn.id = name + "_status";
+    actionBtn.disabled = true;
+    actionBtn.innerText = JSON[name]["has_error"] ? "ERROR" : "OK";
+    divBtnsRow.appendChild(actionBtn);
+
+    w100 = document.createElement("div");
+    w100.classList.add("w-100");
+    divBtnsRow.appendChild(w100);
 
     actionBtn = document.createElement("button");
-    actionBtn.classList.add("btn", "btn-secondary", "m-1");
+    actionBtn.classList.add("col-3", "btn", "btn-secondary", "m-1");
     actionBtn.innerText = "Log";
     actionBtn.onclick = function () {
         loadFile("Log", name);
     }
-    divThree.appendChild(actionBtn);
+    divBtnsRow.appendChild(actionBtn);
 
     actionBtn = document.createElement("button");
-    actionBtn.classList.add("btn", "btn-secondary", "m-1");
-    actionBtn.innerText = "Saved Info";
+    actionBtn.classList.add("col-3", "btn", "btn-warning", "m-1");
+    actionBtn.innerText = "Config";
+    actionBtn.onclick = function () {
+        loadFile("Config", name);
+    }
+    JSON[name]["has_config"] && divBtnsRow.appendChild(actionBtn);
+
+    actionBtn = document.createElement("button");
+    actionBtn.classList.add("col-3", "btn", "btn-secondary", "m-1");
+    actionBtn.innerText = "Info";
     actionBtn.onclick = function () {
         loadFile("SavedInfo", name);
     }
-    JSON[name]["has_saved_info"] && divThree.appendChild(actionBtn);
+    JSON[name]["has_saved_info"] && divBtnsRow.appendChild(actionBtn);
 
     // Append to contentDiv
     document.getElementById("content").appendChild(botElem);

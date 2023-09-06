@@ -51,6 +51,23 @@ def getBotSavedInfo(name: str) -> str:
     return saved_info_file
 
 
+def checkIfError(name):
+    # Get Bot Log
+    log_string = getBotLog(name)
+
+    # Split the log string into lines and reverse it
+    lines = log_string.strip().split('\n')[::-1]
+
+    # Find the index of the first line with "[INFO]" and "------------"
+    start_index = next((i for i, line in enumerate(lines) if "[INFO]" in line and "------------" in line), None)
+    start_index = len(lines) - start_index
+
+    # Check if there is an error in the remaining lines
+    hasError = any("[ERROR]" in line for line in lines[::-1][start_index:])
+
+    return hasError
+
+
 def getBotInfo(name):
     """
     Gets information about a bot process running on the system.
@@ -100,6 +117,7 @@ def getBotInfo(name):
     pDict["last_run"] = last_run
     pDict["has_config"] = os.path.exists(os.path.join("/home/pi/", name, "config.json"))
     pDict["has_saved_info"] = os.path.exists(os.path.join("/home/pi/", name, "saved_info.json"))
+    pDict["has_error"] = checkIfError(name)
 
     return pDict
 

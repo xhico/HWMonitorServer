@@ -6,28 +6,41 @@ async function action(value, name) {
     // Show Loading
     await loadingScreen("show");
 
+    // Run Action
     let resp = await $.ajax({
         method: "post", url: "/bots/action", data: {value: value, name: name}, success: function (data) {
             return data;
         }
     });
 
-    // Show Notification
-    await showNotification("Bot - " + name, resp["message"], resp["status"])
-
     // Remove Loading
     await loadingScreen("remove");
+
+    // Show Notification
+    await showNotification("Bot - " + name, resp["message"], resp["status"])
 }
 
 async function loadFile(value, name) {
+    // Show Loading
+    await loadingScreen("show");
+
+    // Get File Content
     let resp = await $.ajax({
         method: "post", url: "/bots/loadFile", data: {name: name, value: value}, success: function (data) {
             return data;
         }
     });
 
+    // Remove Loading
+    await loadingScreen("remove");
+
     // Show Notification
     await showNotification("Bot - " + name, resp["message"], resp["status"])
+
+    // Check if error
+    if (resp["status"] === "error") {
+        return
+    }
 
     // Open Modal
     document.getElementById("modal" + value + "Title").innerText = name;

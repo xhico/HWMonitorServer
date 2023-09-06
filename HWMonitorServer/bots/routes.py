@@ -54,7 +54,7 @@ def json_action():
             os.system("sudo service " + name + " stop")
             resp = {"status": "success", "message": name + " killed successfully"}
         else:
-            resp = {"status": "error", "message": "Invalid action - " + value}
+            raise Exception("Invalid Action value - " + value)
     except Exception as ex:
         resp = {"status": "error", "message": str(ex)}
 
@@ -81,14 +81,15 @@ def json_loadConfig():
     value = request.form.get('value', type=str)
 
     try:
-        info = ""
         if value == "Log":
             info = models.getBotLog(name)
         elif value == "Config":
             info = models.getBotConfig(name)
         elif value == "SavedInfo":
             info = models.getBotSavedInfo(name)
-        resp = {"status": "success", "message": "View " + value + " successfully", "info": info}
+        else:
+            raise Exception("Invalid LoadFile value - " + value)
+        resp = {"status": "success", "message": "Load " + value + " successfully", "info": info}
     except Exception as ex:
         resp = {"status": "error", "message": str(ex)}
 

@@ -30,7 +30,7 @@ def getHistoricInfo(numberTime: int, unitTime: str, hwMetric: str):
 
     # Retrieve Historic JSON
     with open("/home/pi/HardwareHistory/saved_info.json") as inFile:
-        data = list(reversed(json.load(inFile)["SAVED_INFO"]))
+        data = list(reversed(json.load(inFile)))
 
     # Get available metrics
     availableMetrics = [key for key in data[0].keys() if key != "Date"]

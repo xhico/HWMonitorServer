@@ -38,7 +38,7 @@ def json_botsInfo():
 def json_action():
     """
     Performs an action on a bot based on user input received from a form.
-    The available actions are: "kill", "run", and "log".
+    The available actions are: "start", "stop".
 
     Returns:
         A JSON object containing information about the success or failure of the action performed.
@@ -53,12 +53,6 @@ def json_action():
         elif value == "stop":
             os.system("sudo service " + name + " stop")
             resp = {"status": "success", "message": name + " killed successfully"}
-        elif value == "LoadConfig":
-            info = models.getBotConfig(name)
-            resp = {"status": "success", "message": "View Config successfully", "info": info}
-        elif value == "Log":
-            info = models.getBotLog(name)
-            resp = {"status": "success", "message": "View Log successfully", "info": info}
         else:
             resp = {"status": "error", "message": "Invalid action - " + value}
     except Exception as ex:
@@ -81,11 +75,20 @@ def json_saveConfig():
     return jsonify(resp)
 
 
-@bots.route("/bots/loadSavedInfo/<name>", methods=['GET'])
-def json_loadSavedInfo(name):
+@bots.route("/bots/loadFile", methods=['POST'])
+def json_loadConfig():
+    name = request.form.get('name', type=str)
+    value = request.form.get('value', type=str)
+
     try:
-        info = models.getBotSavedInfo(name)
-        return "<pre>" + info + "</pre>"
+        info = ""
+        if value == "Log":
+            info = models.getBotLog(name)
+        elif value == "Config":
+            info = models.getBotConfig(name)
+        elif value == "SavedInfo":
+            info = models.getBotSavedInfo(name)
+        resp = {"status": "success", "message": "View " + value + " successfully", "info": info}
     except Exception as ex:
         resp = {"status": "error", "message": str(ex)}
 

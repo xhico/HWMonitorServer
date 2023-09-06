@@ -4,9 +4,7 @@
 
 async function action(value, name) {
     // Show Loading
-    if (value === "start" || value === "stop") {
-        await loadingScreen("show");
-    }
+    await loadingScreen("show");
 
     let resp = await $.ajax({
         method: "post", url: "/bots/action", data: {value: value, name: name}, success: function (data) {
@@ -18,34 +16,41 @@ async function action(value, name) {
     await showNotification("Bot - " + name, resp["message"], resp["status"])
 
     // Remove Loading
-    if (value === "start" || value === "stop") {
-        await loadingScreen("remove");
-    }
+    await loadingScreen("remove");
+}
 
-    // Show Config / Log if necessary
-    if (value === "Log" || value === "LoadConfig") {
-        document.getElementById("modal" + value + "Title").innerText = name;
-        let modalBodyText = document.getElementById("modal" + value + "BodyText");
-        modalBodyText.value = resp["info"];
-        modalBodyText.setAttribute("rows", resp["info"].split("\n").length);
-        $("#bot" + value + "Modal").modal("show");
-    }
+async function loadFile(value, name) {
+    let resp = await $.ajax({
+        method: "post", url: "/bots/loadFile", data: {name: name, value: value}, success: function (data) {
+            return data;
+        }
+    });
+
+    // Show Notification
+    await showNotification("Bot - " + name, resp["message"], resp["status"])
+
+    // Open Modal
+    document.getElementById("modal" + value + "Title").innerText = name;
+    let modalBodyText = document.getElementById("modal" + value + "BodyText");
+    modalBodyText.value = resp["info"];
+    modalBodyText.setAttribute("rows", resp["info"].split("\n").length);
+    $("#bot" + value + "Modal").modal("show");
 }
 
 function editConfig() {
-    let modalBodyText = document.getElementById("modalLoadConfigBodyText");
-    let loadConfigEditBtn = document.getElementById("loadConfigEditBtn");
-    let loadConfigSaveBtn = document.getElementById("loadConfigSaveBtn");
+    let modalBodyText = document.getElementById("modalConfigBodyText");
+    let loadConfigEditBtn = document.getElementById("configEditBtn");
+    let loadConfigSaveBtn = document.getElementById("configSaveBtn");
     modalBodyText.disabled = !modalBodyText.disabled;
     loadConfigEditBtn.hidden = !loadConfigEditBtn.hidden;
     loadConfigSaveBtn.hidden = !loadConfigSaveBtn.hidden;
 }
 
 async function saveConfig() {
-    let modalBodyText = document.getElementById("modalLoadConfigBodyText");
-    let loadConfigEditBtn = document.getElementById("loadConfigEditBtn");
-    let loadConfigSaveBtn = document.getElementById("loadConfigSaveBtn");
-    let name = document.getElementById("modalLoadConfigTitle").innerText;
+    let modalBodyText = document.getElementById("modalConfigBodyText");
+    let configEditBtn = document.getElementById("configEditBtn");
+    let configSaveBtn = document.getElementById("configSaveBtn");
+    let name = document.getElementById("modalConfigTitle").innerText;
     let value = modalBodyText.value;
 
     // Save Config
@@ -57,9 +62,9 @@ async function saveConfig() {
 
     // Hide Modal
     modalBodyText.disabled = !modalBodyText.disabled;
-    loadConfigEditBtn.hidden = !loadConfigEditBtn.hidden;
-    loadConfigSaveBtn.hidden = !loadConfigSaveBtn.hidden;
-    $("#botLoadConfigModal").modal("hide");
+    configEditBtn.hidden = !configEditBtn.hidden;
+    configSaveBtn.hidden = !configSaveBtn.hidden;
+    $("#botConfigModal").modal("hide");
 
     // Show Notification
     await showNotification("Bot - " + name, resp["message"], resp["status"])
@@ -169,7 +174,7 @@ function createBot(JSON, name) {
     actionBtn.classList.add("btn", "btn-secondary", "m-1");
     actionBtn.innerText = "Config";
     actionBtn.onclick = function () {
-        action("LoadConfig", name)
+        loadFile("Config", name);
     }
     JSON[name]["has_config"] && divThree.appendChild(actionBtn);
 
@@ -177,7 +182,7 @@ function createBot(JSON, name) {
     actionBtn.classList.add("btn", "btn-secondary", "m-1");
     actionBtn.innerText = "Log";
     actionBtn.onclick = function () {
-        action("Log", name)
+        loadFile("Log", name);
     }
     divThree.appendChild(actionBtn);
 
@@ -185,7 +190,7 @@ function createBot(JSON, name) {
     actionBtn.classList.add("btn", "btn-secondary", "m-1");
     actionBtn.innerText = "Saved Info";
     actionBtn.onclick = function () {
-        window.open("/bots/loadSavedInfo/" + name, "_blank");
+        loadFile("SavedInfo", name);
     }
     JSON[name]["has_saved_info"] && divThree.appendChild(actionBtn);
 

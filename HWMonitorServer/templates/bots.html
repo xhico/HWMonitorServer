@@ -4,17 +4,17 @@
 
 {% block content %}
     <!-- View Bot Config Modal -->
-    <div class="modal fade" id="botLoadConfigModal" tabindex="-1">
+    <div class="modal fade" id="botConfigModal" tabindex="-1">
         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title w-100 text-center"><span id="modalLoadConfigTitle"></span> Config</h5>
+                    <h5 class="modal-title w-100 text-center"><span id="modalConfigTitle"></span> Config</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <label for="modalLoadConfigBodyText"></label><textarea disabled id="modalLoadConfigBodyText" class="modal-body"></textarea>
+                <label for="modalConfigBodyText"></label><textarea disabled id="modalConfigBodyText" class="modal-body"></textarea>
                 <div class="modal-footer">
-                    <button onclick="editConfig()" id="loadConfigEditBtn" type="button" class="btn btn-danger">Edit</button>
-                    <button hidden onclick="saveConfig()" id="loadConfigSaveBtn" type="button" class="btn btn-success">Save</button>
+                    <button onclick="editConfig()" id="configEditBtn" type="button" class="btn btn-danger">Edit</button>
+                    <button hidden onclick="saveConfig()" id="configSaveBtn" type="button" class="btn btn-success">Save</button>
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                 </div>
             </div>
@@ -30,6 +30,22 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <label for="modalLogBodyText"></label><textarea disabled id="modalLogBodyText" class="modal-body"></textarea>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- View Bot Saved Info Modal -->
+    <div class="modal fade" id="botSavedInfoModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title w-100 text-center"><span id="modalSavedInfoTitle"></span> Saved Info</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <label for="modalSavedInfoBodyText"></label><textarea disabled id="modalSavedInfoBodyText" class="modal-body"></textarea>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                 </div>

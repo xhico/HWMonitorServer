@@ -63,6 +63,26 @@ def json_action():
 
 @bots.route("/bots/saveConfig", methods=['POST'])
 def json_saveConfig():
+    """
+    Save configuration data for a bot.
+
+    Args:
+        None (uses POST request form data):
+            - 'name' (str): The name of the configuration parameter to be saved.
+            - 'value' (str): The value to be saved for the specified parameter.
+
+    Returns:
+        JSON response:
+            - 'status' (str): Indicates the status of the operation ('success' or 'error').
+            - 'message' (str): A message providing information about the operation outcome.
+
+    Example Usage:
+        POST /bots/saveConfig
+        form data: {'name': 'param_name', 'value': 'param_value'}
+
+    Note:
+        This function calls 'models.saveConfiguration' to handle the saving of configuration data.
+    """
     name = request.form.get('name', type=str)
     value = request.form.get('value', type=str)
 
@@ -76,7 +96,29 @@ def json_saveConfig():
 
 
 @bots.route("/bots/loadFile", methods=['POST'])
-def json_loadConfig():
+def json_loadFile():
+    """
+    Load information for a bot based on the specified value.
+
+    Args:
+        None (uses POST request form data):
+            - 'name' (str): The name of the bot for which information is requested.
+            - 'value' (str): The type of information to load ('Log', 'Config', or 'SavedInfo').
+
+    Returns:
+        JSON response:
+            - 'status' (str): Indicates the status of the operation ('success' or 'error').
+            - 'message' (str): A message providing information about the operation outcome.
+            - 'info' (object): The loaded information, which depends on the 'value' parameter.
+
+    Example Usage:
+        POST /bots/loadFile
+        form data: {'name': 'bot_name', 'value': 'Config'}
+
+    Note:
+        This function calls various 'models' functions based on the 'value' parameter
+        to load different types of information for the specified bot.
+    """
     name = request.form.get('name', type=str)
     value = request.form.get('value', type=str)
 

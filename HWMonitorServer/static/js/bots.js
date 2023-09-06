@@ -54,7 +54,7 @@ function editConfig() {
     let modalBodyText = document.getElementById("modalConfigBodyText");
     let loadConfigEditBtn = document.getElementById("configEditBtn");
     let loadConfigSaveBtn = document.getElementById("configSaveBtn");
-    modalBodyText.disabled = !modalBodyText.disabled;
+    modalBodyText.readOnly = !modalBodyText.readOnly;
     loadConfigEditBtn.hidden = !loadConfigEditBtn.hidden;
     loadConfigSaveBtn.hidden = !loadConfigSaveBtn.hidden;
 }
@@ -74,7 +74,7 @@ async function saveConfig() {
     });
 
     // Hide Modal
-    modalBodyText.disabled = !modalBodyText.disabled;
+    modalBodyText.readOnly = !modalBodyText.readOnly;
     configEditBtn.hidden = !configEditBtn.hidden;
     configSaveBtn.hidden = !configSaveBtn.hidden;
     $("#botConfigModal").modal("hide");

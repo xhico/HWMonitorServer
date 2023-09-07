@@ -220,7 +220,6 @@ def getAmbientHumidityTemperature() -> dict:
             - 'TemperatureC': A float representing the temperature in Celsius.
             - 'TemperatureF': A float representing the temperature in Fahrenheit.
             - 'Humidity': A float representing the relative humidity.
-            - 'Valid': A boolean indicating whether the data is valid.
     """
     try:
         with open("/home/pi/HumiditySensor/saved_info.json") as inFile:
@@ -230,8 +229,7 @@ def getAmbientHumidityTemperature() -> dict:
             "Date": data["date"],
             "TemperatureC": data["temp_c"],
             "TemperatureF": data["temp_f"],
-            "Humidity": data["humidity"],
-            "Valid": data["valid"]
+            "Humidity": data["humidity"]
         }
     except Exception:
         return {"hasInfo": "None"}

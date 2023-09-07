@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+
 import os
 import subprocess
 import psutil
@@ -20,18 +21,17 @@ def getBotLog(name):
     log_string = subprocess.getoutput(f"cat {log_file}")
 
     # Split the log string into lines and reverse it
-    lines = log_string.strip().split('\n')[::-1]
+    log_string = log_string.strip().split('\n')[::-1]
 
     # Find the index of the third occurrence of "[INFO] ------------"
     start_index, count, maxCount = 0, 0, 3
-    for i, line in enumerate(lines):
-        if "[INFO]" in line and "------------" in line:
+    while count != maxCount and start_index <= len(log_string) - 1:
+        if "[INFO] ---------" in log_string[start_index]:
             count += 1
-            if count == maxCount:
-                start_index = len(lines) - i
-                break
+        start_index += 1
 
-    log_string = "\n".join(lines[::-1][start_index - 1:])
+    # Get only last maxCount runs -> reverse -> toString
+    log_string = "\n".join(log_string[0:start_index][::-1])
 
     return log_string
 

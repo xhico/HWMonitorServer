@@ -99,11 +99,8 @@ async function initCharts(JSON) {
 }
 
 window.addEventListener('DOMContentLoaded', async function main() {
-    console.log("---------------------");
     document.getElementById("navbar_history").classList.add("active");
 
     // Init Charts
     await goBtn();
-
-
 });

@@ -172,7 +172,6 @@ document.getElementById("overviewMonthSelect").addEventListener("change", functi
 });
 
 window.addEventListener("DOMContentLoaded", async function main() {
-    console.log("---------------------");
     document.getElementById("navbar_eye").classList.add("active");
 
     // Get Recordings Info JSON

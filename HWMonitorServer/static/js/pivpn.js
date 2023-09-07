@@ -58,7 +58,6 @@ function addProfileElem(name, profile) {
 }
 
 async function loadClients(status) {
-    console.log(status);
     // Show Loading
     await loadingScreen("show");
 

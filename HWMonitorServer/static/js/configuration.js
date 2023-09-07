@@ -183,7 +183,7 @@ window.addEventListener('DOMContentLoaded', async function main() {
     // Get configJSON
     let configJSON = await getConfigContent(configurationArea);
 
-    // Set NAV ToggleButtons
+    // Set Navigation/Auto-Update ToggleButtons
     for (let entry of ["history", "eye", "pivpn", "updateStats", "updateBots", "updateTop"]) {
         let entryEnabledBtn = document.getElementById(entry + "EnabledBtn");
         let entryDisabledBtn = document.getElementById(entry + "DisabledBtn");

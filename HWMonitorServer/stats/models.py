@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+import copy
 import datetime
 import json
 import re
@@ -45,7 +46,8 @@ def getUptime() -> dict:
             "hasInfo": "Yes",
             "Date_Now": date_now.strftime("%Y/%m/%d %H:%M:%S"),
             "Boot_Time": boot_time.strftime("%Y/%m/%d %H:%M:%S"),
-            "Uptime": "{days} days {hours}h {minutes}m {seconds}s".format(**d)
+            "Uptime": "{days} days {hours}h {minutes}m {seconds}s".format(**d),
+            "Uptime_Secs": delta_time.total_seconds()
         }
     except Exception:
         return {"hasInfo": "None"}

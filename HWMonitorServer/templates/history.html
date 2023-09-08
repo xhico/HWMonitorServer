@@ -5,23 +5,50 @@
 {% block content %}
     <!-- History View -->
 
-    <div class="input-group d-flex justify-content-center mb-2">
-        <span class="input-group-text">Time</span>
-        <label><input style="width: 100px;" class="form-control" type="number" id="numberTime" value="12" min="1"></label>
-        <label><select style="width: 100px;" class="form-select" id="unitTime">
-            <option selected value="hour">Hour</option>
-            <option value="day">Day</option>
-            <option value="week">Week</option>
-        </select></label>
-        <span class="input-group-text">HW</span>
-        <label><select style="width: 150px;" class="form-select" id="hwMetric">
-            <option selected value="CPU">CPU</option>
-        </select></label>
-        <button class="btn btn-outline-success" type="button" onclick="goBtn()">Go</button>
+    <div class="col">
+
+        <!-- History Data Selection -->
+        <div class="container text-center">
+            <div class="row justify-content-md-center">
+                <div class="col-xl-2 col-sm-12 mb-2 d-grid gap-2">
+                    <div class="input-group">
+                        <label class="input-group-text" for="numberTime">Number Time</label>
+                        <select class="form-select" id="numberTime">
+                            <option selected value="6">6</option>
+                            <option value="12">12</option>
+                            <option value="24">24</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-xl-2 col-sm-12 mb-2 d-grid gap-2">
+                    <div class="input-group">
+                        <label class="input-group-text" for="unitTime">Unit Time</label>
+                        <select class="form-select" id="unitTime">
+                            <option selected value="hour">Hour</option>
+                            <option value="day">Day</option>
+                            <option value="week">Week</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-sm-12 mb-2 d-grid gap-2">
+                    <div class="input-group">
+                        <label class="input-group-text" for="hwMetric">Hardware Metric</label>
+                        <select class="form-select" id="hwMetric">
+                            <option selected value="CPU">CPU</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-xl-1 col-sm-12 mb-2 d-grid gap-2">
+                    <button class="btn btn-outline-success" type="button" onclick="goBtn()">Go</button>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- History Charts -->
+        <div class="row" id="charts"></div>
     </div>
 
-    <div class="row" id="charts">
-    </div>
 {% endblock %}
 
 {% block script %}

@@ -3,16 +3,9 @@
  */
 
 let configurationArea;
-let actionBtns = [
-    "configurationArea", "toggleEditConfigurationAreaBtn", "saveConfigJSONBtn",
-    "manageBot", "addBotBtn", "removeBotBtn",
-    "updateTime", "updateTimeBtn",
-    "numberOfBotsLogs", "numberOfBotsLogsBtn"
-];
 
 async function toggleEditConfigurationArea() {
-    let flag = configurationArea.disabled;
-    configurationArea.disabled = !flag;
+    configurationArea.disabled = !configurationArea.disabled;
 }
 
 
@@ -42,7 +35,7 @@ async function saveConfigJSON() {
 
     // Restart if success
     if (resp["status"] === "success") {
-        await showNotification("Saving Configuration", "Restarting Service", resp["status"]);
+        await showNotification("Configuration saved successfully", "Restarting Device", resp["status"]);
         await power("restart");
     }
 
@@ -53,8 +46,13 @@ async function saveConfigJSON() {
 async function manageBot(action) {
     // Get Bot Text
     let botNameElem = document.getElementById("manageBot");
-    botNameElem.disabled = true;
     let botNameElemText = botNameElem.value;
+
+    // Check fo valid chars
+    if (botNameElemText === "" || !/^[a-zA-Z0-9_\-]+$/.test(botNameElemText)) {
+        await showNotification("Failed to " + action + " bot", "Name contains invalid characters or empty", "error");
+        return
+    }
 
     // Convert from String to Object
     configJSON = typeof configJSON === "string" ? JSON.parse(configJSON) : configJSON;
@@ -62,8 +60,7 @@ async function manageBot(action) {
     // Add/Remove botName to configJSON
     if (action === "add") {
         if (configJSON.Bots.includes(botNameElemText)) {
-            await showNotification("Duplicated Entry", "'" + botNameElemText + "' already exists", "warning");
-            await toggleEditConfigurationArea();
+            await showNotification("Duplicated Entry", "'" + botNameElemText + "' already exists", "error");
             return
         }
         configJSON.Bots.push(botNameElemText);
@@ -72,8 +69,7 @@ async function manageBot(action) {
         if (index !== -1) {
             configJSON.Bots.splice(index, 1);
         } else {
-            await showNotification("Missing value", "Failed to find '" + botNameElemText + "'", "warning");
-            await toggleEditConfigurationArea();
+            await showNotification("Missing value", "Failed to find '" + botNameElemText + "'", "error");
             return
         }
     }
@@ -134,13 +130,11 @@ async function setUpdateTime() {
 
     // Get Bot Text
     let updateTimeElem = document.getElementById("updateTime");
-    updateTimeElem.disabled = true;
     let updateTimeElemText = updateTimeElem.value;
 
     // Check if value is not empty
-    if (updateTimeElemText === "") {
-        await showNotification("Invalid Value", "Update Time can't be empty", "warning");
-        await toggleEditConfigurationArea();
+    if (updateTimeElemText === "" || !/^[0-9]+$/.test(updateTimeElemText)) {
+        await showNotification("Failed to set UpdateTime", "UpdateTime contains invalid characters or empty", "error");
         return
     }
 
@@ -164,13 +158,11 @@ async function setUpdateTime() {
 async function setNumberOfBotsLogs() {
     // Get Bot Text
     let numberOfBotsLogsElem = document.getElementById("numberOfBotsLogs");
-    numberOfBotsLogsElem.disabled = true;
     let numberOfBotsLogsText = numberOfBotsLogsElem.value;
 
-    // Check if value is not empty
-    if (numberOfBotsLogsText === "") {
-        await showNotification("Invalid Value", "Number of Bot Logs can't be empty", "warning");
-        await toggleEditConfigurationArea();
+    // Check fo valid chars
+    if (numberOfBotsLogsText === "" || !/^[a-zA-Z0-9_\-]+$/.test(numberOfBotsLogsText)) {
+        await showNotification("Failed to set NumberOfBotsLogs", "NumberOfBotsLogs contains invalid characters or empty", "error");
         return
     }
 
@@ -205,8 +197,6 @@ window.addEventListener('DOMContentLoaded', async function main() {
     for (let entry of ["history", "eye", "pivpn", "updateStats", "updateBots", "updateTop"]) {
         let entryEnabledBtn = document.getElementById(entry + "EnabledBtn");
         let entryDisabledBtn = document.getElementById(entry + "DisabledBtn");
-        actionBtns.push(entry + "EnabledBtn");
-        actionBtns.push(entry + "DisabledBtn");
         configJSON[capitalize(entry)] === true ? entryEnabledBtn.click() : entryDisabledBtn.click();
         entryEnabledBtn.addEventListener("change", function () {
             navToggle(capitalize(entry), this);

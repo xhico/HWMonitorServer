@@ -12,22 +12,13 @@ let actionBtns = [
 
 async function toggleEditConfigurationArea() {
     let flag = configurationArea.disabled;
-    await toggleBtns(!flag);
     configurationArea.disabled = !flag;
-    document.getElementById("toggleEditConfigurationAreaBtn").disabled = !flag;
-    document.getElementById("saveConfigJSONBtn").disabled = !flag;
 }
 
-async function toggleBtns(flag) {
-    actionBtns.forEach(id => {
-        document.getElementById(id).disabled = flag === false;
-    });
-}
 
 async function saveConfigJSON() {
     // Show Loading
     await loadingScreen("show");
-    await toggleBtns(false);
 
     // Check if JSON is valid
     configJSON = configurationArea.value;
@@ -60,8 +51,6 @@ async function saveConfigJSON() {
 }
 
 async function manageBot(action) {
-    await toggleBtns(false);
-
     // Get Bot Text
     let botNameElem = document.getElementById("manageBot");
     botNameElem.disabled = true;
@@ -74,7 +63,6 @@ async function manageBot(action) {
     if (action === "add") {
         if (configJSON.Bots.includes(botNameElemText)) {
             await showNotification("Duplicated Entry", "'" + botNameElemText + "' already exists", "warning");
-            await toggleBtns(true);
             await toggleEditConfigurationArea();
             return
         }
@@ -85,7 +73,6 @@ async function manageBot(action) {
             configJSON.Bots.splice(index, 1);
         } else {
             await showNotification("Missing value", "Failed to find '" + botNameElemText + "'", "warning");
-            await toggleBtns(true);
             await toggleEditConfigurationArea();
             return
         }
@@ -144,7 +131,6 @@ async function navToggle(key, btn) {
 }
 
 async function setUpdateTime() {
-    await toggleBtns(false);
 
     // Get Bot Text
     let updateTimeElem = document.getElementById("updateTime");
@@ -154,7 +140,6 @@ async function setUpdateTime() {
     // Check if value is not empty
     if (updateTimeElemText === "") {
         await showNotification("Invalid Value", "Update Time can't be empty", "warning");
-        await toggleBtns(true);
         await toggleEditConfigurationArea();
         return
     }
@@ -177,8 +162,6 @@ async function setUpdateTime() {
 }
 
 async function setNumberOfBotsLogs() {
-    await toggleBtns(false);
-
     // Get Bot Text
     let numberOfBotsLogsElem = document.getElementById("numberOfBotsLogs");
     numberOfBotsLogsElem.disabled = true;
@@ -187,7 +170,6 @@ async function setNumberOfBotsLogs() {
     // Check if value is not empty
     if (numberOfBotsLogsText === "") {
         await showNotification("Invalid Value", "Number of Bot Logs can't be empty", "warning");
-        await toggleBtns(true);
         await toggleEditConfigurationArea();
         return
     }

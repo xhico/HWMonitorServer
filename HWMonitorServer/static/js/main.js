@@ -112,14 +112,70 @@ async function loadingScreen(action) {
     document.getElementById("overlay").hidden = action;
 }
 
+async function generateRandomString(length) {
+    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    let randomString = '';
+
+    for (let i = 0; i < length; i++) {
+        const randomIndex = Math.floor(Math.random() * characters.length);
+        randomString += characters.charAt(randomIndex);
+    }
+
+    return randomString;
+}
+
 async function showNotification(title, message, type) {
-    document.getElementById("notificationTitle").innerText = title;
-    document.getElementById("notificationMsg").innerText = message;
-    let notificationPopupElem = document.getElementById("notificationPopup");
-    notificationPopupElem.className = "toast text-white";
+    const randomString = await generateRandomString(8);
+
+    // Create the outer div element
+    const notificationPopup = document.createElement("div");
+    notificationPopup.id = randomString;
+    notificationPopup.classList.add("toast", "text-white");
     if (type === "error") type = "danger";
-    notificationPopupElem.classList.add("bg-" + type);
-    $('#notificationPopup').toast('show');
+    notificationPopup.classList.add("bg-" + type);
+    notificationPopup.setAttribute("role", "alert");
+    notificationPopup.setAttribute("aria-live", "assertive");
+    notificationPopup.setAttribute("aria-atomic", "true");
+
+    // Create the div for the toast header
+    const toastHeader = document.createElement("div");
+    toastHeader.classList.add("toast-header");
+
+    // Create the strong element for the title
+    const notificationTitle = document.createElement("strong");
+    notificationTitle.id = "notificationTitle";
+    notificationTitle.classList.add("me-auto");
+    notificationTitle.innerText = title;
+
+    // Create the button element for closing the toast
+    const closeButton = document.createElement("button");
+    closeButton.type = "button";
+    closeButton.classList.add("btn-close");
+    closeButton.setAttribute("data-bs-dismiss", "toast");
+    closeButton.setAttribute("aria-label", "Close");
+
+    // Create the div for the toast message
+    const notificationMsg = document.createElement("div");
+    notificationMsg.id = "notificationMsg";
+    notificationMsg.classList.add("toast-body");
+    notificationMsg.innerText = message;
+
+    // Append elements to construct the desired structure
+    toastHeader.appendChild(notificationTitle);
+    toastHeader.appendChild(closeButton);
+    notificationPopup.appendChild(toastHeader);
+    notificationPopup.appendChild(notificationMsg);
+
+    // Append the notificationPopup to the document body (or any other desired parent element)
+    document.getElementById("notificationContainer").appendChild(notificationPopup);
+
+    // Create eventListener
+    document.getElementById(randomString).addEventListener('hide.bs.toast', function () {
+        document.getElementById(randomString).remove();
+    });
+
+    // Show Notification
+    $('#' + randomString).toast('show');
 }
 
 async function updateDate() {

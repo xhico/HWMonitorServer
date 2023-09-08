@@ -74,7 +74,7 @@ def process_clients(output):
         bytesSent = parts[4]
         lastSeen = ' '.join(parts[5:])
         lastSeen = datetime.datetime.strptime(lastSeen, "%b %d %Y - %H:%M:%S").strftime("%Y/%m/%d %H:%M:%S") if lastSeen != "(not yet)" else lastSeen
-        connected = False if lastSeen == "(not yet)" else (datetime.datetime.now() - datetime.datetime.strptime(lastSeen, "%Y/%m/%d %H:%M:%S")).total_seconds() < 60
+        connected = False if lastSeen == "(not yet)" else (datetime.datetime.now() - datetime.datetime.strptime(lastSeen, "%Y/%m/%d %H:%M:%S")).total_seconds() < 120
         clients[name] = {"remoteIP": remoteIP, "virtualIP": virtualIP, "bytesReceived": bytesReceived, "bytesSent": bytesSent, "lastSeen": lastSeen, "connected": connected}
     return clients
 

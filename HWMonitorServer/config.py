@@ -19,7 +19,17 @@ def loadConfig(hostname):
     configFile = os.path.join(os.path.dirname(os.path.abspath(__file__)), "config_" + hostname + ".json")
 
     # Set default config values
-    defaultConfig = {"Bots": [], "History": True, "Eye": False, "Pivpn": False, "UpdateTime": 2, "UpdateStats": True, "UpdateBots": True, "UpdateTop": True}
+    defaultConfig = {
+        "Bots": [],
+        "History": True,
+        "Eye": False,
+        "Pivpn": False,
+        "UpdateTime": 2,
+        "UpdateStats": True,
+        "UpdateBots": True,
+        "UpdateTop": True,
+        "NumberOfBotsLogs": 5,
+    }
 
     # Load the contents of the config file into a dictionary
     if os.path.exists(configFile):
@@ -60,5 +70,6 @@ class Config:
     # Load the config file
     config, configFile = loadConfig(hostname)
 
-    # Get the names of the bots
+    # Get the names of the bots && NumberOfBotsLogs
     botsName = config["Bots"]
+    NumberOfBotsLogs = config["NumberOfBotsLogs"]

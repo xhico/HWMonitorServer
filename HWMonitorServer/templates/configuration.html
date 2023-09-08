@@ -119,9 +119,13 @@
                     <div class="card-body">
                         <h5 class="card-title">Bots</h5>
                         <div class="input-group flex-nowrap mb-3">
-                            <input id="manageBot" type="text" class="form-control" placeholder="Bot Folder name" aria-label="Bot Folder name" aria-describedby="manageBot">
+                            <input id="manageBot" type="text" class="form-control" placeholder="Folder name" aria-label="Folder name" aria-describedby="manageBot">
                             <button class="btn btn-outline-success" type="button" id="addBotBtn" onclick="manageBot('add')">Add</button>
                             <button class="btn btn-outline-danger" type="button" id="removeBotBtn" onclick="manageBot('remove')">Remove</button>
+                        </div>
+                        <div class="input-group flex-nowrap mb-3">
+                            <input id="numberOfBotsLogs" class="form-control" type="number" min="1" placeholder="Number Logs" aria-label="Number Logs" aria-describedby="numberOfBotsLogs">
+                            <button class="btn btn-outline-success" type="button" id="numberOfBotsLogsBtn" onclick="setNumberOfBotsLogs()">Save</button>
                         </div>
                     </div>
                 </div>

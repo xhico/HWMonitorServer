@@ -3,9 +3,12 @@
  */
 
 let configurationArea;
-let actionBtns = ["configurationArea", "toggleEditConfigurationAreaBtn", "saveConfigJSONBtn",
+let actionBtns = [
+    "configurationArea", "toggleEditConfigurationAreaBtn", "saveConfigJSONBtn",
     "manageBot", "addBotBtn", "removeBotBtn",
-    "updateTime", "updateTimeBtn"];
+    "updateTime", "updateTimeBtn",
+    "numberOfBotsLogs", "numberOfBotsLogsBtn"
+];
 
 async function toggleEditConfigurationArea() {
     let flag = configurationArea.disabled;
@@ -173,6 +176,39 @@ async function setUpdateTime() {
     await saveConfigJSON();
 }
 
+async function setNumberOfBotsLogs() {
+    await toggleBtns(false);
+
+    // Get Bot Text
+    let numberOfBotsLogsElem = document.getElementById("numberOfBotsLogs");
+    numberOfBotsLogsElem.disabled = true;
+    let numberOfBotsLogsText = numberOfBotsLogsElem.value;
+
+    // Check if value is not empty
+    if (numberOfBotsLogsText === "") {
+        await showNotification("Invalid Value", "Number of Bot Logs can't be empty", "warning");
+        await toggleBtns(true);
+        await toggleEditConfigurationArea();
+        return
+    }
+
+    // Convert from String to Object
+    configJSON = typeof configJSON === "string" ? JSON.parse(configJSON) : configJSON;
+
+    // Add/Remove botName to configJSON
+    configJSON.NumberOfBotsLogs = parseInt(numberOfBotsLogsText);
+
+    // Add to configurationArea
+    configJSON = JSON.stringify(configJSON, null, 4);
+    configurationArea.value = configJSON;
+
+    // Set number of rows
+    configurationArea.setAttribute("rows", configurationArea.value.split("\n").length);
+
+    // Save configJSON
+    await saveConfigJSON();
+}
+
 window.addEventListener('DOMContentLoaded', async function main() {
     document.getElementById("navbar_configuration").classList.add("active");
     console.log("Get configuration info");
@@ -200,6 +236,7 @@ window.addEventListener('DOMContentLoaded', async function main() {
 
     // Set configurationArea && updateTime value
     document.getElementById("updateTime").placeholder += " (" + configJSON.UpdateTime + " secs)"
+    document.getElementById("numberOfBotsLogs").placeholder += " (" + configJSON.NumberOfBotsLogs + " logs)"
     configJSON = JSON.stringify(configJSON, null, 4);
     configurationArea.value = configJSON;
 

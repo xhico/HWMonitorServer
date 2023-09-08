@@ -11,5 +11,6 @@
     "UpdateTime": 2,
     "UpdateStats": true,
     "UpdateBots": true,
-    "UpdateTop": true
+    "UpdateTop": true,
+    "NumberOfBotsLogs": 5
 }

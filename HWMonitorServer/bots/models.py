@@ -24,7 +24,7 @@ def getBotLog(name):
     log_string = log_string.strip().split('\n')[::-1]
 
     # Find the index of the third occurrence of "[INFO] ------------"
-    start_index, count, maxCount = 0, 0, 5
+    start_index, count, maxCount = 0, 0, Config.NumberOfBotsLogs
     while count != maxCount and start_index <= len(log_string) - 1:
         if "[INFO] ---------" in log_string[start_index]:
             count += 1

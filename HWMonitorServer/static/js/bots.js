@@ -58,11 +58,21 @@ async function loadFile(value, name) {
 
 async function editConfig() {
     let modalBodyText = document.getElementById("modalConfigBodyText");
-    let loadConfigEditBtn = document.getElementById("configEditBtn");
-    let loadConfigSaveBtn = document.getElementById("configSaveBtn");
+    let configEditBtn = document.getElementById("configEditBtn");
+    let configSaveBtn = document.getElementById("configSaveBtn");
+
+    if (modalBodyText.classList.contains("bg-success")) {
+        modalBodyText.classList.remove("bg-success");
+        modalBodyText.classList.add("bg-danger");
+    } else {
+        modalBodyText.classList.remove("bg-danger");
+        modalBodyText.classList.add("bg-success");
+    }
+
+    // Toggle Attributes
     modalBodyText.readOnly = !modalBodyText.readOnly;
-    loadConfigEditBtn.hidden = !loadConfigEditBtn.hidden;
-    loadConfigSaveBtn.hidden = !loadConfigSaveBtn.hidden;
+    configEditBtn.hidden = !configEditBtn.hidden;
+    configSaveBtn.hidden = !configSaveBtn.hidden;
 }
 
 async function saveConfig() {
@@ -80,9 +90,6 @@ async function saveConfig() {
     });
 
     // Hide Modal
-    modalBodyText.readOnly = !modalBodyText.readOnly;
-    configEditBtn.hidden = !configEditBtn.hidden;
-    configSaveBtn.hidden = !configSaveBtn.hidden;
     $("#botConfigModal").modal("hide");
 
     // Show Notification
@@ -291,6 +298,19 @@ async function updateSections() {
         await updateSections();
     }
 }
+
+document.getElementById("botConfigModal").addEventListener("hidden.bs.modal", event => {
+    let modalBodyText = document.getElementById("modalConfigBodyText");
+    let configEditBtn = document.getElementById("configEditBtn");
+    let configSaveBtn = document.getElementById("configSaveBtn");
+
+    // Toggle Attributes
+    modalBodyText.readOnly = true;
+    configEditBtn.hidden = false;
+    configSaveBtn.hidden = true;
+    modalBodyText.classList.remove("bg-danger");
+    modalBodyText.classList.add("bg-success");
+});
 
 window.addEventListener('DOMContentLoaded', async function main() {
     document.getElementById("navbar_bots").classList.add("active");

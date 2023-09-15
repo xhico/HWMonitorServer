@@ -77,8 +77,6 @@ async function editConfig() {
 
 async function saveConfig() {
     let modalBodyText = document.getElementById("modalConfigBodyText");
-    let configEditBtn = document.getElementById("configEditBtn");
-    let configSaveBtn = document.getElementById("configSaveBtn");
     let name = document.getElementById("modalConfigTitle").innerText;
     let value = JSON.stringify(JSON.parse(modalBodyText.value), null, 4);
 

@@ -1,6 +1,6 @@
 /*
     @author: xhico
-*/
+ */
 
 let configurationArea;
 

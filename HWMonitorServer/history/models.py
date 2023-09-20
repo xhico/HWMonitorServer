@@ -38,6 +38,10 @@ def getHistoricInfo(numberTime: int, unitTime: str, hwMetric: str):
     # Filter data by startDate
     data = [{entry["Date"]: entry[hwMetric]} for entry in data if datetime.datetime.strptime(entry["Date"], "%Y/%m/%d %H:%M") >= startDate]
 
+    # Check if hwMetric == AmbientHumidityTemperature -> ignore 0 values
+    if hwMetric == "AmbientHumidityTemperature":
+        data = [entry for entry in data if not any([val == 0.0 for val in [val for val in list(entry.values())[0].values()]])]
+
     # Decrease data size
     maxItems = 50
     if len(data) > maxItems:

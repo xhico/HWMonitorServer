@@ -51,24 +51,24 @@ def getHistoricInfo(numberTime: int, unitTime: str, hwMetric: str):
             data.pop(index)
 
     # Calculate averages
-    result = {"timestamps": []}
+    historicInfo = {"timestamps": []}
     key_averages = {}
     for entry in data:
         timestamp = next(iter(entry))
-        result["timestamps"].append(timestamp)
+        historicInfo["timestamps"].append(timestamp)
         for key, value in entry[timestamp].items():
-            if key not in result:
-                result[key] = []
+            if key not in historicInfo:
+                historicInfo[key] = []
                 key_averages[key] = 0.0
-            result[key].append(value)
+            historicInfo[key].append(value)
 
     # Add Averages to Results
     for key in key_averages:
-        avgValue = round(sum(result[key]) / len(result[key]), 2)
+        avgValue = round(sum(historicInfo[key]) / len(historicInfo[key]), 2)
         if avgValue != 0:
             key_averages[key] = avgValue
-            result[key + "_avg"] = [key_averages[key]] * len(result[key])
+            historicInfo[key + "_avg"] = [key_averages[key]] * len(historicInfo[key])
         else:
-            del result[key]
+            del historicInfo[key]
 
-    return availableMetrics, result
+    return availableMetrics, historicInfo

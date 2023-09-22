@@ -2,7 +2,7 @@
     @author: xhico
  */
 
-async function goBtn() {
+async function loadMetricBtn() {
     // Show Loading
     await loadingScreen("show");
 
@@ -102,5 +102,5 @@ window.addEventListener('DOMContentLoaded', async function main() {
     document.getElementById("navbar_history").classList.add("active");
 
     // Init Charts
-    await goBtn();
+    await loadMetricBtn();
 });

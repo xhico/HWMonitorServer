@@ -22,10 +22,11 @@ async function loadMetricBtn() {
     let availableMetrics = JSON["availableMetrics"];
     let selectOptions = document.getElementById("hwMetric");
     selectOptions.innerHTML = "";
+
     for (let key of availableMetrics) {
         let divOne = document.createElement("option");
         divOne.value = key;
-        divOne.innerText = key;
+        divOne.innerText = /[a-z]/.test(key) ? key.replace(/([A-Z])/g, ' $1').trim() : key;
         selectOptions.appendChild(divOne);
     }
     document.getElementById("hwMetric").value = hwMetric;

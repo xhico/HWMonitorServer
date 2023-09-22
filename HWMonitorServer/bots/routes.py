@@ -4,6 +4,7 @@ import os
 
 from flask import render_template, jsonify, Blueprint, request
 import HWMonitorServer.bots.models as models
+from HWMonitorServer import Config
 
 # Define a Flask Blueprint instance
 bots = Blueprint("bots", __name__)
@@ -31,7 +32,7 @@ def json_botsInfo():
     Returns:
         A JSON object containing information about all bots.
     """
-    return jsonify(models.getBots())
+    return jsonify({name: models.getBotInfo(name) for name in Config.botsName})
 
 
 @bots.route("/bots/action", methods=['POST'])

@@ -283,8 +283,12 @@ async function updateSections() {
 
     // Iterate over every Bot
     for (let botName of botNames) {
-        await createBot(JSON, botName);
-        await setBot(JSON, botName);
+        if (JSON[botName]["hasInfo"] === "Yes") {
+            await createBot(JSON, botName);
+            await setBot(JSON, botName);
+        } else {
+            await showNotification("Bot - " + botName, JSON[botName]["message"], "error");
+        }
     }
 
     // Remove Loading

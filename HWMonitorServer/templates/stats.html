@@ -33,13 +33,16 @@
         </div>
     </div>
 
-    <!-- Ambient -->
-    <div hidden id="AmbientSection" class="col-xl-3 col-md-6 border-bottom border-end">
-        <div class="text-center"><img class="m-2" width="40" src="{{ url_for('static', filename='images/ambient.png') }}" alt="Ambient"/>Ambient</div>
+    <!-- SDCard -->
+    <div id="SDCardSection" class="col-xl-3 col-md-6 border-bottom border-end">
+        <div class="text-center"><img class="m-2" width="40" src="{{ url_for('static', filename='images/sd.png') }}" alt="SD card"/>SD card</div>
         <div class="text-center">
-            <p class="col">Date: <b><span id="Ambient_Date"></span></b></p>
-            <p class="col">Temperature: <b><span id="Ambient_TemperatureC"></span></b> | <b><span id="Ambient_TemperatureF"></span></b></p>
-            <p class="col">Humidity: <b><span id="Ambient_Humidity"></span></b></p>
+            <p>Used: <b><span id="Disks_SDCard_Used"></span></b></p>
+            <p>Free: <b><span id="Disks_SDCard_Free"></span></b></p>
+            <p>Total: <b><span id="Disks_SDCard_Total"></span></b></p>
+            <div class="progress mb-4 mx-4 progress-20-div">
+                <div id="Disks_SDCard_Percentage" class="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
         </div>
     </div>
 
@@ -76,19 +79,6 @@
         </div>
     </div>
 
-    <!-- SDCard -->
-    <div id="SDCardSection" class="col-xl-3 col-md-6 border-bottom border-end">
-        <div class="text-center"><img class="m-2" width="40" src="{{ url_for('static', filename='images/sd.png') }}" alt="SD card"/>SD card</div>
-        <div class="text-center">
-            <p>Used: <b><span id="Disks_SDCard_Used"></span></b></p>
-            <p>Free: <b><span id="Disks_SDCard_Free"></span></b></p>
-            <p>Total: <b><span id="Disks_SDCard_Total"></span></b></p>
-            <div class="progress mb-4 mx-4 progress-20-div">
-                <div id="Disks_SDCard_Percentage" class="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
-            </div>
-        </div>
-    </div>
-
     <!-- Wired Network -->
     <div id="WiredSection" class="col-xl-3 col-md-6 border-bottom border-end">
         <div class="text-center"><img class="m-2" width="40" src="{{ url_for('static', filename='images/wired.png') }}" alt="Wired Network"/>Wired Network</div>
@@ -121,6 +111,16 @@
             <div class="progress mb-4 mx-4 progress-20-div">
                 <div id="Disks_918_Percentage" class="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
             </div>
+        </div>
+    </div>
+
+    <!-- Ambient -->
+    <div hidden id="AmbientSection" class="col-xl-3 col-md-6 border-bottom border-end">
+        <div class="text-center"><img class="m-2" width="40" src="{{ url_for('static', filename='images/ambient.png') }}" alt="Ambient"/>Ambient</div>
+        <div class="text-center">
+            <p class="col">Date: <b><span id="Ambient_Date"></span></b></p>
+            <p class="col">Temperature: <b><span id="Ambient_TemperatureC"></span></b> | <b><span id="Ambient_TemperatureF"></span></b></p>
+            <p class="col">Humidity: <b><span id="Ambient_Humidity"></span></b></p>
         </div>
     </div>
 {% endblock %}

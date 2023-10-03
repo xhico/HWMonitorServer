@@ -42,6 +42,15 @@ async function loadFile(value, name) {
         return
     }
 
+    // Check if value is savedInfo
+    if (value === "SavedInfo") {
+        const blob = new Blob([resp["info"]], {type: "application/json"});
+        const url = URL.createObjectURL(blob);
+        window.open(url, "_blank");
+        URL.revokeObjectURL(url);
+        return
+    }
+
     // Open Modal
     document.getElementById("modal" + value + "Title").innerText = name;
     let modalBodyText = document.getElementById("modal" + value + "BodyText");

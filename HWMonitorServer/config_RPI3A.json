@@ -3,7 +3,8 @@
         "CheckInternet",
         "HardwareHistory",
         "ipSender",
-        "RPiBackups"
+        "RPiBackups",
+        "RPiStatus"
     ],
     "History": true,
     "Eye": false,

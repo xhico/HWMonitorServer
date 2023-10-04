@@ -9,7 +9,8 @@
         "ipSender",
         "NoIpUpdater",
         "RaspberryPiSurveillance",
-        "RPiBackups"
+        "RPiBackups",
+        "RPiStatus"
     ],
     "History": true,
     "Eye": true,

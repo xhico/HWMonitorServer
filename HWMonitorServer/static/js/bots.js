@@ -43,7 +43,7 @@ async function loadFile(value, name) {
     }
 
     // Check if value is savedInfo
-    if (value === "SavedInfo") {
+    if (value === "SavedInfo" && resp["info"].split("\n").length > 50) {
         const blob = new Blob([resp["info"]], {type: "application/json"});
         const url = URL.createObjectURL(blob);
         window.open(url, "_blank");

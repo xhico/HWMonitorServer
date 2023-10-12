@@ -208,18 +208,19 @@ async function createBot(JSON, name) {
     divBtnsRow.appendChild(actionBtn);
 
     actionBtn = document.createElement("button");
-    actionBtn.classList.add("col-3", "btn", "btn-secondary", "m-1");
+    actionBtn.classList.add("col-3", "btn", "btn-secondary", "m-1", "position-relative");
     actionBtn.innerText = "Log";
-    if (JSON[name]["has_error"]) {
-        actionBtn.classList.add("position-relative");
-        let span = document.createElement("span");
-        span.classList.add("position-absolute", "top-0", "start-100", "translate-middle", "p-2", "bg-danger", "border", "border-light", "rounded-circle");
-        let innerSpan = document.createElement("span");
-        innerSpan.classList.add("visually-hidden");
-        innerSpan.textContent = "New alerts";
-        span.appendChild(innerSpan);
-        actionBtn.appendChild(span);
-    }
+
+    let span = document.createElement("span");
+    span.id = name + "_alert";
+    span.classList.add("position-absolute", "top-0", "start-100", "translate-middle", "p-2", "bg-danger", "border", "border-light", "rounded-circle");
+    let innerSpan = document.createElement("span");
+    innerSpan.classList.add("visually-hidden");
+    innerSpan.textContent = "New alerts";
+    span.appendChild(innerSpan);
+    span.hidden = true;
+    actionBtn.appendChild(span);
+
     actionBtn.onclick = function () {
         loadFile("Log", name);
     }
@@ -272,6 +273,7 @@ async function setBot(JSON, name) {
     document.getElementById(name + "_last_run").innerText = last_run;
     document.getElementById(name + "_start").disabled = ((running === "True"));
     document.getElementById(name + "_stop").disabled = ((running === "False"));
+    document.getElementById(name + "_alert").hidden = !JSON[name]["has_error"];
 }
 
 async function updateSections() {

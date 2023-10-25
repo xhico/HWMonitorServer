@@ -36,8 +36,7 @@ sudo mv /home/pi/HWMonitorServer/HWMonitorServer.service /etc/systemd/system/
 
 sudo a2ensite HWMonitorServer.conf
 sudo systemctl enable apache2
-sudo systemctl enable HWMonitorServer.socket
-sudo systemctl enable HWMonitorServer.service
 sudo systemctl daemon-reload && sudo systemctl restart apache2
 sudo systemctl restart HWMonitorServer
+ln -s /home/pi/RaspberryPiSurveillance/_RECORDINGS/ /home/pi/HWMonitorServer/HWMonitorServer/static/
 chmod +x -R /home/pi/HWMonitorServer/*

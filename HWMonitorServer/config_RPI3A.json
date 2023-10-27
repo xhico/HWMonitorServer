@@ -2,6 +2,7 @@
     "Bots": [
         "CheckInternet",
         "HardwareHistory",
+        "HumiditySensor",
         "ipSender",
         "RPiBackups",
         "RPiStatus"

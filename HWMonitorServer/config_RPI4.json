@@ -6,7 +6,6 @@
         "FlightRadarAlerts",
         "FogosPtAlerts",
         "HardwareHistory",
-        "HumiditySensor",
         "ipSender",
         "NoIpUpdater",
         "RaspberryPiSurveillance",

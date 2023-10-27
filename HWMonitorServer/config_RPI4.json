@@ -8,7 +8,6 @@
         "HardwareHistory",
         "ipSender",
         "NoIpUpdater",
-        "RaspberryPiSurveillance",
         "RPiBackups",
         "RPiStatus"
     ],

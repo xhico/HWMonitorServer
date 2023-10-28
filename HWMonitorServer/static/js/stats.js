@@ -244,12 +244,12 @@ async function updateSections() {
     getVersions(JSON);
     getUptime(JSON);
     getCPU(JSON);
-    getAmbientHumidityTemperature(JSON);
     getMemory(JSON);
     getSDCard(JSON);
     getWired(JSON);
     getWifi(JSON);
     get918(JSON);
+    getAmbientHumidityTemperature(JSON);
 
     // Remove Loading
     await loadingScreen("remove");

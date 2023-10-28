@@ -3,14 +3,13 @@
         "CheckInternet",
         "ddnsUpdater",
         "EZTV-AutoDownloader",
-        "FlightRadarAlerts",
         "FogosPtAlerts",
         "HardwareHistory",
         "ipSender",
         "NoIpUpdater",
+        "RaspberryPiSurveillance",
         "RPiBackups",
-        "RPiStatus",
-        "RaspberryPiSurveillance"
+        "RPiStatus"
     ],
     "History": true,
     "Eye": true,

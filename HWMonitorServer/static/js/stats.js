@@ -99,7 +99,7 @@ async function getAmbientHumidityTemperature(JSON) {
     document.getElementById("Ambient_TemperatureC").innerText = Ambient_TemperatureC + " ºC";
     document.getElementById("Ambient_TemperatureF").innerText = Ambient_TemperatureF + " °F";
     document.getElementById("Ambient_Humidity").innerText = Ambient_Humidity + " %";
-    document.getElementById("Ambient_Pressure").innerText = Ambient_Pressure + " hPa";
+    document.getElementById("Ambient_Pressure").innerText = Ambient_Pressure !== "Not Available" ? Ambient_Pressure + " hPa" : Ambient_Pressure;
     document.getElementById("AmbientSection").hidden = false;
 }
 

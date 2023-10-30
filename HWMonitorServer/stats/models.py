@@ -229,9 +229,10 @@ def getAmbientHumidityTemperature() -> dict:
             "Date": data["date"],
             "TemperatureC": data["temp_c"],
             "TemperatureF": data["temp_f"],
-            "Humidity": data["humidity"]
+            "Humidity": data["humidity"],
+            "Pressure": data["pressure"] if "pressure" in data.keys() else "Not Available"
         }
-    except Exception:
+    except Exception as ex:
         return {"hasInfo": "None"}
 
 

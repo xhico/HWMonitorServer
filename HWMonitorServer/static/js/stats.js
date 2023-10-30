@@ -94,10 +94,12 @@ async function getAmbientHumidityTemperature(JSON) {
     let Ambient_TemperatureC = JSON["AmbientHumidityTemperature"]["TemperatureC"];
     let Ambient_TemperatureF = JSON["AmbientHumidityTemperature"]["TemperatureF"];
     let Ambient_Humidity = JSON["AmbientHumidityTemperature"]["Humidity"];
+    let Ambient_Pressure = JSON["AmbientHumidityTemperature"]["Pressure"];
     document.getElementById("Ambient_Date").innerText = Ambient_Date;
     document.getElementById("Ambient_TemperatureC").innerText = Ambient_TemperatureC + " ºC";
     document.getElementById("Ambient_TemperatureF").innerText = Ambient_TemperatureF + " °F";
     document.getElementById("Ambient_Humidity").innerText = Ambient_Humidity + " %";
+    document.getElementById("Ambient_Pressure").innerText = Ambient_Pressure;
     document.getElementById("AmbientSection").hidden = false;
 }
 

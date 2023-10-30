@@ -208,7 +208,7 @@ def getWifi():
         return {"hasInfo": "None"}
 
 
-def getAmbientHumidityTemperature() -> dict:
+def getAmbient() -> dict:
     """
     Reads data from a JSON file containing humidity and temperature readings from a sensor.
     Returns a dictionary containing the relevant information.
@@ -220,6 +220,7 @@ def getAmbientHumidityTemperature() -> dict:
             - 'TemperatureC': A float representing the temperature in Celsius.
             - 'TemperatureF': A float representing the temperature in Fahrenheit.
             - 'Humidity': A float representing the relative humidity.
+            - 'Pressure': A float representing the relative pressure.
     """
     try:
         with open("/home/pi/HumiditySensor/saved_info.json") as inFile:
@@ -244,7 +245,7 @@ def getHWInfo():
     - Version: returns the version of the device
     - Uptime: returns the time since the device was last started
     - CPU: returns the CPU usage of the device
-    - AmbientHumidityTemperature: returns the ambient humidity and temperature of the device
+    - Ambient: returns the ambient humidity and temperature of the device
     - Memory: returns the memory usage of the device
     - Disks: returns a dictionary containing information about the disks on the device
         - SDCard: returns information about the SD card disk
@@ -258,7 +259,7 @@ def getHWInfo():
         "Version": getVersions(),
         "Uptime": getUptime(),
         "CPU": getCPU(),
-        "AmbientHumidityTemperature": getAmbientHumidityTemperature(),
+        "Ambient": getAmbient(),
         "Memory": getMemory(),
         "Disks": {
             "SDCard": getSDCard(),

@@ -84,17 +84,17 @@ async function getCPU(JSON) {
     gauge.set(CPU_Temperature);
 }
 
-async function getAmbientHumidityTemperature(JSON) {
-    if (JSON["AmbientHumidityTemperature"]["hasInfo"] === "None") {
+async function getAmbient(JSON) {
+    if (JSON["Ambient"]["hasInfo"] === "None") {
         return;
     }
 
-    // Date / Humidity / Temperature
-    let Ambient_Date = JSON["AmbientHumidityTemperature"]["Date"];
-    let Ambient_TemperatureC = JSON["AmbientHumidityTemperature"]["TemperatureC"];
-    let Ambient_TemperatureF = JSON["AmbientHumidityTemperature"]["TemperatureF"];
-    let Ambient_Humidity = JSON["AmbientHumidityTemperature"]["Humidity"];
-    let Ambient_Pressure = JSON["AmbientHumidityTemperature"]["Pressure"];
+    // Ambient
+    let Ambient_Date = JSON["Ambient"]["Date"];
+    let Ambient_TemperatureC = JSON["Ambient"]["TemperatureC"];
+    let Ambient_TemperatureF = JSON["Ambient"]["TemperatureF"];
+    let Ambient_Humidity = JSON["Ambient"]["Humidity"];
+    let Ambient_Pressure = JSON["Ambient"]["Pressure"];
     document.getElementById("Ambient_Date").innerText = Ambient_Date;
     document.getElementById("Ambient_TemperatureC").innerText = Ambient_TemperatureC + " ºC";
     document.getElementById("Ambient_TemperatureF").innerText = Ambient_TemperatureF + " °F";
@@ -251,7 +251,7 @@ async function updateSections() {
     getWired(JSON);
     getWifi(JSON);
     get918(JSON);
-    getAmbientHumidityTemperature(JSON);
+    getAmbient(JSON);
 
     // Remove Loading
     await loadingScreen("remove");

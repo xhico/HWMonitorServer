@@ -10,7 +10,8 @@
         "NoIpUpdater",
         "RaspberryPiSurveillance",
         "RPiBackups",
-        "RPiStatus"
+        "RPiStatus",
+        "SenseHatMatrix"
     ],
     "History": true,
     "Eye": true,

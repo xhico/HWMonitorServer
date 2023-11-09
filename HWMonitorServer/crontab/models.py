@@ -51,13 +51,6 @@ def saveCrontab(cronjobs):
             jobJob = "#" + jobJob if jobStatus == "disabled" else jobJob.lstrip("#")
             newCrontab.append(jobJob + "\n")
 
-        # Extract the "SHELL=/bin/bash" line
-        shell_line = [entry for entry in newCrontab if entry.startswith("SHELL=")]
-        if shell_line:
-            newCrontab.remove(shell_line[0])
-        else:
-            shell_line = []
-
         # Split the entries into three groups: those starting with "@", "#", and the rest
         at_entries = [entry for entry in newCrontab if entry.startswith('@')]
         comment_entries = [entry for entry in newCrontab if entry.startswith('#')]
@@ -68,7 +61,7 @@ def saveCrontab(cronjobs):
         non_at_comment_entries = sorted(non_at_comment_entries, key=estimate_frequency, reverse=True)
 
         # Combine the sorted entries and add the "SHELL=/bin/bash" line at the top
-        sorted_crontab_entries = shell_line + at_entries + non_at_comment_entries + comment_entries
+        sorted_crontab_entries = at_entries + non_at_comment_entries + comment_entries
 
         # Save File
         crontabFile = "/home/pi/crontab.txt"

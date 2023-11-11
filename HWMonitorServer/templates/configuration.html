@@ -47,7 +47,7 @@
                         <h5 class="card-title">Auto-Update Sections</h5>
 
                         <div class="input-group flex-nowrap mb-3">
-                            <span class="input-group-text" id="addon-wrapping">Stats</span>
+                            <input disabled class="form-control" type="text" placeholder="Stats" aria-label="Stats" aria-describedby="Stats" value="Stats">
                             <input type="radio" class="btn-check" name="updateStatsOptions" id="updateStatsEnabledBtn" autocomplete="off" checked>
                             <label class="btn btn-outline-success" for="updateStatsEnabledBtn">Enabled</label>
                             <input type="radio" class="btn-check" name="updateStatsOptions" id="updateStatsDisabledBtn" autocomplete="off">
@@ -55,7 +55,7 @@
                         </div>
 
                         <div class="input-group flex-nowrap mb-3">
-                            <span class="input-group-text" id="addon-wrapping">Bots</span>
+                            <input disabled class="form-control" type="text" placeholder="Bots" aria-label="Bots" aria-describedby="Bots" value="Bots">
                             <input type="radio" class="btn-check" name="updateBotsOptions" id="updateBotsEnabledBtn" autocomplete="off" checked>
                             <label class="btn btn-outline-success" for="updateBotsEnabledBtn">Enabled</label>
                             <input type="radio" class="btn-check" name="updateBotsOptions" id="updateBotsDisabledBtn" autocomplete="off">
@@ -63,7 +63,7 @@
                         </div>
 
                         <div class="input-group flex-nowrap mb-3">
-                            <span class="input-group-text" id="addon-wrapping">TOP</span>
+                            <input disabled class="form-control" type="text" placeholder="TOP" aria-label="TOP" aria-describedby="TOP" value="TOP">
                             <input type="radio" class="btn-check" name="updateTopOptions" id="updateTopEnabledBtn" autocomplete="off" checked>
                             <label class="btn btn-outline-success" for="updateTopEnabledBtn">Enabled</label>
                             <input type="radio" class="btn-check" name="updateTopOptions" id="updateTopDisabledBtn" autocomplete="off">
@@ -72,7 +72,7 @@
 
                         <div class="input-group flex-nowrap">
                             <input id="updateTime" class="form-control" type="number" min="1" placeholder="Update Time" aria-label="Update Time" aria-describedby="updateTime">
-                            <button class="btn btn-outline-success" type="button" id="updateTimeBtn" onclick="setUpdateTime()">Save</button>
+                            <button class="btn btn-success" type="button" id="updateTimeBtn" onclick="setUpdateTime()">Save</button>
                         </div>
 
                     </div>
@@ -84,7 +84,7 @@
                         <h5 class="card-title">Navigation</h5>
 
                         <div class="input-group flex-nowrap mb-3">
-                            <span class="input-group-text" id="addon-wrapping">EYE</span>
+                            <input disabled class="form-control" type="text" placeholder="EYE" aria-label="EYE" aria-describedby="EYE" value="EYE">
                             <input type="radio" class="btn-check" name="eyeOptions" id="eyeEnabledBtn" autocomplete="off" checked>
                             <label class="btn btn-outline-success" for="eyeEnabledBtn">Enabled</label>
                             <input type="radio" class="btn-check" name="eyeOptions" id="eyeDisabledBtn" autocomplete="off">
@@ -92,7 +92,7 @@
                         </div>
 
                         <div class="input-group flex-nowrap mb-3">
-                            <span class="input-group-text" id="addon-wrapping">PiVPN</span>
+                            <input disabled class="form-control" type="text" placeholder="PiVPN" aria-label="PiVPN" aria-describedby="PiVPN" value="PiVPN">
                             <input type="radio" class="btn-check" name="pivpnOptions" id="pivpnEnabledBtn" autocomplete="off" checked>
                             <label class="btn btn-outline-success" for="pivpnEnabledBtn">Enabled</label>
                             <input type="radio" class="btn-check" name="pivpnOptions" id="pivpnDisabledBtn" autocomplete="off">
@@ -100,7 +100,7 @@
                         </div>
 
                         <div class="input-group flex-nowrap">
-                            <span class="input-group-text" id="addon-wrapping">LED IR Controller</span>
+                            <input disabled class="form-control" type="text" placeholder="LED IR Controller" aria-label="LED IR Controller" aria-describedby="LED IR Controller" value="LED IR Controller">
                             <input type="radio" class="btn-check" name="ledircontrollerOptions" id="ledircontrollerEnabledBtn" autocomplete="off" checked>
                             <label class="btn btn-outline-success" for="ledircontrollerEnabledBtn">Enabled</label>
                             <input type="radio" class="btn-check" name="ledircontrollerOptions" id="ledircontrollerDisabledBtn" autocomplete="off">
@@ -121,7 +121,7 @@
                         <div class="input-group flex-nowrap mb-3">
                             <input id="manageBot" type="text" class="form-control" placeholder="Folder name" aria-label="Folder name" aria-describedby="manageBot">
                             <button class="btn btn-success" type="button" id="addBotBtn" onclick="manageBot('add')">Add</button>
-                            <button class="btn btn-danger" type="button" id="removeBotBtn" onclick="manageBot('remove')">Remove</button>
+                            <button class="btn btn-outline-danger" type="button" id="removeBotBtn" onclick="manageBot('remove')">Remove</button>
                         </div>
                         <div class="input-group flex-nowrap mb-3">
                             <input id="numberOfBotsLogs" class="form-control" type="number" min="1" placeholder="Number Logs" aria-label="Number Logs" aria-describedby="numberOfBotsLogs">

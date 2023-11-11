@@ -45,5 +45,8 @@ def create_app(config_class=Config):
     from HWMonitorServer.configuration.routes import configuration
     app.register_blueprint(configuration)
 
+    from HWMonitorServer.ledircontroller.routes import ledircontroller
+    app.register_blueprint(ledircontroller)
+
     # return the Flask application instance
     return app

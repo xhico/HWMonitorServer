@@ -24,6 +24,7 @@ def loadConfig(hostname):
         "History": True,
         "Eye": False,
         "Pivpn": False,
+        "Ledircontroller": False,
         "UpdateTime": 2,
         "UpdateStats": True,
         "UpdateBots": True,

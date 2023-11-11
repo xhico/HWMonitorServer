@@ -62,149 +62,134 @@
 
 .btn-red {
     background-color: #ff0000;
-    color: #ffffff;
+    color: white;
 }
 
 .btn-red:hover {
-    background-color: #cc0000;
-    color: #ffffff;
+    background-color: #ff0000;
+    color: white;
 }
 
 .btn-green {
     background-color: #008000;
-    color: #ffffff;
+    color: white;
 }
 
 .btn-green:hover {
-    background-color: #006400;
-    color: #ffffff;
+    background-color: #008000;
+    color: white;
 }
 
 .btn-green-light {
     background-color: #90ee90;
-    color: #ffffff;
 }
 
 .btn-green-light:hover {
-    background-color: #7ccd7c;
-    color: #ffffff;
+    background-color: #90ee90;
 }
 
 .btn-blue {
     background-color: #0000ff;
-    color: #ffffff;
+    color: white;
 }
 
 .btn-blue:hover {
-    background-color: #00008b;
-    color: #ffffff;
+    background-color: #0000ff;
+    color: white;
 }
 
 .btn-blue-light {
     background-color: #add8e6;
-    color: #000080;
 }
 
 .btn-blue-light:hover {
-    background-color: #87ceeb;
+    background-color: #add8e6;
 }
 
 .btn-white {
     background-color: #ffffff;
-    color: #000000;
 }
 
 .btn-white:hover {
-    background-color: #f0f0f0;
+    background-color: #ffffff;
 }
 
 .btn-orange {
     background-color: #ffa500;
-    color: #ffffff;
 }
 
 .btn-orange:hover {
-    background-color: #e68a00;
+    background-color: #ffa500;
 }
 
 .btn-orange-light {
     background-color: #ffd700;
-    color: #8b4513;
 }
 
 .btn-orange-light:hover {
-    background-color: #ffcc00;
+    background-color: #ffd700;
 }
 
 .btn-cyan {
     background-color: #00ffff;
-    color: #008080;
 }
 
 .btn-cyan:hover {
-    background-color: #00ced1;
+    background-color: #00ffff;
 }
 
 .btn-cyan-high {
     background-color: #00ced1;
-    color: #008080;
 }
 
 .btn-cyan-high:hover {
-    background-color: #00ffff;
+    background-color: #00ced1;
 }
 
 .btn-cyan-green {
     background-color: #7fffd4;
-    color: #006400;
 }
 
 .btn-cyan-green:hover {
-    background-color: #66cdaa;
+    background-color: #7fffd4;
 }
 
 .btn-purple {
     background-color: #800080;
-    color: #ffffff;
 }
 
 .btn-purple:hover {
-    background-color: #9932cc;
+    background-color: #800080;
 }
 
 .btn-purple-light {
     background-color: #9932cc;
-    color: #ffffff;
 }
 
 .btn-purple-light:hover {
-    background-color: #800080;
+    background-color: #9932cc;
 }
 
 .btn-yellow {
     background-color: #ffff00;
-    color: #808000;
 }
 
 .btn-yellow:hover {
-    background-color: #ffdb58;
+    background-color: #ffff00;
 }
 
 .btn-yellow-high {
     background-color: #ffd700;
-    color: #8b4513;
 }
 
 .btn-yellow-high:hover {
-    background-color: #ffcc00;
+    background-color: #ffd700;
 }
 
 .btn-pink {
     background-color: #ffc0cb;
-    color: #800080;
 }
 
 .btn-pink:hover {
-    background-color: #ffb6c1;
+    background-color: #ffc0cb;
 }
-

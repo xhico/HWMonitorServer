@@ -3,11 +3,11 @@
  */
 
 async function clickBtn(btn) {
-    // Get InnerText from btn
-    let text = btn.innerText;
+    // Get text from btn value
+    let text = btn.value;
 
-    // Get btn action from innerText
-    let value = btn.innerText.replaceAll(" ", "_").toLowerCase();
+    // Get btn value from value
+    let value = text.replaceAll(" ", "_").toLocaleLowerCase();
 
     // Show Loading
     await loadingScreen("show");

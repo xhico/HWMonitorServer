@@ -194,7 +194,7 @@ window.addEventListener('DOMContentLoaded', async function main() {
     let configJSON = await getConfigContent(configurationArea);
 
     // Set Navigation/Auto-Update ToggleButtons
-    for (let entry of ["history", "eye", "pivpn", "ledircontroller", "updateStats", "updateBots", "updateTop"]) {
+    for (let entry of ["eye", "pivpn", "ledircontroller", "updateStats", "updateBots", "updateTop"]) {
         let entryEnabledBtn = document.getElementById(entry + "EnabledBtn");
         let entryDisabledBtn = document.getElementById(entry + "DisabledBtn");
         configJSON[capitalize(entry)] === true ? entryEnabledBtn.click() : entryDisabledBtn.click();

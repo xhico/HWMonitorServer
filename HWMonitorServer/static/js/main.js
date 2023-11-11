@@ -92,7 +92,6 @@ async function getConfigContent() {
 
     // Show navbar items
     document.getElementById("navbar_bots").hidden = !(configJSON.Bots.length !== 0);
-    document.getElementById("navbar_history").hidden = !configJSON.History;
     document.getElementById("navbar_eye").hidden = !configJSON.Eye;
     document.getElementById("navbar_pivpn").hidden = !configJSON.Pivpn;
     document.getElementById("navbar_ledircontroller").hidden = !configJSON.Ledircontroller;

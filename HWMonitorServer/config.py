@@ -21,7 +21,6 @@ def loadConfig(hostname):
     # Set default config values
     defaultConfig = {
         "Bots": [],
-        "History": True,
         "Eye": False,
         "Pivpn": False,
         "Ledircontroller": False,

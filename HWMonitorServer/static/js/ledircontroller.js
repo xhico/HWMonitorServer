@@ -14,7 +14,7 @@ async function clickBtn(btn) {
 
     // Run Action
     let resp = await $.ajax({
-        method: "post", url: "/ledircontroller/btn", data: {value: value, text: text}, success: function (data) {
+        method: "post", url: "/ledircontroller/btn", data: {value: value}, success: function (data) {
             return data;
         }
     });

@@ -27,10 +27,9 @@ def json_btn():
 
     """
     value = request.form.get('value', type=str)
-    text = request.form.get('text', type=str)
 
     try:
-        resp = {"status": "success", "message": text + " clicked successfully"}
+        resp = {"status": "success", "message": "Clicked successfully"}
         os.system("python3 /home/pi/LEDIRController/LEDIRController.py " + value)
     except Exception as ex:
         resp = {"status": "error", "message": str(ex)}

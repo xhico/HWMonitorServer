@@ -2,11 +2,6 @@
 
 sudo apt install python3 python3-pip python3-setuptools python3-venv -y
 python3 -m pip install flask gunicorn requests gpiozero psutil --no-cache-dir
-sudo apt install certbot -y
-mkdir -p /home/pi/certs/
-openssl genrsa -out /home/pi/certs/HWMonitorServer.key 2048
-openssl req -new -key /home/pi/certs/HWMonitorServer.key -out /home/pi/certs/HWMonitorServer.csr -subj "/C=PT/ST=Leiria/L=Óbidos/O=xhico/CN=HWMonitorServer@$(hostname)"
-openssl x509 -req -days 365 -in /home/pi/certs/HWMonitorServer.csr -signkey /home/pi/certs/HWMonitorServer.key -out /home/pi/certs/HWMonitorServer.crt
 
 echo """
 <VirtualHost *:443>
@@ -26,8 +21,8 @@ echo """
     </Location>
 
     SSLEngine on
-    SSLCertificateFile /home/pi/certs/HWMonitorServer.crt
-    SSLCertificateKeyFile /home/pi/certs/HWMonitorServer.key
+    SSLCertificateFile /home/pi/certs/$(hostname).crt
+    SSLCertificateKeyFile /home/pi/certs/$(hostname).key
 </VirtualHost>
 """  | sudo tee -a /etc/apache2/sites-available/HWMonitorServer.conf
 

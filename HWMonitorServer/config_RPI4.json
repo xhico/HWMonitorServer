@@ -1,25 +1,25 @@
 {
-  "Bots": [
-    "CheckInternet",
-    "ddnsUpdater",
-    "EZTV-AutoDownloader",
-    "FogosPtAlerts",
-    "HardwareHistory",
-    "HumiditySensor",
-    "ipSender",
-    "NoIpUpdater",
-    "RaspberryPiSurveillance",
-    "RPiBackups",
-    "RPiStatus",
-    "SenseHatMatrix"
-  ],
-  "History": true,
-  "Eye": true,
-  "Pivpn": false,
-  "ledircontroller": true,
-  "UpdateTime": 2,
-  "UpdateStats": true,
-  "UpdateBots": true,
-  "UpdateTop": true,
-  "NumberOfBotsLogs": 5
+    "Bots": [
+        "CheckInternet",
+        "ddnsUpdater",
+        "EZTV-AutoDownloader",
+        "FogosPtAlerts",
+        "HardwareHistory",
+        "HumiditySensor",
+        "ipSender",
+        "NoIpUpdater",
+        "RaspberryPiSurveillance",
+        "RPiBackups",
+        "RPiStatus",
+        "SenseHatMatrix"
+    ],
+    "History": true,
+    "Eye": true,
+    "Pivpn": false,
+    "Ledircontroller": true,
+    "UpdateTime": 2,
+    "UpdateStats": true,
+    "UpdateBots": true,
+    "UpdateTop": true,
+    "NumberOfBotsLogs": 5
 }

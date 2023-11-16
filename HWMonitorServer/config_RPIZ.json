@@ -1,0 +1,17 @@
+{
+    "Bots": [
+        "CheckInternet",
+        "HardwareHistory",
+        "ipSender",
+        "RPiBackups",
+        "RPiStatus"
+    ],
+    "Eye": false,
+    "Pivpn": false,
+    "Ledircontroller": false,
+    "UpdateTime": 2,
+    "UpdateStats": true,
+    "UpdateBots": true,
+    "UpdateTop": true,
+    "NumberOfBotsLogs": 5
+}

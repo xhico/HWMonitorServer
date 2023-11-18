@@ -54,8 +54,13 @@ async function loadFile(value, name) {
     // Open Modal
     document.getElementById("modal" + value + "Title").innerText = name;
     let modalBodyText = document.getElementById("modal" + value + "BodyText");
-    modalBodyText.value = resp["info"];
-    modalBodyText.setAttribute("rows", resp["info"].split("\n").length);
+    resp["info"] = resp["info"].replaceAll("\n", "<br>");
+    resp["info"] = resp["info"].replaceAll("[INFO]", "<span class='log-text-info'>[INFO]</span>");
+    resp["info"] = resp["info"].replaceAll("[WARNING]", "<span class='log-text-warning'>[WARNING]</span>");
+    resp["info"] = resp["info"].replaceAll("[ERROR]", "<span class='log-text-error'>[ERROR]</span>");
+    resp["info"] = resp["info"].replaceAll("[DEBUG]", "<span class='log-text-debug'>[DEBUG]</span>");
+    resp["info"] = resp["info"].replaceAll("[OK]", "<span class='log-text-ok'>[OK]</span>");
+    modalBodyText.innerHTML = resp["info"];
     $("#bot" + value + "Modal").modal("show");
 
     // Scroll to the bottom if LOG

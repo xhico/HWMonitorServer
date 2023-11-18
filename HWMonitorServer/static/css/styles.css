@@ -193,3 +193,23 @@
 .btn-pink:hover {
     background-color: #ffc0cb;
 }
+
+.log-text-info {
+    color: #478FEF;
+}
+
+.log-text-warning {
+    color: #F7CD45;
+}
+
+.log-text-error {
+    color: #E16866;
+}
+
+.log-text-debug {
+    color: #8686F7;
+}
+
+.log-text-ok {
+    color: #94D065;
+}

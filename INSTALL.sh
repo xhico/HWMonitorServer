@@ -24,7 +24,7 @@ echo """
     SSLCertificateFile /home/pi/certs/$(hostname).crt
     SSLCertificateKeyFile /home/pi/certs/$(hostname).key
 </VirtualHost>
-"""  | sudo tee -a /etc/apache2/sites-available/HWMonitorServer.conf
+"""  | sudo tee /etc/apache2/sites-available/HWMonitorServer.conf
 
 sudo mv /home/pi/HWMonitorServer/HWMonitorServer.socket /etc/systemd/system/
 sudo mv /home/pi/HWMonitorServer/HWMonitorServer.service /etc/systemd/system/

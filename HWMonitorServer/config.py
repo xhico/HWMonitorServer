@@ -26,7 +26,7 @@ def loadConfig(hostname):
         "Ledircontroller": False,
         "UpdateTime": 2,
         "UpdateStats": True,
-        "UpdateBots": True,
+        "UpdateBots": False,
         "UpdateTop": True,
         "NumberOfBotsLogs": 5,
     }

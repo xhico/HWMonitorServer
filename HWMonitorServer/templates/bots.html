@@ -8,14 +8,15 @@
         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title w-100 text-center"><span id="modalConfigTitle"></span> Config</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <h5 class="modal-title"><span id="modalConfigTitle"></span> Config</h5>
+                    <div class="ml-auto">
+                        <button onclick="editConfig()" id="configEditBtn" type="button" class="btn btn-danger">Edit</button>
+                        <button hidden onclick="saveConfig()" id="configSaveBtn" type="button" class="btn btn-success">Save</button>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
                 </div>
-                <label for="modalConfigBodyText"></label><textarea readonly id="modalConfigBodyText" class="modal-body bg-success bg-opacity-25"></textarea>
-                <div class="modal-footer">
-                    <button onclick="editConfig()" id="configEditBtn" type="button" class="btn btn-danger">Edit</button>
-                    <button hidden onclick="saveConfig()" id="configSaveBtn" type="button" class="btn btn-success">Save</button>
-                </div>
+                <label for="modalConfigBodyText"></label>
+                <textarea readonly id="modalConfigBodyText" class="modal-body bg-success bg-opacity-25"></textarea>
             </div>
         </div>
     </div>
@@ -25,10 +26,14 @@
         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title w-100 text-center"><span id="modalLogTitle"></span> Log</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <h5 class="modal-title"><span id="modalLogTitle"></span> Log</h5>
+                    <div class="ml-auto">
+                        <button type="button" class="btn btn-secondary">View Full Log</button>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
                 </div>
-                <span id="modalLogBodyText" class="modal-body"></span>
+                <label for="modalLogBodyText"></label>
+                <div id="modalLogBodyText" class="modal-body"></div>
             </div>
         </div>
     </div>
@@ -38,7 +43,7 @@
         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title w-100 text-center"><span id="modalSavedInfoTitle"></span> Saved Info</h5>
+                    <h5 class="modal-title"><span id="modalSavedInfoTitle"></span> Saved Info</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <label for="modalSavedInfoBodyText"></label>

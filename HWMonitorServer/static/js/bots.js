@@ -51,16 +51,25 @@ async function loadFile(value, name) {
         return
     }
 
-    // Open Modal
-    document.getElementById("modal" + value + "Title").innerText = name;
+    // Get Modal Text Area
     let modalBodyText = document.getElementById("modal" + value + "BodyText");
-    resp["info"] = resp["info"].replaceAll("\n", "<br>");
-    resp["info"] = resp["info"].replaceAll("[INFO]", "<span class='log-text-info'>[INFO]</span>");
-    resp["info"] = resp["info"].replaceAll("[WARNING]", "<span class='log-text-warning'>[WARNING]</span>");
-    resp["info"] = resp["info"].replaceAll("[ERROR]", "<span class='log-text-error'>[ERROR]</span>");
-    resp["info"] = resp["info"].replaceAll("[DEBUG]", "<span class='log-text-debug'>[DEBUG]</span>");
-    resp["info"] = resp["info"].replaceAll("[OK]", "<span class='log-text-ok'>[OK]</span>");
-    modalBodyText.innerHTML = resp["info"];
+    document.getElementById("modal" + value + "Title").innerText = name;
+
+    // Check if value is log ? Modify innerHTML
+    if (value === "Log") {
+        resp["info"] = resp["info"].replaceAll("\n", "<br>");
+        resp["info"] = resp["info"].replaceAll("[INFO]", "<span class='log-text-info'>[INFO]</span>");
+        resp["info"] = resp["info"].replaceAll("[WARNING]", "<span class='log-text-warning'>[WARNING]</span>");
+        resp["info"] = resp["info"].replaceAll("[ERROR]", "<span class='log-text-error'>[ERROR]</span>");
+        resp["info"] = resp["info"].replaceAll("[DEBUG]", "<span class='log-text-debug'>[DEBUG]</span>");
+        resp["info"] = resp["info"].replaceAll("[OK]", "<span class='log-text-ok'>[OK]</span>");
+        modalBodyText.innerHTML = resp["info"];
+    } else {
+        modalBodyText.setAttribute("rows", resp["info"].split("\n").length);
+        modalBodyText.value = resp["info"];
+    }
+
+    // Open Modal
     $("#bot" + value + "Modal").modal("show");
 
     // Scroll to the bottom if LOG

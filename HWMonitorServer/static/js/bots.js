@@ -49,8 +49,8 @@ async function loadFile(value, name) {
         return
     }
 
-    // Check if response is big
-    if (resp["info"].split("\n").length > 50) {
+    // Check if response is big in case of Log or FullLog
+    if ((value.includes("Log") || value === "SavedInfo") && resp["info"].split("\n").length > 50) {
         const blob = new Blob([resp["info"]], {type: "application/json"});
         const url = URL.createObjectURL(blob);
         window.open(url, "_blank");

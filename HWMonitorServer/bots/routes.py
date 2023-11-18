@@ -124,8 +124,8 @@ def json_loadFile():
     value = request.form.get('value', type=str)
 
     try:
-        if value == "Log":
-            info = models.getBotLog(name)
+        if value == "Log" or value == "FullLog":
+            info = models.getBotLog(value, name)
         elif value == "Config":
             info = models.getBotConfig(name)
         elif value == "SavedInfo":

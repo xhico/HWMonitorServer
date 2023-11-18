@@ -24,9 +24,12 @@ async function loadFile(value, name) {
     // Show Loading
     await loadingScreen("show");
 
+    // Get name from FullLog
+    name = value === "FullLog" ? document.getElementById("modalLogTitle").innerText : name;
+
     // Get File Content
     let resp = await $.ajax({
-        method: "post", url: "/bots/loadFile", data: {name: name, value: value}, success: function (data) {
+        method: "post", url: "/bots/loadFile", data: {value: value, name: name}, success: function (data) {
             return data;
         }
     });
@@ -37,17 +40,22 @@ async function loadFile(value, name) {
     // Show Notification
     await showNotification("Bot - " + name, resp["message"], resp["status"])
 
+    // Revert the value
+    value = value === "FullLog" ? "Log" : value;
+
     // Check if error
     if (resp["status"] === "error") {
+        $("#bot" + value + "Modal").modal("hide");
         return
     }
 
-    // Check if value is savedInfo
-    if (value === "SavedInfo" && resp["info"].split("\n").length > 50) {
+    // Check if response is big
+    if (resp["info"].split("\n").length > 50) {
         const blob = new Blob([resp["info"]], {type: "application/json"});
         const url = URL.createObjectURL(blob);
         window.open(url, "_blank");
         URL.revokeObjectURL(url);
+        $("#bot" + value + "Modal").modal("hide");
         return
     }
 

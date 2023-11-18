@@ -7,11 +7,12 @@ import datetime
 from HWMonitorServer.config import Config
 
 
-def getBotLog(name):
+def getBotLog(value, name):
     """
     Returns the log file for a bot with the given name, last maxCount times it ran.
 
     Args:
+        value: A string representing the value of the bot.
         name: A string representing the name of the bot.
 
     Returns:
@@ -20,18 +21,20 @@ def getBotLog(name):
     log_file = f"/home/pi/{name}/{name}.log"
     log_string = subprocess.getoutput(f"cat {log_file}")
 
-    # Split the log string into lines and reverse it
-    log_string = log_string.strip().split('\n')[::-1]
+    # Split the log_string is Log
+    if value == "Log":
+        # Split the log string into lines and reverse it
+        log_string = log_string.strip().split('\n')[::-1]
 
-    # Find the index of the third occurrence of "[INFO] ------------"
-    start_index, count, maxCount = 0, 0, Config.NumberOfBotsLogs
-    while count != maxCount and start_index <= len(log_string) - 1:
-        if "[INFO] ---------" in log_string[start_index]:
-            count += 1
-        start_index += 1
+        # Find the index of the third occurrence of "[INFO] ------------"
+        start_index, count, maxCount = 0, 0, Config.NumberOfBotsLogs
+        while count != maxCount and start_index <= len(log_string) - 1:
+            if "[INFO] ---------" in log_string[start_index]:
+                count += 1
+            start_index += 1
 
-    # Get only last maxCount runs -> reverse -> toString
-    log_string = "\n".join(log_string[0:start_index][::-1])
+        # Get only last maxCount runs -> reverse -> toString
+        log_string = "\n".join(log_string[0:start_index][::-1])
 
     return log_string
 
@@ -77,7 +80,7 @@ def checkIfError(name):
         bool: True if an error is found in the bot log, False otherwise.
     """
     # Get Bot Log
-    log_string = getBotLog(name)
+    log_string = getBotLog("Log", name)
 
     # Split the log string into lines and reverse it
     lines = log_string.strip().split('\n')[::-1]

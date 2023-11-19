@@ -26,9 +26,11 @@ async function getUptime(JSON) {
     }
 
     // Uptime
+    let Uptime_Install_Date = JSON["Uptime"]["Install_Date"];
     let Uptime_Date_Now = JSON["Uptime"]["Date_Now"];
     let Uptime_Boot_Time = JSON["Uptime"]["Boot_Time"];
     let Uptime_Uptime = JSON["Uptime"]["Uptime"];
+    document.getElementById("Uptime_Install_Date").innerText = Uptime_Install_Date;
     document.getElementById("Uptime_Date_Now").innerText = Uptime_Date_Now;
     document.getElementById("Uptime_Boot_Time").innerText = Uptime_Boot_Time;
     document.getElementById("Uptime_Uptime").innerText = Uptime_Uptime;

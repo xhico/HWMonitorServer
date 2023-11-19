@@ -34,6 +34,7 @@ def getUptime() -> dict:
     Returns:
         A dictionary containing system uptime information if successful, otherwise a dictionary with 'hasInfo' set to 'None'.
     """
+    install_date = subprocess.getoutput("cat /var/log/dpkg.log | grep 'install ' | head -n 1 | awk '{print $1, $2}'")
     date_now = datetime.datetime.now()
     boot_time = datetime.datetime.fromtimestamp(psutil.boot_time())
     delta_time = datetime.timedelta(seconds=(date_now - boot_time).total_seconds())
@@ -44,6 +45,7 @@ def getUptime() -> dict:
     try:
         return {
             "hasInfo": "Yes",
+            "Install_Date": datetime.datetime.strptime(install_date, "%Y-%m-%d %H:%M:%S").strftime("%Y/%m/%d %H:%M:%S"),
             "Date_Now": date_now.strftime("%Y/%m/%d %H:%M:%S"),
             "Boot_Time": boot_time.strftime("%Y/%m/%d %H:%M:%S"),
             "Uptime": "{days} days {hours}h {minutes}m {seconds}s".format(**d),

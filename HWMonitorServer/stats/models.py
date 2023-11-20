@@ -34,22 +34,29 @@ def getUptime() -> dict:
     Returns:
         A dictionary containing system uptime information if successful, otherwise a dictionary with 'hasInfo' set to 'None'.
     """
-    install_date = subprocess.getoutput("cat /var/log/dpkg.log | grep 'install ' | head -n 1 | awk '{print $1, $2}'")
     date_now = datetime.datetime.now()
+
+    install_date = subprocess.getoutput("cat /var/log/dpkg.log | grep 'install ' | head -n 1 | awk '{print $1, $2}'")
+    install_date = datetime.datetime.strptime(install_date, "%Y-%m-%d %H:%M:%S")
+    install_delta_time = datetime.timedelta(seconds=(date_now - install_date).total_seconds())
+    install_d = {"days": install_delta_time.days}
+    install_d["hours"], rem = divmod(install_delta_time.seconds, 3600)
+    install_d["minutes"], install_d["seconds"] = divmod(rem, 60)
+
     boot_time = datetime.datetime.fromtimestamp(psutil.boot_time())
-    delta_time = datetime.timedelta(seconds=(date_now - boot_time).total_seconds())
-    d = {"days": delta_time.days}
-    d["hours"], rem = divmod(delta_time.seconds, 3600)
-    d["minutes"], d["seconds"] = divmod(rem, 60)
+    boot_delta_time = datetime.timedelta(seconds=(date_now - boot_time).total_seconds())
+    boot_d = {"days": boot_delta_time.days}
+    boot_d["hours"], rem = divmod(boot_delta_time.seconds, 3600)
+    boot_d["minutes"], boot_d["seconds"] = divmod(rem, 60)
 
     try:
         return {
             "hasInfo": "Yes",
-            "Install_Date": datetime.datetime.strptime(install_date, "%Y-%m-%d %H:%M:%S").strftime("%Y/%m/%d %H:%M:%S"),
+            "Install_Date": install_date.strftime("%Y/%m/%d %H:%M:%S"),
+            "Install_Uptime": "{days} days {hours}h {minutes}m {seconds}s".format(**install_d),
             "Date_Now": date_now.strftime("%Y/%m/%d %H:%M:%S"),
             "Boot_Time": boot_time.strftime("%Y/%m/%d %H:%M:%S"),
-            "Uptime": "{days} days {hours}h {minutes}m {seconds}s".format(**d),
-            "Uptime_Secs": delta_time.total_seconds()
+            "Boot_Uptime": "{days} days {hours}h {minutes}m {seconds}s".format(**boot_d)
         }
     except Exception:
         return {"hasInfo": "None"}

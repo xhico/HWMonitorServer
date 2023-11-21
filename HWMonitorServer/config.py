@@ -29,6 +29,7 @@ def loadConfig(hostname):
         "UpdateBots": False,
         "UpdateTop": True,
         "NumberOfBotsLogs": 5,
+        "Location": "Office",
     }
 
     # Load the contents of the config file into a dictionary

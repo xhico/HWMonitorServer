@@ -20,9 +20,14 @@
             </div>
         </div>
 
-        <!-- File Actions -->
+    </div>
+
+    <!-- Right Pane -->
+    <div class="col-xl-8 col-md-12">
+        <!-- File-Actions -->
+        <!-- About -->
         <div class="row">
-            <div class="col-12 mb-4">
+            <div class="col-xl-6 col-md-12 mb-4">
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title">File Actions</h5>
@@ -32,14 +37,18 @@
                     </div>
                 </div>
             </div>
+            <div class="col-xl-6 col-md-12 mb-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">About</h5>
+                        <p class="card-text">Francisco 'xhico' Filipe | <a class="card-link" target="_blank" href="https://github.com/xhico">GitHub</a></p>
+                    </div>
+                </div>
+            </div>
         </div>
 
-    </div>
-
-    <!-- Right Pane -->
-    <div class="col-xl-8 col-md-12">
-        <!-- Auto-Update Sections -->
-        <!-- Navigation Sections -->
+        <!-- Auto-Update -->
+        <!-- Navigation -->
         <div class="row">
             <div class="col-xl-6 col-md-12 mb-4">
                 <div class="card">
@@ -111,8 +120,8 @@
             </div>
         </div>
 
-        <!-- Bots Sections -->
-        <!-- About -->
+        <!-- Bots -->
+        <!-- Location -->
         <div class="row">
             <div class="col-xl-6 col-md-12 mb-4">
                 <div class="card">
@@ -133,8 +142,11 @@
             <div class="col-xl-6 col-md-12 mb-4">
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title">About</h5>
-                        <div>Francisco 'xhico' Filipe | <a target="_blank" href="https://github.com/xhico">GitHub</a></div>
+                        <h5 class="card-title">Location</h5>
+                        <div class="input-group flex-nowrap mb-3">
+                            <input id="location" class="form-control" type="text" placeholder="RPi Location" aria-label="RPi Location" aria-describedby="location">
+                            <button class="btn btn-success" type="button" id="locationBtn" onclick="setLocation()">Save</button>
+                        </div>
                     </div>
                 </div>
             </div>

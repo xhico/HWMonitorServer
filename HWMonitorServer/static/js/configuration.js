@@ -183,6 +183,35 @@ async function setNumberOfBotsLogs() {
     await saveConfigJSON();
 }
 
+async function setLocation() {
+    // Get Bot Text
+    let locationElem = document.getElementById("location");
+    let locationText = locationElem.value;
+    console.log(locationText);
+
+    // Check fo valid chars
+    if (locationText === "" || !/^[a-zA-Z0-9_\- ]+$/.test(locationText)) {
+        await showNotification("Failed to set Location", "Location contains invalid characters or empty", "error");
+        return
+    }
+
+    // Convert from String to Object
+    configJSON = typeof configJSON === "string" ? JSON.parse(configJSON) : configJSON;
+
+    // Add/Remove Location to configJSON
+    configJSON.Location = locationText;
+
+    // Add to configurationArea
+    configJSON = JSON.stringify(configJSON, null, 4);
+    configurationArea.value = configJSON;
+
+    // Set number of rows
+    configurationArea.setAttribute("rows", configurationArea.value.split("\n").length);
+
+    // Save configJSON
+    await saveConfigJSON();
+}
+
 window.addEventListener('DOMContentLoaded', async function main() {
     document.getElementById("navbar_configuration").classList.add("active");
     console.log("Get configuration info");
@@ -206,9 +235,10 @@ window.addEventListener('DOMContentLoaded', async function main() {
         });
     }
 
-    // Set configurationArea && updateTime value
+    // Set updateTime && numberOfBotsLogs && location && configurationArea
     document.getElementById("updateTime").placeholder += " (" + configJSON.UpdateTime + " secs)"
     document.getElementById("numberOfBotsLogs").placeholder += " (" + configJSON.NumberOfBotsLogs + " logs)"
+    document.getElementById("location").placeholder += " (" + configJSON.Location + ")"
     configJSON = JSON.stringify(configJSON, null, 4);
     configurationArea.value = configJSON;
 

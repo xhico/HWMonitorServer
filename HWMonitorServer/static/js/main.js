@@ -96,6 +96,9 @@ async function getConfigContent() {
     document.getElementById("navbar_pivpn").hidden = !configJSON.Pivpn;
     document.getElementById("navbar_ledircontroller").hidden = !configJSON.Ledircontroller;
 
+    // Show Room Name
+    document.getElementById("navLocation").innerText = configJSON.Location;
+
     return configJSON;
 }
 

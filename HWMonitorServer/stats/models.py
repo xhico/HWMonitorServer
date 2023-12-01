@@ -36,8 +36,8 @@ def getUptime() -> dict:
     """
     date_now = datetime.datetime.now()
 
-    install_date = subprocess.getoutput("cat /var/log/dpkg.log | grep 'install ' | head -n 1 | awk '{print $1, $2}'")
-    install_date = datetime.datetime.strptime(install_date, "%Y-%m-%d %H:%M:%S")
+    install_date = subprocess.getoutput("passwd -S | awk '{print $3}'")
+    install_date = datetime.datetime.strptime(install_date, "%Y-%m-%d")
     install_delta_time = datetime.timedelta(seconds=(date_now - install_date).total_seconds())
     install_d = {"days": install_delta_time.days}
     install_d["hours"], rem = divmod(install_delta_time.seconds, 3600)

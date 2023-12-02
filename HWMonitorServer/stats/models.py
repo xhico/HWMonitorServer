@@ -40,8 +40,6 @@ def getUptime() -> dict:
     install_date = datetime.datetime.strptime(install_date, "%Y-%m-%d")
     install_delta_time = datetime.timedelta(seconds=(date_now - install_date).total_seconds())
     install_d = {"days": install_delta_time.days}
-    install_d["hours"], rem = divmod(install_delta_time.seconds, 3600)
-    install_d["minutes"], install_d["seconds"] = divmod(rem, 60)
 
     boot_time = datetime.datetime.fromtimestamp(psutil.boot_time())
     boot_delta_time = datetime.timedelta(seconds=(date_now - boot_time).total_seconds())
@@ -52,8 +50,8 @@ def getUptime() -> dict:
     try:
         return {
             "hasInfo": "Yes",
-            "Install_Date": install_date.strftime("%Y/%m/%d %H:%M:%S"),
-            "Install_Uptime": "{days} days {hours}h {minutes}m {seconds}s".format(**install_d),
+            "Install_Date": install_date.strftime("%Y/%m/%d"),
+            "Install_Uptime": "{days} days".format(**install_d),
             "Date_Now": date_now.strftime("%Y/%m/%d %H:%M:%S"),
             "Boot_Time": boot_time.strftime("%Y/%m/%d %H:%M:%S"),
             "Boot_Uptime": "{days} days {hours}h {minutes}m {seconds}s".format(**boot_d)

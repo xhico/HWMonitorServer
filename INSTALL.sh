@@ -1,7 +1,8 @@
 #!/bin/bash
 
 sudo apt install python3 python3-pip python3-setuptools python3-venv -y
-python3 -m pip install flask gunicorn requests gpiozero psutil --no-cache-dir
+python3 -m pip install flask gunicorn requests --no-cache-dir
+python3 -m pip gpiozero psutil --no-cache-dir
 
 echo """
 <VirtualHost *:443>

@@ -1,6 +1,5 @@
 {
     "Bots": [
-        "CheckInternet",
         "HardwareHistory",
         "HumiditySensor",
         "ipSender",
@@ -14,5 +13,6 @@
     "UpdateStats": true,
     "UpdateBots": true,
     "UpdateTop": true,
-    "NumberOfBotsLogs": 5
+    "NumberOfBotsLogs": 5,
+    "Location": "Office"
 }

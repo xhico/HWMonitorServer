@@ -1,6 +1,5 @@
 {
     "Bots": [
-        "CheckInternet",
         "ddnsUpdater",
         "EZTV-AutoDownloader",
         "FogosPtAlerts",
@@ -21,5 +20,6 @@
     "UpdateStats": true,
     "UpdateBots": true,
     "UpdateTop": true,
-    "NumberOfBotsLogs": 5
+    "NumberOfBotsLogs": 5,
+    "Location": "Office"
 }

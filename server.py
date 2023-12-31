@@ -1,6 +1,3 @@
-# Set the encoding for the Python script to UTF-8
-# Specify that this script should be run with Python 3
-
 # -*- coding: utf-8 -*-
 # !/usr/bin/python3
 

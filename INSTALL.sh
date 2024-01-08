@@ -33,5 +33,7 @@ sudo a2ensite HWMonitorServer.conf
 sudo systemctl enable apache2
 sudo systemctl daemon-reload && sudo systemctl restart apache2
 sudo systemctl restart HWMonitorServer
-ln -s /home/pi/RaspberryPiSurveillance/_RECORDINGS/ /home/pi/HWMonitorServer/HWMonitorServer/static/
+if [ -d "/home/pi/RaspberryPiSurveillance/" ]; then
+  ln -s /home/pi/RaspberryPiSurveillance/_RECORDINGS/ /home/pi/HWMonitorServer/HWMonitorServer/static/
+fi
 chmod +x -R /home/pi/HWMonitorServer/*

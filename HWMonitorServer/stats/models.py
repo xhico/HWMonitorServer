@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 
-import copy
 import datetime
 import json
 import re

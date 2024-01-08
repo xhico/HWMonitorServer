@@ -30,6 +30,7 @@ def loadConfig(hostname):
         "UpdateTop": True,
         "NumberOfBotsLogs": 5,
         "Location": "Office",
+        "CPUTemperatureRange": [20, 50, 65, 80]
     }
 
     # Load the contents of the config file into a dictionary

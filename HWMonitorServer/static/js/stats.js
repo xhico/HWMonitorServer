@@ -78,12 +78,20 @@ async function getCPU(JSON) {
 
     // Add Gauge info
     let opts = {
-        angle: 0.15, lineWidth: 0.44, radiusScale: 1, pointer: {length: 0.6, strokeWidth: 0.035, color: '#000000'}, limitMax: false, limitMin: false, staticZones: [{strokeStyle: "#198754", min: 30, max: 50}, {strokeStyle: "#ffc107", min: 50, max: 65}, {strokeStyle: "#dc3545", min: 65, max: 80},], highDpiSupport: true,
+        angle: 0.15, lineWidth: 0.44, radiusScale: 1, pointer: {
+            length: 0.6, strokeWidth: 0.035, color: '#000000'
+        },
+        limitMax: false, limitMin: false, staticZones: [
+            {strokeStyle: "#198754", min: config_CPUTemperatureRange[0], max: config_CPUTemperatureRange[1]},
+            {strokeStyle: "#ffc107", min: config_CPUTemperatureRange[1], max: config_CPUTemperatureRange[2]},
+            {strokeStyle: "#dc3545", min: config_CPUTemperatureRange[2], max: config_CPUTemperatureRange[3]}
+        ],
+        highDpiSupport: true,
     };
     let target = document.getElementById("CPU_Temperature_Gauge");
     let gauge = new Gauge(target).setOptions(opts);
-    gauge.maxValue = 80;
-    gauge.setMinValue(30);
+    gauge.maxValue = config_CPUTemperatureRange[3];
+    gauge.setMinValue(config_CPUTemperatureRange[0]);
     gauge.animationSpeed = 1;
     gauge.set(CPU_Temperature);
 }

@@ -4,6 +4,7 @@
 
 let hostname, configJSON;
 let config_updateStats, config_updateBots, config_updateTop, config_updateTime;
+let config_CPUTemperatureRange;
 
 async function sleep(secs) {
     await new Promise(resolve => setTimeout(resolve, secs * 1000));
@@ -84,6 +85,9 @@ async function getConfigContent() {
     config_updateBots = configJSON.UpdateBots;
     config_updateTop = configJSON.UpdateTop;
     config_updateTime = configJSON.UpdateTime;
+
+    // Set CPU Gauge Temperature Range
+    config_CPUTemperatureRange = configJSON.CPUTemperatureRange;
 
     // Set Hostname
     hostname = await getHostname();

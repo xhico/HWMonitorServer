@@ -1,6 +1,7 @@
 #!/bin/bash
 
 sudo apt install python3 python3-pip python3-setuptools python3-venv -y
+sudo apt install raspberrypi-sys-mods -y
 python3 -m pip install -r /home/pi/HWMonitorServer/requirements.txt --no-cache-dir
 
 echo """

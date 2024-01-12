@@ -1,0 +1,28 @@
+{
+    "Bots": [
+        "ddnsUpdater",
+        "EZTV-AutoDownloader",
+        "FogosPtAlerts",
+        "GeckodriverUpdater",
+        "HardwareHistory",
+        "ipSender",
+        "NoIpUpdater",
+        "PiHoleAlerts",
+        "RPiBackups"
+    ],
+    "Eye": false,
+    "Pivpn": true,
+    "Ledircontroller": false,
+    "UpdateTime": 1,
+    "UpdateStats": true,
+    "UpdateBots": true,
+    "UpdateTop": true,
+    "NumberOfBotsLogs": 5,
+    "Location": "Living Room",
+    "CPUTemperatureRange": [
+        30,
+        65,
+        75,
+        85
+    ]
+}

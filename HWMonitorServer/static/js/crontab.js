@@ -49,6 +49,33 @@ function createInputGroup(idx, job) {
     const div = document.createElement("div");
     div.classList.add("input-group", "mb-1");
 
+    const upBtn = document.createElement("button");
+    upBtn.type = "button";
+    upBtn.id = "up-job-" + idx;
+    upBtn.classList.add("btn", "btn-arrow", "btn-outline-secondary");
+    upBtn.innerHTML = "&#8679;"
+    upBtn.disabled = job["status"] === "disabled";
+    upBtn.onclick = async function () {
+        let div = $(upBtn).closest(".input-group");
+        div.insertBefore(div.prev());
+        saveCronjobs();
+    }
+
+    const downBtn = document.createElement("button");
+    downBtn.type = "button";
+    downBtn.id = "down-job-" + idx;
+    downBtn.classList.add("btn", "btn-arrow", "btn-outline-secondary");
+    downBtn.innerHTML = "&#8681;"
+    downBtn.disabled = job["status"] === "disabled";
+    downBtn.onclick = function () {
+        let div = $(downBtn).closest(".input-group");
+        div.insertAfter(div.next());
+        saveCronjobs();
+    }
+
+    div.appendChild(upBtn);
+    div.appendChild(downBtn);
+
     // Create the input element with the "disabled" attribute
     const input = document.createElement("input");
     input.type = "text";

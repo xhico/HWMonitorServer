@@ -25,16 +25,7 @@ def readCrontab():
     return cronjobs
 
 
-# Function to estimate running frequency
-def estimate_frequency(entry):
-    parts = entry.split()
-    if len(parts) >= 6:
-        if "*/" in parts[0]:
-            return 1 / int(parts[0][2:])
-    return 0
-
-
-def saveCrontab(cronjobs):
+def saveCrontab(crontab):
     """
     Takes a list of dictionaries representing each cron job and their status, modifies the status of each job as needed,
     saves the modified list to the crontab file of user "pi", and returns a tuple indicating the success or failure of the
@@ -43,7 +34,7 @@ def saveCrontab(cronjobs):
     try:
         newCrontab = []
         # Modify the status of each job as needed and add it to the new crontab list
-        for job in cronjobs:
+        for job in crontab:
             jobJob = job["job"]
             jobStatus = job["status"]
 
@@ -51,23 +42,11 @@ def saveCrontab(cronjobs):
             jobJob = "#" + jobJob if jobStatus == "disabled" else jobJob.lstrip("#")
             newCrontab.append(jobJob + "\n")
 
-        # Split the entries into three groups: those starting with "@", "#", and the rest
-        at_entries = [entry for entry in newCrontab if entry.startswith('@')]
-        comment_entries = [entry for entry in newCrontab if entry.startswith('#')]
-        non_at_comment_entries = [entry for entry in newCrontab if not (entry.startswith('@') or entry.startswith('#'))]
-
-        # Sort each group by estimated frequency
-        at_entries = sorted(at_entries, key=estimate_frequency, reverse=True)
-        non_at_comment_entries = sorted(non_at_comment_entries, key=estimate_frequency, reverse=True)
-
-        # Combine the sorted entries and add the "SHELL=/bin/bash" line at the top
-        sorted_crontab_entries = at_entries + non_at_comment_entries + comment_entries
-
         # Save File
         crontabFile = "/home/pi/crontab.txt"
         # Write the modified crontab to the crontab file
         with open(crontabFile, "w") as outFile:
-            outFile.writelines(sorted_crontab_entries)
+            outFile.writelines(newCrontab)
 
         # Load the modified crontab into the crontab of user "pi"
         os.system("crontab -u pi " + crontabFile)

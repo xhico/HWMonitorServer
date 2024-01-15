@@ -13,6 +13,7 @@
         "HardwareHistory",
         "ipSender",
         "NoIpUpdater",
+        "NVIDIADriverUpdater",
         "RPiBackups"
     ],
     "Eye": false,

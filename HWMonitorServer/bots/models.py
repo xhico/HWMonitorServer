@@ -118,7 +118,7 @@ def getBotInfo(name):
         # Get parent process and it's children recursively
         processes = [proc for proc in psutil.process_iter(["pid", "cmdline"]) if proc.info["cmdline"] is not None]
         processes = [proc for proc in processes if any([name in arg for arg in proc.info["cmdline"]])]
-        all_related_processes = []
+        allRelatedProcesses = []
         for process in processes:
             pDict["Running"] = "True"
             pDict["info"]["pid"] = process.pid
@@ -133,13 +133,16 @@ def getBotInfo(name):
             running_time = "{days} days {hours}h {minutes}m {seconds}s".format(**d)
             pDict["info"]["running_time"] = running_time
 
-            all_related_processes.extend(getRelatedProcesses(process, name))
+            allRelatedProcesses.extend(getRelatedProcesses(process, name))
 
         # Aggregate CPU /RAM Usage
-        for process in all_related_processes:
-            cpu_usage = [process.cpu_percent() for _ in range(10)]
-            pDict["info"]["cpu"] += (sum(cpu_usage) / len(cpu_usage)) / psutil.cpu_count()
-            pDict["info"]["memory"] += process.memory_percent()
+        for process in allRelatedProcesses:
+            try:
+                cpuUsage = [process.cpu_percent() for _ in range(10)]
+                pDict["info"]["cpu"] += (sum(cpuUsage) / len(cpuUsage)) / psutil.cpu_count()
+                pDict["info"]["memory"] += process.memory_percent()
+            except psutil.NoSuchProcess:
+                pass
 
         pDict["info"]["cpu"] = round(pDict["info"]["cpu"], 2)
         pDict["info"]["memory"] = round(pDict["info"]["memory"], 2)

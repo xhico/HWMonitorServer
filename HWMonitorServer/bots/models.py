@@ -95,6 +95,14 @@ def checkIfError(name):
     return hasError
 
 
+def getRelatedProcesses(process, processName):
+    relatedProcesses = [process]
+    subProcesses = [subProcess for subProcess in psutil.process_iter(["pid", "ppid", "cmdline"]) if subProcess.info["ppid"] == process.info["pid"]]
+    for subProcess in subProcesses:
+        relatedProcesses.extend(getRelatedProcesses(subProcess, processName))
+    return relatedProcesses
+
+
 def getBotInfo(name):
     """
     Gets information about a bot process running on the system.
@@ -105,39 +113,36 @@ def getBotInfo(name):
     """
 
     try:
-        # create an empty dictionary to store the process information
-        pDict = {}
+        pDict = {"Running": "False", "info": {"pid": "-", "cpu": 0.0, "memory": 0.0, "create_time": "-", "running_time": "-"}}
 
-        # get a list of all running processes with the given name
-        proc_iter = psutil.process_iter(attrs=["pid", "cmdline"])
-        p = [p for p in proc_iter if name + ".py" in '\t'.join(p.info["cmdline"])]
+        # Get parent process and it's children recursively
+        processes = [proc for proc in psutil.process_iter(["pid", "cmdline"]) if proc.info["cmdline"] is not None]
+        processes = [proc for proc in processes if any([name in arg for arg in proc.info["cmdline"]])]
+        all_related_processes = []
+        for process in processes:
+            pDict["Running"] = "True"
+            pDict["info"]["pid"] = process.pid
 
-        # if the process is running, get its information
-        if len(p) != 0:
-            p = p[0]
-            pid = p.pid
-            cpu = p.cpu_percent()
-            mem = p.memory_percent()
-            create_time = datetime.datetime.fromtimestamp(p.create_time())
+            create_time = datetime.datetime.fromtimestamp(process.create_time())
+            pDict["info"]["create_time"] = create_time.strftime("%Y/%m/%d %H:%M:%S")
+
             running_time = datetime.timedelta(seconds=(datetime.datetime.now() - create_time).total_seconds())
-
-            # format the running time as a string
             d = {"days": running_time.days}
             d["hours"], rem = divmod(running_time.seconds, 3600)
             d["minutes"], d["seconds"] = divmod(rem, 60)
             running_time = "{days} days {hours}h {minutes}m {seconds}s".format(**d)
+            pDict["info"]["running_time"] = running_time
 
-            # add the process information to the dictionary
-            pDict["Running"], pDict["info"] = "True", {
-                "pid": pid,
-                "cpu": round(cpu, 2),
-                "memory": round(mem, 2),
-                "create_time": create_time.strftime("%Y/%m/%d %H:%M:%S"),
-                "running_time": running_time
-            }
-        else:
-            # if the process is not running, indicate that in the dictionary
-            pDict["Running"] = "False"
+            all_related_processes.extend(getRelatedProcesses(process, name))
+
+        # Aggregate CPU /RAM Usage
+        for process in all_related_processes:
+            cpu_usage = [process.cpu_percent() for _ in range(10)]
+            pDict["info"]["cpu"] += (sum(cpu_usage) / len(cpu_usage)) / psutil.cpu_count()
+            pDict["info"]["memory"] += process.memory_percent()
+
+        pDict["info"]["cpu"] = round(pDict["info"]["cpu"], 2)
+        pDict["info"]["memory"] = round(pDict["info"]["memory"], 2)
 
         # Get last run
         last_run = subprocess.getoutput("tail -n 1 /home/pi/" + name + "/" + name + ".log | cut -d ',' -f 1")

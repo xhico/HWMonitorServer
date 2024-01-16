@@ -125,12 +125,13 @@ def getSDCard() -> dict:
             - "Total": The total size of the disk, in bytes.
     """
     try:
+        disk = psutil.disk_usage("/")
         return {
             "hasInfo": "Yes",
-            "Percentage": round(psutil.disk_usage('/').percent, 2),
-            "Used": psutil.disk_usage('/').used,
-            "Free": psutil.disk_usage('/').free,
-            "Total": psutil.disk_usage('/').total
+            "Percentage": round(disk.percent, 2),
+            "Used": disk.used,
+            "Free": disk.free,
+            "Total": disk.total
         }
     except Exception:
         return {"hasInfo": "None"}
@@ -152,13 +153,14 @@ def get918() -> dict:
             - "Total": The total size of the disk, in bytes.
     """
     try:
+        disk = psutil.disk_usage("/media/pi/918")
         return {
             "hasInfo": "Yes",
             "Available": "Yes",
-            "Percentage": round(psutil.disk_usage('/media/pi/918').percent, 2),
-            "Used": psutil.disk_usage('/media/pi/918').used,
-            "Free": psutil.disk_usage('/media/pi/918').free,
-            "Total": psutil.disk_usage('/media/pi/918').total
+            "Percentage": round(disk.percent, 2),
+            "Used": disk.used,
+            "Free": disk.free,
+            "Total": disk.total
         }
     except Exception:
         return {"hasInfo": "None"}

@@ -281,8 +281,8 @@ async function setBot(JSON, name) {
 
     if (running === "True") {
         pid = JSON[name]["info"]["pid"];
-        cpu = JSON[name]["info"]["cpu"];
-        memory = JSON[name]["info"]["memory"];
+        cpu = JSON[name]["info"]["cpu"] + "%";
+        memory = JSON[name]["info"]["memory"] + "%";
         create_time = JSON[name]["info"]["create_time"];
         running_time = JSON[name]["info"]["running_time"];
     }

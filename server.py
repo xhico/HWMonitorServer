@@ -9,5 +9,4 @@ app = create_app()
 
 # Check if this script is being run as the main module
 if __name__ == '__main__':
-    #app.run()
-    app.run(host='0.0.0.0')
+    app.run()

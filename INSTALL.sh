@@ -5,6 +5,11 @@ sudo apt install raspberrypi-sys-mods -y
 python3 -m pip install -r /home/pi/HWMonitorServer/requirements.txt --no-cache-dir
 
 echo """
+<VirtualHost *:80>
+	ServerName monitor.$(hostname).xhico
+	Redirect permanent / https://monitor.$(hostname).xhico
+</VirtualHost>
+
 <VirtualHost *:443>
     ServerName monitor.$(hostname).xhico
     ErrorLog /var/www/HWMonitorServer-error.log

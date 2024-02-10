@@ -6,8 +6,8 @@ python3 -m pip install -r /home/pi/HWMonitorServer/requirements.txt --no-cache-d
 
 echo """
 <VirtualHost *:80>
-	ServerName monitor.$(hostname).xhico
-	Redirect permanent / https://monitor.$(hostname).xhico
+    ServerName monitor.$(hostname).xhico
+    Redirect permanent / https://monitor.$(hostname).xhico
 </VirtualHost>
 
 <VirtualHost *:443>

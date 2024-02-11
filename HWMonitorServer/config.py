@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 
-import json
 import os
+import json
+import datetime
 import socket
 
 
@@ -20,17 +21,18 @@ def loadConfig(hostname):
 
     # Set default config values
     defaultConfig = {
-        "Bots": [],
-        "Eye": False,
-        "Pivpn": False,
-        "Ledircontroller": False,
+        "InstallDate": datetime.datetime.now().strftime("%Y/%m/%d %H:%M:%S"),
+        "Location": "Office",
         "UpdateTime": 2,
         "UpdateStats": True,
         "UpdateBots": False,
         "UpdateTop": True,
         "NumberOfBotsLogs": 5,
-        "Location": "Office",
-        "CPUTemperatureRange": [20, 50, 65, 80]
+        "Eye": False,
+        "Pivpn": False,
+        "Ledircontroller": False,
+        "CPUTemperatureRange": [20, 50, 65, 80],
+        "Bots": [],
     }
 
     # Load the contents of the config file into a dictionary
@@ -72,6 +74,7 @@ class Config:
     # Load the config file
     config, configFile = loadConfig(hostname)
 
-    # Get the names of the bots && NumberOfBotsLogs
+    # Get installDate, the names of the bots && NumberOfBotsLogs
+    installDate = config["InstallDate"]
     botsName = config["Bots"]
     NumberOfBotsLogs = config["NumberOfBotsLogs"]

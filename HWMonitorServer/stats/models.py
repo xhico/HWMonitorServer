@@ -7,6 +7,7 @@ import subprocess
 
 import gpiozero
 import psutil
+from HWMonitorServer import Config
 
 
 def getVersions() -> dict:
@@ -35,8 +36,8 @@ def getUptime() -> dict:
     """
     date_now = datetime.datetime.now()
 
-    install_date = subprocess.getoutput("passwd -S | awk '{print $3}'")
-    install_date = datetime.datetime.strptime(install_date, "%Y-%m-%d")
+    install_date = Config.installDate
+    install_date = datetime.datetime.strptime(install_date, "%Y/%m/%d %H:%M:%S")
     install_delta_time = datetime.timedelta(seconds=(date_now - install_date).total_seconds())
     install_d = {"days": install_delta_time.days}
 

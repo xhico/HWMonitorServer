@@ -1,7 +1,9 @@
 # -*- coding: utf-8 -*-
 
 import os
+
 from flask import render_template, jsonify, Blueprint, request
+
 import HWMonitorServer.bots.models as models
 from HWMonitorServer import Config
 

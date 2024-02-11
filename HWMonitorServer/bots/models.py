@@ -1,9 +1,11 @@
 # -*- coding: utf-8 -*-
 
+import datetime
 import os
 import subprocess
+
 import psutil
-import datetime
+
 from HWMonitorServer.config import Config
 
 

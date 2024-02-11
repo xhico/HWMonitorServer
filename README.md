@@ -7,6 +7,7 @@ It was inspired by XavierBerger/RPi-Monitor, but built with Flask
 ![Stats](https://github.com/xhico/HWMonitorServer/blob/main/ScreenImages/Stats.jpg "Stats")
 
 ## Features
+
 * Auto-detect for other RPIs running the Monitor
 * Auto-refresh
 * Lightweight
@@ -19,6 +20,7 @@ It was inspired by XavierBerger/RPi-Monitor, but built with Flask
 * Hardware History
 
 ## Stats available
+
 * Version
 * Uptime
 * Temperature
@@ -31,17 +33,30 @@ It was inspired by XavierBerger/RPi-Monitor, but built with Flask
 * HDD Storage
 
 ### Bots
+
 ![Bots](https://github.com/xhico/HWMonitorServer/blob/main/ScreenImages/Bots.jpg "Bots")
+
 ### History
+
 ![History](https://github.com/xhico/HWMonitorServer/blob/main/ScreenImages/History.jpg "History")
+
 ### Crontab
+
 ![History](https://github.com/xhico/HWMonitorServer/blob/main/ScreenImages/Crontab.jpg "Crontab")
+
 ### TOP
+
 ![TOP](https://github.com/xhico/HWMonitorServer/blob/main/ScreenImages/TOP.jpg "TOP")
+
 ### EYE
+
 ![EYE](https://github.com/xhico/HWMonitorServer/blob/main/ScreenImages/EYE.jpg "EYE")
+
 ### PiVPN
+
 ![PiVPN](https://github.com/xhico/HWMonitorServer/blob/main/ScreenImages/PiVPN.jpg "PiVPN")
+
 ### Config
+
 ![Config](https://github.com/xhico/HWMonitorServer/blob/main/ScreenImages/Config.jpg "Config")
 

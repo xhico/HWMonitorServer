@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from flask import render_template, jsonify, Blueprint, request
+
 import HWMonitorServer.history.models as models
 
 # Define a Flask Blueprint instance

@@ -2,6 +2,7 @@
 
 import psutil
 from flask import render_template, jsonify, Blueprint, request
+
 import HWMonitorServer.top.models as models
 
 # Define a Flask Blueprint instance

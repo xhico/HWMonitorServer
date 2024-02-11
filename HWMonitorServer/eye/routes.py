@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from flask import render_template, Blueprint, jsonify
+
 import HWMonitorServer.eye.models as models
 
 # Define a Flask Blueprint instance

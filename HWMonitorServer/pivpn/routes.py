@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from flask import render_template, jsonify, Blueprint
+
 import HWMonitorServer.pivpn.models as models
 
 # Define a Flask pivpn instance

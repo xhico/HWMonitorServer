@@ -78,3 +78,6 @@ class Config:
     installDate = config["InstallDate"]
     botsName = config["Bots"]
     NumberOfBotsLogs = config["NumberOfBotsLogs"]
+
+    # Add CSP
+    CONTENT_SECURITY_POLICY = f"default-src 'self'; script-src 'self' https://monitor.{hostname}.xhico; style-src 'self' https://monitor.{hostname}.xhico; img-src 'self' https://monitor.{hostname}.xhico;"

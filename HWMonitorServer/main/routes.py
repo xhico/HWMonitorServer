@@ -5,6 +5,8 @@ import socket
 
 from flask import jsonify, request, Blueprint
 
+from HWMonitorServer import Config
+
 # Define a Flask Blueprint instance
 main = Blueprint("main", __name__)
 
@@ -13,16 +15,21 @@ main = Blueprint("main", __name__)
 # ---------------------------------------------------------------------------------------------------------- #
 
 @main.after_request
-def add_header(r):
+def add_security_headers(response):
     """
     Add headers to both force the latest IE rendering engine or Chrome Frame,
     and also to cache the rendered page for 10 minutes.
     """
-    r.headers["Cache-Control"] = "no-cache, no-store, must-revalidate"
-    r.headers["Pragma"] = "no-cache"
-    r.headers["Expires"] = "0"
-    r.headers['Cache-Control'] = 'public, max-age=0'
-    return r
+    response.headers['Content-Security-Policy'] = Config.CONTENT_SECURITY_POLICY
+    response.headers['X-Content-Type-Options'] = 'nosniff'
+    response.headers['X-Frame-Options'] = 'SAMEORIGIN'
+    response.headers['Referrer-Policy'] = 'strict-origin-when-cross-origin'
+    response.headers['Strict-Transport-Security'] = 'max-age=31536000; includeSubDomains'
+    response.headers["Cache-Control"] = "no-cache, no-store, must-revalidate"
+    response.headers["Pragma"] = "no-cache"
+    response.headers["Expires"] = "0"
+    response.headers['Cache-Control'] = 'public, max-age=0'
+    return response
 
 
 @main.route("/main/power", methods=['POST'])

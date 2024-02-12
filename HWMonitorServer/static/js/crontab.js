@@ -144,13 +144,18 @@ function createInputGroup(idx, job) {
     }
     editItem.appendChild(editButton);
 
+    // Add Remove Button
     const removeItem = document.createElement("li");
     const removeButton = document.createElement("button");
     removeButton.classList.add("dropdown-item");
     removeButton.innerText = "Remove";
     removeButton.onclick = function (event) {
-        $(event.target.closest(".input-group")).remove();
-        saveCronjobs();
+        // Display a confirmation dialog
+        if (confirm("Are you sure you want to remove this item?")) {
+            // If confirmed, remove the item
+            $(event.target.closest(".input-group")).remove();
+            saveCronjobs();
+        }
     }
     removeItem.appendChild(removeButton);
 

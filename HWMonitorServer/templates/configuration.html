@@ -124,7 +124,7 @@
         </div>
 
         <!-- Bots -->
-        <!-- About -->
+        <!-- CPU Temperature Range -->
         <div class="row">
             <div class="col-xl-6 col-md-12 mb-4">
                 <div class="card">
@@ -145,13 +145,13 @@
             <div class="col-xl-6 col-md-12 mb-4">
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title">CPU Temperature</h5>
+                        <h5 class="card-title">CPU Temperature Range</h5>
                         <div class="input-group">
-                            <span class="input-group-text">Range</span>
-                            <input type="number" min="0" max="100" aria-label="CPU Temperature Low Min" class="form-control" id="CPUTemperatureLowMin">
-                            <input type="number" min="0" max="100" aria-label="CPU Temperature Low Max" class="form-control" id="CPUTemperatureLowMax">
-                            <input type="number" min="0" max="100" aria-label="CPU Temperature Medium Max" class="form-control" id="CPUTemperatureMediumMax">
-                            <input type="number" min="0" max="100" aria-label="CPU Temperature High Max" class="form-control" id="CPUTemperatureHighMax">
+                            <input type="number" aria-label="CPU Temperature Low Min" class="form-control text-center" id="CPUTemperatureLowMin" onchange="setCPUTemperatureRange(false)">
+                            <input type="number" aria-label="CPU Temperature Low Max" class="form-control text-center" id="CPUTemperatureLowMax" onchange="setCPUTemperatureRange(false)">
+                            <input type="number" aria-label="CPU Temperature Medium Max" class="form-control text-center" id="CPUTemperatureMediumMax" onchange="setCPUTemperatureRange(false)">
+                            <input type="number" aria-label="CPU Temperature High Max" class="form-control text-center" id="CPUTemperatureHighMax" onchange="setCPUTemperatureRange(false)">
+                            <button class="btn btn-success" type="button" onclick="setCPUTemperatureRange(true)">Save</button>
                         </div>
                     </div>
                 </div>

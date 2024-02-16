@@ -212,6 +212,43 @@ async function setLocation() {
     await saveConfigJSON();
 }
 
+async function setCPUTemperatureRange(save) {
+    // Get Range Values
+    let lowMin = document.querySelector("#CPUTemperatureLowMin").value;
+    let lowMax = document.querySelector("#CPUTemperatureLowMax").value;
+    let mediumMax = document.querySelector("#CPUTemperatureMediumMax").value;
+    let highMax = document.querySelector("#CPUTemperatureHighMax").value;
+
+    // Set min and max values accordingly
+    document.querySelector("#CPUTemperatureLowMin").setAttribute("max", lowMax);
+    document.querySelector("#CPUTemperatureLowMax").setAttribute("min", lowMin);
+    document.querySelector("#CPUTemperatureLowMax").setAttribute("max", mediumMax);
+    document.querySelector("#CPUTemperatureMediumMax").setAttribute("min", lowMax);
+    document.querySelector("#CPUTemperatureMediumMax").setAttribute("max", highMax);
+    document.querySelector("#CPUTemperatureHighMax").setAttribute("min", mediumMax);
+
+    // Check if it is to save
+    if (!save) {
+        return
+    }
+
+    // Convert from String to Object
+    configJSON = typeof configJSON === "string" ? JSON.parse(configJSON) : configJSON;
+
+    // Change CPUTemperatureRange to configJSON
+    configJSON.CPUTemperatureRange = [lowMin, lowMax, mediumMax, highMax];
+
+    // Add to configurationArea
+    configJSON = JSON.stringify(configJSON, null, 4);
+    configurationArea.value = configJSON;
+
+    // Set number of rows
+    configurationArea.setAttribute("rows", configurationArea.value.split("\n").length);
+
+    // Save configJSON
+    await saveConfigJSON();
+}
+
 window.addEventListener('DOMContentLoaded', async function main() {
     document.querySelector("#navbar_configuration").classList.add("active");
     console.log("Get configuration info");
@@ -239,6 +276,12 @@ window.addEventListener('DOMContentLoaded', async function main() {
     document.querySelector("#updateTime").placeholder += " (" + configJSON.UpdateTime + " secs)"
     document.querySelector("#numberOfBotsLogs").placeholder += " (" + configJSON.NumberOfBotsLogs + " logs)"
     document.querySelector("#location").placeholder += " (" + configJSON.Location + ")"
+
+    // Set CPU Temperature Range
+    document.querySelector("#CPUTemperatureLowMin").value = configJSON.CPUTemperatureRange[0];
+    document.querySelector("#CPUTemperatureLowMax").value = configJSON.CPUTemperatureRange[1];
+    document.querySelector("#CPUTemperatureMediumMax").value = configJSON.CPUTemperatureRange[2];
+    document.querySelector("#CPUTemperatureHighMax").value = configJSON.CPUTemperatureRange[3];
 
     // Change configJSON to String
     configJSON = JSON.stringify(configJSON, null, 4);

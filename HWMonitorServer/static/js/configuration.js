@@ -214,18 +214,18 @@ async function setLocation() {
 
 async function setCPUTemperatureRange(save) {
     // Get Range Values
-    let lowMin = document.querySelector("#CPUTemperatureLowMin").value;
-    let lowMax = document.querySelector("#CPUTemperatureLowMax").value;
-    let mediumMax = document.querySelector("#CPUTemperatureMediumMax").value;
-    let highMax = document.querySelector("#CPUTemperatureHighMax").value;
+    let lowMin = parseInt(document.querySelector("#CPUTemperatureLowMin").value);
+    let lowMax = parseInt(document.querySelector("#CPUTemperatureLowMax").value);
+    let mediumMax = parseInt(document.querySelector("#CPUTemperatureMediumMax").value);
+    let highMax = parseInt(document.querySelector("#CPUTemperatureHighMax").value);
 
     // Set min and max values accordingly
-    document.querySelector("#CPUTemperatureLowMin").setAttribute("max", lowMax);
-    document.querySelector("#CPUTemperatureLowMax").setAttribute("min", lowMin);
-    document.querySelector("#CPUTemperatureLowMax").setAttribute("max", mediumMax);
-    document.querySelector("#CPUTemperatureMediumMax").setAttribute("min", lowMax);
-    document.querySelector("#CPUTemperatureMediumMax").setAttribute("max", highMax);
-    document.querySelector("#CPUTemperatureHighMax").setAttribute("min", mediumMax);
+    document.querySelector("#CPUTemperatureLowMin").setAttribute("max", lowMax.toString());
+    document.querySelector("#CPUTemperatureLowMax").setAttribute("min", lowMin.toString());
+    document.querySelector("#CPUTemperatureLowMax").setAttribute("max", mediumMax.toString());
+    document.querySelector("#CPUTemperatureMediumMax").setAttribute("min", lowMax.toString());
+    document.querySelector("#CPUTemperatureMediumMax").setAttribute("max", highMax.toString());
+    document.querySelector("#CPUTemperatureHighMax").setAttribute("min", mediumMax.toString());
 
     // Check if it is to save
     if (!save) {

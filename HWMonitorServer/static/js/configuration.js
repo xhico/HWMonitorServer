@@ -239,10 +239,12 @@ window.addEventListener('DOMContentLoaded', async function main() {
     document.querySelector("#updateTime").placeholder += " (" + configJSON.UpdateTime + " secs)"
     document.querySelector("#numberOfBotsLogs").placeholder += " (" + configJSON.NumberOfBotsLogs + " logs)"
     document.querySelector("#location").placeholder += " (" + configJSON.Location + ")"
+
+    // Change configJSON to String
     configJSON = JSON.stringify(configJSON, null, 4);
     configurationArea.value = configJSON;
 
-    // Set number of rows
+    // Set number of rows of configurationArea
     configurationArea.setAttribute("rows", configurationArea.value.split("\n").length);
 
     // Remove Loading

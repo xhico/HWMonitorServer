@@ -39,9 +39,9 @@ async function setOverview() {
     }
 
     // Add to page
-    document.getElementById("overviewEnabled").innerText = enabledCount.toString();
-    document.getElementById("overviewDisabled").innerText = disabledCount.toString();
-    document.getElementById("overviewTotal").innerText = totalEntries.toString();
+    document.querySelector("#overviewEnabled").innerText = enabledCount.toString();
+    document.querySelector("#overviewDisabled").innerText = disabledCount.toString();
+    document.querySelector("#overviewTotal").innerText = totalEntries.toString();
 }
 
 function createInputGroup(idx, job) {
@@ -174,7 +174,7 @@ function createInputGroup(idx, job) {
     div.appendChild(dropdownMenu);
 
     // Append the main div to cronjobs div
-    document.getElementById("cronjobs").appendChild(div);
+    document.querySelector("#cronjobs").appendChild(div);
 }
 
 async function setCronjobsDiv() {
@@ -182,7 +182,7 @@ async function setCronjobsDiv() {
     await setOverview();
 
     // Set Cronjobs Group
-    document.getElementById("cronjobs").innerHTML = "";
+    document.querySelector("#cronjobs").innerHTML = "";
     for (let idx = 0; idx < cronjobsJSON.length; idx++) {
         let job = cronjobsJSON[idx];
         await createInputGroup(idx, job);
@@ -207,7 +207,7 @@ async function jobAction(job, action) {
 
 async function regenerateCronjobsJSON() {
     // Generate cronjobsJSON
-    let cronjobsDiv = document.getElementById("cronjobs");
+    let cronjobsDiv = document.querySelector("#cronjobs");
     cronjobsJSON = [];
     for (let job of cronjobsDiv.children) {
         let jobJob = job.querySelector('[id^="input-job-"]').value;
@@ -245,7 +245,7 @@ async function saveCronjobs() {
 
 async function addJob() {
     let idx = cronjobsJSON.length;
-    let jobJob = document.getElementById("addCronjobInput").value;
+    let jobJob = document.querySelector("#addCronjobInput").value;
     await createInputGroup(idx, {"job": jobJob, "status": "enabled"});
 
     // Save
@@ -280,7 +280,7 @@ async function downloadCronjobs() {
 }
 
 window.addEventListener('DOMContentLoaded', async function main() {
-    document.getElementById("navbar_crontab").classList.add("active");
+    document.querySelector("#navbar_crontab").classList.add("active");
     console.log("Get crontab info");
 
     // Add Cronjobs

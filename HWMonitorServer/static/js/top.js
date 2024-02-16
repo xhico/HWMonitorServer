@@ -22,9 +22,9 @@ async function getInfo() {
     });
 
     // Reset tableHeader && tableBody
-    let tableHeader = document.getElementById("tableHeader");
+    let tableHeader = document.querySelector("#tableHeader");
     tableHeader.innerHTML = "";
-    let tableBody = document.getElementById("tableBody");
+    let tableBody = document.querySelector("#tableBody");
     tableBody.innerHTML = "";
 
     for (let i = 0; i < resp.length; i++) {
@@ -90,6 +90,6 @@ async function updateInfo() {
 }
 
 window.addEventListener('DOMContentLoaded', async function main() {
-    document.getElementById("navbar_top").classList.add("active");
+    document.querySelector("#navbar_top").classList.add("active");
     await updateInfo();
 });

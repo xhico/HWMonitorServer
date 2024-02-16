@@ -25,7 +25,7 @@ async function loadFile(value, name) {
     await loadingScreen("show");
 
     // Get name from FullLog
-    name = value === "FullLog" ? document.getElementById("modalLogTitle").innerText : name;
+    name = value === "FullLog" ? document.querySelector("#modalLogTitle").innerText : name;
 
     // Get File Content
     let resp = await $.ajax({
@@ -60,8 +60,8 @@ async function loadFile(value, name) {
     }
 
     // Get Modal Text Area
-    let modalBodyText = document.getElementById("modal" + value + "BodyText");
-    document.getElementById("modal" + value + "Title").innerText = name;
+    let modalBodyText = document.querySelector("#modal" + value + "BodyText");
+    document.querySelector("#modal" + value + "Title").innerText = name;
 
     // Check if value is log ? Modify innerHTML
     if (value === "Log") {
@@ -88,9 +88,9 @@ async function loadFile(value, name) {
 }
 
 async function editConfig() {
-    let modalBodyText = document.getElementById("modalConfigBodyText");
-    let configEditBtn = document.getElementById("configEditBtn");
-    let configSaveBtn = document.getElementById("configSaveBtn");
+    let modalBodyText = document.querySelector("#modalConfigBodyText");
+    let configEditBtn = document.querySelector("#configEditBtn");
+    let configSaveBtn = document.querySelector("#configSaveBtn");
 
     if (modalBodyText.classList.contains("bg-success")) {
         modalBodyText.classList.remove("bg-success");
@@ -107,8 +107,8 @@ async function editConfig() {
 }
 
 async function saveConfig() {
-    let modalBodyText = document.getElementById("modalConfigBodyText");
-    let name = document.getElementById("modalConfigTitle").innerText;
+    let modalBodyText = document.querySelector("#modalConfigBodyText");
+    let name = document.querySelector("#modalConfigTitle").innerText;
     let value = JSON.stringify(JSON.parse(modalBodyText.value), null, 4);
 
     // Save Config
@@ -128,7 +128,7 @@ async function saveConfig() {
 async function createBot(JSON, name) {
 
     // Skip if already created
-    if (document.getElementById("bot_" + name)) {
+    if (document.querySelector("#bot_" + name)) {
         return
     }
 
@@ -270,13 +270,13 @@ async function createBot(JSON, name) {
     JSON[name]["has_saved_info"] && divBtnsRow.appendChild(actionBtn);
 
     // Append to contentDiv
-    document.getElementById("content").appendChild(botElem);
+    document.querySelector("#content").appendChild(botElem);
 }
 
 async function setBot(JSON, name) {
     let running = JSON[name]["Running"];
     let last_run = JSON[name]["last_run"];
-    document.getElementById(name + "_running").innerText = running;
+    document.querySelector("#" + name + "_running").innerText = running;
     let [pid, cpu, memory, create_time, running_time] = Array(5).fill("-");
 
     if (running === "True") {
@@ -287,15 +287,15 @@ async function setBot(JSON, name) {
         running_time = JSON[name]["info"]["running_time"];
     }
 
-    document.getElementById(name + "_pid").innerText = pid;
-    document.getElementById(name + "_cpu").innerText = cpu;
-    document.getElementById(name + "_memory").innerText = memory;
-    document.getElementById(name + "_create_time").innerText = create_time;
-    document.getElementById(name + "_running_time").innerText = running_time;
-    document.getElementById(name + "_last_run").innerText = last_run;
-    document.getElementById(name + "_start").disabled = ((running === "True"));
-    document.getElementById(name + "_stop").disabled = ((running === "False"));
-    document.getElementById(name + "_alert").hidden = !JSON[name]["has_error"];
+    document.querySelector("#" + name + "_pid").innerText = pid;
+    document.querySelector("#" + name + "_cpu").innerText = cpu;
+    document.querySelector("#" + name + "_memory").innerText = memory;
+    document.querySelector("#" + name + "_create_time").innerText = create_time;
+    document.querySelector("#" + name + "_running_time").innerText = running_time;
+    document.querySelector("#" + name + "_last_run").innerText = last_run;
+    document.querySelector("#" + name + "_start").disabled = ((running === "True"));
+    document.querySelector("#" + name + "_stop").disabled = ((running === "False"));
+    document.querySelector("#" + name + "_alert").hidden = !JSON[name]["has_error"];
 }
 
 async function updateSections() {
@@ -334,10 +334,10 @@ async function updateSections() {
     }
 }
 
-document.getElementById("botConfigModal").addEventListener("hidden.bs.modal", event => {
-    let modalBodyText = document.getElementById("modalConfigBodyText");
-    let configEditBtn = document.getElementById("configEditBtn");
-    let configSaveBtn = document.getElementById("configSaveBtn");
+document.querySelector("#botConfigModal").addEventListener("hidden.bs.modal", event => {
+    let modalBodyText = document.querySelector("#modalConfigBodyText");
+    let configEditBtn = document.querySelector("#configEditBtn");
+    let configSaveBtn = document.querySelector("#configSaveBtn");
 
     // Toggle Attributes
     modalBodyText.readOnly = true;
@@ -348,6 +348,6 @@ document.getElementById("botConfigModal").addEventListener("hidden.bs.modal", ev
 });
 
 window.addEventListener('DOMContentLoaded', async function main() {
-    document.getElementById("navbar_bots").classList.add("active");
+    document.querySelector("#navbar_bots").classList.add("active");
     await updateSections();
 });

@@ -52,7 +52,7 @@ function addProfileElem(name, profile) {
     profileElemCardEntry.hidden = !profile["remoteIP"]
     profileElemCardBody.appendChild(profileElemCardEntry);
 
-    let profilesElem = document.getElementById("profiles");
+    let profilesElem = document.querySelector("#profiles");
     profilesElem.appendChild(profileElemCol);
 
 }
@@ -62,10 +62,10 @@ async function loadClients(status) {
     await loadingScreen("show");
 
     // Clear existing profiles
-    document.getElementById("profiles").innerHTML = "";
+    document.querySelector("#profiles").innerHTML = "";
 
     // Set clientsTitle
-    document.getElementById("clientsTitle").innerText = status;
+    document.querySelector("#clientsTitle").innerText = status;
 
     // Get PiVPN Info
     let resp = await $.ajax({
@@ -87,7 +87,7 @@ async function loadClients(status) {
 
     // Check if no Clients
     if (Object.keys(resp).length === 0) {
-        document.getElementById("profiles").innerHTML = "<span>No Clients to show</span>";
+        document.querySelector("#profiles").innerHTML = "<span>No Clients to show</span>";
     }
 
     // Set Overview
@@ -97,15 +97,15 @@ async function loadClients(status) {
         totalCount++;
         connectedCount += resp[name].connected === true ? 1 : 0;
     }
-    document.getElementById("overviewBadgeConnected").innerText = connectedCount.toString();
-    document.getElementById("overviewBadgeTotal").innerText = totalCount.toString();
+    document.querySelector("#overviewBadgeConnected").innerText = connectedCount.toString();
+    document.querySelector("#overviewBadgeTotal").innerText = totalCount.toString();
 
     // Toggle Overview Btn
     const overviewButtons = document.querySelectorAll('[id^="overviewBtn-"]');
     overviewButtons.forEach(button => {
         button.classList.remove("active");
     });
-    document.getElementById("overviewBtn-" + status).classList.add("active");
+    document.querySelector("#overviewBtn-" + status).classList.add("active");
 
     // Add PiVPN Profiles
     for (const name in resp) {
@@ -118,7 +118,7 @@ async function loadClients(status) {
 }
 
 window.addEventListener('DOMContentLoaded', async function main() {
-    document.getElementById("navbar_pivpn").classList.add("active");
+    document.querySelector("#navbar_pivpn").classList.add("active");
     console.log("Get PiVPN info");
 
     // Load Clients

@@ -45,7 +45,7 @@ async function saveConfigJSON() {
 
 async function manageBot(action) {
     // Get Bot Text
-    let botNameElem = document.getElementById("manageBot");
+    let botNameElem = document.querySelector("#manageBot");
     let botNameElemText = botNameElem.value;
 
     // Check fo valid chars
@@ -129,7 +129,7 @@ async function navToggle(key, btn) {
 async function setUpdateTime() {
 
     // Get Bot Text
-    let updateTimeElem = document.getElementById("updateTime");
+    let updateTimeElem = document.querySelector("#updateTime");
     let updateTimeElemText = updateTimeElem.value;
 
     // Check if value is not empty
@@ -157,7 +157,7 @@ async function setUpdateTime() {
 
 async function setNumberOfBotsLogs() {
     // Get Bot Text
-    let numberOfBotsLogsElem = document.getElementById("numberOfBotsLogs");
+    let numberOfBotsLogsElem = document.querySelector("#numberOfBotsLogs");
     let numberOfBotsLogsText = numberOfBotsLogsElem.value;
 
     // Check fo valid chars
@@ -185,7 +185,7 @@ async function setNumberOfBotsLogs() {
 
 async function setLocation() {
     // Get Bot Text
-    let locationElem = document.getElementById("location");
+    let locationElem = document.querySelector("#location");
     let locationText = locationElem.value;
     console.log(locationText);
 
@@ -213,19 +213,19 @@ async function setLocation() {
 }
 
 window.addEventListener('DOMContentLoaded', async function main() {
-    document.getElementById("navbar_configuration").classList.add("active");
+    document.querySelector("#navbar_configuration").classList.add("active");
     console.log("Get configuration info");
 
     // Get configurationArea TextArea
-    configurationArea = document.getElementById("configurationArea");
+    configurationArea = document.querySelector("#configurationArea");
 
     // Get configJSON
     let configJSON = await getConfigContent(configurationArea);
 
     // Set Navigation/Auto-Update ToggleButtons
     for (let entry of ["eye", "pivpn", "ledircontroller", "updateStats", "updateBots", "updateTop"]) {
-        let entryEnabledBtn = document.getElementById(entry + "EnabledBtn");
-        let entryDisabledBtn = document.getElementById(entry + "DisabledBtn");
+        let entryEnabledBtn = document.querySelector("#" + entry + "EnabledBtn");
+        let entryDisabledBtn = document.querySelector("#" + entry + "DisabledBtn");
         configJSON[capitalize(entry)] === true ? entryEnabledBtn.click() : entryDisabledBtn.click();
         entryEnabledBtn.addEventListener("change", function () {
             navToggle(capitalize(entry), this);
@@ -236,9 +236,9 @@ window.addEventListener('DOMContentLoaded', async function main() {
     }
 
     // Set updateTime && numberOfBotsLogs && location && configurationArea
-    document.getElementById("updateTime").placeholder += " (" + configJSON.UpdateTime + " secs)"
-    document.getElementById("numberOfBotsLogs").placeholder += " (" + configJSON.NumberOfBotsLogs + " logs)"
-    document.getElementById("location").placeholder += " (" + configJSON.Location + ")"
+    document.querySelector("#updateTime").placeholder += " (" + configJSON.UpdateTime + " secs)"
+    document.querySelector("#numberOfBotsLogs").placeholder += " (" + configJSON.NumberOfBotsLogs + " logs)"
+    document.querySelector("#location").placeholder += " (" + configJSON.Location + ")"
     configJSON = JSON.stringify(configJSON, null, 4);
     configurationArea.value = configJSON;
 

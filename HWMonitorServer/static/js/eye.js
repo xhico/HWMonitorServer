@@ -26,7 +26,7 @@ function formatDate(inputDate) {
 async function setSelectOverview() {
     // Add months to select overview
     let months = [...new Set(Object.keys(recordingsJSON).map(date => date.substring(0, 7)))];
-    let selectElement = document.getElementById("overviewMonthSelect");
+    let selectElement = document.querySelector("#overviewMonthSelect");
     for (let month of months) {
         let newOption = document.createElement("option");
         newOption.value = month;
@@ -37,11 +37,11 @@ async function setSelectOverview() {
 
 async function setOverviewMonth() {
     // Clear Overview Month
-    let overviewListGroup = document.getElementById("overviewListGroup");
+    let overviewListGroup = document.querySelector("#overviewListGroup");
     overviewListGroup.innerHTML = "";
 
     // Get Value of Month
-    let monthValue = document.getElementById("overviewMonthSelect").value;
+    let monthValue = document.querySelector("#overviewMonthSelect").value;
 
     // Filter recordingsJSON to only get the Month
     let filteredRecordings = {};
@@ -80,7 +80,7 @@ async function setOverviewMonth() {
 
 async function createRecordingCards(lastDayName) {
     // Clear
-    let recordingsDiv = document.getElementById("recordings");
+    let recordingsDiv = document.querySelector("#recordings");
     recordingsDiv.innerHTML = "";
 
     // Toggle Overview Btn
@@ -88,10 +88,10 @@ async function createRecordingCards(lastDayName) {
     overviewButtons.forEach(button => {
         button.classList.remove("active");
     });
-    document.getElementById("overviewBtn-" + lastDayName).classList.add("active");
+    document.querySelector("#overviewBtn-" + lastDayName).classList.add("active");
 
     // Set dayFolderName
-    document.getElementById("dayFolderName").innerText = formatDate(lastDayName);
+    document.querySelector("#dayFolderName").innerText = formatDate(lastDayName);
 
     // Create Recs Cards
     for (let recName of recordingsJSON[lastDayName].sort()) {
@@ -117,7 +117,7 @@ async function createRecordingCards(lastDayName) {
             cardDiv.classList.remove("bg-body-secondary");
         });
         cardDiv.onclick = () => {
-            document.getElementById("recordingModalTitle").innerText = cardTitleText;
+            document.querySelector("#recordingModalTitle").innerText = cardTitleText;
             let video = document.createElement("video");
             video.id = "recVideo";
             video.style.width = "100%";
@@ -128,7 +128,7 @@ async function createRecordingCards(lastDayName) {
             source.setAttribute("type", "video/mp4");
             video.appendChild(source);
 
-            document.getElementById("recBody").append(video);
+            document.querySelector("#recBody").append(video);
             $("#recordingModal").modal("show");
             video.play();
         };
@@ -163,16 +163,16 @@ async function createRecordingCards(lastDayName) {
     }
 }
 
-document.getElementById("recordingModal").addEventListener("hidden.bs.modal", event => {
-    document.getElementById("recVideo").remove();
+document.querySelector("#recordingModal").addEventListener("hidden.bs.modal", event => {
+    document.querySelector("#recVideo").remove();
 });
 
-document.getElementById("overviewMonthSelect").addEventListener("change", function () {
+document.querySelector("#overviewMonthSelect").addEventListener("change", function () {
     setOverviewMonth();
 });
 
 window.addEventListener("DOMContentLoaded", async function main() {
-    document.getElementById("navbar_eye").classList.add("active");
+    document.querySelector("#navbar_eye").classList.add("active");
 
     // Get Recordings Info JSON
     console.log("Get Recordings Info JSON");

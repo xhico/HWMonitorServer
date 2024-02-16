@@ -27,7 +27,7 @@ async function clickBtn(btn) {
 }
 
 window.addEventListener('DOMContentLoaded', async function main() {
-    document.getElementById("navbar_ledircontroller").classList.add("active");
+    document.querySelector("#navbar_ledircontroller").classList.add("active");
 
     // Remove Loading
     await loadingScreen("remove");

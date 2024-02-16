@@ -44,7 +44,7 @@ function capitalize(string) {
 }
 
 async function power(option) {
-    let btn = document.getElementById("power" + await capitalize(option) + "Btn")
+    let btn = document.querySelector("#power" + await capitalize(option) + "Btn")
 
     // Disable Btn
     btn.disabled = true;
@@ -92,16 +92,16 @@ async function getConfigContent() {
     // Set Hostname
     hostname = await getHostname();
     document.title = document.title.includes("|") ? document.title : document.title + " | " + hostname
-    document.getElementById("Hostname").innerText = hostname;
+    document.querySelector("#Hostname").innerText = hostname;
 
     // Show navbar items
-    document.getElementById("navbar_bots").hidden = !(configJSON.Bots.length !== 0);
-    document.getElementById("navbar_eye").hidden = !configJSON.Eye;
-    document.getElementById("navbar_pivpn").hidden = !configJSON.Pivpn;
-    document.getElementById("navbar_ledircontroller").hidden = !configJSON.Ledircontroller;
+    document.querySelector("#navbar_bots").hidden = !(configJSON.Bots.length !== 0);
+    document.querySelector("#navbar_eye").hidden = !configJSON.Eye;
+    document.querySelector("#navbar_pivpn").hidden = !configJSON.Pivpn;
+    document.querySelector("#navbar_ledircontroller").hidden = !configJSON.Ledircontroller;
 
     // Show Room Name
-    document.getElementById("navLocation").innerText = configJSON.Location;
+    document.querySelector("#navLocation").innerText = configJSON.Location;
 
     return configJSON;
 }
@@ -116,7 +116,7 @@ async function loadingScreen(action) {
         return
     }
 
-    document.getElementById("overlay").hidden = action;
+    document.querySelector("#overlay").hidden = action;
 }
 
 async function generateRandomString(length) {
@@ -174,11 +174,11 @@ async function showNotification(title, message, type) {
     notificationPopup.appendChild(notificationMsg);
 
     // Append the notificationPopup to the document body (or any other desired parent element)
-    document.getElementById("notificationContainer").appendChild(notificationPopup);
+    document.querySelector("#notificationContainer").appendChild(notificationPopup);
 
     // Create eventListener
-    document.getElementById(randomString).addEventListener('hide.bs.toast', function () {
-        document.getElementById(randomString).remove();
+    document.querySelector("#" + randomString).addEventListener('hide.bs.toast', function () {
+        document.querySelector("#" + randomString).remove();
     });
 
     // Show Notification
@@ -194,7 +194,7 @@ async function updateDate() {
     let hour = checkZero(today.getHours() + "");
     let minutes = checkZero(today.getMinutes() + "");
     let seconds = checkZero(today.getSeconds() + "");
-    document.getElementById("navDateNow").innerText = year + "/" + month + "/" + day + " " + hour + ":" + minutes + ":" + seconds;
+    document.querySelector("#navDateNow").innerText = year + "/" + month + "/" + day + " " + hour + ":" + minutes + ":" + seconds;
 
     // Wait x secs -> Run again
     await sleep(config_updateTime);

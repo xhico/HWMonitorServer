@@ -6,9 +6,9 @@ async function loadMetricBtn() {
     // Show Loading
     await loadingScreen("show");
 
-    let numberTime = document.getElementById("numberTime").value;
-    let unitTime = document.getElementById("unitTime").value;
-    let hwMetric = document.getElementById("hwMetric").value;
+    let numberTime = document.querySelector("#numberTime").value;
+    let unitTime = document.querySelector("#unitTime").value;
+    let hwMetric = document.querySelector("#hwMetric").value;
 
     // Get Ambient Data
     console.log("Get " + hwMetric + " Data");
@@ -20,7 +20,7 @@ async function loadMetricBtn() {
 
     // Add metrics to select options
     let availableMetrics = JSON["availableMetrics"];
-    let selectOptions = document.getElementById("hwMetric");
+    let selectOptions = document.querySelector("#hwMetric");
     selectOptions.innerHTML = "";
 
     for (let key of availableMetrics) {
@@ -29,7 +29,7 @@ async function loadMetricBtn() {
         divOne.innerText = /[a-z]/.test(key) ? key.replace(/([A-Z])/g, ' $1').trim() : key;
         selectOptions.appendChild(divOne);
     }
-    document.getElementById("hwMetric").value = hwMetric;
+    document.querySelector("#hwMetric").value = hwMetric;
 
     // Set Charts
     await initCharts(JSON["historicInfo"]);
@@ -40,7 +40,7 @@ async function loadMetricBtn() {
 
 async function initCharts(JSON) {
     // Reset Charts
-    let chartsRow = document.getElementById("charts");
+    let chartsRow = document.querySelector("#charts");
     chartsRow.innerHTML = "";
 
     // Get chartNames
@@ -104,7 +104,7 @@ async function initCharts(JSON) {
 }
 
 window.addEventListener('DOMContentLoaded', async function main() {
-    document.getElementById("navbar_history").classList.add("active");
+    document.querySelector("#navbar_history").classList.add("active");
 
     // Init Charts
     await loadMetricBtn();

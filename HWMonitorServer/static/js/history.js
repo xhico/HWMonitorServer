@@ -58,9 +58,11 @@ async function initCharts(JSON) {
         divOne.id = "chart_" + chartName;
         chartsRow.appendChild(divOne);
 
-        // Add info to Chart
+        // Set Series Data
         let seriesData = JSON[chartName];
         let avgData = JSON[chartName + "_avg"];
+
+        // Add info to Chart
         new Highcharts.Chart({
             chart: {renderTo: "chart_" + chartName, type: "spline"},
             title: {text: chartName.replaceAll("_", " ")},
@@ -76,6 +78,8 @@ async function initCharts(JSON) {
             },
             yAxis: {
                 crosshair: true,
+                min: (chartName.includes("Percentage") ? 0 : Math.min(...seriesData)),
+                max: (chartName.includes("Percentage") ? 100 : Math.max(...seriesData)),
                 title: {text: ""}, labels: {
                     formatter: function () {
                         return ((this.value < 100000) ? this.value : convert_size(this.value, 1));

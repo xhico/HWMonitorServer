@@ -76,15 +76,28 @@ async function getCPU(JSON) {
     let CPU_Temperature = JSON["CPU"]["Temperature"];
     document.querySelector("#CPU_Temperature").innerText = CPU_Temperature + " °C";
 
+    // Set Colors
+    let greenColor, yellowColor, redColor;
+    switch (true) {
+        case (CPU_Temperature > config_CPUTemperatureRange[0] && CPU_Temperature < config_CPUTemperatureRange[1]):
+            [greenColor, yellowColor, redColor] = ["#36714B", "#F9D885", "#DD8589"];
+            break;
+        case (CPU_Temperature > config_CPUTemperatureRange[1] && CPU_Temperature < config_CPUTemperatureRange[2]):
+            [greenColor, yellowColor, redColor] = ["#83B092", "#F6C344", "#DD8589"];
+            break;
+        default:
+            [greenColor, yellowColor, redColor] = ["#83B092", "#F9D885", "#CB444A"];
+    }
+
     // Add Gauge info
     let opts = {
-        angle: 0.15, lineWidth: 0.44, radiusScale: 1, pointer: {
-            length: 0.6, strokeWidth: 0.035, color: '#000000'
+        angle: 0.15, lineWidth: 0.5, radiusScale: 1, pointer: {
+            length: 0.5, strokeWidth: 0.035, color: '#000000'
         },
         limitMax: false, limitMin: false, staticZones: [
-            {strokeStyle: "#36714B", min: config_CPUTemperatureRange[0], max: config_CPUTemperatureRange[1]},
-            {strokeStyle: "#F6C344", min: config_CPUTemperatureRange[1], max: config_CPUTemperatureRange[2]},
-            {strokeStyle: "#CB444A", min: config_CPUTemperatureRange[2], max: config_CPUTemperatureRange[3]}
+            {strokeStyle: greenColor, min: config_CPUTemperatureRange[0], max: config_CPUTemperatureRange[1]},
+            {strokeStyle: yellowColor, min: config_CPUTemperatureRange[1], max: config_CPUTemperatureRange[2]},
+            {strokeStyle: redColor, min: config_CPUTemperatureRange[2], max: config_CPUTemperatureRange[3]}
         ],
         highDpiSupport: true,
     };

@@ -91,7 +91,7 @@ async function getCPU(JSON) {
 
     // Add Gauge info
     let opts = {
-        angle: 0.15, lineWidth: 0.5, radiusScale: 1, pointer: {
+        angle: 0, lineWidth: 0.5, radiusScale: 1, pointer: {
             length: 0.5, strokeWidth: 0.035, color: '#000000'
         },
         limitMax: false, limitMin: false, staticZones: [

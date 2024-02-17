@@ -82,9 +82,9 @@ async function getCPU(JSON) {
             length: 0.6, strokeWidth: 0.035, color: '#000000'
         },
         limitMax: false, limitMin: false, staticZones: [
-            {strokeStyle: "#198754", min: config_CPUTemperatureRange[0], max: config_CPUTemperatureRange[1]},
-            {strokeStyle: "#ffc107", min: config_CPUTemperatureRange[1], max: config_CPUTemperatureRange[2]},
-            {strokeStyle: "#dc3545", min: config_CPUTemperatureRange[2], max: config_CPUTemperatureRange[3]}
+            {strokeStyle: "#36714B", min: config_CPUTemperatureRange[0], max: config_CPUTemperatureRange[1]},
+            {strokeStyle: "#F6C344", min: config_CPUTemperatureRange[1], max: config_CPUTemperatureRange[2]},
+            {strokeStyle: "#CB444A", min: config_CPUTemperatureRange[2], max: config_CPUTemperatureRange[3]}
         ],
         highDpiSupport: true,
     };

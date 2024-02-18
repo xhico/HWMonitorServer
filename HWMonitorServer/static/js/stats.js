@@ -79,10 +79,10 @@ async function getCPU(JSON) {
     // Set Colors
     let greenColor, yellowColor, redColor;
     switch (true) {
-        case (CPU_Temperature > config_CPUTemperatureRange[0] && CPU_Temperature < config_CPUTemperatureRange[1]):
+        case (CPU_Temperature >= config_CPUTemperatureRange[0] && CPU_Temperature < config_CPUTemperatureRange[1]):
             [greenColor, yellowColor, redColor] = ["#36714B", "#F9D885", "#DD8589"];
             break;
-        case (CPU_Temperature > config_CPUTemperatureRange[1] && CPU_Temperature < config_CPUTemperatureRange[2]):
+        case (CPU_Temperature >= config_CPUTemperatureRange[1] && CPU_Temperature < config_CPUTemperatureRange[2]):
             [greenColor, yellowColor, redColor] = ["#83B092", "#F6C344", "#DD8589"];
             break;
         default:

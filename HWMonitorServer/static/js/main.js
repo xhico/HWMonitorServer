@@ -132,7 +132,7 @@ async function generateRandomString(length) {
 }
 
 async function showNotification(title, message, type) {
-    const randomString = await generateRandomString(8);
+    const randomString = await generateRandomString(16);
 
     // Create the outer div element
     const notificationPopup = document.createElement("div");
@@ -175,11 +175,6 @@ async function showNotification(title, message, type) {
 
     // Append the notificationPopup to the document body (or any other desired parent element)
     document.querySelector("#notificationContainer").appendChild(notificationPopup);
-
-    // Create eventListener
-    document.querySelector("#" + randomString).addEventListener('hide.bs.toast', function () {
-        document.querySelector("#" + randomString).remove();
-    });
 
     // Show Notification
     $('#' + randomString).toast('show');

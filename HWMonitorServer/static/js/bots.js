@@ -49,16 +49,6 @@ async function loadFile(value, name) {
         return
     }
 
-    // Check if response is big in case of Log or FullLog
-    if ((value === "SavedInfo") && resp["info"].split("\n").length > 200) {
-        const blob = new Blob([resp["info"]], {type: "application/json"});
-        const url = URL.createObjectURL(blob);
-        window.open(url, "_blank");
-        URL.revokeObjectURL(url);
-        $("#bot" + value + "Modal").modal("hide");
-        return
-    }
-
     // Get Modal Text Area
     let modalBodyText = document.querySelector("#modal" + value + "BodyText");
     document.querySelector("#modal" + value + "Title").innerText = name;

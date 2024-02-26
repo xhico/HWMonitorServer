@@ -226,36 +226,99 @@ async function getWifi(JSON) {
     document.querySelector("#Network_Wifi_Packets_Received").innerText = parseInt(Network_Wifi_Packets_Received).toLocaleString();
 }
 
-async function get918(JSON) {
-    if (JSON["Disks"]["918"]["hasInfo"] === "None") {
-        return;
+async function getExternalDisks(JSON) {
+    let Disks_ExternalDisks = JSON["Disks"]["ExternalDisks"];
+
+    // Create External Disk Div
+    function createExternalDiskDiv(diskName) {
+        // Create the main div element
+        let mainDiv = document.createElement("div");
+        mainDiv.id = diskName + "Section";
+        mainDiv.className = "col-xl-3 col-md-6 border-bottom border-end";
+
+        // Create the first inner div element with the image and text
+        let innerDiv1 = document.createElement("div");
+        innerDiv1.className = "text-center";
+        let img = document.createElement("img");
+        img.className = "m-2";
+        img.width = 40;
+        img.src = "/static/images/usb_hdd.png";
+        img.alt = "External Hard Drive";
+        let textNode = document.createTextNode(diskName);
+        innerDiv1.appendChild(img);
+        innerDiv1.appendChild(textNode);
+
+        // Create the second inner div element with the disk information
+        let innerDiv2 = document.createElement("div");
+        innerDiv2.className = "text-center";
+        let p1 = document.createElement("p");
+        p1.className = "col";
+        p1.innerHTML = "Used: <b><span id='Disks_" + diskName + "_Used'></span></b>";
+        let p2 = document.createElement("p");
+        p2.className = "col";
+        p2.innerHTML = "Free: <b><span id='Disks_" + diskName + "_Free'></span></b>";
+        let p3 = document.createElement("p");
+        p3.className = "col";
+        p3.innerHTML = "Total: <b><span id='Disks_" + diskName + "_Total'></span></b>";
+        let divProgressBar = document.createElement("div");
+        divProgressBar.className = "progress mb-4 mx-4 progress-20-height";
+        let progressBar = document.createElement("div");
+        progressBar.id = "Disks_" + diskName + "_Percentage";
+        progressBar.className = "progress-bar";
+        progressBar.setAttribute("role", "progressbar");
+        progressBar.setAttribute("aria-valuemin", "0");
+        progressBar.setAttribute("aria-valuemax", "100");
+        divProgressBar.appendChild(progressBar);
+        innerDiv2.appendChild(p1);
+        innerDiv2.appendChild(p2);
+        innerDiv2.appendChild(p3);
+        innerDiv2.appendChild(divProgressBar);
+
+        // Append inner divs to the main div
+        mainDiv.appendChild(innerDiv1);
+        mainDiv.appendChild(innerDiv2);
+        return mainDiv;
     }
 
-    // Disks -> 918
-    let Disks_918_Percentage = JSON["Disks"]["918"]["Percentage"];
-    let Disks_918_Used = JSON["Disks"]["918"]["Used"];
-    let Disks_918_Free = JSON["Disks"]["918"]["Free"];
-    let Disks_918_Total = JSON["Disks"]["918"]["Total"];
-    document.querySelector("#Disks_918_Percentage").innerText = Disks_918_Percentage + " %";
-    document.querySelector("#Disks_918_Percentage").style.width = Disks_918_Percentage + "%";
-    document.querySelector("#Disks_918_Percentage").ariaValueNow = Disks_918_Percentage;
-    if (Disks_918_Percentage < 50) {
-        document.querySelector("#Disks_918_Percentage").classList.remove("bg-warning");
-        document.querySelector("#Disks_918_Percentage").classList.remove("bg-danger");
-        document.querySelector("#Disks_918_Percentage").classList.add("bg-success");
-    } else if (Disks_918_Percentage >= 50 && Disks_918_Percentage < 80) {
-        document.querySelector("#Disks_918_Percentage").classList.remove("bg-danger");
-        document.querySelector("#Disks_918_Percentage").classList.remove("bg-success");
-        document.querySelector("#Disks_918_Percentage").classList.add("bg-warning");
-    } else {
-        document.querySelector("#Disks_918_Percentage").classList.remove("bg-success");
-        document.querySelector("#Disks_918_Percentage").classList.remove("bg-warning");
-        document.querySelector("#Disks_918_Percentage").classList.add("bg-danger");
+    // Iterate over every External Div
+    for (let Disks_ExternalDisk in Disks_ExternalDisks) {
+
+        // Get Infos
+        let Disk_Info = Disks_ExternalDisks[Disks_ExternalDisk]
+        let Disk_Percentage = Disk_Info["Percentage"];
+        let Disk_Used = Disk_Info["Used"];
+        let Disk_Free = Disk_Info["Free"];
+        let Disk_Total = Disk_Info["Total"];
+
+        // Create External Div if necessary
+        let Disk_Div = document.getElementById("#" + Disks_ExternalDisk + "Section");
+        if (!Disk_Div) {
+            Disk_Div = createExternalDiskDiv(Disks_ExternalDisk);
+        }
+
+        // Add Disk_Div to Content Div
+        document.querySelector("#content").appendChild(Disk_Div);
+
+        // Set External Disk Info
+        let diskPercentageElement = document.querySelector("#Disks_" + Disks_ExternalDisk + "_Percentage");
+        diskPercentageElement.innerText = Disk_Percentage + " %";
+        diskPercentageElement.style.width = Disk_Percentage + "%";
+        diskPercentageElement.ariaValueNow = Disk_Percentage;
+        if (Disk_Percentage < 50) {
+            diskPercentageElement.classList.remove("bg-warning", "bg-danger");
+            diskPercentageElement.classList.add("bg-success");
+        } else if (Disk_Percentage < 80) {
+            diskPercentageElement.classList.remove("bg-danger", "bg-success");
+            diskPercentageElement.classList.add("bg-warning");
+        } else {
+            diskPercentageElement.classList.remove("bg-success", "bg-warning");
+            diskPercentageElement.classList.add("bg-danger");
+        }
+
+        document.querySelector("#Disks_" + Disks_ExternalDisk + "_Used").innerText = convert_size(Disk_Used);
+        document.querySelector("#Disks_" + Disks_ExternalDisk + "_Free").innerText = convert_size(Disk_Free);
+        document.querySelector("#Disks_" + Disks_ExternalDisk + "_Total").innerText = convert_size(Disk_Total);
     }
-    document.querySelector("#Disks_918_Used").innerText = convert_size(Disks_918_Used);
-    document.querySelector("#Disks_918_Free").innerText = convert_size(Disks_918_Free);
-    document.querySelector("#Disks_918_Total").innerText = convert_size(Disks_918_Total);
-    document.querySelector("#918Section").hidden = false;
 }
 
 async function updateSections() {
@@ -275,7 +338,7 @@ async function updateSections() {
     getSDCard(JSON);
     getWired(JSON);
     getWifi(JSON);
-    get918(JSON);
+    getExternalDisks(JSON);
     getAmbient(JSON);
 
     // Remove Loading

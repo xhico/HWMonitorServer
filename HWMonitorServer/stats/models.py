@@ -2,6 +2,7 @@
 
 import datetime
 import json
+import os
 import re
 import subprocess
 
@@ -140,33 +141,37 @@ def getSDCard() -> dict:
         return {"hasInfo": "None"}
 
 
-def get918() -> dict:
-    """Returns information about the disk usage of the /media/pi/918 directory.
+def getExternalDisks() -> dict:
+    """
+    Retrieves information about external disks connected to the system.
 
     Returns:
-        dict: A dictionary containing information about the /media/pi/918 directory's disk usage.
-            The dictionary contains the following keys:
-            - "hasInfo": Indicates whether the disk information was successfully obtained.
-              Possible values are "Yes" or "None".
-            - "Available": Indicates whether the /media/pi/918 directory is available.
-              Possible values are "Yes" or "None".
-            - "Percentage": The percentage of disk usage.
-            - "Used": The amount of disk space used, in bytes.
-            - "Free": The amount of free disk space, in bytes.
-            - "Total": The total size of the disk, in bytes.
+        dict: A dictionary containing disk information with disk objects as keys.
+              Each disk object is associated with a dictionary containing details such as availability,
+              usage percentage, used space, free space, and total space.
     """
-    try:
-        disk = psutil.disk_usage("/media/pi/918")
-        return {
-            "hasInfo": "Yes",
-            "Available": "Yes",
-            "Percentage": round(disk.percent, 2),
-            "Used": disk.used,
-            "Free": disk.free,
-            "Total": disk.total
-        }
-    except Exception:
-        return {"hasInfo": "None"}
+    disks_info = {}
+    media_pi_path = "/media/pi"
+
+    # List directories in the specified path
+    disks = [folder for folder in os.listdir(media_pi_path) if os.path.isdir(os.path.join(media_pi_path, folder))]
+
+    # Iterate through each folder
+    for folderName in disks:
+        try:
+            disk = psutil.disk_usage(os.path.join(media_pi_path, folderName))
+            disks_info[folderName] = {
+                "hasInfo": "Yes",
+                "Available": "Yes",
+                "Percentage": round(disk.percent, 2),
+                "Used": disk.used,
+                "Free": disk.free,
+                "Total": disk.total
+            }
+        except Exception:
+            disks_info[folderName] = {"hasInfo": "None"}
+
+    return disks_info
 
 
 def getWired():
@@ -274,7 +279,7 @@ def getHWInfo():
         "Memory": getMemory(),
         "Disks": {
             "SDCard": getSDCard(),
-            "918": get918()
+            "ExternalDisks": getExternalDisks()
         },
         "Network": {
             "Wired": getWired(),

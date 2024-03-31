@@ -1,7 +1,8 @@
 #!/bin/bash
 
 sudo apt install python3 python3-pip python3-setuptools python3-venv -y
-sudo apt install raspberrypi-sys-mods -y
+sudo apt install raspberrypi-sys-mods apache2-utils -y
+sudo htpasswd -c /etc/apache2/.htpasswd $USER
 python3 -m pip install -r /home/pi/HWMonitorServer/requirements.txt --no-cache-dir
 
 echo """
@@ -24,6 +25,10 @@ echo """
     <Location "/">
         ProxyPass unix:/run/HWMonitorServer.sock|http://127.0.0.1/
         ProxyPassReverse unix:/run/HWMonitorServer.sock|http://127.0.0.1/
+        AuthType Basic
+        AuthName "Restricted Access"
+        AuthUserFile /etc/apache2/.htpasswd
+        Require valid-user
     </Location>
 
     SSLEngine on

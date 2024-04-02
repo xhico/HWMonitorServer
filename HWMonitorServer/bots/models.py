@@ -152,7 +152,7 @@ def getBotInfo(name):
 
         # Get last run
         log_file = f"/home/pi/{name}/{name}.log"
-        log_content = subprocess.getoutput(f"cat {log_file}")
+        log_content = subprocess.getoutput(f"tail -n 100 {log_file}")
         timestamps = re.findall(r'\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}', log_content)
         last_run = timestamps[-1] if timestamps else "Not Available"
         pDict["last_run"] = last_run

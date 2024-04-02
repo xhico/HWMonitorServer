@@ -2,6 +2,7 @@
 
 import datetime
 import os
+import re
 import subprocess
 
 import psutil
@@ -150,9 +151,13 @@ def getBotInfo(name):
         pDict["info"]["memory"] = round(pDict["info"]["memory"], 2)
 
         # Get last run
-        last_run = subprocess.getoutput("tail -n 1 /home/pi/" + name + "/" + name + ".log | cut -d ',' -f 1")
-        last_run = datetime.datetime.strptime(last_run, "%Y-%m-%d %H:%M:%S").strftime("%Y/%m/%d %H:%M:%S")
+        log_file = f"/home/pi/{name}/{name}.log"
+        log_content = subprocess.getoutput(f"cat {log_file}")
+        timestamps = re.findall(r'\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}', log_content)
+        last_run = timestamps[-1] if timestamps else "Not Available"
         pDict["last_run"] = last_run
+
+        # Set other infos
         pDict["has_config"] = os.path.exists(os.path.join("/home/pi/", name, "config.json"))
         pDict["has_saved_info"] = os.path.exists(os.path.join("/home/pi/", name, "saved_info.json"))
         pDict["has_error"] = checkIfError(name)

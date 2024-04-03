@@ -40,6 +40,20 @@ async function loadFile(value, name) {
     // Show Notification
     await showNotification("Bot - " + name, resp["message"], resp["status"])
 
+    // Change "View Full Log" Button
+    let viewLogBtn = document.querySelector("#botLogModal > div > div > div.modal-header > div > button.btn.btn-secondary");
+    if (value === "FullLog") {
+        viewLogBtn.innerText = "View Log";
+        viewLogBtn.onclick = function () {
+            loadFile("Log", name);
+        }
+    } else if (value === "Log") {
+        viewLogBtn.innerText = "View Full Log";
+        viewLogBtn.onclick = function () {
+            loadFile("FullLog", name);
+        }
+    }
+
     // Revert the value
     value = value === "FullLog" ? "Log" : value;
 
@@ -335,6 +349,11 @@ document.querySelector("#botConfigModal").addEventListener("hidden.bs.modal", ev
     configSaveBtn.hidden = true;
     modalBodyText.classList.remove("bg-danger");
     modalBodyText.classList.add("bg-success");
+});
+
+document.querySelector("#botLogModal").addEventListener("hidden.bs.modal", event => {
+    document.querySelector("#modalLogTitle").innerHTML = "";
+    document.querySelector("#modalLogBodyText").innerHTML = "";
 });
 
 window.addEventListener('DOMContentLoaded', async function main() {

@@ -1,8 +1,7 @@
 # -*- coding: utf-8 -*-
 
-from flask import render_template, jsonify, Blueprint
-
 import HWMonitorServer.stats.models as models
+from flask import render_template, jsonify, Blueprint
 
 # Define a Flask Blueprint instance
 stats = Blueprint("stats", __name__)

@@ -2,9 +2,8 @@
 
 import json
 
-from flask import render_template, jsonify, Blueprint, request
-
 import HWMonitorServer.crontab.models as models
+from flask import render_template, jsonify, Blueprint, request
 
 # Define a Flask Blueprint instance
 crontab = Blueprint("crontab", __name__)

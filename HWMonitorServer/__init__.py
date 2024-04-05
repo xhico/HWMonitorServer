@@ -1,8 +1,7 @@
 # -*- coding: utf-8 -*-
 
-from flask import Flask
-
 from HWMonitorServer.config import Config
+from flask import Flask
 
 
 def create_app(config_class=Config):

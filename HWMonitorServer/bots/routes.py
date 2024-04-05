@@ -2,9 +2,9 @@
 
 import os
 
+import HWMonitorServer.bots.models as models
 from flask import render_template, jsonify, Blueprint, request
 
-import HWMonitorServer.bots.models as models
 from HWMonitorServer import Config
 
 # Define a Flask Blueprint instance

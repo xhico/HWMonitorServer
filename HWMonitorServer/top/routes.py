@@ -1,9 +1,8 @@
 # -*- coding: utf-8 -*-
 
+import HWMonitorServer.top.models as models
 import psutil
 from flask import render_template, jsonify, Blueprint, request
-
-import HWMonitorServer.top.models as models
 
 # Define a Flask Blueprint instance
 top = Blueprint("top", __name__)

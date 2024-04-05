@@ -6,7 +6,6 @@ import re
 import subprocess
 
 import psutil
-
 from HWMonitorServer.config import Config
 
 
